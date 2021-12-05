@@ -5,21 +5,48 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest -- coverage",
+    "test:update": "jest -- coverage -- updateSnapshot",
+    "test:watch": "jest -- watch",
+    "coverage": "jest -- coverage && open ./coverage/lcov-report/index.html"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/stack": "^6.0.11",
     "expo": "~43.0.2",
     "expo-status-bar": "~1.1.0",
+    "jest": "^27.4.3",
+    "middleware": "^1.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-web": "0.17.1"
+    "react-native-gesture-handler": "^2.0.0",
+    "react-native-i18n": "^2.0.15",
+    "react-native-paper": "^4.10.1",
+    "react-native-reanimated": "^2.2.4",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.0",
+    "react-native-vector-icons": "^9.0.0",
+    "react-native-web": "0.17.1",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "save": "^2.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@testing-library/jest-native": "^4.0.4",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
+    "react-native-testing-library": "^6.0.0",
     "typescript": "~4.3.5"
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFiles": ["./node_modules/react-native-gesture-handler/jestSetup.js"],
+    "transformIgnorePatterns": ["node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation"]
   },
   "private": true
 }
