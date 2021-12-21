@@ -7,7 +7,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { HomeStack, SettingsStack } from './App/navigation/bottomNavigation/bottomNavigation';
 import {store}  from './App/redux/store'
-import { createBottomTabNavigator as cBn } from '@react-navigation/bottom-tabs'
+import { createMaterialBottomTabNavigator  } from '@react-navigation/material-bottom-tabs'
 import { MaterialIcons  } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -17,7 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
 // import ReactDOM from 'react-dom'
-const Tab = cBn();
+const Tab = createMaterialBottomTabNavigator();
 
 const Navigator =()=> {
   const navigation = useNavigation();  
@@ -25,6 +25,7 @@ const Navigator =()=> {
     <>
       <Tab.Navigator
         initialRouteName="Home"
+        barStyle={{ backgroundColor: '#694fad' }}
         screenOptions={{
           tabBarActiveTintColor: '#028373',
           headerLeft: () => <Ionicons name="chevron-back" size={24} color="black" onPress={()=>navigation.goBack()} />,
@@ -89,8 +90,8 @@ const Navigator =()=> {
 export default function App() {
   return (
     <Provider store={store}> 
-    <NavigationContainer>
-        <Navigator/>
+    <NavigationContainer >
+        <Navigator />
       <StatusBar style="auto" />
       </NavigationContainer>
     </Provider>
