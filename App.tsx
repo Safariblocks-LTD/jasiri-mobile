@@ -9,6 +9,12 @@ import { HomeStack, SettingsStack } from './App/navigation/bottomNavigation/bott
 import {store}  from './App/redux/store'
 import { createBottomTabNavigator as cBn } from '@react-navigation/bottom-tabs'
 import { MaterialIcons  } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+
+
 // import ReactDOM from 'react-dom'
 const Tab = cBn();
 
@@ -18,30 +24,56 @@ const Navigator =()=> {
       <Tab.Navigator
         initialRouteName="Feed"
         screenOptions={{
-          tabBarActiveTintColor: '#42f44b',
+          tabBarActiveTintColor: '#028373',
         }}
         >
         <Tab.Screen
-          name="HomeStack"
+          name="wallet"
           component={HomeStack}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons  name="home" color={color} size={size} />
+              <FontAwesome5 name="wallet" size={40} color="black" />
             ),
           }}
         />
         <Tab.Screen
-          name="SettingsStack"
+          name="contacts"
+          component={SettingsStack}
+          options={{
+            tabBarLabel: 'contacts',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="contacts" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="other"
+          component={SettingsStack}
+          options={{
+            tabBarLabel: 'swap',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="swap-vert-circle" size={50} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="one more"
+          component={SettingsStack}
+          options={{
+            tabBarLabel: 'bell',
+            tabBarIcon: ({ color, size }) => (
+              <Octicons name="bell" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="another"
           component={SettingsStack}
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons 
-                name="settings"
-                color={color}
-                size={size}
-              />
+              <Fontisto name="player-settings" size={40} color="black" />
             ),
           }}
         />
