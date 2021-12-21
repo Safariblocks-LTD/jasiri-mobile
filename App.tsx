@@ -68,7 +68,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-function createBottomTabNavigator() {
-  throw new Error('Function not implemented.');
-}
+
 
