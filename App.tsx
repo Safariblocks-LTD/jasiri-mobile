@@ -13,22 +13,26 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 // import ReactDOM from 'react-dom'
 const Tab = cBn();
 
 const Navigator =()=> {
+  const navigation = useNavigation();  
   return (
-    <NavigationContainer>
+    <>
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName="Home"
         screenOptions={{
           tabBarActiveTintColor: '#028373',
+          headerLeft: () => <Ionicons name="chevron-back" size={24} color="black" onPress={()=>navigation.goBack()} />,
+
         }}
         >
         <Tab.Screen
-          name="wallet"
+          name="Wallet"
           component={HomeStack}
           options={{
             tabBarLabel: '',
@@ -38,55 +42,57 @@ const Navigator =()=> {
           }}
         />
         <Tab.Screen
-          name="contacts"
+          name="Contacts"
           component={SettingsStack}
           options={{
-            tabBarLabel: 'contacts',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="contacts" size={40} color="black" />
             ),
           }}
         />
         <Tab.Screen
-          name="other"
+          name="Connect"
           component={SettingsStack}
           options={{
-            tabBarLabel: 'swap',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons name="swap-vert-circle" size={50} color="black" />
+              <MaterialIcons name="swap-vert-circle" size={40} color="black" />
             ),
           }}
         />
         <Tab.Screen
-          name="one more"
+          name="Notification"
           component={SettingsStack}
           options={{
-            tabBarLabel: 'bell',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Octicons name="bell" size={40} color="black" />
             ),
           }}
         />
         <Tab.Screen
-          name="another"
+          name="Settings"
           component={SettingsStack}
           options={{
-            tabBarLabel: 'Settings',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
               <Fontisto name="player-settings" size={40} color="black" />
             ),
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    </>
   )
 }
 
 export default function App() {
   return (
     <Provider store={store}> 
+    <NavigationContainer>
         <Navigator/>
       <StatusBar style="auto" />
+      </NavigationContainer>
     </Provider>
   );
 }
