@@ -1,6 +1,5 @@
 // React Native Bottom Navigation
 // https://aboutreact.com/react-native-bottom-navigation/
-
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -49,16 +48,16 @@ export function SettingsStack() {
         component={SettingsScreen}
         options={{ title: 'Setting Page' }}
       />
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Details"
-        component={DetailsScreen}
+        component={SettingsScreen}
         options={{ title: 'Details Page' }}
       />
       <Stack.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={SettingsScreen}
         options={{ title: 'Profile Page' }}
-      /> */}
+      />
     </Stack.Navigator>
   );
 }
