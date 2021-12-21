@@ -52,13 +52,9 @@ const Navigator =()=> {
 
 export default function App() {
   return (
-    <Provider store={store}>
-    {/* <View style={styles.container}> */}
-      
+    <Provider store={store}> 
         <Navigator/>
-      
       <StatusBar style="auto" />
-    {/* </View> */}
     </Provider>
   );
 }
