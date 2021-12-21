@@ -1,13 +1,8 @@
 // React Native Bottom Navigation
 // https://aboutreact.com/react-native-bottom-navigation/
 
-import 'react-native-gesture-handler';
-
 import * as React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
 import SettingsScreen from '../../screens/screen1'
