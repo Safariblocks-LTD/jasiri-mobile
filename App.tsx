@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import { HomeStack, SettingsStack } from './App/navigation/bottomNavigation/bottomNavigation';
 import {store}  from './App/redux/store'
 import { createBottomTabNavigator as cBn } from '@react-navigation/bottom-tabs'
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons  } from '@expo/vector-icons';
 // import ReactDOM from 'react-dom'
 const Tab = cBn();
 
@@ -17,16 +17,17 @@ const Navigator =()=> {
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Feed"
-        tabBarOptions={{
-          activeTintColor: '#42f44b',
-        }}>
+        screenOptions={{
+          tabBarActiveTintColor: '#42f44b',
+        }}
+        >
         <Tab.Screen
           name="HomeStack"
           component={HomeStack}
           options={{
             tabBarLabel: 'Home',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+              <MaterialIcons  name="home" color={color} size={size} />
             ),
           }}
         />
@@ -36,7 +37,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: 'Settings',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
+              <MaterialIcons 
                 name="settings"
                 color={color}
                 size={size}
@@ -52,12 +53,12 @@ const Navigator =()=> {
 export default function App() {
   return (
     <Provider store={store}>
-    <View style={styles.container}>
+    {/* <View style={styles.container}> */}
       
         <Navigator/>
       
       <StatusBar style="auto" />
-    </View>
+    {/* </View> */}
     </Provider>
   );
 }
