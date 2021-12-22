@@ -15,9 +15,10 @@ import { Octicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // import ReactDOM from 'react-dom'
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 const Navigator =()=> {
   const navigation = useNavigation();  
@@ -28,7 +29,7 @@ const Navigator =()=> {
         barStyle={{ backgroundColor: '#694fad' }}
         screenOptions={{
           tabBarActiveTintColor: '#028373',
-          headerLeft: () => <Ionicons name="chevron-back" size={24} color="black" onPress={()=>navigation.goBack()} />,
+          headerLeft: () => <Ionicons name="chevron-back" size={20} color="black" onPress={()=>navigation.goBack()} />,
 
         }}
         >
@@ -38,7 +39,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <FontAwesome5 name="wallet" size={40} color="black" />
+              <FontAwesome5 name="wallet" size={20} color="black" />
             ),
           }}
         />
@@ -48,7 +49,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="contacts" size={40} color="black" />
+              <MaterialCommunityIcons name="contacts" size={20} color="black" />
             ),
           }}
         />
@@ -58,7 +59,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons name="swap-vert-circle" size={40} color="black" />
+              <MaterialIcons name="swap-vert-circle" size={20} color="black" />
             ),
           }}
         />
@@ -68,7 +69,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Octicons name="bell" size={40} color="black" />
+              <Octicons name="bell" size={20} color="black" />
             ),
           }}
         />
@@ -78,7 +79,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Fontisto name="player-settings" size={40} color="black" />
+              <Fontisto name="player-settings" size={20} color="black" />
             ),
           }}
         />
