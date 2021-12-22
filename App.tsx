@@ -26,9 +26,16 @@ const Navigator =()=> {
     <>
       <Tab.Navigator
         initialRouteName="Home"
-        barStyle={{ backgroundColor: '#694fad' }}
+        
+        
         screenOptions={{
           tabBarActiveTintColor: '#028373',
+          tabBarStyle: {
+            position: 'relative',
+            backgroundColor: '#fff',
+            height: 100
+
+          },
           headerLeft: () => <Ionicons name="chevron-back" size={20} color="black" onPress={()=>navigation.goBack()} />,
 
         }}
@@ -39,7 +46,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <FontAwesome5 name="wallet" size={20} color="black" />
+              <FontAwesome5 name="wallet" size={30} color="#028373" />
             ),
           }}
         />
@@ -49,7 +56,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="contacts" size={20} color="black" />
+              <MaterialCommunityIcons name="contacts" size={30} color="#028373" />
             ),
           }}
         />
@@ -59,7 +66,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons name="swap-vert-circle" size={20} color="black" />
+              <MaterialIcons name="swap-vert-circle" size={60} color="#028373" />
             ),
           }}
         />
@@ -69,7 +76,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Octicons name="bell" size={20} color="black" />
+              <Octicons name="bell" size={30} color="#028373" />
             ),
           }}
         />
@@ -79,7 +86,7 @@ const Navigator =()=> {
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <Fontisto name="player-settings" size={20} color="black" />
+              <Fontisto name="player-settings" size={30} color="#028373" />
             ),
           }}
         />
