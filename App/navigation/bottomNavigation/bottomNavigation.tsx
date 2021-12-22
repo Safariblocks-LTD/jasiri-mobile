@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../../screens/home/component';
+import JasiriTransaction from '../../screens/sendReceiveJasiri/component';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,6 +30,7 @@ const Navigator =()=> {
             height: 100
 
           },
+          
           headerLeft: () => <Ionicons name="chevron-back" size={20} color="black" onPress={()=>navigation.goBack()} />,
 
         }}
@@ -55,7 +57,7 @@ const Navigator =()=> {
         />
         <Tab.Screen
           name="Connect"
-          component={HomeScreen}
+          component={JasiriTransaction}
           options={{
             tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
