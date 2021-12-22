@@ -7,58 +7,93 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Provider } from 'react-redux'
 import { HomeStack, SettingsStack } from './App/navigation/bottomNavigation/bottomNavigation';
 import {store}  from './App/redux/store'
-import { createBottomTabNavigator as cBn } from '@react-navigation/bottom-tabs'
+import { createMaterialBottomTabNavigator  } from '@react-navigation/material-bottom-tabs'
 import { MaterialIcons  } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Octicons } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 // import ReactDOM from 'react-dom'
-const Tab = cBn();
+const Tab = createMaterialBottomTabNavigator();
 
 const Navigator =()=> {
+  const navigation = useNavigation();  
   return (
-    <NavigationContainer>
+    <>
       <Tab.Navigator
-        initialRouteName="Feed"
+        initialRouteName="Home"
+        barStyle={{ backgroundColor: '#694fad' }}
         screenOptions={{
-          tabBarActiveTintColor: '#42f44b',
+          tabBarActiveTintColor: '#028373',
+          headerLeft: () => <Ionicons name="chevron-back" size={24} color="black" onPress={()=>navigation.goBack()} />,
+
         }}
         >
         <Tab.Screen
-          name="HomeStack"
+          name="Wallet"
           component={HomeStack}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons  name="home" color={color} size={size} />
+              <FontAwesome5 name="wallet" size={40} color="black" />
             ),
           }}
         />
         <Tab.Screen
-          name="SettingsStack"
+          name="Contacts"
           component={SettingsStack}
           options={{
-            tabBarLabel: 'Settings',
+            tabBarLabel: '',
             tabBarIcon: ({ color, size }) => (
-              <MaterialIcons 
-                name="settings"
-                color={color}
-                size={size}
-              />
+              <MaterialCommunityIcons name="contacts" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Connect"
+          component={SettingsStack}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="swap-vert-circle" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Notification"
+          component={SettingsStack}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: ({ color, size }) => (
+              <Octicons name="bell" size={40} color="black" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsStack}
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: ({ color, size }) => (
+              <Fontisto name="player-settings" size={40} color="black" />
             ),
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+    </>
   )
 }
 
 export default function App() {
   return (
-    <Provider store={store}>
-    {/* <View style={styles.container}> */}
-      
-        <Navigator/>
-      
+    <Provider store={store}> 
+    <NavigationContainer >
+        <Navigator />
       <StatusBar style="auto" />
-    {/* </View> */}
+      </NavigationContainer>
     </Provider>
   );
 }
