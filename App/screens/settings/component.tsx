@@ -5,13 +5,17 @@ import * as React from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
-  Button,
   View,
   Text,
   SafeAreaView,
 } from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+type route = {
+  route: string,
+  navigation: any,
+}
+
+const SettingsScreen = ({ navigation }: route) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
@@ -27,24 +31,22 @@ const HomeScreen = ({ navigation }) => {
               textAlign: 'center',
               marginBottom: 16,
             }}>
-            You are on Home Screen please navigate......
+            You are on Setting Screen
           </Text>
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
-              navigation.navigate('Settings')
-            }>
-            <Text>Go to settng</Text>
+            onPress={() => navigation.navigate('Home')}>
+            <Text>Go to Home Tab</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('CreateAccount')}>
-            <Text>create account</Text>
+            onPress={() => navigation.navigate('Details')}>
+            <Text>Open Detail Screen</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Transactions')}>
-            <Text>Transactions</Text>
+            onPress={() => navigation.navigate('Profile')}>
+            <Text>Open Profile Screen</Text>
           </TouchableOpacity>
         </View>
         <Text style={{ fontSize: 18, textAlign: 'center', color: 'grey' }}>
@@ -57,7 +59,6 @@ const HomeScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
@@ -67,4 +68,4 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-export default HomeScreen;
+export default SettingsScreen;

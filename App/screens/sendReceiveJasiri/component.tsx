@@ -42,7 +42,6 @@ const JasiriTransaction = ({ route, navigation }) => {
             <Text>Receive</Text>
           </TouchableOpacity>
           </View>
-          
         </View>
         
       </View>
