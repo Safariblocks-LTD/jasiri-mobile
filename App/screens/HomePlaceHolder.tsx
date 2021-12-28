@@ -13,7 +13,7 @@ import {
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BottomNavigation } from '../navigation';
+import { BottomNavigation } from '../navigation/Index';
 
 import { 
 CreateAccount, Registration
