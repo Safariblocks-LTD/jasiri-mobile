@@ -15,46 +15,11 @@ type route = {
   navigation: any,
 }
 
-const SettingsScreen = ({ navigation }: route) => {
+export const SettingsScreen = ({ navigation }: route) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              fontSize: 25,
-              textAlign: 'center',
-              marginBottom: 16,
-            }}>
-            You are on Setting Screen
-          </Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Home')}>
-            <Text>Go to Home Tab</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Details')}>
-            <Text>Open Detail Screen</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Profile')}>
-            <Text>Open Profile Screen</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{ fontSize: 18, textAlign: 'center', color: 'grey' }}>
-          React Native Bottom Navigation
-        </Text>
-        <Text style={{ fontSize: 16, textAlign: 'center', color: 'grey' }}>
-          www.aboutreact.com
-        </Text>
+        <Text> Settings </Text>
       </View>
     </SafeAreaView>
   );
@@ -68,4 +33,4 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-export default SettingsScreen;
+

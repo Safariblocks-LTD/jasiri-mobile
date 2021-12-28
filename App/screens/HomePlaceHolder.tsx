@@ -11,7 +11,18 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BottomNavigation } from '../navigation';
+
+import { 
+CreateAccount, Registration
+  
+  
+ } from '.';
+ const Stack = createNativeStackNavigator()
+
+export const HomePlaceHolder = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
@@ -29,30 +40,34 @@ const HomeScreen = ({ navigation }) => {
             }}>
             You are on Home Screen please navigate......
           </Text>
+
+         
+
+
+          {/* Registration */}
           <TouchableOpacity
             style={styles.button}
             onPress={() =>
-              navigation.navigate('Settings')
+              navigation.navigate('Registration')
             }>
-            <Text>Go to settng</Text>
+            <Text>Registration</Text>
           </TouchableOpacity>
+
+            {/* create account */}
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('CreateAccount')}>
             <Text>create account</Text>
           </TouchableOpacity>
+
+            {/* Jasiri */}
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Transactions')}>
-            <Text>Transactions</Text>
+            onPress={() => navigation.navigate('Dashboard')}>
+            <Text>Dashboard</Text>
           </TouchableOpacity>
         </View>
-        <Text style={{ fontSize: 18, textAlign: 'center', color: 'grey' }}>
-          React Native Bottom Navigation
-        </Text>
-        <Text style={{ fontSize: 16, textAlign: 'center', color: 'grey' }}>
-          www.aboutreact.com
-        </Text>
+        
       </View>
     </SafeAreaView>
   );
@@ -67,4 +82,15 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-export default HomeScreen;
+
+export const HomeStack =()=>{
+    return (
+      <Stack.Navigator>
+         <Stack.Screen name="Home" component={HomePlaceHolder} />   
+         <Stack.Screen name="Registration" component={Registration} />   
+        <Stack.Screen name="CreateAccount" component={CreateAccount} />      
+        <Stack.Screen name="Dashboard" component={BottomNavigation} />
+      </Stack.Navigator>
+    )
+  }
+

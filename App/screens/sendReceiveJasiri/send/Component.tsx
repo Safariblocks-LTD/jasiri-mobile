@@ -1,14 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export const Registration = () => {
+export const Send = () => {
     return (
         <View>
             <Text>
-                Registartion page
+               Component
             </Text>
         </View>
     )
 }
-
 
