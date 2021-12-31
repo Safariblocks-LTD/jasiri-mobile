@@ -1,14 +1,14 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import { BottomNavigation } from '../../';
 
-export const Registration = () => {
+export const Dashboard = () => {
     return (
         <View>
             <Text>
-                Registartion page
+                DashBoard
             </Text>
         </View>
     )
 }
-
 

@@ -9,67 +9,66 @@ import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../../screens/home/component';
-import JasiriTransaction from '../../screens/sendReceiveJasiri/component';
+import { Token, SettingsScreen, Qr, Send,  Tokens, Wallet, Dashboard } from '../../screens';
 
 const Tab = createBottomTabNavigator();
 
-const Navigator =()=> {
+export const BottomNavigation =()=> {
   const navigation = useNavigation();  
   return (
-    <>
+    
       <Tab.Navigator
-        initialRouteName="Home"
+        // initialRouteName="Dashboard"
         
         
         screenOptions={{
-          tabBarActiveTintColor: '#028373',
+          // tabBarActiveTintColor: '#028373',
           tabBarStyle: {
-            position: 'relative',
-            backgroundColor: '#fff',
+            // position: 'relative',
+            // backgroundColor: '#fff',
             height: 100
 
           },
           
-          headerLeft: () => <Ionicons name="chevron-back" size={20} color="black" onPress={()=>navigation.goBack()} />,
+          // headerLeft: () => <Ionicons name="chevron-back" size={20} color="black" onPress={()=>navigation.goBack()} />,
 
         }}
         >
         <Tab.Screen
-          name="Wallet"
-          component={HomeScreen}
+          name="Dashboard"
+          component={Dashboard}
           options={{
-            tabBarLabel: '',
+           
             tabBarIcon: ({ color, size }) => (
               <FontAwesome5 name="wallet" size={30} color="#028373" />
             ),
           }}
         />
         <Tab.Screen
-          name="Contacts"
-          component={HomeScreen}
+          name="Tokens"
+          component={Tokens}
           options={{
-            tabBarLabel: '',
+           
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="contacts" size={30} color="#028373" />
             ),
           }}
         />
         <Tab.Screen
-          name="Connect"
-          component={JasiriTransaction}
+          name="Send"
+          component={Send}
           options={{
-            tabBarLabel: '',
+           
             tabBarIcon: ({ color, size }) => (
               <MaterialIcons name="swap-vert-circle" size={60} color="#028373" />
             ),
           }}
         />
         <Tab.Screen
-          name="Notification"
-          component={HomeScreen}
+          name="Token"
+          component={Token}
           options={{
-            tabBarLabel: '',
+           
             tabBarIcon: ({ color, size }) => (
               <Octicons name="bell" size={30} color="#028373" />
             ),
@@ -77,17 +76,18 @@ const Navigator =()=> {
         />
         <Tab.Screen
           name="Settings"
-          component={HomeScreen}
+          component={SettingsScreen}
           options={{
-            tabBarLabel: '',
+           
             tabBarIcon: ({ color, size }) => (
               <Fontisto name="player-settings" size={30} color="#028373" />
             ),
           }}
         />
+
+       
       </Tab.Navigator>
-    </>
+   
   )
 }
 
-export default Navigator

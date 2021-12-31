@@ -11,7 +11,8 @@ import {
   TextInput,
 } from 'react-native';
 
-const JasiriTransaction = ({ route, navigation }) => {
+
+export const Token = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
@@ -69,4 +70,4 @@ const styles = StyleSheet.create({
     borderRadius: 10
   }
 });
-export default JasiriTransaction;
+

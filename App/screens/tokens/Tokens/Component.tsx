@@ -1,14 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-export const Registration = () => {
+export const Tokens = () => {
     return (
         <View>
             <Text>
-                Registartion page
+                Scan QR
             </Text>
         </View>
     )
 }
-
 

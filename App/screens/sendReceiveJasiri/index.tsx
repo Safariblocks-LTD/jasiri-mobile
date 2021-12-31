@@ -1,1 +1,2 @@
-export * from './component'
+export * from './QR/Index'
+export * from './send/Index'
