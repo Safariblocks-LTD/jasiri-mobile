@@ -10,6 +10,8 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -17,34 +19,49 @@ import { BottomNavigation } from '../navigation/Index';
 import { Registration } from './registration/component';
 import { CreateAccount} from './createAccount/component';
 
+
  const Stack = createNativeStackNavigator()
 
-export const HomePlaceHolder = ({ navigation }) => {
+ type navigation = {
+   navigation: any
+ }
+
+export const HomePlaceHolder = ({ navigation }: navigation) => {
+
+  const [fontsLoaded] = useFonts({
+    'Orbitron': 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Orbitron:wght@500&display=swap'
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <AppLoading />
+    )
+  } else {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16, width: 375, height: 812, backgroundColor: '#E3E8E7'
- }}>
-      <View style={styles.ecslipe3}></View>
-     <View style={styles.eclipse2}></View>
+      <View 
+      style={{ flex: 1, padding: 16, width: 375, height: 812, backgroundColor: '#E3E8E7'}}
+      >
+        <View style={styles.ecslipe3}></View>
+        <View style={styles.eclipse2}></View>
 
-     <View style={styles.logo} >
-       <Text style= {styles.logoText}>
-       JA$IRI
-       </Text>
-     </View>
-     
-     <View>
-     <TouchableOpacity
+        <View style={styles.logo} >
+          <Text style= {styles.logoText}>
+          JA$IRI....
+          </Text>
+        </View>
+      
+        <View>
+         <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('CreateAccount')}>
             <Text style={styles.account}>add account</Text>
           </TouchableOpacity>
-     </View>
-        
-        
+        </View> 
       </View>
     </SafeAreaView>
   );
+}
 };
 
 const styles = StyleSheet.create({
@@ -58,23 +75,17 @@ const styles = StyleSheet.create({
     height: 42,
     borderRadius: 15,
   },
-
   logo: {
-   bottom: -370,
+   bottom: 320,
    left: 105,
+   right: 93,
    width: 177,
-  //  backgroundColor: 'red',
    height: 38,
    top: 439,
-  display: 'flex',
-  alignItems: 'center'
+   display: 'flex',
+   alignItems: 'center'
   },
  logoText: {
-  // position: 'absolute',
-  // left: 28,
-  // right: 24.8,
-  // top: 54.06,
-  // bottom: 39.41,
   fontFamily: 'Orbitron',
   fontStyle: 'normal',
   fontWeight: 'bold',
@@ -94,7 +105,7 @@ const styles = StyleSheet.create({
 
   },
   ecslipe3: {
-    width: 170,
+    width: 186,
     height: 163,
     overflow: 'hidden', 
     backgroundColor: '#403131', 
@@ -105,20 +116,20 @@ const styles = StyleSheet.create({
     borderRadius: 130
   },
   eclipse2: {
-    width: 170,
+    width: 186,
     height: 163,
     overflow: 'hidden', 
     backgroundColor: '#8E5858', 
     top: 0, 
     left: -59, 
     position: 'absolute', 
-    opacity: .02, 
+    opacity: .04, 
     borderRadius: 130
   },
 
 });
 
-export const HomeStack =()=>{
+export const HomeStack = () => {
     return (
       <Stack.Navigator>
          <Stack.Screen name="Home" component={HomePlaceHolder} />   
@@ -128,4 +139,3 @@ export const HomeStack =()=>{
       </Stack.Navigator>
     )
   }
-
