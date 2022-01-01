@@ -10,9 +10,6 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
-
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
@@ -28,41 +25,35 @@ import { CreateAccount} from './createAccount/component';
 
 export const HomePlaceHolder = ({ navigation }: navigation) => {
 
-  const [fontsLoaded] = useFonts({
-    'Orbitron': 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Orbitron:wght@500&display=swap'
-  });
-
-  if (!fontsLoaded) {
-    return (
-      <AppLoading />
-    )
-  } else {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View 
-      style={{ flex: 1, padding: 16, width: 375, height: 812, backgroundColor: '#E3E8E7'}}
+      style={{ flex: 1, padding: 16, width: '100%', height: '100%', backgroundColor: 'red'}}
       >
         <View style={styles.ecslipe3}></View>
         <View style={styles.eclipse2}></View>
 
         <View style={styles.logo} >
           <Text style= {styles.logoText}>
-          JA$IRI....
+            JA$IRIfgrewwrwetryruty
           </Text>
+        </View>
+        <View>
+          <Text>sammyy kirighakyuuuuuuuuuuuuuuuuuuuyryrte4tt54</Text>
         </View>
       
         <View>
          <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('CreateAccount')}>
-            <Text style={styles.account}>add account</Text>
+              <Text style={styles.account}>sammyy</Text>
           </TouchableOpacity>
         </View> 
       </View>
     </SafeAreaView>
   );
 }
-};
+
 
 const styles = StyleSheet.create({
   button: {
@@ -86,7 +77,7 @@ const styles = StyleSheet.create({
    alignItems: 'center'
   },
  logoText: {
-  fontFamily: 'Orbitron',
+  // fontFamily: 'Orbitron',
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 42,
@@ -112,7 +103,7 @@ const styles = StyleSheet.create({
     top: -56, 
     left: -24, 
     position: 'absolute', 
-    opacity: .05, 
+    opacity: .06, 
     borderRadius: 130
   },
   eclipse2: {
