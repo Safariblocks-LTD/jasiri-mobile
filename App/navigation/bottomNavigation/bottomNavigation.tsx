@@ -28,10 +28,16 @@ export const BottomNavigation =()=> {
 
         
         >
+<<<<<<< HEAD
         <Tab.Screen
           name="main"
           component={DashboardHome}
          
+=======
+        {/* <Tab.Screen
+          name="Dashboard"
+          component={Dashboard}
+>>>>>>> c631a5c (update navigation and screens)
           options={{
            
             tabBarIcon: () => (
@@ -39,7 +45,7 @@ export const BottomNavigation =()=> {
             ),
             // header: <></>
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Tokens"
           component={Tokens}

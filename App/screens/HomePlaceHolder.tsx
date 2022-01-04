@@ -66,15 +66,13 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
         </View>
       
         <View style={styles.textBox}>
-        <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Registration')}>
-              <Text style={styles.account}>add Account</Text>
-          </TouchableOpacity>
+          <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Registration')}>
+                <Text style={styles.account}>add Account</Text>
+            </TouchableOpacity>
         </View>
       </View>
-         
-       
       </View>
     </SafeAreaView>
   );
