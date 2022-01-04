@@ -24,6 +24,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
+
 import { CreateAccount, Dashboard, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
