@@ -9,7 +9,7 @@ import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Token, SettingsScreen, Qr, Send,  Tokens, Wallet, Dashboard } from '../../screens/Index';
+import { Token, SettingsScreen, Qr, Send,  Tokens, Wallet, Dashboard } from '../../screens';
 
 const Tab = createBottomTabNavigator();
 

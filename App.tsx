@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import {store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
 import { HomeStack
- } from './App/screens/Index';
+ } from './App/screens';
 
 // import ReactDOM from 'react-dom'
 
