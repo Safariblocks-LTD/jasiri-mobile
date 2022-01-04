@@ -14,8 +14,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
-// import { CreateAccount, Registration } from './Index';
- const Stack = createNativeStackNavigator()
+import { CreateAccount, Dashboard, Registration } from './index';
+import { createStackNavigator } from '@react-navigation/stack';
+
+ const Stack = createStackNavigator()
 
  type navigation = {
    navigation: any
@@ -33,20 +35,20 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
 
         <View style={styles.logo} >
           <Text style= {styles.logoText}>
-            JA$IRIfgrewwrwetryruty
+            JA$IRI
           </Text>
         </View>
         <View>
-          <Text>sammyy kirighakyuuuuuuuuuuuuuuuuuuuyryrte4tt54</Text>
+          <Text>sammyy</Text>
         </View>
       
-        <View>
+      
          <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('CreateAccount')}>
+            onPress={() => navigation.navigate('Create Account')}>
               <Text style={styles.account}>sammyy</Text>
           </TouchableOpacity>
-        </View> 
+       
       </View>
     </SafeAreaView>
   );
@@ -83,7 +85,7 @@ const styles = StyleSheet.create({
   color: '#78B9B1'
  },
   account: {
-    backgroundColor: '#3BD5C2',
+    // backgroundColor: '#3BD5C2',
     color: 'black',
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
     width: 186,
     height: 163,
     overflow: 'hidden', 
-    backgroundColor: '#403131', 
+    // backgroundColor: '#403131', 
     top: -56, 
     left: -24, 
     position: 'absolute', 
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     width: 186,
     height: 163,
     overflow: 'hidden', 
-    backgroundColor: '#8E5858', 
+    // backgroundColor: '#8E5858', 
     top: 0, 
     left: -59, 
     position: 'absolute', 
@@ -121,10 +123,14 @@ const styles = StyleSheet.create({
 export const HomeStack = () => {
     return (
       <Stack.Navigator>
-         <Stack.Screen name="Home" component={HomePlaceHolder} />   
-         {/* <Stack.Screen name="Registration" component={Registration} />   
-        <Stack.Screen name="CreateAccount" component={CreateAccount} />       */}
-        <Stack.Screen name="Dashboard" component={BottomNavigation} />
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="Home" component={HomePlaceHolder} />   
+          {/* <Stack.Screen name="Registration" component={Registration} />    */}
+          <Stack.Screen name="Create Account" component={CreateAccount} />    
+        </Stack.Group>
+        <Stack.Group>
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+        </Stack.Group> 
       </Stack.Navigator>
     )
   }

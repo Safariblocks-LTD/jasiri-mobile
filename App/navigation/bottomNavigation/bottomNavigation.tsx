@@ -34,7 +34,7 @@ export const BottomNavigation =()=> {
 
         }}
         >
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Dashboard"
           component={Dashboard}
           options={{
@@ -43,7 +43,7 @@ export const BottomNavigation =()=> {
               <FontAwesome5 name="wallet" size={30} color="#028373" />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Tokens"
           component={Tokens}
