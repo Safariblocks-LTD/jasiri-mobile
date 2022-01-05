@@ -10,6 +10,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> 8e30ceb (added changes in the authentication pages)
 
 <<<<<<< HEAD
@@ -21,6 +22,13 @@ export const Registration = ({navigation}: navigation) => {
 =======
 export const Registration = ({navigation}) => {
 >>>>>>> 0367ad5 (created account recovery page)
+=======
+type navigation = {
+    navigation: any
+  }
+
+export const Registration = ({navigation}: navigation) => {
+>>>>>>> 05ed0d1 (added a new file and modified other files)
     return (
         <View style={styles.container}>
             <View style={styles.textbox}>

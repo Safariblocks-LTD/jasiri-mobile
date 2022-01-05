@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import * as React from 'react'
+import { View, Text } from 'react-native'
+>>>>>>> 05ed0d1 (added a new file and modified other files)
 
 import * as React from 'react'
 import { View, Text, SafeAreaView } from 'react-native'

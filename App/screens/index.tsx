@@ -9,10 +9,4 @@ export * from './createAccount/Index'
 export * from './HomePlaceHolder'
 export * from './recoverAccount/index'
 export * from './seedphrase/index'
-<<<<<<< HEAD
 export * from './seedphrase2/index'
-
-
-
-=======
->>>>>>> a14de56 (added a seed phrase page)

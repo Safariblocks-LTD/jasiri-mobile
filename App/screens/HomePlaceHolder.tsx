@@ -48,11 +48,7 @@ import { CreateAccount, Dashboard, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
-<<<<<<< HEAD
 import SeedPhraseFinalPage from './seedphrase2/component';
-=======
->>>>>>> fa4ff4c (added a seed phrase page)
-
  const Stack = createStackNavigator()
 <<<<<<< HEAD
 
