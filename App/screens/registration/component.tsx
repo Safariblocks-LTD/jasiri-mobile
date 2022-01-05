@@ -20,7 +20,7 @@ export const Registration = () => {
                 <View style={styles.divider}></View>
                 <View style = {styles.down}>
                 <Text style={styles.icon1}><MaterialCommunityIcons name="recycle" size={30} color="black" /></Text> 
-                <Text style={styles.iconText}>Create Account</Text>
+                <Text style={styles.iconText2}>Recorver with passphrase</Text>
                 <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
             </View>
@@ -76,6 +76,9 @@ const styles = StyleSheet.create({
    iconText: {
     marginRight: 120
    },
+   iconText2: {
+    marginRight: 60
+   },
 
   icon2: {
 
@@ -83,13 +86,13 @@ const styles = StyleSheet.create({
 
    divider: {
        left: 20,
-       top: 10,
+       top: 25,
        width: 256,
        height: 2,
        backgroundColor: 'black',
    },
    down: {
-       top: 20,
+       top: 45,
        display: 'flex',
        flexDirection: 'row',
        alignItems: 'center',

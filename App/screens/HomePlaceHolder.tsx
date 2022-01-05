@@ -28,7 +28,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View 
-      style={{ flex: 1, padding: 16, width: '100%', height: '100%', backgroundColor: '#E3E8E7'}}
+      style={styles.container}
       >
         <View style={styles.ecslipe3}></View>
         <View style={styles.eclipse2}></View>
@@ -39,12 +39,14 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
           </Text>
         </View>
       
-      
-         <TouchableOpacity
+        <View style={styles.textBox}>
+        <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate('Registration')}>
               <Text style={styles.account}>add Account</Text>
           </TouchableOpacity>
+        </View>
+         
        
       </View>
     </SafeAreaView>
@@ -53,6 +55,14 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
 
 
 const styles = StyleSheet.create({
+
+  container: {
+    flex: 1, 
+    padding: 16, 
+    width: '100%', 
+    height: '100%',
+    backgroundColor: '#E3E8E7'
+  },
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
@@ -65,14 +75,15 @@ const styles = StyleSheet.create({
   },
   logo: {
    bottom: 320,
-   left: 97,
-   right: 93,
+   left: 90,
+   right: 97,
    width: 177,
    height: 38,
-   top: 439,
+   top: 420,
    display: 'flex',
-   alignItems: 'center'
+   alignItems: 'center',
   },
+
  logoText: {
   // fontFamily: 'Orbitron',
   fontStyle: 'normal',
@@ -81,8 +92,13 @@ const styles = StyleSheet.create({
   lineHeight: 45,
   color: '#78B9B1'
  },
+
+ textBox: {
+  top: 55
+  },
+  
   account: {
-    // backgroundColor: '#3BD5C2',
+    backgroundColor: '#3BD5C2',
     color: 'black',
     textTransform: 'uppercase',
     textAlign: 'center',
@@ -96,22 +112,22 @@ const styles = StyleSheet.create({
     width: 186,
     height: 163,
     overflow: 'hidden', 
-    // backgroundColor: '#403131', 
+    backgroundColor: '#403131', 
     top: -56, 
     left: -24, 
     position: 'absolute', 
-    opacity: .06, 
+    opacity: .04, 
     borderRadius: 130
   },
   eclipse2: {
     width: 186,
     height: 163,
     overflow: 'hidden', 
-    // backgroundColor: '#8E5858', 
+    backgroundColor: '#8E5858', 
     top: 0, 
     left: -59, 
     position: 'absolute', 
-    opacity: .04, 
+    opacity: .02, 
     borderRadius: 130
   },
 });
