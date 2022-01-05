@@ -13,6 +13,7 @@
     "coverage": "jest -- coverage && open ./coverage/lcov-report/index.html"
   },
   "dependencies": {
+    "@expo/vector-icons": "^12.0.5",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/material-bottom-tabs": "^6.0.9",
@@ -34,6 +35,7 @@
     "react-native-reanimated": "^2.2.4",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
+    "react-native-svg": "^12.1.1",
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
     "react-redux": "^7.2.6",

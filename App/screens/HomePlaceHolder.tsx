@@ -28,7 +28,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View 
-      style={{ flex: 1, padding: 16, width: '100%', height: '100%', backgroundColor: 'red'}}
+      style={{ flex: 1, padding: 16, width: '100%', height: '100%', backgroundColor: '#E3E8E7'}}
       >
         <View style={styles.ecslipe3}></View>
         <View style={styles.eclipse2}></View>
@@ -38,15 +38,23 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
             JA$IRI
           </Text>
         </View>
+<<<<<<< Updated upstream
         <View>
           <Text>sammyy</Text>
         </View>
+=======
+>>>>>>> Stashed changes
       
       
          <TouchableOpacity
             style={styles.button}
+<<<<<<< Updated upstream
             onPress={() => navigation.navigate('Create Account')}>
               <Text style={styles.account}>sammyy</Text>
+=======
+            onPress={() => navigation.navigate('Registration')}>
+              <Text style={styles.account}>add Account</Text>
+>>>>>>> Stashed changes
           </TouchableOpacity>
        
       </View>
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
   },
   logo: {
    bottom: 320,
-   left: 105,
+   left: 97,
    right: 93,
    width: 177,
    height: 38,
@@ -117,7 +125,6 @@ const styles = StyleSheet.create({
     opacity: .04, 
     borderRadius: 130
   },
-
 });
 
 export const HomeStack = () => {
