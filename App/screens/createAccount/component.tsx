@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> 83aed74 (modified some files)
 import * as React from 'react'
+=======
+import * as React from 'react';
+>>>>>>> 176490e (modified some files)
 import { View, Text, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 

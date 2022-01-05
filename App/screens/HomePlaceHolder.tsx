@@ -10,6 +10,12 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> 83aed74 (modified some files)
 import { 
   Orbitron_400Regular,
   Orbitron_500Medium,
@@ -20,6 +26,10 @@ import {
 } from '@expo-google-fonts/orbitron'
 import {useFonts} from 'expo-font'
 import AppLoading from 'expo-app-loading';
+<<<<<<< HEAD
+=======
+>>>>>>> 176490e (modified some files)
+>>>>>>> 83aed74 (modified some files)
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
@@ -33,6 +43,12 @@ import SeedPhraseFinalPage from './seedphrase2/component';
 
  const Stack = createStackNavigator()
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+export const HomePlaceHolder = ({ navigation }) => {
+=======
+>>>>>>> 83aed74 (modified some files)
  type navigation = {
    navigation: any
  }
@@ -50,6 +66,10 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
   if(!fontsLoaded){
     return <AppLoading />
   }
+<<<<<<< HEAD
+=======
+>>>>>>> 176490e (modified some files)
+>>>>>>> 83aed74 (modified some files)
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View 
