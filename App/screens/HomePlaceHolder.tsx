@@ -10,6 +10,16 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
+import { 
+  Orbitron_400Regular,
+  Orbitron_500Medium,
+  Orbitron_600SemiBold,
+  Orbitron_700Bold,
+  Orbitron_800ExtraBold,
+  Orbitron_900Black 
+} from '@expo-google-fonts/orbitron'
+import {useFonts} from 'expo-font'
+import AppLoading from 'expo-app-loading';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
@@ -24,7 +34,18 @@ import { createStackNavigator } from '@react-navigation/stack';
  }
 
 export const HomePlaceHolder = ({ navigation }: navigation) => {
+  let [fontsLoaded, error] = useFonts({
+    Orbitron_400Regular,
+    Orbitron_500Medium,
+    Orbitron_600SemiBold,
+    Orbitron_700Bold,
+    Orbitron_800ExtraBold,
+    Orbitron_900Black 
+  })
 
+  if(!fontsLoaded){
+    return <AppLoading />
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View 
@@ -85,7 +106,7 @@ const styles = StyleSheet.create({
   },
 
  logoText: {
-  // fontFamily: 'Orbitron',
+  fontFamily: 'Orbitron_400Regular',
   fontStyle: 'normal',
   fontWeight: 'bold',
   fontSize: 42,
