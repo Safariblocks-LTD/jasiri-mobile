@@ -3,7 +3,11 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const SeedPhrase = () => {
+type navigation = {
+    navigation: any
+  } 
+
+const SeedPhrase = ({navigation}: navigation) => {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -36,8 +40,9 @@ const SeedPhrase = () => {
                 <TouchableOpacity style={styles.button}>
                         <Text 
                         style = {styles.buttonText}
+                        onPress={() => navigation.navigate("Seed Phrase Final Page")}
                         >
-                         Recover Account
+                         Next
                         </Text>
                     </TouchableOpacity>
                 </View>

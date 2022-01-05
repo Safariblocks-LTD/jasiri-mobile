@@ -28,6 +28,7 @@ import { CreateAccount, Dashboard, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
+import SeedPhraseFinalPage from './seedphrase2/component';
 
  const Stack = createStackNavigator()
 
@@ -166,6 +167,7 @@ export const HomeStack = () => {
           <Stack.Screen name="Create Account" component={CreateAccount} />    
           <Stack.Screen name="Recover Account" component={RecoverAccount} />   
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
+          <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
         </Stack.Group>
         <Stack.Group>
           <Stack.Screen name="Dashboard" component={Dashboard} />

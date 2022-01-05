@@ -26,7 +26,7 @@ const RecoverAccount = () => {
                         <Text 
                         style = {styles.buttonText}
                         >
-                            Recover Account
+                         Recover Account
                         </Text>
                     </TouchableOpacity>
                 </View>
