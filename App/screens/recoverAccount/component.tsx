@@ -27,7 +27,11 @@ const RecoverAccount = () => {
                         <Text 
                         style = {styles.buttonText}
                         >
+<<<<<<< HEAD
                          Recover Account
+=======
+                            Recover Account
+>>>>>>> a14de56 (added a seed phrase page)
                         </Text>
                     </TouchableOpacity>
                 </View>
