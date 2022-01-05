@@ -15,24 +15,12 @@ export const CreateAccount = ({navigation}: navigation) => {
                 </Text>
             </View>
         
-<<<<<<< Updated upstream
-            <View style={styles.buttonContainer}>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('Dashboard')}>
-                <Text style={styles.account}>I understand</Text>
-            </TouchableOpacity>
-            </View>
-           
-    
-=======
             <View>
                 <TouchableOpacity
                     style={styles.button}>
                     <Text style={styles.account}>I understand</Text>
                 </TouchableOpacity>
-        </View> 
->>>>>>> Stashed changes
+        </View>
         </View>
     )
 }
@@ -51,7 +39,6 @@ const styles = StyleSheet.create({
         
     },
     textBox: {
-<<<<<<< Updated upstream
         alignItems: 'flex-start',
         width: '100%',
         padding: 20,
@@ -71,17 +58,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // alignItems: 'center',
         margin: 15
-        
-       
-=======
-        width: 288,
-        height: 104,
-        top: 204,
-        flex: 1,
-        left: 23,
-        alignItems: 'center',
-        justifyContent: 'center',
->>>>>>> Stashed changes
     },
     text: {
         // position: 'absolute',
@@ -109,14 +85,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#3BD5C2',
         padding: 10,
-<<<<<<< Updated upstream
         width: '100%',
-        
-=======
-        width: 325,
-        left: 35,
-        bottom: 30,
->>>>>>> Stashed changes
         height: 42,
         borderRadius: 15,
         

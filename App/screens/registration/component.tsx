@@ -2,6 +2,8 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 
 export const Registration = () => {
     return (
@@ -17,10 +19,15 @@ export const Registration = () => {
                 </View>
                 <View style={styles.divider}></View>
                 <View style = {styles.down}>
-                <Text><MaterialIcons name="person-add-alt-1" size={30} color="black" /></Text> 
-                <Text>Create Account</Text>
-                <Text><Feather name="arrow-right-circle" size={24} color="black" /></Text>
+                <Text style={styles.icon1}><MaterialCommunityIcons name="recycle" size={30} color="black" /></Text> 
+                <Text style={styles.iconText}>Create Account</Text>
+                <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
+            </View>
+            <View style = {styles.footer}>
+                <Text style = {styles.footerText}>
+                    By creating an account, you agree to Jasiri terms and conditions and privacy policy
+                </Text>
             </View>
         </View>
     )
@@ -33,6 +40,7 @@ const styles = StyleSheet.create({
       height: '100%',
       backgroundColor: '#FFFFFF'
     },
+
    textbox: {
    top: 41,
    width: 216,
@@ -40,6 +48,7 @@ const styles = StyleSheet.create({
    alignItems: 'center',
    justifyContent: 'center',
    },
+
    text: {
    fontStyle: 'normal',
 //    fontFamily: 'roboto',
@@ -52,29 +61,54 @@ const styles = StyleSheet.create({
        alignItems: 'center',
        justifyContent: 'center',
    },
+
    up: {
    display: 'flex',
    flexDirection: 'row',
    alignItems: 'center',
    justifyContent: 'center',
    },
+
    icon1: {
    marginRight: 20,
    },
+
    iconText: {
     marginRight: 120
    },
+
   icon2: {
 
   },
+
    divider: {
-       top: 12,
-       width: 200,
+       left: 20,
+       top: 10,
+       width: 256,
        height: 2,
-       backgroundColor: 'green',
+       backgroundColor: 'black',
    },
    down: {
+       top: 20,
+       display: 'flex',
+       flexDirection: 'row',
+       alignItems: 'center',
+       justifyContent: 'center',
+   },
 
+   footer: {
+       top: 441,
+       width: 272,
+       left: 55
+   },
+
+   footerText: {
+   color: 'black',
+   alignItems: 'flex-end',
+   fontWeight: 'normal',
+   fontStyle: 'normal',
+   fontSize: 14,
+   lineHeight: 16
    }
 })
 

@@ -38,23 +38,12 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
             JA$IRI
           </Text>
         </View>
-<<<<<<< Updated upstream
-        <View>
-          <Text>sammyy</Text>
-        </View>
-=======
->>>>>>> Stashed changes
       
       
          <TouchableOpacity
             style={styles.button}
-<<<<<<< Updated upstream
-            onPress={() => navigation.navigate('Create Account')}>
-              <Text style={styles.account}>sammyy</Text>
-=======
             onPress={() => navigation.navigate('Registration')}>
               <Text style={styles.account}>add Account</Text>
->>>>>>> Stashed changes
           </TouchableOpacity>
        
       </View>
@@ -132,7 +121,7 @@ export const HomeStack = () => {
       <Stack.Navigator>
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Home" component={HomePlaceHolder} />   
-          {/* <Stack.Screen name="Registration" component={Registration} />    */}
+          <Stack.Screen name="Registration" component={Registration} />   
           <Stack.Screen name="Create Account" component={CreateAccount} />    
         </Stack.Group>
         <Stack.Group>
