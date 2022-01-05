@@ -1,4 +1,5 @@
 import * as React from 'react'
+<<<<<<< HEAD
 import { View, Text, StyleSheet } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 
@@ -32,11 +33,22 @@ const RecoverAccount = () => {
                 </View>
             </View>
             
+=======
+import { View, Text } from 'react-native'
+
+const RecoverAccount = () => {
+    return (
+        <View>
+            <Text>
+                Welcome user you can recover your account here
+            </Text>
+>>>>>>> 0367ad5 (created account recovery page)
         </View>
     )
 }
 
 export default RecoverAccount
+<<<<<<< HEAD
 
 const styles = StyleSheet.create({
 container: {
@@ -99,3 +111,5 @@ buttonText: {
     color: 'black'
 }
 })
+=======
+>>>>>>> 0367ad5 (created account recovery page)

@@ -12,11 +12,15 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 >>>>>>> 8e30ceb (added changes in the authentication pages)
 
+<<<<<<< HEAD
 type navigation = {
     navigation: any
   }
 
 export const Registration = ({navigation}: navigation) => {
+=======
+export const Registration = ({navigation}) => {
+>>>>>>> 0367ad5 (created account recovery page)
     return (
         <View style={styles.container}>
             <View style={styles.textbox}>
@@ -25,13 +29,17 @@ export const Registration = ({navigation}: navigation) => {
             <View style={styles.main}>
                 <View style={styles.up}>
                 <Text style={styles.icon1}><MaterialIcons name="person-add-alt-1" size={30} color="black" /></Text> 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0367ad5 (created account recovery page)
                 <Text style={styles.iconText} onPress={() => navigation.navigate("Create Account")}>Create Account</Text>
                 <Text style={styles.icon2}><Feather onPress={() => navigation.navigate("Create Account")} name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
                 <View style={styles.divider}></View>
                 <View style = {styles.down}>
                 <Text style={styles.icon1}><MaterialCommunityIcons name="recycle" size={30} color="black" /></Text> 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
                 <Text style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recorver with passphrase</Text>
@@ -41,6 +49,9 @@ export const Registration = ({navigation}: navigation) => {
 =======
                 <Text style={styles.iconText2}>Recorver with passphrase</Text>
 >>>>>>> fd15565 (modified the registration and home files)
+=======
+                <Text style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recorver with passphrase</Text>
+>>>>>>> 0367ad5 (created account recovery page)
                 <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
             </View>

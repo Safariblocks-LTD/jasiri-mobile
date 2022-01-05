@@ -11,11 +11,14 @@ import {
   SafeAreaView,
 } from 'react-native';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 
 =======
 >>>>>>> 83aed74 (modified some files)
+=======
+>>>>>>> 0367ad5 (created account recovery page)
 import { 
   Orbitron_400Regular,
   Orbitron_500Medium,
@@ -27,14 +30,20 @@ import {
 import {useFonts} from 'expo-font'
 import AppLoading from 'expo-app-loading';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 176490e (modified some files)
 >>>>>>> 83aed74 (modified some files)
+=======
+>>>>>>> 0367ad5 (created account recovery page)
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0367ad5 (created account recovery page)
 import { CreateAccount, Dashboard, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
@@ -42,6 +51,7 @@ import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
 
  const Stack = createStackNavigator()
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -49,6 +59,8 @@ import SeedPhraseFinalPage from './seedphrase2/component';
 export const HomePlaceHolder = ({ navigation }) => {
 =======
 >>>>>>> 83aed74 (modified some files)
+=======
+>>>>>>> 0367ad5 (created account recovery page)
  type navigation = {
    navigation: any
  }
@@ -67,17 +79,24 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
     return <AppLoading />
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 176490e (modified some files)
 >>>>>>> 83aed74 (modified some files)
+=======
+
+>>>>>>> 0367ad5 (created account recovery page)
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View 
-      style={styles.container}
+      style={{ flex: 1, padding: 16, width: 375, height: 812, backgroundColor: '#E3E8E7'}}
       >
         <View style={styles.ecslipe3}></View>
         <View style={styles.eclipse2}></View>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0367ad5 (created account recovery page)
       <View style={styles.buttonTextBoxContainer}>
         <View style={styles.logo} >
           <Text style= {styles.logoText}>
@@ -102,15 +121,22 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
               <Text style={styles.account}>add Account</Text>
           </TouchableOpacity>
         </View>
+<<<<<<< HEAD
          
        
 >>>>>>> 78e92ce (update navigation and screens)
 >>>>>>> fd15565 (modified the registration and home files)
+=======
+      </View>
+>>>>>>> 0367ad5 (created account recovery page)
       </View>
     </SafeAreaView>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0367ad5 (created account recovery page)
 
 const styles = StyleSheet.create({
 
@@ -119,6 +145,7 @@ const styles = StyleSheet.create({
     padding: 16, 
     width: '100%', 
     height: '100%',
+<<<<<<< HEAD
 <<<<<<< HEAD
     backgroundColor: '#E3E8E7',
     
@@ -133,6 +160,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#E3E8E7'
   },
 >>>>>>> fd15565 (modified the registration and home files)
+=======
+    backgroundColor: '#E3E8E7',
+    
+  },
+
+  buttonTextBoxContainer:{
+    height: '100%',
+    justifyContent: 'flex-end',
+  },
+
+>>>>>>> 0367ad5 (created account recovery page)
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
@@ -142,6 +180,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   logo: {
+<<<<<<< HEAD
 <<<<<<< HEAD
    display: 'flex',
    alignItems: 'center',
@@ -156,6 +195,11 @@ const styles = StyleSheet.create({
    display: 'flex',
    alignItems: 'center',
 >>>>>>> fd15565 (modified the registration and home files)
+=======
+   display: 'flex',
+   alignItems: 'center',
+   marginBottom: 30
+>>>>>>> 0367ad5 (created account recovery page)
   },
 
  logoText: {
@@ -169,10 +213,14 @@ const styles = StyleSheet.create({
 
  textBox: {
 <<<<<<< HEAD
+<<<<<<< HEAD
   alignItems: 'center',
 =======
   top: 55
 >>>>>>> fd15565 (modified the registration and home files)
+=======
+  alignItems: 'center',
+>>>>>>> 0367ad5 (created account recovery page)
   },
   
   account: {
@@ -205,7 +253,7 @@ const styles = StyleSheet.create({
     top: 0, 
     left: -59, 
     position: 'absolute', 
-    opacity: .02, 
+    opacity: .04, 
     borderRadius: 130
   },
 });
