@@ -18,14 +18,14 @@ const RecoverAccount = () => {
                       placeholder = "Enter or paste you passphrase"
                       placeholderTextColor = "black"
                       autoCapitalize = "none"
-                      
                     ></TextInput>
                 </View>
                 </View>
-               
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style = {styles.buttonText}>
+                        <Text 
+                        style = {styles.buttonText}
+                        >
                             Recover Account
                         </Text>
                     </TouchableOpacity>
