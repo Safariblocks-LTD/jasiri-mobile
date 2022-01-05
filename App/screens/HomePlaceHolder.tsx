@@ -64,7 +64,6 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
             JA$IRI
           </Text>
         </View>
-      
         <View style={styles.textBox}>
           <TouchableOpacity
               style={styles.button}

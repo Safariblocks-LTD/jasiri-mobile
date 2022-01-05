@@ -4,6 +4,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8e30ceb (added changes in the authentication pages)
 
 type navigation = {
     navigation: any
@@ -25,7 +29,11 @@ export const Registration = ({navigation}: navigation) => {
                 <View style={styles.divider}></View>
                 <View style = {styles.down}>
                 <Text style={styles.icon1}><MaterialCommunityIcons name="recycle" size={30} color="black" /></Text> 
+<<<<<<< HEAD
                 <Text style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recorver with passphrase</Text>
+=======
+                <Text style={styles.iconText}>Create Account</Text>
+>>>>>>> 8e30ceb (added changes in the authentication pages)
                 <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
             </View>
@@ -45,6 +53,7 @@ const styles = StyleSheet.create({
       height: '100%',
       backgroundColor: '#FFFFFF'
     },
+
    textbox: {
    top: 41,
    width: 216,
@@ -52,6 +61,7 @@ const styles = StyleSheet.create({
    alignItems: 'center',
    justifyContent: 'center',
    },
+
    text: {
    fontStyle: 'normal',
 //    fontFamily: 'roboto',
@@ -64,6 +74,7 @@ const styles = StyleSheet.create({
        alignItems: 'center',
        justifyContent: 'center',
    },
+
    up: {
    display: 'flex',
    flexDirection: 'row',
@@ -78,9 +89,12 @@ const styles = StyleSheet.create({
    iconText: {
     marginRight: 120
    },
+<<<<<<< HEAD
    iconText2: {
     marginRight: 60
    },
+=======
+>>>>>>> 8e30ceb (added changes in the authentication pages)
 
   icon2: {
 
@@ -88,13 +102,21 @@ const styles = StyleSheet.create({
 
    divider: {
        left: 20,
+<<<<<<< HEAD
        top: 25,
+=======
+       top: 10,
+>>>>>>> 8e30ceb (added changes in the authentication pages)
        width: 256,
        height: 2,
        backgroundColor: 'black',
    },
    down: {
+<<<<<<< HEAD
        top: 45,
+=======
+       top: 20,
+>>>>>>> 8e30ceb (added changes in the authentication pages)
        display: 'flex',
        flexDirection: 'row',
        alignItems: 'center',

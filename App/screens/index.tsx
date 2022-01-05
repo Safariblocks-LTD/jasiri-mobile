@@ -1,9 +1,9 @@
 
 export * from './registration/Index'
 export * from './dashboard/Index'
-export * from './sendReceiveJasiri/Index'
+export * from './sendReceiveJasiri/index'
 export * from './tokens/Index'
-export * from './settings/Index'
+export * from './settings//index'
 export * from './wallet/Index'
 export * from './createAccount/Index'
 export * from './HomePlaceHolder'
