@@ -64,6 +64,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
             JA$IRI
           </Text>
         </View>
+<<<<<<< HEAD
         <View style={styles.textBox}>
           <TouchableOpacity
               style={styles.button}
@@ -72,6 +73,19 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
             </TouchableOpacity>
         </View>
       </View>
+=======
+      
+        <View style={styles.textBox}>
+        <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('Registration')}>
+              <Text style={styles.account}>add Account</Text>
+          </TouchableOpacity>
+        </View>
+         
+       
+>>>>>>> 78e92ce (update navigation and screens)
+>>>>>>> fd15565 (modified the registration and home files)
       </View>
     </SafeAreaView>
   );
@@ -85,6 +99,7 @@ const styles = StyleSheet.create({
     padding: 16, 
     width: '100%', 
     height: '100%',
+<<<<<<< HEAD
     backgroundColor: '#E3E8E7',
     
   },
@@ -94,6 +109,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 
+=======
+    backgroundColor: '#E3E8E7'
+  },
+>>>>>>> fd15565 (modified the registration and home files)
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
@@ -103,9 +122,20 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   logo: {
+<<<<<<< HEAD
    display: 'flex',
    alignItems: 'center',
    marginBottom: 30
+=======
+   bottom: 320,
+   left: 90,
+   right: 97,
+   width: 177,
+   height: 38,
+   top: 420,
+   display: 'flex',
+   alignItems: 'center',
+>>>>>>> fd15565 (modified the registration and home files)
   },
 
  logoText: {
@@ -118,7 +148,11 @@ const styles = StyleSheet.create({
  },
 
  textBox: {
+<<<<<<< HEAD
   alignItems: 'center',
+=======
+  top: 55
+>>>>>>> fd15565 (modified the registration and home files)
   },
   
   account: {

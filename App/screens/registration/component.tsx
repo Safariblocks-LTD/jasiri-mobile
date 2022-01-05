@@ -30,10 +30,14 @@ export const Registration = ({navigation}: navigation) => {
                 <View style = {styles.down}>
                 <Text style={styles.icon1}><MaterialCommunityIcons name="recycle" size={30} color="black" /></Text> 
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <Text style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recorver with passphrase</Text>
 =======
                 <Text style={styles.iconText}>Create Account</Text>
 >>>>>>> 8e30ceb (added changes in the authentication pages)
+=======
+                <Text style={styles.iconText2}>Recorver with passphrase</Text>
+>>>>>>> fd15565 (modified the registration and home files)
                 <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
             </View>
@@ -90,11 +94,17 @@ const styles = StyleSheet.create({
     marginRight: 120
    },
 <<<<<<< HEAD
+<<<<<<< HEAD
    iconText2: {
     marginRight: 60
    },
 =======
 >>>>>>> 8e30ceb (added changes in the authentication pages)
+=======
+   iconText2: {
+    marginRight: 60
+   },
+>>>>>>> fd15565 (modified the registration and home files)
 
   icon2: {
 
@@ -103,20 +113,28 @@ const styles = StyleSheet.create({
    divider: {
        left: 20,
 <<<<<<< HEAD
+<<<<<<< HEAD
        top: 25,
 =======
        top: 10,
 >>>>>>> 8e30ceb (added changes in the authentication pages)
+=======
+       top: 25,
+>>>>>>> fd15565 (modified the registration and home files)
        width: 256,
        height: 2,
        backgroundColor: 'black',
    },
    down: {
 <<<<<<< HEAD
+<<<<<<< HEAD
        top: 45,
 =======
        top: 20,
 >>>>>>> 8e30ceb (added changes in the authentication pages)
+=======
+       top: 45,
+>>>>>>> fd15565 (modified the registration and home files)
        display: 'flex',
        flexDirection: 'row',
        alignItems: 'center',
