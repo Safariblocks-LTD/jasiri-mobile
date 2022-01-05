@@ -24,8 +24,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
-import { CreateAccount, Dashboard, Registration } from './index';
+import { CreateAccount, Dashboard, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
+import RecoverAccount from './recoverAccount/component';
 
  const Stack = createStackNavigator()
 
@@ -54,6 +55,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
         <View style={styles.ecslipe3}></View>
         <View style={styles.eclipse2}></View>
 
+      <View style={styles.buttonTextBoxContainer}>
         <View style={styles.logo} >
           <Text style= {styles.logoText}>
             JA$IRI
@@ -67,6 +69,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
               <Text style={styles.account}>add Account</Text>
           </TouchableOpacity>
         </View>
+      </View>
          
        
       </View>
@@ -82,27 +85,32 @@ const styles = StyleSheet.create({
     padding: 16, 
     width: '100%', 
     height: '100%',
-    backgroundColor: '#E3E8E7'
+    backgroundColor: '#E3E8E7',
+    
+  },
+
+  buttonTextBoxContainer:{
+    
+    // borderWidth: 1,
+    height: '100%',
+    
+    justifyContent: 'flex-end',
   },
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
     padding: 10,
     width: 325,
-    left: 15,
-    bottom: -470,
+   
     height: 42,
     borderRadius: 15,
   },
   logo: {
-   bottom: 320,
-   left: 90,
-   right: 97,
-   width: 177,
-   height: 38,
-   top: 420,
+  
    display: 'flex',
    alignItems: 'center',
+  //  borderWidth: 1,
+   marginBottom: 30
   },
 
  logoText: {
@@ -115,7 +123,9 @@ const styles = StyleSheet.create({
  },
 
  textBox: {
-  top: 55
+  // top: 55,
+  alignItems: 'center',
+  // borderWidth: 1
   },
   
   account: {
@@ -160,6 +170,7 @@ export const HomeStack = () => {
           <Stack.Screen name="Home" component={HomePlaceHolder} />   
           <Stack.Screen name="Registration" component={Registration} />   
           <Stack.Screen name="Create Account" component={CreateAccount} />    
+          <Stack.Screen name="Recover Account" component={RecoverAccount} />    
         </Stack.Group>
         <Stack.Group>
           <Stack.Screen name="Dashboard" component={Dashboard} />

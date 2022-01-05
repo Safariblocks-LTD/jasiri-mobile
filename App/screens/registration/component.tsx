@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
-export const Registration = () => {
+export const Registration = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.textbox}>
@@ -14,13 +14,13 @@ export const Registration = () => {
             <View style={styles.main}>
                 <View style={styles.up}>
                 <Text style={styles.icon1}><MaterialIcons name="person-add-alt-1" size={30} color="black" /></Text> 
-                <Text style={styles.iconText}>Create Account</Text>
-                <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
+                <Text style={styles.iconText} onPress={() => navigation.navigate("Create Account")}>Create Account</Text>
+                <Text style={styles.icon2}><Feather onPress={() => navigation.navigate("Create Account")} name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
                 <View style={styles.divider}></View>
                 <View style = {styles.down}>
                 <Text style={styles.icon1}><MaterialCommunityIcons name="recycle" size={30} color="black" /></Text> 
-                <Text style={styles.iconText2}>Recorver with passphrase</Text>
+                <Text style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recorver with passphrase</Text>
                 <Text style={styles.icon2}><Feather name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
             </View>
