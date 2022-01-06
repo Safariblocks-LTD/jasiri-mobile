@@ -11,19 +11,19 @@ const SeedPhraseFinalPage = ({navigation}: navigation) => {
         <View style={styles.container} >
             <View style={styles.content}>
                 <View style={styles.sectionOne}>
-                    <Text>Tap words in correct order to confirm your seed phrase</Text>
+                    <Text style={styles.text}>Tap words in correct order to confirm your seed phrase</Text>
                 </View>
                 <View style={styles.sectionTwo}>
-                    <Text>Select word #2</Text>
+                    <Text style={styles.text}>Select word #2</Text>
                 </View>
                 <View style={styles.sectionThree}>
-                   <Text>Select word #2</Text>
+                   <Text style={styles.text}>Select word #2</Text>
                 </View>
                 <View style={styles.sectionThree}>
-                   <Text>Select word #2</Text>
+                   <Text style={styles.text}>Select word #2</Text>
                 </View>
-                <View style={styles.sectionFour}>
-                  <Text>Select word #2</Text>
+                <View style={styles.sectionThree}>
+                  <Text style={styles.text}>Select word #2</Text>
                 </View>
                 <View style={styles.sectionFive}>
                     <TouchableOpacity style={styles.button}>
@@ -44,14 +44,49 @@ export default SeedPhraseFinalPage
 
 const styles = StyleSheet.create({
  container: {
-
+ flex: 1,
+ width: '100%',
+ height: '100%',
+ backgroundColor: 'white'
  },
- content: {},
- sectionOne: {},
- sectionTwo: {},
- sectionThree: {},
- sectionFour: {},
- sectionFive: {},
+ content: {
+     height: '100%',
+     justifyContent: 'flex-start',
+     alignItems: 'center'
+ },
+ sectionOne: {
+     marginTop: 10,
+     backgroundColor: '#B0DDD5',
+     padding: 5,
+     height: 58,
+     width: 300,
+     justifyContent: 'center',
+     alignItems: 'center',
+    borderRadius: 12,
+ },
+ text: {
+  fontSize: 18,
+  fontStyle: 'normal',
+  fontWeight: '500'
+ },
+ sectionTwo: {
+    padding: 5,
+     justifyContent: 'flex-start',
+     width: 300,
+     marginTop: 30,
+     height: 40
+     
+ },
+ sectionThree: {
+    padding: 5,
+    justifyContent: 'flex-start',
+    width: 300,
+    marginTop: 70,
+    height: 40
+ },
+ sectionFive: {
+     marginTop: 100
+ },
  button: {
     width: 300,
     height: 42,
