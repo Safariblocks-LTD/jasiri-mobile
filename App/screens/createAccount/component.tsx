@@ -20,7 +20,8 @@ export const CreateAccount = ({navigation}: navigation) => {
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
-                        style={styles.button}>
+                        style={styles.button}
+                        onPress={() => navigation.navigate("Seed Phrase")}>
                         <Text style={styles.account}>I understand</Text>
                     </TouchableOpacity>
                 </View>

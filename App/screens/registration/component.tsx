@@ -4,8 +4,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+type navigation = {
+    navigation: any
+  }
 
-export const Registration = ({navigation}) => {
+export const Registration = ({navigation}: navigation) => {
     return (
         <View style={styles.container}>
             <View style={styles.textbox}>
