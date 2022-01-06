@@ -10,3 +10,6 @@ export * from './HomePlaceHolder'
 export * from './recoverAccount/index'
 export * from './seedphrase/index'
 export * from './seedphrase2/index'
+
+
+
