@@ -16,13 +16,12 @@ export const CreateAccount = ({navigation}: navigation) => {
                 </Text>
             </View>
             <View style={styles.buttonContainer}>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() => navigation.navigate('Dashboard')}>
-                <Text style={styles.account}>I understand</Text>
-            </TouchableOpacity>
-            
-        </View>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Dashboard')}>
+                    <Text style={styles.account}>I understand</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }

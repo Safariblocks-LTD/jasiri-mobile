@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'; 
@@ -17,6 +18,7 @@ export const Registration = ({navigation}: navigation) => {
             <View style={styles.main}>
                 <View style={styles.up}>
                 <Text style={styles.icon1}><MaterialIcons name="person-add-alt-1" size={30} color="black" /></Text> 
+
                 <Text style={styles.iconText} onPress={() => navigation.navigate("Create Account")}>Create Account</Text>
                 <Text style={styles.icon2}><Feather onPress={() => navigation.navigate("Create Account")} name="arrow-right-circle" size={24} color="black" /></Text>
                 </View>
@@ -43,7 +45,6 @@ const styles = StyleSheet.create({
       height: '100%',
       backgroundColor: '#FFFFFF'
     },
-
    textbox: {
    top: 41,
    width: 216,
@@ -51,7 +52,6 @@ const styles = StyleSheet.create({
    alignItems: 'center',
    justifyContent: 'center',
    },
-
    text: {
    fontStyle: 'normal',
 //    fontFamily: 'roboto',
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
        alignItems: 'center',
        justifyContent: 'center',
    },
-
    up: {
    display: 'flex',
    flexDirection: 'row',
