@@ -9,48 +9,44 @@ import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Token, SettingsScreen, Qr, Send,  Tokens, Wallet, Dashboard } from '../../screens';
+import { Token, SettingsScreen, Qr, Send,  Tokens, Wallet } from '../../screens';
+import { DashboardHome } from '../../components/dashboard/component';
+import { StyleSheet } from 'react-native';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 export const BottomNavigation =()=> {
-  const navigation = useNavigation();  
   return (
     
       <Tab.Navigator
-        // initialRouteName="Dashboard"
+          initialRouteName="main"
         
         
-        screenOptions={{
-          // tabBarActiveTintColor: '#028373',
-          tabBarStyle: {
-            // position: 'relative',
-            // backgroundColor: '#fff',
-            height: 100
-
-          },
+       
+          barStyle= {styles.bar}
           
-          // headerLeft: () => <Ionicons name="chevron-back" size={20} color="black" onPress={()=>navigation.goBack()} />,
 
-        }}
+        
         >
-        {/* <Tab.Screen
-          name="Dashboard"
-          component={Dashboard}
+        <Tab.Screen
+          name="main"
+          component={DashboardHome}
+         
           options={{
            
-            tabBarIcon: ({ color, size }) => (
-              <FontAwesome5 name="wallet" size={30} color="#028373" />
+            tabBarIcon: () => (
+              <FontAwesome5 name="wallet" size={30} color="#028373" style={styles.debug}/>
             ),
+            // header: <></>
           }}
-        /> */}
+        />
         <Tab.Screen
           name="Tokens"
           component={Tokens}
           options={{
            
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="contacts" size={30} color="#028373" />
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="contacts" size={30} color="#028373" style={styles.debug} />
             ),
           }}
         />
@@ -59,8 +55,8 @@ export const BottomNavigation =()=> {
           component={Send}
           options={{
            
-            tabBarIcon: ({ color, size }) => (
-              <MaterialIcons name="swap-vert-circle" size={60} color="#028373" />
+            tabBarIcon: () => (
+              <MaterialIcons name="swap-vert-circle" size={45} color="#028373" style={styles.debug}/>
             ),
           }}
         />
@@ -69,8 +65,8 @@ export const BottomNavigation =()=> {
           component={Token}
           options={{
            
-            tabBarIcon: ({ color, size }) => (
-              <Octicons name="bell" size={30} color="#028373" />
+            tabBarIcon: () => (
+              <Octicons name="bell" size={30} color="#028373" style={styles.debug}/>
             ),
           }}
         />
@@ -79,8 +75,8 @@ export const BottomNavigation =()=> {
           component={SettingsScreen}
           options={{
            
-            tabBarIcon: ({ color, size }) => (
-              <Fontisto name="player-settings" size={30} color="#028373" />
+            tabBarIcon: () => (
+              <Fontisto name="player-settings" size={30} color="#028373" style={styles.debug}/>
             ),
           }}
         />
@@ -90,4 +86,22 @@ export const BottomNavigation =()=> {
    
   )
 }
+
+const styles= StyleSheet.create({
+  bar: {
+    // flex: 1,
+    position: 'relative',
+    backgroundColor: '#fff',
+    // height: 80,
+    // width: '100%',
+    // borderWidth: 1
+
+  },
+  debug: {
+
+    // borderWidth: 1,
+    height: 45,
+    width: 45
+  }
+})
 

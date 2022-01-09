@@ -1,13 +1,19 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
+import { BottomNavigation } from '../../navigation/Index'
+import { StyleSheet } from 'react-native'
 
 export const Dashboard = () => {
     return (
-        <View>
-            <Text>
-                DashBoard
-            </Text>
-        </View>
+        <SafeAreaView style={styles.container}>
+            <BottomNavigation ></BottomNavigation>
+        </SafeAreaView>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    }
+})
 
