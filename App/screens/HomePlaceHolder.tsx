@@ -149,8 +149,8 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
-    padding: 10,
-    width: 325,
+    justifyContent: 'center',
+    width: '80%',
     height: 42,
     borderRadius: 15,
   },
@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
-    lineHeight: 20,
     fontStyle: 'normal',
 
   },
