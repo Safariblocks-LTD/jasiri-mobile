@@ -9,16 +9,8 @@ import {
   View,
   Text,
   SafeAreaView,
+  Image,
 } from 'react-native';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> 83aed74 (modified some files)
-=======
->>>>>>> 0367ad5 (created account recovery page)
 import { 
   Orbitron_400Regular,
   Orbitron_500Medium,
@@ -29,37 +21,20 @@ import {
 } from '@expo-google-fonts/orbitron'
 import {useFonts} from 'expo-font'
 import AppLoading from 'expo-app-loading';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 176490e (modified some files)
->>>>>>> 83aed74 (modified some files)
-=======
->>>>>>> 0367ad5 (created account recovery page)
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 0367ad5 (created account recovery page)
-import { CreateAccount, Dashboard, Registration,  } from './index';
+import { CreateAccount, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
- const Stack = createStackNavigator()
-<<<<<<< HEAD
+import Dashboard  from './dashboard/component';
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-export const HomePlaceHolder = ({ navigation }) => {
-=======
->>>>>>> 83aed74 (modified some files)
-=======
->>>>>>> 0367ad5 (created account recovery page)
+ const Stack = createStackNavigator()
+
  type navigation = {
    navigation: any
  }
@@ -77,65 +52,40 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
   if(!fontsLoaded){
     return <AppLoading />
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 176490e (modified some files)
->>>>>>> 83aed74 (modified some files)
-=======
-
->>>>>>> 0367ad5 (created account recovery page)
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View 
-      style={{ flex: 1, padding: 16, width: 375, height: 812, backgroundColor: '#E3E8E7'}}
-      >
-        <View style={styles.ecslipe3}></View>
-        <View style={styles.eclipse2}></View>
-<<<<<<< HEAD
+    <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={styles.container} >
+          <View style={styles.eclipseContainer}>
+              <View style={styles.ecslipe3}></View>
+              <View style={styles.eclipse2}></View>
+          </View>
+          <View style={styles.imageContainer}>
+              <Image
+                source={require('../assets/undraw_transfer_money_rywa.png')}
+                style={{ width: 250, height: 250 }}
+              /> 
+          </View>
 
-=======
->>>>>>> 0367ad5 (created account recovery page)
-      <View style={styles.buttonTextBoxContainer}>
-        <View style={styles.logo} >
-          <Text style= {styles.logoText}>
-            JA$IRI
-          </Text>
-        </View>
-<<<<<<< HEAD
-        <View style={styles.textBox}>
-          <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Registration')}>
-                <Text style={styles.account}>add Account</Text>
-            </TouchableOpacity>
-        </View>
-      </View>
-=======
-      
-        <View style={styles.textBox}>
-        <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Registration')}>
-              <Text style={styles.account}>add Account</Text>
-          </TouchableOpacity>
-        </View>
-<<<<<<< HEAD
-         
-       
->>>>>>> 78e92ce (update navigation and screens)
->>>>>>> fd15565 (modified the registration and home files)
-=======
-      </View>
->>>>>>> 0367ad5 (created account recovery page)
+          <View style={styles.logo} >
+                <Image
+                  source={require('../assets/jasiri.png')}
+                  style={{ width: 200, height: 40 }}
+                />
+          </View>
+              
+
+          <View style={styles.buttonTextBoxContainer}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Registration')}>
+                      <Text style={styles.account}>add Account</Text>
+                </TouchableOpacity>
+          </View>
       </View>
     </SafeAreaView>
   );
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 0367ad5 (created account recovery page)
 
 const styles = StyleSheet.create({
 
@@ -144,32 +94,58 @@ const styles = StyleSheet.create({
     padding: 16, 
     width: '100%', 
     height: '100%',
-<<<<<<< HEAD
-<<<<<<< HEAD
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: '#E3E8E7',
-    
+    justifyContent: 'space-between',
   },
+
+  eclipseContainer: {
+    top: 0,
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  ecslipe3: {
+    width: 186,
+    height: 163,
+    overflow: 'hidden', 
+    backgroundColor: '#403131', 
+    top: -56, 
+    left: -24, 
+    position: 'absolute', 
+    opacity: .09, 
+    borderRadius: 130
+  },
+  eclipse2: {
+    width: 186,
+    height: 163,
+    overflow: 'hidden', 
+    backgroundColor: '#8E5858', 
+    top: 0, 
+    left: -59, 
+    position: 'absolute', 
+    opacity: .07, 
+    borderRadius: 130
+  },
+  imageContainer: {
+    marginTop: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+
+  logo: {
+    justifyContent: 'center',
+    alignItems: 'center'
+    },
 
   buttonTextBoxContainer:{
-    height: '100%',
-    justifyContent: 'flex-end',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 30
   },
-
-=======
-    backgroundColor: '#E3E8E7'
-  },
->>>>>>> fd15565 (modified the registration and home files)
-=======
-    backgroundColor: '#E3E8E7',
-    
-  },
-
-  buttonTextBoxContainer:{
-    height: '100%',
-    justifyContent: 'flex-end',
-  },
-
->>>>>>> 0367ad5 (created account recovery page)
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
@@ -177,49 +153,6 @@ const styles = StyleSheet.create({
     width: 325,
     height: 42,
     borderRadius: 15,
-  },
-  logo: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-   display: 'flex',
-   alignItems: 'center',
-   marginBottom: 30
-=======
-   bottom: 320,
-   left: 90,
-   right: 97,
-   width: 177,
-   height: 38,
-   top: 420,
-   display: 'flex',
-   alignItems: 'center',
->>>>>>> fd15565 (modified the registration and home files)
-=======
-   display: 'flex',
-   alignItems: 'center',
-   marginBottom: 30
->>>>>>> 0367ad5 (created account recovery page)
-  },
-
- logoText: {
-  fontFamily: 'Orbitron_400Regular',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 42,
-  lineHeight: 45,
-  color: '#78B9B1'
- },
-
- textBox: {
-<<<<<<< HEAD
-<<<<<<< HEAD
-  alignItems: 'center',
-=======
-  top: 55
->>>>>>> fd15565 (modified the registration and home files)
-=======
-  alignItems: 'center',
->>>>>>> 0367ad5 (created account recovery page)
   },
   
   account: {
@@ -233,28 +166,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
 
   },
-  ecslipe3: {
-    width: 186,
-    height: 163,
-    overflow: 'hidden', 
-    backgroundColor: '#403131', 
-    top: -56, 
-    left: -24, 
-    position: 'absolute', 
-    opacity: .04, 
-    borderRadius: 130
-  },
-  eclipse2: {
-    width: 186,
-    height: 163,
-    overflow: 'hidden', 
-    backgroundColor: '#8E5858', 
-    top: 0, 
-    left: -59, 
-    position: 'absolute', 
-    opacity: .04, 
-    borderRadius: 130
-  },
+ 
 });
 
 export const HomeStack = () => {
@@ -273,4 +185,4 @@ export const HomeStack = () => {
         </Stack.Group> 
       </Stack.Navigator>
     )
-  }
+    }

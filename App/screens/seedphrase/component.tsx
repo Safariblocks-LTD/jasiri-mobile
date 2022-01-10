@@ -3,21 +3,11 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 05ed0d1 (added a new file and modified other files)
 type navigation = {
     navigation: any
   } 
 
 const SeedPhrase = ({navigation}: navigation) => {
-<<<<<<< HEAD
-=======
-const SeedPhrase = () => {
->>>>>>> a14de56 (added a seed phrase page)
-=======
->>>>>>> 05ed0d1 (added a new file and modified other files)
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -50,20 +40,9 @@ const SeedPhrase = () => {
                 <TouchableOpacity style={styles.button}>
                         <Text 
                         style = {styles.buttonText}
-<<<<<<< HEAD
-<<<<<<< HEAD
                         onPress={() => navigation.navigate("Seed Phrase Final Page")}
                         >
                          Next
-=======
-                        >
-                         Recover Account
->>>>>>> a14de56 (added a seed phrase page)
-=======
-                        onPress={() => navigation.navigate("Seed Phrase Final Page")}
-                        >
-                         Next
->>>>>>> 05ed0d1 (added a new file and modified other files)
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -79,10 +58,6 @@ const styles = StyleSheet.create({
   flex:1,
   width: '100%',
   height: '100%',
-<<<<<<< HEAD
-=======
-  borderWidth: 1
->>>>>>> a14de56 (added a seed phrase page)
   },
   content: {
       alignItems: 'center'
