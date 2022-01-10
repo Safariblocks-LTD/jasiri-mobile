@@ -1,5 +1,5 @@
 // import ReactDOM from 'react-dom'
-import React from 'react';
+import * as React from 'react';
 import { createMaterialBottomTabNavigator  } from '@react-navigation/material-bottom-tabs'
 import { MaterialIcons  } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Token, SettingsScreen, Qr, Send,  Tokens, Wallet } from '../../screens';
-import { DashboardHome } from '../../components/dashboard/component';
+import { DashboardHome } from '../../components/dashboard/Index';
 import { StyleSheet } from 'react-native';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -20,26 +20,17 @@ export const BottomNavigation =()=> {
     
       <Tab.Navigator
           initialRouteName="main"
-        
-        
-       
           barStyle= {styles.bar}
-          
-
-        
         >
         <Tab.Screen
           name="main"
           component={DashboardHome}
-         
           options={{
-           
             tabBarIcon: () => (
               <FontAwesome5 name="wallet" size={30} color="#028373" style={styles.debug}/>
             ),
-            // header: <></>
           }}
-        />
+        /> 
         <Tab.Screen
           name="Tokens"
           component={Tokens}
@@ -92,9 +83,6 @@ const styles= StyleSheet.create({
     // flex: 1,
     position: 'relative',
     backgroundColor: '#fff',
-    // height: 80,
-    // width: '100%',
-    // borderWidth: 1
 
   },
   debug: {

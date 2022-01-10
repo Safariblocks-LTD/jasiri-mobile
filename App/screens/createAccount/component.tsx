@@ -1,5 +1,6 @@
-import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+
+import * as React from 'react'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type navigation = {
@@ -10,18 +11,21 @@ export const CreateAccount = ({navigation}: navigation) => {
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <View style={styles.graphic}>
-                    <Text style={styles.graphicText}>the graphics here</Text>
+                <View style={styles.imageContainer}>
+                  <Image 
+                    source={require('../../assets/Vector.png')}
+                    style={{height: 150, width: 150}}
+                     />
                 </View>
                 <View style={styles.textBox}>
                     <Text style={styles.text}>
-                    Back up your account using a recovery passphrace
+                    Back up your account using a recovery passphrace 
                     </Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => navigation.navigate("Seed Phrase")}>
+                        onPress={() => navigation.navigate('Seed Phrase')}>
                         <Text style={styles.account}>I understand</Text>
                     </TouchableOpacity>
                 </View>
@@ -32,33 +36,32 @@ export const CreateAccount = ({navigation}: navigation) => {
 
 const styles = StyleSheet.create({
     container: {
-    flex: 1,  
-    height: '100%',
-    width: '100%',
-    justifyContent: 'center',
-    backgroundColor: '#FEFEFE'
+        flex: 1, 
     },
 
     content: {
-    borderWidth: 1,
-    alignItems: 'center'
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#FFFFFF',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-
-    graphic: {
-    width: '100%',
-    height: '40%',
+    imageContainer: {
+        marginTop: 40,
     },
-
-    graphicText: {
-    color: 'black'
-    },
-
     textBox: {
         width: '100%',
-        height: '30%',
+        justifyContent: 'center',
+        alignItems: 'center',
         padding: 20,
+        marginBottom: 70
     },
-
+    buttonContainer: {
+        width: '80%',
+        justifyContent: 'center',
+        margin: 15,
+        marginBottom: 40
+    },
     text: {
         color: '#000000',
         // fontFamily: 'Poppins',
@@ -66,29 +69,19 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         fontSize: 30,
     },
-
-    buttonContainer: {
-        width: '100%',
-        height: '30%',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-
-    button: {
-        marginTop: 80,
-        alignItems: 'center',
-        backgroundColor: '#3BD5C2',
-        padding: 10,
-        width: 320,
-        height: 42,
-        borderRadius: 15,
-      },
-
     account: {
         color: 'black',
         textTransform: 'uppercase',
         fontWeight: 'bold',
         fontSize: 18,
       },
-})
 
+      button: {
+        alignItems: 'center',
+        backgroundColor: '#3BD5C2',
+        padding: 10,
+        width: '100%',
+        height: 42,
+        borderRadius: 15,
+      },
+})

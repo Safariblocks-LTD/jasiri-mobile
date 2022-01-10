@@ -29,7 +29,7 @@ const SeedPhrase = ({navigation}: navigation) => {
                             renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
                         />
                     </View>
-                    <View style={styles.list2}> 
+                    <View style={styles.list1}> 
                         <FlatList
                                 data={list2}
                                 renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
@@ -37,13 +37,13 @@ const SeedPhrase = ({navigation}: navigation) => {
                     </View>
                 </View>
                 <View style={styles.third}>
-                <TouchableOpacity style={styles.button}>
-                        <Text 
-                        style = {styles.buttonText}
-                        onPress={() => navigation.navigate("Seed Phrase Final Page")}
-                        >
-                         Next
-                        </Text>
+                    <TouchableOpacity style={styles.button}>
+                            <Text 
+                            style = {styles.buttonText}
+                            onPress={() => navigation.navigate("Seed Phrase Final Page")}
+                            >
+                            Next
+                            </Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -56,42 +56,44 @@ export default SeedPhrase
 const styles = StyleSheet.create({
   container: {
   flex:1,
-  width: '100%',
-  height: '100%',
   },
   content: {
-      alignItems: 'center'
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   first: {
       marginTop: 20,
       height: '25%',
       backgroundColor: '#AAC8C2',
-      width: 320,
+      width: '85%',
       borderRadius: 35,
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center'
   },
   section1: {
-      marginTop: 17,
-      justifyContent: 'flex-start',
+    //   marginTop: 17,
   },
   section1Icon: {
-      marginLeft: 20
+      top: -40
   },
   section2: {
-      margin: 15,
       justifyContent: 'flex-start',
+      width: '80%',
+      padding: 10
 
   },
   section2Text1: {
       fontSize: 14,
-      marginTop: 5,
       fontWeight: '500',
       fontStyle: 'normal',
       color: 'black'
   },
   section2Text2: {
-      marginTop: 20,
+      marginTop: 15,
       width: 250,
       color: 'black',
       fontSize: 14
@@ -99,20 +101,16 @@ const styles = StyleSheet.create({
   second: {
       display: 'flex',
       flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
       marginTop: 10,
-      height: '50%',
+      padding: 10,
       backgroundColor: '#AAC8C2',
-      width: 320,
+      width: '85%',
       borderRadius: 35
   },
   list1: {
       marginTop: 30,
-      marginLeft: 30,
-      width: '50%'
-  },
-  list2: {
-      marginTop: 30,
-      width: '50%'
   },
   item: {
       fontSize:14,
@@ -121,12 +119,13 @@ const styles = StyleSheet.create({
   },
   third: {
       height: '25%',
+      width: '80%',
       justifyContent: 'center',
+      alignItems: 'center',
   },
   button: {
-      marginBottom: 30,
     width: 300,
-    height: 42,
+    height: 40,
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',

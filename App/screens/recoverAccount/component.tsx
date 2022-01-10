@@ -31,13 +31,11 @@ const RecoverAccount = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            
         </View>
     )
 }
 
 export default RecoverAccount
-
 const styles = StyleSheet.create({
 container: {
     flex: 1,

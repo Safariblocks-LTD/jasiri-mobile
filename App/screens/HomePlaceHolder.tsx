@@ -9,6 +9,7 @@ import {
   View,
   Text,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import { 
   Orbitron_400Regular,
@@ -24,11 +25,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
-import { CreateAccount, Dashboard, Registration,  } from './index';
+
+import { CreateAccount, Registration,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
+import Dashboard  from './dashboard/component';
 
  const Stack = createStackNavigator()
 
@@ -50,30 +53,34 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
     return <AppLoading />
   }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View 
-      style={styles.container}
-      >
-        <View style={styles.ecslipe3}></View>
-        <View style={styles.eclipse2}></View>
+    <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
+      <View style={styles.container} >
+          <View style={styles.eclipseContainer}>
+              <View style={styles.ecslipe3}></View>
+              <View style={styles.eclipse2}></View>
+          </View>
+          <View style={styles.imageContainer}>
+              <Image
+                source={require('../assets/undraw_transfer_money_rywa.png')}
+                style={{ width: 250, height: 250 }}
+              /> 
+          </View>
 
-      <View style={styles.buttonTextBoxContainer}>
-        <View style={styles.logo} >
-          <Text style= {styles.logoText}>
-            JA$IRI
-          </Text>
-        </View>
-      
-        <View style={styles.textBox}>
-        <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate('Registration')}>
-              <Text style={styles.account}>add Account</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-         
-       
+          <View style={styles.logo} >
+                <Image
+                  source={require('../assets/jasiri.png')}
+                  style={{ width: 200, height: 40 }}
+                />
+          </View>
+              
+
+          <View style={styles.buttonTextBoxContainer}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Registration')}>
+                      <Text style={styles.account}>add Account</Text>
+                </TouchableOpacity>
+          </View>
       </View>
     </SafeAreaView>
   );
@@ -87,52 +94,16 @@ const styles = StyleSheet.create({
     padding: 16, 
     width: '100%', 
     height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     backgroundColor: '#E3E8E7',
-    
+    justifyContent: 'space-between',
   },
 
-  buttonTextBoxContainer:{
-    height: '100%',
-    justifyContent: 'flex-end',
-  },
-
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#3BD5C2',
-    padding: 10,
-    width: 325,
-    height: 42,
-    borderRadius: 15,
-  },
-  logo: {
-   display: 'flex',
-   alignItems: 'center',
-   marginBottom: 30
-  },
-
- logoText: {
-  fontFamily: 'Orbitron_400Regular',
-  fontStyle: 'normal',
-  fontWeight: 'bold',
-  fontSize: 42,
-  lineHeight: 45,
-  color: '#78B9B1'
- },
-
- textBox: {
-  alignItems: 'center',
-  },
-  
-  account: {
-    backgroundColor: '#3BD5C2',
-    color: 'black',
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 18,
-    lineHeight: 20,
-    fontStyle: 'normal',
-
+  eclipseContainer: {
+    top: 0,
+    display: 'flex',
+    flexDirection: 'column'
   },
   ecslipe3: {
     width: 186,
@@ -142,7 +113,7 @@ const styles = StyleSheet.create({
     top: -56, 
     left: -24, 
     position: 'absolute', 
-    opacity: .04, 
+    opacity: .09, 
     borderRadius: 130
   },
   eclipse2: {
@@ -153,9 +124,48 @@ const styles = StyleSheet.create({
     top: 0, 
     left: -59, 
     position: 'absolute', 
-    opacity: .02, 
+    opacity: .07, 
     borderRadius: 130
   },
+  imageContainer: {
+    marginTop: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+
+  logo: {
+    justifyContent: 'center',
+    alignItems: 'center'
+    },
+
+  buttonTextBoxContainer:{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: 30
+  },
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#3BD5C2',
+    justifyContent: 'center',
+    width: '80%',
+    height: 42,
+    borderRadius: 15,
+  },
+  
+  account: {
+    backgroundColor: '#3BD5C2',
+    color: 'black',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
+    fontStyle: 'normal',
+
+  },
+ 
 });
 
 export const HomeStack = () => {
@@ -174,4 +184,4 @@ export const HomeStack = () => {
         </Stack.Group> 
       </Stack.Navigator>
     )
-  }
+    }
