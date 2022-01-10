@@ -45,22 +45,20 @@ export default SeedPhraseFinalPage
 const styles = StyleSheet.create({
  container: {
  flex: 1,
- width: '100%',
- height: '100%',
  backgroundColor: 'white'
  },
  content: {
-     height: '100%',
-     justifyContent: 'flex-start',
-     alignItems: 'center'
+    width: '100%',
+    height: '100%',
+    justifyContent: 'space-around',
+    alignItems: 'center'
  },
  sectionOne: {
      marginTop: 10,
      backgroundColor: '#B0DDD5',
-     padding: 5,
-     height: 60,
-     width: 300,
-     justifyContent: 'center',
+     padding: 10,
+     height: '10%',
+     width: '80%',
      alignItems: 'center',
     borderRadius: 12,
  },
@@ -70,26 +68,28 @@ const styles = StyleSheet.create({
   fontWeight: '500'
  },
  sectionTwo: {
-    padding: 5,
+     padding: 5,
      justifyContent: 'flex-start',
-     width: 300,
-     marginTop: 30,
+     width: '80%',
      height: 40
      
  },
  sectionThree: {
     padding: 5,
     justifyContent: 'flex-start',
-    width: 300,
+    width: '80%',
     marginTop: 70,
     height: 40
  },
  sectionFive: {
-     marginTop: 100
+    height: '30%',
+    alignItems: 'center',
+    justifyContent: 'center',
  },
  button: {
+    marginTop: 40,
     width: 300,
-    height: 42,
+    height: 40,
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
