@@ -29,7 +29,9 @@ export const BottomNavigation =()=> {
             tabBarIcon: () => (
               <FontAwesome5 name="wallet" size={30} color="#028373" style={styles.debug}/>
             ),
+            // : ()=>{undefined}
           }}
+          
         /> 
         <Tab.Screen
           name="Tokens"
@@ -47,7 +49,7 @@ export const BottomNavigation =()=> {
           options={{
            
             tabBarIcon: () => (
-              <MaterialIcons name="swap-vert-circle" size={45} color="#028373" style={styles.debug}/>
+              <MaterialIcons name="swap-vert-circle" size={30} color="#028373" style={styles.debug}/>
             ),
           }}
         />

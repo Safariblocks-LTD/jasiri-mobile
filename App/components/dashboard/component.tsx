@@ -1,66 +1,126 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView, Image } from 'react-native'
 import { BottomNavigation } from '../../navigation/Index'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Svg, { Circle, Rect } from 'react-native-svg';
+import { TouchableOpacity } from 'react-native-gesture-handler'
+
+import { getAccountInfo } from '../../services'
+
 
 export const DashboardHome = () => {
+    React.useEffect(()=>{
+        const accounts=getAccountInfo().then(res=>console.log(res))
+
+    })
     return (
-        <View style={styles.container}>
-           <Text style={styles.title}>Dashboard</Text>
+        
+        <ScrollView style={styles.scrollView}>
+            <View style={styles.container}>
+            <Text style={styles.title}>Dashboard</Text>
 
-           <View style={styles.balance}> 
-
-           </View>
-
-           <View style={styles.info}> 
-
+            <View style={styles.balance}> 
+                <Text>TOTAL BALANCE</Text> 
+                <Text>0.00</Text> 
+                <Text>USD</Text> 
             </View>
 
-            <Text style={styles.title}>Quick actions</Text>
+            <View style={styles.info}> 
 
-            <View style={styles.quickActions}> 
+                </View>
 
+                <Text style={{alignSelf: 'flex-start',...styles.title}}>Quick actions</Text>
+
+                <View style={styles.quickActions}> 
+                    <TouchableOpacity style={styles.quickActionsItem}>
+                    <Image
+                        // style={styles.tinyLogo}
+                        source={require('../../assets/hand.png')}
+                    />
+                    <Text style={styles.tinyText}> Tokenization </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity  style={styles.quickActionsItem}>
+                    <Image
+                        // style={styles.tinyLogo}
+                        source={require('../../assets/dollar.png')}
+                    />
+                    <Text style={styles.tinyText}> Cash commit </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity  style={styles.quickActionsItem}>
+                    <Image
+                        // style={styles.tinyLogo}
+                        source={require('../../assets/pie.png')}
+                    />
+                    <Text style={styles.tinyText}> Rewards </Text>
+                    </TouchableOpacity>
+
+                </View>
             </View>
 
-        </View>
+        </ScrollView>
+        
     )
 }
 
 const styles = StyleSheet.create({
+    scrollView: {
+        // flex: 1,
+        // alignItems: 'center',
+        height: 800,
+        // borderWidth: 1
+    },
+    
     container: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
-        height: '100%'
+        height: 800,
+        // borderWidth: 1
     },
     title: {
         textAlign: 'center',
         fontSize: 20,
-        margin: 5,
+        margin: 30,
         fontWeight: 'bold'
     },
     balance: {
         backgroundColor: '#fff',
-        minHeight: '20%',
+        minHeight: '10%',
         margin: 5,
         width: '85%',
-        borderRadius: 20
+        borderRadius: 20,
+        padding: 20
     },
 
     info: {
         backgroundColor: '#fff',
-        minHeight: '40%',
+        minHeight: '30%',
         margin: 10,
         width: '85%',
         borderRadius: 20
     },
 
     quickActions: {
-        backgroundColor: '#fff',
-        minHeight: '20%',
+        // backgroundColor: '#fff',
+        // minHeight: '20%',
         margin: 10,
         width: '85%',
-        borderRadius: 20
+        borderRadius: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    quickActionsItem: {
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 80,
+        height: 60,
+        borderRadius: 10
+    },
+    tinyText:{
+        color: 'black',
+        fontSize: 12,
+        fontWeight: 'bold'
     }
 })
 
