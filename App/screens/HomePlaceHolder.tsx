@@ -32,6 +32,7 @@ import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
 import Dashboard  from './dashboard/component';
+import Send from './sendReceiveJasiri/send/Component';
 
  const Stack = createStackNavigator()
 
@@ -163,7 +164,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     fontStyle: 'normal',
-
   },
  
 });
@@ -181,6 +181,7 @@ export const HomeStack = () => {
         </Stack.Group>
         <Stack.Group>
           <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen name="Send" component={Send} /> 
         </Stack.Group> 
       </Stack.Navigator>
     )
