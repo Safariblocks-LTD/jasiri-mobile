@@ -3,7 +3,7 @@ import {token} from "./auth";
 
 
 
-const apiBaseUrl = 'https://algoindexer.algoexplorerapi.io';
+const apiBaseUrl = 'https://algoindexer.testnet.algoexplorerapi.io/v2';
 
 const baseConfig = () => {
   const config = {};
@@ -17,12 +17,15 @@ export default {
     let qsParts = [''];
    
     let paramString = qsParts.length === 0 ? "" : `?${qsParts.join("&")}`;
+    console.log(paramString)
 
    
    
     let url = (endpoint || "").toLowerCase().startsWith("http")
       ? `${endpoint}`
       : `${apiBaseUrl}/${endpoint}`;
+
+      console.log(`${url}${paramString}`)
 
     try {
       let response = await axios.get(`${url}${paramString}`, baseConfig());

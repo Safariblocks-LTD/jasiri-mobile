@@ -1,10 +1,22 @@
-import {createAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-function withPayloadType<T>() {
-    return (t: T) => ({ payload: t })
+const tokenSlice = createSlice({
+  name: "token",
+  initialState: {
+    token: {amount: '', unitName: ''},
+    visible: false
+  },
+  reducers: {
+    setToken(state, action: PayloadAction<{amount: string, unitName: string} >) {
+      state.token = action.payload
+    },
+    setVisible(state, action: PayloadAction<boolean >) {
+      state.visible = action.payload
+    },
   }
-export const action = createAction('test', withPayloadType<string>())
+})
 
-
+export const { setToken, setVisible } = tokenSlice.actions
+export const token = tokenSlice
 
 

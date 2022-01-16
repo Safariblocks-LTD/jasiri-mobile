@@ -10,17 +10,40 @@ import {
   SafeAreaView,
   TextInput,
 } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Modal } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, setVisible } from '../../../redux';
 
 
-export const Token = ({ route, navigation }) => {
+export const Token = (props: { route, navigation}) => {
+
+  const [visible, setVisible] = React.useState(false)
+  
+  const dispatch = useDispatch()
+
+  const vsState = useSelector((state: RootState)=>state.token.visible)
+  
+  React.useEffect(()=>{
+    setVisible(vsState)
+  }, [])
+ 
+
+  const handleSend=()=>{
+    dispatch(setVisible(false))
+    setVisible(false)
+  }
+
+  
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16 }}>
+    <Modal visible={visible} >
+      <ScrollView>
+      <View style={styles.container}>
         <View
           style={{
-            flex: 1,
+            
             alignItems: 'center',
-            justifyContent: 'center',
+            // justifyContent: 'center',
           }}>
          
           <TextInput
@@ -33,23 +56,34 @@ export const Token = ({ route, navigation }) => {
           <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={handleSend}
+          >
             <Text>Send</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={handleSend} >
             <Text>Receive</Text>
           </TouchableOpacity>
           </View>
         </View>
         
       </View>
-    </SafeAreaView>
+      </ScrollView>
+    </Modal>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    alignItems:'center',
+    // margin: 5,
+    backgroundColor: '#ebe1c5',
+    width: '100%',
+    height: 800,
+    justifyContent: 'flex-start',
+    borderWidth: 5
+  },
   button: {
     alignItems: 'center',
     backgroundColor: '#79E7E7',

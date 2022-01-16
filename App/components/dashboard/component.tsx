@@ -10,10 +10,15 @@ import { getAccountInfo } from '../../services'
 
 
 export const DashboardHome = () => {
+    const [accountInfo, setAccountInfo] = React.useState(null)
     React.useEffect(()=>{
-        const accounts=getAccountInfo().then(res=>console.log(res))
+        const accounts=getAccountInfo()
+        .then((res: any)=>{
+            console.log(res.account.assets); 
+            setAccountInfo({...res})
+        }).catch(e=>console.log(e))
 
-    })
+    }, [])
     return (
         
         <ScrollView style={styles.scrollView}>
@@ -22,7 +27,7 @@ export const DashboardHome = () => {
 
             <View style={styles.balance}> 
                 <Text>TOTAL BALANCE</Text> 
-                <Text>0.00</Text> 
+                <Text>{accountInfo?accountInfo.account.assets[0].amount: 'loading'}</Text> 
                 <Text>USD</Text> 
             </View>
 
