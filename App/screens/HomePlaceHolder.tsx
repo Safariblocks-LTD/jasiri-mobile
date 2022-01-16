@@ -34,6 +34,7 @@ import SeedPhraseFinalPage from './seedphrase2/component';
 import Dashboard  from './dashboard/component';
 import Send from './sendReceiveJasiri/send/Component';
 import { Token } from '../components/dashboard/tokens/Index';
+import { QrScanner } from '../components/qrScanner';
 
  const Stack = createStackNavigator()
 
@@ -184,6 +185,7 @@ export const HomeStack = () => {
         <Stack.Group>
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="Send" component={Send} /> 
+          <Stack.Screen name="Scan QR" component={QrScanner} /> 
         </Stack.Group> 
       </Stack.Navigator>
     )

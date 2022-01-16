@@ -27,6 +27,10 @@
     },
     "web": {
       "favicon": "./App/assets/images/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-camera"
+    ]
+  
   }
 }

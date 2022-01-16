@@ -34,7 +34,7 @@ export const Token = (props: { route, navigation}) => {
 
   
   return (
-    <Modal>
+    <View>
       <ScrollView>
       <View style={styles.container}>
         <View
@@ -80,9 +80,12 @@ export const Token = (props: { route, navigation}) => {
          <Text style={styles.addressTitle}>Recipient Address</Text>
            <View style={styles.recipientqrContainer}>
            <TextInput style={styles.addressInput}></TextInput>
-           <View style={styles.qrInput}>
+           <TouchableOpacity 
+           style={styles.qrInput}
+           onPress={()=>props.navigation.navigate('Scan QR')}
+           >
              <Image source={require('../../../../assets/qr.png')}></Image>
-           </View>
+           </TouchableOpacity>
 
            </View>
         
@@ -99,6 +102,7 @@ export const Token = (props: { route, navigation}) => {
        </View>
        
         </View>
+        
          
        </>
 
@@ -112,9 +116,9 @@ export const Token = (props: { route, navigation}) => {
         
       </View>
       </ScrollView>
-
      
-    </Modal>
+     
+    </View>
   );
 };
 const styles = StyleSheet.create({
@@ -134,7 +138,7 @@ const styles = StyleSheet.create({
   },
   transactionContainer: {
     width: '100%',
-    borderWidth: 3,
+    // borderWidth: 3,
     alignSelf: 'flex-start',
     padding: 20
   },

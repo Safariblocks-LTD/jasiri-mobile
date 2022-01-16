@@ -9,6 +9,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { getAccountInfo } from '../../services'
 
 
+
 export const DashboardHome = () => {
     const [accountInfo, setAccountInfo] = React.useState(null)
     React.useEffect(()=>{
@@ -62,6 +63,7 @@ export const DashboardHome = () => {
 
                 </View>
             </View>
+            
 
         </ScrollView>
         
