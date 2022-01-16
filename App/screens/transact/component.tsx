@@ -2,9 +2,10 @@ import * as React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { getAccountInfo, getAssetInfo } from '../../services'
-import { Token, Tokens } from '..'
+import { Token } from '../../components/dashboard/tokens/Index'
 import { setToken, setVisible } from '../../redux'
 import { useDispatch } from 'react-redux'
+import { createStackNavigator } from '@react-navigation/stack'
 
 export const Transact = ({route, navigation}) => {
     const [assets, setAssets] = React.useState([])
@@ -16,20 +17,22 @@ export const Transact = ({route, navigation}) => {
         getAccountInfo().then(res=>{
            
             setAssets(res.account.assets)
-        getAssetInfo().then((asset)=>{
+            getAssetInfo().then((asset)=>{
             
             const assetParams = {...asset}.asset.params
             setUnitName(assetParams['unit-name'])
             
-        console.log(asset)
+        // console.log(asset)
         })
     })
     }, [unitName])
 
     const handleCLick=(asset: {amount: string})=>{
-        setToken({unitName, amount: asset.amount})
+        dispatch(setToken({unitName, amount: asset.amount}))
         
-        dispatch(setVisible(true))
+        dispatch(setVisible({visible: true}))
+        navigation.navigate('Token')
+        
     }
     return (
             <View style={styles.container} >
@@ -74,68 +77,52 @@ export const Transact = ({route, navigation}) => {
                     </View>
 
 
-                    <Token route={route} navigation={navigation} ></Token>
+                    
                 </View>
-              
+            
+           
             </View>
     )
 }
 
 
 
+
+
 const styles = StyleSheet.create({
 container: {
     flex: 1,
-       
     backgroundColor: '#E3E8E7',
     },
 content: {
-    // borderWidth: 1,
-    // height: '100%',
-   
     justifyContent: 'space-between'
 },
 content_first: {
-    display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // borderWidth: 1,
     width: '100%',
     height: '60%'
 },
 content_first_jasiri: {
-    // borderWidth: 1,
     borderRadius: 5,
     width: '90%',
-    height: 'auto',
     paddingBottom: 10,
     margin: 20,
     backgroundColor: 'white'
 },
 first: {
-    display: 'flex',
     flexDirection: 'column',
     marginLeft: 10
 },
 content_first_usd: {
-    // borderWidth: 1,
+  
     width: '90%',
-    height: 'auto',
     backgroundColor: 'white',
     borderRadius: 5,
-    paddingBottom: 10,
-    margin: 20,
+
+
 },
-content_first_algo: {
-    // borderWidth: 1,
-    width: '90%',
-    height: 'auto',
-    borderRadius: 5,
-    backgroundColor: 'white',
-    paddingBottom: 10,
-    // margin: 20,
-},
+
 content_second: {
     // borderWidth: 1,
     width: '100%',
@@ -149,15 +136,15 @@ account: {
     color: 'black',
     textTransform: 'uppercase',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 16,
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#3BD5C2',
-    padding: 10,
+    padding: 15,
     width: '100%',
-    height: 42,
+    // height: 42,
     borderRadius: 15,
   },
 })

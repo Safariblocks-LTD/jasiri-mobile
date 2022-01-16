@@ -4,13 +4,13 @@ const tokenSlice = createSlice({
   name: "token",
   initialState: {
     token: {amount: '', unitName: ''},
-    visible: false
+    visible: {visible: false}
   },
   reducers: {
     setToken(state, action: PayloadAction<{amount: string, unitName: string} >) {
       state.token = action.payload
     },
-    setVisible(state, action: PayloadAction<boolean >) {
+    setVisible(state, action: PayloadAction<{visible: boolean} >) {
       state.visible = action.payload
     },
   }

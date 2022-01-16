@@ -26,13 +26,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { BottomNavigation } from '../navigation/Index';
 
 
-import { CreateAccount, Registration,  } from './index';
+import { CreateAccount, Registration, SendStack,  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
 import Dashboard  from './dashboard/component';
 import Send from './sendReceiveJasiri/send/Component';
+import { Token } from '../components/dashboard/tokens/Index';
 
  const Stack = createStackNavigator()
 
@@ -178,6 +179,7 @@ export const HomeStack = () => {
           <Stack.Screen name="Recover Account" component={RecoverAccount} />   
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
+          <Stack.Screen name="Token" component={Token} />
         </Stack.Group>
         <Stack.Group>
           <Stack.Screen name="Dashboard" component={Dashboard} />

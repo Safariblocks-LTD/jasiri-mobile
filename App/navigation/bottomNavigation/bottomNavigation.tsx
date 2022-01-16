@@ -9,10 +9,11 @@ import { Fontisto } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Token, SettingsScreen, Qr, Tokens, Wallet, Transact } from '../../screens';
+import { SettingsScreen, Qr, Wallet, Transact } from '../../screens';
 import { DashboardHome } from '../../components/dashboard/Index';
 import { StyleSheet } from 'react-native';
 import Send from '../../screens/send/component';
+import { View } from 'react-native';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -24,54 +25,54 @@ export const BottomNavigation =()=> {
           barStyle= {styles.bar}
         >
           <Tab.Group>
-        <Tab.Screen
-          name="main"
-          component={DashboardHome}
-          options={{
-            tabBarIcon: () => (
-              <FontAwesome5 name="wallet" size={30} color="#028373" style={styles.debug}/>
-            ),
-          }}
-        /> 
-        <Tab.Screen
-          name="Tokens"
-          component={Tokens}
-          options={{
-           
-            tabBarIcon: () => (
-              <MaterialCommunityIcons name="contacts" size={30} color="#028373" style={styles.debug} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Send"
-          component={Transact}
-          options={{
-           
-            tabBarIcon: () => (
-              <MaterialIcons name="swap-vert-circle" size={45} color="#028373" style={styles.debug}/>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Token"
-          component={Token}
-          options={{
-            tabBarIcon: () => (
-              <Octicons name="bell" size={30} color="#028373" style={styles.debug}/>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={SettingsScreen}
-          options={{
-           
-            tabBarIcon: () => (
-              <Fontisto name="player-settings" size={30} color="#028373" style={styles.debug}/>
-            ),
-          }}
-        />
+          <Tab.Screen
+            name="main"
+            component={DashboardHome}
+            options={{
+              tabBarIcon: () => (
+                <FontAwesome5 name="wallet" size={30} color="#028373" style={styles.debug}/>
+              ),
+            }}
+          /> 
+          <Tab.Screen
+            name="screen"
+            component={()=><View></View>}
+            options={{
+            
+              tabBarIcon: () => (
+                <MaterialCommunityIcons name="contacts" size={30} color="#028373" style={styles.debug} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Send"
+            component={Transact}
+            options={{
+            
+              tabBarIcon: () => (
+                <MaterialIcons name="swap-vert-circle" size={45} color="#028373" style={styles.debug}/>
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="notification"
+            component={()=><View></View>}
+            options={{
+              tabBarIcon: () => (
+                <Octicons name="bell" size={30} color="#028373" style={styles.debug}/>
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{
+            
+              tabBarIcon: () => (
+                <Fontisto name="player-settings" size={30} color="#028373" style={styles.debug}/>
+              ),
+            }}
+          />
         
 
         </Tab.Group>
