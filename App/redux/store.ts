@@ -1,15 +1,17 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
 
-import {action} from './reducers'
+import {token} from './reducers';
 
 
 
-const rootReducer = combineReducers({action})
+
 
 
 export const store = configureStore({
-    reducer: rootReducer
+    reducer: {
+        token: token.reducer
+    }
 })
 
 

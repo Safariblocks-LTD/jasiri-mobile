@@ -9,6 +9,7 @@ import {store}  from './App/redux/store'
 import { HomeStack
  } from './App/screens';
 
+
 // import ReactDOM from 'react-dom'
 
 const Navigator =()=> {
@@ -23,8 +24,10 @@ const Navigator =()=> {
 export default function App() {
   return (
    
-    
+    <Provider store={store}>
     <Navigator/>
+    </Provider>
+    
  
   );
 }
