@@ -11,11 +11,7 @@ import { QRCode as CustomQRCode } from 'react-native-custom-qr-codes-expo';
 export default function CustomQRCodes() {
   return (
     <>
-      <CustomQRCode
-        codeStyle="circle"
-        linearGradient={['green', 'red']}
-        content="QR code with circles"
-      />
+     
       <CustomQRCode
         backgroundImage={require('../../../assets/images/icon.png')}
         content="QR code with background image"
