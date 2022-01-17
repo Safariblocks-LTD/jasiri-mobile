@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   container: {
-    borderWidth: 1
+    // borderWidth: 1
   },
   head: {
     display: 'flex',
@@ -184,10 +184,10 @@ const styles = StyleSheet.create({
   },
   category_divider: {
     width: '75%', 
-    backgroundColor: 'black', 
-    height: 2, 
+    backgroundColor: 'black',  
     marginLeft: 55,
-     marginTop: 25
+    marginTop: 25,
+    borderWidth: 1
   },
   content_body: {
     display: 'flex',
