@@ -1,7 +1,6 @@
 
 export * from './registration/Index'
 export * from './dashboard/Index'
-export * from './sendReceiveJasiri/Index'
 export * from './settings/Index'
 export * from './wallet/Index'
 export * from './createAccount/Index'
