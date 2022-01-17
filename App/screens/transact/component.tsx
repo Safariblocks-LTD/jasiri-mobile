@@ -49,7 +49,9 @@ export const Transact = ({route, navigation}) => {
                                             <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>Ja$iri</Text>
                                         </View>
                                         <View style={{display: 'flex', flexDirection: 'column', marginLeft: 30, padding: 5}}>
-                                            <Text style={{fontWeight: 'bold', fontSize: 15, marginBottom: 5, padding: 4}}>{asset.amount} {unitName}</Text>
+                                            <Text style={{fontWeight: 'bold', fontSize: 15, marginBottom: 5, padding: 4}}>
+                                                {asset.amount} {unitName}
+                                            </Text>
                                             <Text style={{backgroundColor: '#B7FFEA', borderRadius: 10, width: '30%', fontSize: 14, fontWeight: 'bold', padding: 4}}>$ 9000.00SD</Text>
                                         </View>
                                     </View>
@@ -58,12 +60,12 @@ export const Transact = ({route, navigation}) => {
                             
                             
                         </View>
-                        ): 
+                         ):
                         <View style={styles.content_first} >
                             
                             
                         </View>
-                    }
+                     }
                   
                     <View style={styles.content_second} >
                         <TouchableOpacity 
