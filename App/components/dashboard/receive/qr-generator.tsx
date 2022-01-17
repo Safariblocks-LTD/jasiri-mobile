@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 // See the README file
 
@@ -20,30 +21,78 @@ function LogoFromFile() {
 
 export default function App() {
   return (
+    <ScrollView>
     <View style={styles.container}>
-      <View
-        style={{
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-        }}>
+        
+      <View  style={styles.qrContainer}>
         <Simple />
         {/* The logo doesn't display on Expo Web */}
-        <LogoFromFile />
+        {/* <LogoFromFile /> */}
+      </View>
+      <View style={styles.address}>
+
       </View>
 
-      <CustomQRCodes />
+      <View style={styles.buttons}>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>copy</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>share</Text></TouchableOpacity>
+
     </View>
+
+      {/* <CustomQRCodes /> */}
+     
+    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'space-around',
+    // flex: 1,
+    justifyContent: 'flex-start',
     paddingTop: 20,
     alignItems: 'center',
-    backgroundColor: '#ecf0f1',
+    // backgroundColor: '#ecf0f1',
+    // borderWidth: 3,
+    height: 800
   },
+  qrContainer: {
+    //   borderWidth: 3,
+      padding: 20,
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      margin: 20,
+    //   height: '30%',
+    //   width: '60%'
+  },
+  address: {
+    // flex: 1,
+    paddingTop: 20,
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    // borderWidth: 3,
+    width: '80%',
+    marginTop: '50%',
+    height: 50,
+    // height: 800,
+    borderRadius: 10
+  },
+  buttons: {
+      flexDirection: 'row'
+  },
+  button: {
+      backgroundColor: '#79E7E7',
+      margin: 30,
+      height: 40,
+      width: 100,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10
+  },
+  buttonText: {
+      fontSize: 18,
+      fontWeight: 'bold'
+  }
 });
