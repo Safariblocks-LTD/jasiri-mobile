@@ -1,13 +1,14 @@
 
 import * as React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, Modal } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-type navigation = {
-    navigation: any
-  }
 
-export const CreateAccount = ({navigation}: navigation) => {
+export const CreateAccount = ({navigation}) => {
+    const handleClick=()=>{
+        navigation.navigate('Seed Phrase')
+        console.log('Button click')
+    }
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -25,7 +26,7 @@ export const CreateAccount = ({navigation}: navigation) => {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => navigation.navigate('Seed Phrase')}>
+                        onPress={handleClick}>
                         <Text style={styles.account}>I understand</Text>
                     </TouchableOpacity>
                 </View>

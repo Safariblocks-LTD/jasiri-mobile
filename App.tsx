@@ -9,7 +9,6 @@ import {store}  from './App/redux/store'
 import { HomeStack
  } from './App/screens';
 
- import {uuid} from 'react-native-uuid'
 
 
 // import ReactDOM from 'react-dom'

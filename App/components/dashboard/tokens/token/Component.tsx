@@ -64,7 +64,7 @@ export const Token = (props: { route, navigation}) => {
 
           <TouchableOpacity
             style={styles.button}
-            onPress={()=>props.navigation.navigate('main')}
+            onPress={()=>props.navigation.navigate('Receive')}
             >
             <Text style={styles.buttonText}>Receive</Text>
           </TouchableOpacity>

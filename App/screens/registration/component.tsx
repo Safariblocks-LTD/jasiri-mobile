@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Modal } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -11,6 +11,7 @@ type navigation = {
 
 export const Registration = ({navigation}: navigation) => {
     return (
+    
         <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.textbox}>
@@ -42,6 +43,7 @@ export const Registration = ({navigation}: navigation) => {
                     </Text>
                 </View>
             </View>
+        
         </View>
     )
 }

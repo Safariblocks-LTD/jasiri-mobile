@@ -9,7 +9,7 @@ import {
   View,
   Text,
   SafeAreaView,
-  Image,
+  Image, Modal
 } from 'react-native';
 import { 
   Orbitron_400Regular,
@@ -21,28 +21,23 @@ import {
 } from '@expo-google-fonts/orbitron'
 import {useFonts} from 'expo-font'
 import AppLoading from 'expo-app-loading';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { BottomNavigation } from '../navigation/Index';
 
 
-import { CreateAccount, Registration, SendStack,  } from './index';
+import { CreateAccount, Registration  } from './index';
 import { createStackNavigator } from '@react-navigation/stack';
 import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
 import Dashboard  from './dashboard/component';
-import Send from './sendReceiveJasiri/send/Component';
-import { Token } from '../components/dashboard/tokens/Index';
+import { Token } from '../components/dashboard/tokens';
 import { QrScanner } from '../components/qrScanner';
+import Receive from '../components/dashboard/receive/component';
 
  const Stack = createStackNavigator()
 
- type navigation = {
-   navigation: any
- }
 
-export const HomePlaceHolder = ({ navigation }: navigation) => {
+
+export const HomePlaceHolder = ({ navigation }) => {
   let [fontsLoaded, error] = useFonts({
     Orbitron_400Regular,
     Orbitron_500Medium,
@@ -56,6 +51,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
     return <AppLoading />
   }
   return (
+    <Modal>
     <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={styles.container} >
           <View style={styles.eclipseContainer}>
@@ -86,6 +82,7 @@ export const HomePlaceHolder = ({ navigation }: navigation) => {
           </View>
       </View>
     </SafeAreaView>
+    </Modal>
   );
 }
 
@@ -172,7 +169,9 @@ const styles = StyleSheet.create({
 
 export const HomeStack = () => {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator
+      
+      >
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
           <Stack.Screen name="Home" component={HomePlaceHolder} />   
           <Stack.Screen name="Registration" component={Registration} />   
@@ -181,11 +180,11 @@ export const HomeStack = () => {
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
           <Stack.Screen name="Token" component={Token} />
+          <Stack.Screen name="Scan QR" component={QrScanner} /> 
+          <Stack.Screen name="Receive" component={Receive} /> 
         </Stack.Group>
         <Stack.Group>
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="Send" component={Send} /> 
-          <Stack.Screen name="Scan QR" component={QrScanner} /> 
+          <Stack.Screen name="Dashboard" component={Dashboard} />         
         </Stack.Group> 
       </Stack.Navigator>
     )

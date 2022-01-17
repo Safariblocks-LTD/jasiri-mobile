@@ -2,10 +2,9 @@ import * as React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { getAccountInfo, getAssetInfo } from '../../services'
-import { Token } from '../../components/dashboard/tokens/Index'
 import { setToken, setVisible } from '../../redux'
 import { useDispatch } from 'react-redux'
-import { createStackNavigator } from '@react-navigation/stack'
+
 
 export const Transact = ({route, navigation}) => {
     const [assets, setAssets] = React.useState([])
@@ -38,14 +37,14 @@ export const Transact = ({route, navigation}) => {
             <View style={styles.container} >
                 <View style={styles.content}>
                     {
-                        assets.length > 0 ? assets.map((asset: {amount: string})=>
-                            <View style={styles.content_first} >
+                        assets.length > 0 ? assets.map((asset: {amount: string, unit})=>
+                            <View style={styles.content_first} key={unitName}>
                             <View style={styles.content_first_jasiri} >
                                 <TouchableOpacity 
                                     onPress={() => handleCLick({amount: asset.amount})}  
                                     >
                                     <View style={styles.first}>
-                                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', }}>
+                                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
                                             <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
                                             <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>Ja$iri</Text>
                                         </View>

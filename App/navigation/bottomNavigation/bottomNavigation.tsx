@@ -6,13 +6,10 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 import { Fontisto } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { SettingsScreen, Qr, Wallet, Transact } from '../../screens';
 import { DashboardHome } from '../../components/dashboard/Index';
 import { StyleSheet } from 'react-native';
-import Send from '../../screens/send/component';
 import { View } from 'react-native';
 
 const Tab = createMaterialBottomTabNavigator();
