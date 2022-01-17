@@ -1,3 +1,3 @@
 export * from './component'
 export * from './receive/index'
-export * from './tokens'
+export * from './tokens/Index'

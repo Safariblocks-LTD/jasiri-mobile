@@ -28,7 +28,7 @@ import RecoverAccount from './recoverAccount/component';
 import SeedPhrase from './seedphrase/component';
 import SeedPhraseFinalPage from './seedphrase2/component';
 import Dashboard  from './dashboard/component';
-import { Token } from '../components/dashboard/tokens';
+import { Token } from './../components/dashboard/tokens/token/Index';
 import { QrScanner } from '../components/qrScanner';
 import Receive from '../components/dashboard/receive/component';
 
