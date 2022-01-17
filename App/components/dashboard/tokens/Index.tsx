@@ -1,2 +1,2 @@
-export * from './tokens/index'
-export * from './token/index'
+export * from './tokens/Index'
+export * from './token/Index'

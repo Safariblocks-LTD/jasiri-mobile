@@ -45,7 +45,6 @@ export const BottomNavigation =()=> {
             name="Send"
             component={Transact}
             options={{
-            
               tabBarIcon: () => (
                 <MaterialIcons name="swap-vert-circle" size={45} color="#028373" style={styles.debug}/>
               ),
@@ -53,7 +52,7 @@ export const BottomNavigation =()=> {
           />
           <Tab.Screen
             name="notification"
-            component={()=><View></View>}
+            children={()=><View></View>}
             options={{
               tabBarIcon: () => (
                 <Octicons name="bell" size={30} color="#028373" style={styles.debug}/>

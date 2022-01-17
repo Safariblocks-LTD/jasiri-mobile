@@ -5,7 +5,6 @@ import * as React from 'react';
 import {
   TouchableOpacity,
   StyleSheet,
-  Button,
   View,
   Text,
   SafeAreaView,
