@@ -61,10 +61,26 @@ export const Transact = ({navigation}) => {
                             
                         </View>
                          ):
-                        <View style={styles.tokensContainer} >
+                         <View style={styles.tokensContainer} key={''}>
+                         <View style={styles.tokenContainer} >
                             
-                            <Text> Loading </Text>
-                        </View>
+                                
+                                     <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
+                                         <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
+                                         <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>loading</Text>
+                                     </View>
+                                     
+                                     <Text style={styles.unitAmount}>
+                                             loading
+                                     </Text>
+                                     <Text style={styles.unitInUsd}>$ 0 USD</Text>
+                                    
+                                 
+                     
+                         </View>
+                         
+                         
+                     </View>
                      }
                   
                     
@@ -89,7 +105,8 @@ const styles = StyleSheet.create({
 container: {
     padding: 20,
     flex: 1,
-    marginTop: 20,
+    paddingTop: 40,
+    // marginTop: 20,
     backgroundColor: '#E3E8E7',
     height: 800,
 

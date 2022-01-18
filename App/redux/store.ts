@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 
-import {token} from './reducers';
+import {token, scanned} from './reducers';
 
 
 
@@ -10,7 +10,8 @@ import {token} from './reducers';
 
 export const store = configureStore({
     reducer: {
-        token: token.reducer
+        token: token.reducer,
+        scanned: scanned.reducer
     }
 })
 
