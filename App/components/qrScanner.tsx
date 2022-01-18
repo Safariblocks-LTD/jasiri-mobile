@@ -7,7 +7,6 @@ import { setData } from '../redux';
 
 export  function QrScanner({navigation}) {
   const [hasPermission, setHasPermission] = React.useState(null);
-  const [scanned, setScanned] = React.useState(false);
 
   React.useEffect(() => {
     (async () => {
@@ -20,7 +19,6 @@ export  function QrScanner({navigation}) {
   const dispatch=useDispatch()
 
   const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
     dispatch(setData(data))
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     navigation.navigate('Send')
@@ -36,7 +34,7 @@ export  function QrScanner({navigation}) {
   return (
     <View style={styles.container}>
       <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
       {/* {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />} */}
