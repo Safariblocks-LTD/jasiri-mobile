@@ -1,12 +1,28 @@
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
-import React from 'react';
+import { Text, View, StyleSheet, Button, SafeAreaView, Vibration, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { BarCodeScanner , BarCodeScannerResult} from 'expo-barcode-scanner';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setData } from '../redux';
+import BarcodeMask from 'react-native-barcode-mask';
+
+
+
+
+
+const finderWidth: number = 280;
+const finderHeight: number = 280;
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const viewMinX = (width - finderWidth) / 2;
+const viewMinY = (height - finderHeight) / 2;
+
+
 
 
 export  function QrScanner({navigation}) {
-  const [hasPermission, setHasPermission] = React.useState(null);
+  const [hasPermission, setHasPermission] = React.useState<boolean|null>(null);
+  const [type, setType] = useState<any>(BarCodeScanner.Constants.Type.back);
+  const [scanned, setScanned] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     (async () => {
@@ -18,35 +34,62 @@ export  function QrScanner({navigation}) {
 
   const dispatch=useDispatch()
 
-  const handleBarCodeScanned = ({ type, data }) => {
-    dispatch(setData(data))
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    navigation.navigate('Send')
+  const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
+
+    if (!scanned) {
+          const {type, data, bounds: {origin} = {}} = scanningResult;
+          // @ts-ignore
+          const {x, y} = origin;
+          if (x >= viewMinX && y >= viewMinY && x <= (viewMinX + finderWidth / 2) && y <= (viewMinY + finderHeight / 2)) {
+              setScanned(true);
+              Vibration.vibrate()
+              dispatch(setData(data))
+              navigation.goBack()             
+          }
+      }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return Alert.alert('No access to camera.');
   }
 
   return (
     <View style={styles.container}>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {/* {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />} */}
+        type={type}
+        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+        style={[StyleSheet.absoluteFillObject, styles.container]}
+      >
+
+      <View
+          style={{
+              // flex: 1,
+              backgroundColor: 'transparent',
+              flexDirection: 'row',
+          }}>
+          <TouchableOpacity
+              onPress={() => {setType(
+                      type === BarCodeScanner.Constants.Type.back? BarCodeScanner.Constants.Type.front
+                          : BarCodeScanner.Constants.Type.back
+                  );
+              }}>
+              <Text style={{fontSize: 18, margin: 5, color: 'white',}}> Flip </Text>
+          </TouchableOpacity>
+      </View>
+        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine/>
+        </BarCodeScanner>
     </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-      paddingTop: 50,
-        width: '100%',
-        // height: 800
-    },
+  container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: height
+  },    
+    
 })
