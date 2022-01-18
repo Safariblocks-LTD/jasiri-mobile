@@ -15,67 +15,31 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setVisible as setGlobalVisible} from '../../../../redux';
+import { RootState, setVisible as setGlobalVisible} from '../../../redux';
 
 
-export const Token = (props: { route, navigation}) => {
-  const [sendButton, setSendButton] = React.useState(false)
+export const SendToken = (props: { route, navigation}) => {
+
   
   
   const dispatch = useDispatch()
   const token = useSelector((state: RootState)=>state.token.token)
 
   console.log(token)
-
-
-
-  
-
-
-  
   return (
-    <View>
+    
       <ScrollView>
       <View style={styles.container}>
-        <View
-          style={{
-            
-            alignItems: 'center',
-            // justifyContent: 'center',
-          }}>
-         
-          <View
-           
-           
-           style={styles.token}
-          >
+              
+          <View style={styles.token} >
             <Text style={styles.tokenText}> Total jasiri balance</Text>
             <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
             <Text style={styles.tokenText}> $ {token.amount} USD</Text>
-            </View>
-         
-          {!sendButton?<><View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={()=>setSendButton(true)}
-          >
-            <Text style={styles.buttonText}>Send</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.button}
-            onPress={()=>props.navigation.navigate('Receive')}
-            >
-            <Text style={styles.buttonText}>Receive</Text>
-          </TouchableOpacity>
           </View>
-          <Text style={styles.transactioHeader}>TRANSACTION HISTORY</Text>
-          </>
+         
           
           
-          : 
           
-          <>
          <View style={styles.transactionContainer}>
          <Text style={styles.addressTitle}>Recipient Address</Text>
            <View style={styles.recipientqrContainer}>
@@ -84,7 +48,7 @@ export const Token = (props: { route, navigation}) => {
            style={styles.qrInput}
            onPress={()=>props.navigation.navigate('Scan QR')}
            >
-             <Image source={require('../../../../assets/qr.png')}></Image>
+             <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>
 
            </View>
@@ -102,29 +66,18 @@ export const Token = (props: { route, navigation}) => {
        </View>
        
         </View>
-        
-         
-       </>
+     
 
-        
-}
         </View>
-        
-
-        
-
-        
-      </View>
       </ScrollView>
      
      
-    </View>
+    
   );
 };
 const styles = StyleSheet.create({
-  transactioHeader: {
+  transactionHeader: {
     alignSelf: 'flex-start',
-    margin: 20,
     fontWeight: 'bold',
     // borderWidth: 3
   },
@@ -132,15 +85,17 @@ const styles = StyleSheet.create({
     alignItems:'center',
     backgroundColor: '#E3E8E7',
     width: '100%',
-    height: 800,
+    height: 850,
     justifyContent: 'flex-start',
-    // borderWidth: 5
+   
+    // marginTop: 0
   },
   transactionContainer: {
-    width: '100%',
+    width: '85%',
     // borderWidth: 3,
-    alignSelf: 'flex-start',
-    padding: 20
+    margin: 40
+    // alignSelf: 'flex-start',
+    // padding: 20
   },
   addressTitle: {
     fontWeight: 'bold',
@@ -158,9 +113,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#79E7E7',
     justifyContent: 'center',
     padding: 10,
-    width: 150,
+    width: '40%',
     height: 50,
-    margin: 16,
+    // margin: 16,
     borderRadius: 10
   },
   continueButton: {
@@ -169,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     padding: 10,
-    width: '80%',
+    width: '85%',
     height: 50,
     margin: 20,
     borderRadius: 10,
@@ -177,23 +132,33 @@ const styles = StyleSheet.create({
   
   },
   buttonContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // borderWidth: 5,
+    width: '85%',
+    margin: 30
 
   },
   token: {
-    width: 350,
-    height: 150,
-    margin: 20,
+   width: '85%',
+    height: '15%',
+    marginTop: 50,
     padding: 20,
+    justifyContent: 'space-between',
     backgroundColor: '#fff',
     borderRadius: 10,
+    // borderWidth: 5
     
   },
   tokenText: {
-    fontSize: 18,
+    fontSize: 15,
     textTransform: 'uppercase',
     fontWeight: 'bold',
     margin: 3
+  },
+  transactions: {
+    // borderWidth: 5,
+    width: '85%'
   },
   buttonText: {
     fontWeight: 'bold',

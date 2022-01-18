@@ -1,24 +1,23 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 import QrGenerator from './qr-generator'
 
 
-const Receive = () => {
+export const Receive = () => {
     return (
         
-        <View style={styles.receiveContainer}>
+        <ScrollView style={styles.receiveContainer}>
             <QrGenerator/>
-        </View>
+        </ScrollView>
     )
 }
-
-export default Receive
 
 
 const styles = StyleSheet.create({
     receiveContainer: {
-  
+        paddingTop: 50,
         flex: 1,
         width: '100%',
         height: 800,
