@@ -9,6 +9,8 @@ import { getAccountInfo } from '../../services'
 
 
 
+
+
 export const Dashboard = ({navigation}: any) => {
     const [accountInfo, setAccountInfo] = React.useState(null)
     React.useEffect(()=>{

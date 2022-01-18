@@ -14,8 +14,7 @@ import { TabBar } from './tab-bar';
 
 
 import { createStackNavigator } from "@react-navigation/stack"
-import { Token } from "../components/dashboard"
-import Receive from "../components/dashboard/receive/component"
+import { Token, Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
 import { Dashboard } from '../screens';
@@ -30,7 +29,7 @@ const Tab = createBottomTabNavigator();
 
 export const Navigation =()=> {
   return (
-    <>
+
       <Tab.Navigator
           initialRouteName="Home"
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
@@ -41,47 +40,49 @@ export const Navigation =()=> {
           }}
         >
           <Tab.Group>
-            <Tab.Screen name="Main" children={Dashboard}/> 
-            <Tab.Screen name="Send" children={Transact} />            
-            <Tab.Screen name="Screen1" children={()=><View></View>}/>
-            <Tab.Screen name="Notification" children={()=><View></View>} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Group>
-          <Tab.Group>
-            <Tab.Screen name="Home" component={Home} />   
-            <Tab.Screen name="Registration" component={Registration} />   
-            <Tab.Screen name="Create Account" component={CreateAccount} />    
-            <Tab.Screen name="Recover Account" component={RecoverAccount} />   
-            <Tab.Screen name="Seed Phrase" component={SeedPhrase} /> 
-            <Tab.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
-            <Tab.Screen name="Token" component={Token} />
-            <Tab.Screen name="Scan QR" component={QrScanner} /> 
-            <Tab.Screen name="Receive" component={Receive} /> 
+            <Tab.Screen name="Main" component={()=><Dashboard/>}/> 
+            <Tab.Screen name="Send" component={({state, descriptors, navigation})=><Transact navigation={navigation}/>} />            
+            <Tab.Screen name="Screen1" component={()=><View></View>}/>
+            <Tab.Screen name="Notification" component={()=><View></View>} />
+            <Tab.Screen name="Settings" component={()=><SettingsScreen/>} />
+            <Tab.Screen name="Send or receive" component={()=><SendStack/>} />
           </Tab.Group>
       </Tab.Navigator>
 
-      {/* <Stack.Navigator
+      
+
+   
+  )
+}
+
+export const SendStack=()=> {
+  return (
+     <Stack.Navigator
+     initialRouteName="Token"
       screenOptions={{
           header: ()=><View></View>
       }}
       >
         <Stack.Group >
-          <Stack.Screen name="Home" component={Home} />   
-          <Stack.Screen name="Registration" component={Registration} />   
-          <Stack.Screen name="Create Account" component={CreateAccount} />    
-          <Stack.Screen name="Recover Account" component={RecoverAccount} />   
-          <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
-          <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
           <Stack.Screen name="Token" component={Token} />
           <Stack.Screen name="Scan QR" component={QrScanner} /> 
           <Stack.Screen name="Receive" component={Receive} /> 
+          <Stack.Screen name="Send token" component={SendToken} /> 
         </Stack.Group>
-        <Stack.Group>
-          <Stack.Screen name="Dashboard" component={Dashboard} />         
-        </Stack.Group> 
-      </Stack.Navigator> */}
-    </>
-   
+      </Stack.Navigator> 
+  )
+}
+
+
+export const AuthenticationStack=()=>{
+  return (
+    {/* <Stack.Screen name="Home" component={Home} />   
+    <Stack.Screen name="Registration" component={Registration} />   
+    <Stack.Screen name="Create Account" component={CreateAccount} />    
+    <Stack.Screen name="Recover Account" component={RecoverAccount} />   
+    <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
+    <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> */}
+
   )
 }
 
@@ -94,4 +95,6 @@ const styles= StyleSheet.create({
   },
   
 })
+
+
 

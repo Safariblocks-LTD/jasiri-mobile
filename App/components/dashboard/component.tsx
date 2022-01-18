@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { View, Text, ScrollView, Image } from 'react-native'
-import { BottomNavigation } from '../../navigation'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle, Rect } from 'react-native-svg';
