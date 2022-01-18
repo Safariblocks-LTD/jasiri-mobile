@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import {store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
 import { HomeStack
- } from './App/screens';
+ } from './App/navigation';
 
 
 

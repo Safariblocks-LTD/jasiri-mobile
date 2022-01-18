@@ -1,1 +1,2 @@
-export * from './bottomNavigation/Index'
+export * from './bottomNavigation'
+export * from './stack-navigation'

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View, Text, ScrollView, Image } from 'react-native'
-import { BottomNavigation } from '../../navigation/Index'
+import { BottomNavigation } from '../../navigation'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle, Rect } from 'react-native-svg';
@@ -72,10 +72,7 @@ export const DashboardHome = () => {
 
 const styles = StyleSheet.create({
     scrollView: {
-        // flex: 1,
-        // alignItems: 'center',
-        height: 800,
-        // borderWidth: 1
+       flex: 1
     },
     
     container: {

@@ -1,4 +1,1 @@
-import React from 'react'
-
-
-module.exports = {}
+export * from './dashboard'
