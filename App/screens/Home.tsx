@@ -22,17 +22,8 @@ import {useFonts} from 'expo-font'
 import AppLoading from 'expo-app-loading';
 
 
-import { CreateAccount, Registration  } from './index';
-import { createStackNavigator } from '@react-navigation/stack';
-import RecoverAccount from './recoverAccount/component';
-import SeedPhrase from './seedphrase/component';
-import SeedPhraseFinalPage from './seedphrase2/component';
-import Dashboard  from './dashboard/component';
-import { Token } from './../components/dashboard/tokens/token/Index';
-import { QrScanner } from '../components/qrScanner';
-import Receive from '../components/dashboard/receive/component';
 
- const Stack = createStackNavigator()
+
 
 
 
@@ -50,7 +41,7 @@ export const HomePlaceHolder = ({ navigation }) => {
     return <AppLoading />
   }
   return (
-    <Modal>
+    
     <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={styles.container} >
           <View style={styles.eclipseContainer}>
@@ -81,7 +72,7 @@ export const HomePlaceHolder = ({ navigation }) => {
           </View>
       </View>
     </SafeAreaView>
-    </Modal>
+    
   );
 }
 
@@ -166,25 +157,4 @@ const styles = StyleSheet.create({
  
 });
 
-export const HomeStack = () => {
-    return (
-      <Stack.Navigator
-      
-      >
-        <Stack.Group screenOptions={{ presentation: 'modal' }}>
-          <Stack.Screen name="Home" component={HomePlaceHolder} />   
-          <Stack.Screen name="Registration" component={Registration} />   
-          <Stack.Screen name="Create Account" component={CreateAccount} />    
-          <Stack.Screen name="Recover Account" component={RecoverAccount} />   
-          <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
-          <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
-          <Stack.Screen name="Token" component={Token} />
-          <Stack.Screen name="Scan QR" component={QrScanner} /> 
-          <Stack.Screen name="Receive" component={Receive} /> 
-        </Stack.Group>
-        <Stack.Group>
-          <Stack.Screen name="Dashboard" component={Dashboard} />         
-        </Stack.Group> 
-      </Stack.Navigator>
-    )
-    }
+
