@@ -42,7 +42,7 @@ export const Home = ({ navigation }) => {
   }
   return (
     
-    <SafeAreaView style={{ flex: 1, width: '100%', height: '100%' }}>
+    <Modal style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={styles.container} >
           <View style={styles.eclipseContainer}>
               <View style={styles.ecslipe3}></View>
@@ -71,7 +71,7 @@ export const Home = ({ navigation }) => {
                 </TouchableOpacity>
           </View>
       </View>
-    </SafeAreaView>
+    </Modal>
     
   );
 }
@@ -84,7 +84,6 @@ const styles = StyleSheet.create({
     padding: 16, 
     width: '100%', 
     height: '100%',
-    display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#E3E8E7',
     justifyContent: 'space-between',
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
 
   eclipseContainer: {
     top: 0,
-    display: 'flex',
     flexDirection: 'column'
   },
   ecslipe3: {

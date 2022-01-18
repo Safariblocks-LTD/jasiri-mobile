@@ -21,7 +21,7 @@ import { Home, Registration, CreateAccount } from "../screens"
 import { Dashboard } from '../screens';
 import RecoverAccount from "../screens/recoverAccount/component"
 import SeedPhrase from "../screens/seedphrase/component"
-import SeedPhraseFinalPage from "../screens/seedphrase2/component"
+import { SeedPhraseFinalPage } from '../screens';
 
 
 const Stack = createStackNavigator()
@@ -32,7 +32,7 @@ export const Navigation =()=> {
   return (
     <>
       <Tab.Navigator
-          initialRouteName="Main"
+          initialRouteName="Home"
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
           screenOptions={{
             tabBarStyle: styles.tabBar,
@@ -46,6 +46,17 @@ export const Navigation =()=> {
             <Tab.Screen name="Screen1" children={()=><View></View>}/>
             <Tab.Screen name="Notification" children={()=><View></View>} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
+          </Tab.Group>
+          <Tab.Group>
+            <Tab.Screen name="Home" component={Home} />   
+            <Tab.Screen name="Registration" component={Registration} />   
+            <Tab.Screen name="Create Account" component={CreateAccount} />    
+            <Tab.Screen name="Recover Account" component={RecoverAccount} />   
+            <Tab.Screen name="Seed Phrase" component={SeedPhrase} /> 
+            <Tab.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} />
+            <Tab.Screen name="Token" component={Token} />
+            <Tab.Screen name="Scan QR" component={QrScanner} /> 
+            <Tab.Screen name="Receive" component={Receive} /> 
           </Tab.Group>
       </Tab.Navigator>
 

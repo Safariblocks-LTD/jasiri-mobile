@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Modal } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type navigation = {
     navigation: any
   }
 
-const SeedPhraseFinalPage = ({navigation}: navigation) => {
+export const SeedPhraseFinalPage = ({navigation}) => {
     return (
-        <View style={styles.container} >
+        <Modal style={styles.container} >
             <View style={styles.content}>
                 <View style={styles.sectionOne}>
                     <Text style={styles.text}>Tap words in correct order to confirm your seed phrase</Text>
@@ -26,21 +26,19 @@ const SeedPhraseFinalPage = ({navigation}: navigation) => {
                   <Text style={styles.text}>Select word #2</Text>
                 </View>
                 <View style={styles.sectionFive}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
                             <Text 
-                            style = {styles.buttonText}
-                            onPress={() => navigation.navigate("Dashboard")}
+                            style = {styles.buttonText}                            
                             >
                             Next
                             </Text>
                     </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </Modal>
     )
 }
 
-export default SeedPhraseFinalPage
 
 const styles = StyleSheet.create({
  container: {
