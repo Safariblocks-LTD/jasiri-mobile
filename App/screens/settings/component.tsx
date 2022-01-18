@@ -12,12 +12,9 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-type route = {
-  route: string,
-  navigation: any,
-}
 
-export const SettingsScreen = ({ navigation }: route) => {
+
+export const SettingsScreen = ({ navigation }: any) => {
   return (
     <View style={{width: '100%', height: '100%', backgroundColor: '#E3E8E7', borderWidth: 1}} >
        <ScrollView >
