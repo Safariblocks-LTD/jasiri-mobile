@@ -40,12 +40,12 @@ export const Navigation =()=> {
           }}
         >
           <Tab.Group>
-            <Tab.Screen name="Main" component={()=><Dashboard/>}/> 
-            <Tab.Screen name="Send" component={({state, descriptors, navigation})=><Transact navigation={navigation}/>} />            
-            <Tab.Screen name="Screen1" component={()=><View></View>}/>
-            <Tab.Screen name="Notification" component={()=><View></View>} />
-            <Tab.Screen name="Settings" component={()=><SettingsScreen/>} />
-            <Tab.Screen name="Send or receive" component={()=><SendStack/>} />
+            <Tab.Screen name="Main" component={Dashboard}/> 
+            <Tab.Screen name="Send" component={Transact} />            
+            <Tab.Screen name="Screen1" component={View}/>
+            <Tab.Screen name="Notification" component={View} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="Send or receive" component={SendStack} />
           </Tab.Group>
       </Tab.Navigator>
 
@@ -76,12 +76,23 @@ export const SendStack=()=> {
 
 export const AuthenticationStack=()=>{
   return (
-    {/* <Stack.Screen name="Home" component={Home} />   
-    <Stack.Screen name="Registration" component={Registration} />   
-    <Stack.Screen name="Create Account" component={CreateAccount} />    
-    <Stack.Screen name="Recover Account" component={RecoverAccount} />   
-    <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
-    <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> */}
+
+    <Stack.Navigator
+    initialRouteName="Token"
+     screenOptions={{
+         header: ()=><View></View>
+     }}
+     >
+        <Stack.Group >
+          <Stack.Screen name="Home" component={Home} />   
+          <Stack.Screen name="Registration" component={Registration} />   
+          <Stack.Screen name="Create Account" component={CreateAccount} />    
+          <Stack.Screen name="Recover Account" component={RecoverAccount} />   
+          <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
+          <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
+        </Stack.Group >
+
+      </Stack.Navigator> 
 
   )
 }
