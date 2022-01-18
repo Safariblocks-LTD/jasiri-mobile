@@ -6,7 +6,7 @@ import { setToken, setVisible } from '../../redux'
 import { useDispatch } from 'react-redux'
 
 
-export const Transact = ({route, navigation}) => {
+export const Transact = () => {
     const [assets, setAssets] = React.useState([])
     const [unitName, setUnitName] = React.useState('')
    
@@ -30,14 +30,14 @@ export const Transact = ({route, navigation}) => {
         dispatch(setToken({unitName, amount: asset.amount}))
         
         dispatch(setVisible({visible: true}))
-        navigation.navigate('Token')
+        // navigation.navigate('Token')
         
     }
     return (
-            <View style={styles.container} >
+            <ScrollView style={styles.container} >
                 <View style={styles.content}>
                     {
-                        assets.length > 0 ? assets.map((asset: {amount: string, unit})=>
+                        assets.length > 0 ? assets.map((asset: {amount: string, unit: string})=>
                             <View style={styles.content_first} key={unitName}>
                             <View style={styles.content_first_jasiri} >
                                 <TouchableOpacity 
@@ -48,7 +48,7 @@ export const Transact = ({route, navigation}) => {
                                             <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
                                             <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>Ja$iri</Text>
                                         </View>
-                                        <View style={{display: 'flex', flexDirection: 'column', marginLeft: 30, padding: 5}}>
+                                        <View style={{flexDirection: 'column', marginLeft: 30, padding: 5}}>
                                             <Text style={{fontWeight: 'bold', fontSize: 15, marginBottom: 5, padding: 4}}>
                                                 {asset.amount} {unitName}
                                             </Text>
@@ -63,7 +63,7 @@ export const Transact = ({route, navigation}) => {
                          ):
                         <View style={styles.content_first} >
                             
-                            
+                            <Text> Loading </Text>
                         </View>
                      }
                   
@@ -82,7 +82,7 @@ export const Transact = ({route, navigation}) => {
                 </View>
             
            
-            </View>
+            </ScrollView>
     )
 }
 
@@ -92,28 +92,37 @@ export const Transact = ({route, navigation}) => {
 
 const styles = StyleSheet.create({
 container: {
-    flex: 1,
+    padding: 20,
+    // flex: 1,
     backgroundColor: '#E3E8E7',
+    height: 800,
+    // borderWidth: 5
     },
 content: {
-    justifyContent: 'space-between'
+    flex: 1,
+    justifyContent: 'center',
+    height: 800,
+    // borderWidth: 5
 },
 content_first: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: '60%'
+    // height: '60%',
+    // borderWidth: 5
 },
 content_first_jasiri: {
     borderRadius: 5,
     width: '90%',
     paddingBottom: 10,
     margin: 20,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    // flex: 1,
 },
 first: {
     flexDirection: 'column',
-    marginLeft: 10
+    marginLeft: 10,
+    // flex: 1,
 },
 content_first_usd: {
   
@@ -127,7 +136,7 @@ content_first_usd: {
 content_second: {
     // borderWidth: 1,
     width: '100%',
-    height: '40%',
+    // height: '40%',
     justifyContent: 'flex-start',
     paddingTop: 80,
     alignItems: 'center'
@@ -146,7 +155,7 @@ account: {
     padding: 15,
     width: '100%',
     // height: 42,
-    borderRadius: 15,
+    borderRadius: 10,
   },
 })
 
