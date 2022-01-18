@@ -1,2 +1,2 @@
-export * from './bottomNavigation'
-export * from './stack-navigation'
+export * from './navigation'
+// export * from './stack-navigation'

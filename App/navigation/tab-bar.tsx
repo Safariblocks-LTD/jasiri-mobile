@@ -3,24 +3,26 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 
 
-export const TabBar =()=>{
+export const TabBar =(props: any)=>{
+    const {navigation, state, descriptors} = props
     return (
         <View style={styles.container}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Main')}>
             <FontAwesome5 name="wallet" size={30} color="#028373" />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Screen1')}>
             <MaterialCommunityIcons name="contacts" size={30} color="#028373"  />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Send')}>
             <MaterialIcons name="swap-vert-circle" size={55} color="#028373" />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>
             <Octicons name="bell" size={30} color="#028373" />
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={()=>navigation.navigate('Settings')}>
             <Fontisto name="player-settings" size={30} color="#028373" />
             </TouchableOpacity>
+            
         </View>
     )
 }

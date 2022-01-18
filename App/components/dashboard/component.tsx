@@ -72,7 +72,8 @@ export const DashboardHome = () => {
 
 const styles = StyleSheet.create({
     scrollView: {
-       flex: 1
+       flex: 1,
+       padding: 10
     },
     
     container: {
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
 
     info: {
         backgroundColor: '#fff',
-        minHeight: '30%',
+        minHeight: '20%',
         margin: 10,
         width: '85%',
         borderRadius: 20

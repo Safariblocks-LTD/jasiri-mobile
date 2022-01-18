@@ -27,7 +27,7 @@ import AppLoading from 'expo-app-loading';
 
 
 
-export const HomePlaceHolder = ({ navigation }) => {
+export const Home = ({ navigation }) => {
   let [fontsLoaded, error] = useFonts({
     Orbitron_400Regular,
     Orbitron_500Medium,

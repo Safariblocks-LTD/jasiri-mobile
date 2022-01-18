@@ -6,27 +6,17 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux'
 import {store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
-import { HomeStack
+import { Navigation
  } from './App/navigation';
 
-
-
-// import ReactDOM from 'react-dom'
-
-const Navigator =()=> {
-  return (  
-    <NavigationContainer>
-   <HomeStack/>   
-   </NavigationContainer>
-   
-  )
-}
 
 export default function App() {
   return (
    
     <Provider store={store}>
-    <Navigator/>
+      <NavigationContainer>
+        <Navigation/>   
+    </NavigationContainer>
     </Provider>
     
  
