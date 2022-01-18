@@ -20,3 +20,20 @@ export const { setToken, setVisible } = tokenSlice.actions
 export const token = tokenSlice
 
 
+
+
+const scannedSlice = createSlice({
+  name: "scanned",
+  initialState: {
+    data: '',
+  },
+  reducers: {
+    setData(state, action: PayloadAction<string >) {
+      state.data = action.payload
+    },
+  }
+})
+
+export const { setData } = scannedSlice.actions
+export const scanned = scannedSlice
+

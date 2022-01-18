@@ -24,6 +24,7 @@ export const SendToken = (props: { route, navigation}) => {
   
   const dispatch = useDispatch()
   const token = useSelector((state: RootState)=>state.token.token)
+  const address =  useSelector((state: RootState)=>state.scanned.data)
 
   console.log(token)
   return (
@@ -43,10 +44,10 @@ export const SendToken = (props: { route, navigation}) => {
          <View style={styles.transactionContainer}>
          <Text style={styles.addressTitle}>Recipient Address</Text>
            <View style={styles.recipientqrContainer}>
-           <TextInput style={styles.addressInput}></TextInput>
+           <TextInput style={styles.addressInput} value={address}></TextInput>
            <TouchableOpacity 
-           style={styles.qrInput}
-           onPress={()=>props.navigation.navigate('Scan QR')}
+            style={styles.qrInput}
+            onPress={()=>props.navigation.navigate('Scan QR')}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>
