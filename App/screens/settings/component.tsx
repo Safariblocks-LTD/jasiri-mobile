@@ -29,7 +29,7 @@ export const SettingsScreen = ({ navigation }: route) => {
            <View style={{marginLeft: 8}}>
            <View style={{marginTop: 15, ...styles.content}}>
                 <Text style={styles.categorty_header}> general settings</Text>
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/Vector9.png')} />
                   </View>
@@ -44,7 +44,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/Vector10.png')} />
                   </View>
@@ -59,7 +59,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/Vector11.png')} />
                   </View>
@@ -77,7 +77,7 @@ export const SettingsScreen = ({ navigation }: route) => {
 
               <View style={styles.content_body}>
                 <Text style={styles.categorty_header}> security</Text>
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 23, height: 23}} source={require('../../assets/Vector12.png')} />
                   </View>
@@ -92,7 +92,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/Vector13.png')} />
                   </View>
@@ -108,7 +108,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                 </View>
 
                 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/vector14.png')} />
                   </View>
@@ -123,7 +123,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/Vector15.png')} />
                   </View>
@@ -138,7 +138,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
                     <Image style={{width: 26, height: 26}} source={require('../../assets/Vector16.png')} />
                   </View>
@@ -157,7 +157,7 @@ export const SettingsScreen = ({ navigation }: route) => {
               <View style={styles.content_main}>
                 <Text style={styles.categorty_header}> legal</Text>
                 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50, marginLeft: 30}}>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
                       <Text style={styles.category_text} >terms of service</Text>
@@ -169,7 +169,7 @@ export const SettingsScreen = ({ navigation }: route) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 15}}>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
                   <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50, marginLeft: 30}}>
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
                       <Text style={styles.category_text} >private policy</Text>
@@ -242,8 +242,8 @@ const styles = StyleSheet.create({
   },
   category_divider: { 
     backgroundColor: 'grey',  
-    // height: 1,
-    borderWidth: 1
+    height: 1,
+    // borderWidth: 1
   },
   content_body: {
     justifyContent: 'center',
