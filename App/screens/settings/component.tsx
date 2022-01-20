@@ -26,101 +26,155 @@ export const SettingsScreen = ({ navigation }: any) => {
            <View style={{marginLeft: 8}}>
            <View style={{marginTop: 15, ...styles.content}}>
                 <Text style={styles.categorty_header}> general settings</Text>
-                <View style={styles.category_container}>
-                    <View  style={styles.category_body}>
-                        <Image source={require('../../assets/Vector9.png')} style={{marginLeft: 10}} /> 
-                        <Text style={styles.category_text} >fiat currency</Text>
-                        <Image style={{marginLeft: 180}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector9.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >fiat currency</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 5}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
 
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10}} source={require('../../assets/Vector10.png')} /> 
-                        <Text  style={styles.category_text}>Language</Text>
-                        <Image style={{marginLeft: 200}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector10.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >Language</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider} ></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
 
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10}} source={require('../../assets/Vector11.png')} /> 
-                        <Text style={styles.category_text}>notificationa</Text>
-                        <Image style={{marginLeft: 185}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector11.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >notifications</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
               </View>
 
               <View style={styles.content_body}>
                 <Text style={styles.categorty_header}> security</Text>
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10,}} source={require('../../assets/Vector12.png')} /> 
-                        <Text style={styles.category_text}>set/change password</Text>
-                        <Image style={{marginLeft: 128,}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 23, height: 23}} source={require('../../assets/Vector12.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >set/change password</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
 
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10,}} source={require('../../assets/Vector13.png')} /> 
-                        <Text style={styles.category_text}>biometric authentication</Text>
-                        <Image style={{marginLeft: 107,}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector13.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >biometric authentication</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
 
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10,}} source={require('../../assets/vector14.png')} /> 
-                        <Text style={styles.category_text}>wallet connect sessions </Text>
-                        <Image style={{marginLeft: 103,}} source={require('../../assets/Vector17.png')} />
+                
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/vector14.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >wallet connect sessions</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
 
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10,}} source={require('../../assets/Vector15.png')} /> 
-                        <Text style={styles.category_text}>developer settings</Text>
-                        <Image style={{marginLeft: 141,}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector15.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >developer settings</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
 
-                <View style={styles.category_container}>
-                    <View style={styles.category_body}>
-                        <Image style={{marginLeft: 10,}} source={require('../../assets/Vector16.png')} /> 
-                        <Text style={styles.category_text}>reset wallet</Text>
-                        <Image style={{marginLeft: 184,}} source={require('../../assets/Vector17.png')} />
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector16.png')} />
+                  </View>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >reset wallet</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
                     </View>
-                    <View style={styles.category_divider}></View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
+                  </View>
                 </View>
               </View>
 
               <View style={styles.content_main}>
                 <Text style={styles.categorty_header}> legal</Text>
-                <View style={{ marginLeft: 50, alignItems: 'flex-start', marginTop: 5, }}>
-                  <View>
-                  <View style={styles.category_container}>
-                      <View style={styles.category_body}>
-                          <Text style={styles.category_text}>terms of service</Text>
-                          <Image style={{marginLeft: 135,}} source={require('../../assets/Vector17.png')} />
-                      </View>
-                      <View style={{width: '80%', height: 1, marginLeft: 20, backgroundColor: 'grey', marginTop: 25}}><Text style={{fontSize: 25}}>fddddddddddddddddddddddddddddddddddddddddddddddd</Text></View>
+                
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50, marginLeft: 30}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >terms of service</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
+                    </View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
                   </View>
+                </View>
 
-                  <View style={styles.category_container}>
-                      <View style={styles.category_body}>
-                          <Text style={styles.category_text}>private policy</Text>
-                          <Image style={{marginLeft: 156,}} source={require('../../assets/Vector17.png')} />
-                      </View>
-                      <View style={{width: '80%', height: 1, marginLeft: 20, backgroundColor: 'grey', marginTop: 10}}><Text style={{fontSize: 25}}>fddddddddddddddddddddddddddddddddddddddddddddddd</Text></View>
-                  </View>
+                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
+                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50, marginLeft: 30}}>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                      <Text style={styles.category_text} >private policy</Text>
+                      <Image source={require('../../assets/Vector17.png')} />
+                    </View>
+                    <View style={{width: '100%', padding: 10}}>
+                      <View style={{width: '100%', ...styles.category_divider}}></View>
+                    </View>
                   </View>
                 </View>
 
@@ -178,17 +232,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     alignItems: 'center',
   },
-  category_text: {
-    marginLeft: 20, 
+  category_text: { 
     fontSize: 14, 
     fontWeight: 'bold', 
     textTransform: 'capitalize'
   },
-  category_divider: {
-    width: '70%', 
+  category_divider: { 
     backgroundColor: 'grey',  
-    marginLeft: 55,
-    marginTop: 25,
     height: 1,
     // borderWidth: 1
   },
