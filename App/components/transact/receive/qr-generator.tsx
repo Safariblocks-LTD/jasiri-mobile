@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import Clipboard from '@react-native-clipboard/clipboard'
+import Share from 'react-native-share'
 import { ScrollView } from 'react-native-gesture-handler';
 
 // See the README file
@@ -12,9 +14,7 @@ const hardCodedAddress = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOC
 // Simple usage, defaults for all but the value
 function Simple() {
   return (
-  
     <SvgQRCode size={150} value={hardCodedAddress} />
-   
   );
 }
 
@@ -26,6 +26,21 @@ function LogoFromFile() {
 }
 
 export default function App() {
+  const copyAddressToClipboard = () => {
+    Clipboard.setString(hardCodedAddress)
+  }
+
+  const shareAddress = async () => {
+     const shareOptions = {
+       message: hardCodedAddress
+     }
+
+     try {
+       const shareResponse = await Share.open(shareOptions)
+     } catch (error) {
+       console.log(error);
+     }
+  }
   return (
     // <ScrollView>
     <View style={styles.container}>
@@ -40,16 +55,18 @@ export default function App() {
       </View>
 
       <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={copyAddressToClipboard}>
               <Image
               source={require('../../../assets/copy.png')}
               ></Image>
-              <Text style={styles.buttonText}>copy</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>copy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={shareAddress}>
               <Image
               source={require('../../../assets/share.png')}
               ></Image>
-              <Text style={styles.buttonText}>share</Text></TouchableOpacity>
+              <Text style={styles.buttonText}>share</Text>
+          </TouchableOpacity>
 
     </View>
 

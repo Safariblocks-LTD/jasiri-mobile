@@ -1587,6 +1587,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@react-native-clipboard/clipboard@^1.8.5":
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/@react-native-clipboard/clipboard/-/clipboard-1.8.5.tgz#b11276e38ef288b0fd70c0a38506e2deecc5fa5a"
+  integrity sha512-o2RPDwP9JMnLece1Qq6a3Fsz/VxfA9auLckkGOor7WcI82DWaWiJ6Uiyu7H1xpaUyqWc+ypVKRX680GYS36HjA==
+
 "@react-native-community/cli-debugger-ui@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npmjs.org/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-5.0.1.tgz"
@@ -6524,6 +6529,11 @@ react-native-screens@~3.8.0:
   integrity sha512-lHrnB/elAoMJKv8O12U6BLgeup4lB6ZKJHEOVuG/D72nv/OE9wUusbou6YCB5tp3YbaSpHflPnkFmHA/vCejpw==
   dependencies:
     warn-once "^0.1.0"
+
+react-native-share@^7.3.3:
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-7.3.3.tgz#7c44b1dd20dae50db8c6455fdfc4882533e5542b"
+  integrity sha512-46JW7lfZMy7Xcw/wOXUtjgoioEJ0IAEmm4bK01M4wt/lVCntxZ0IVXUA6vWSnxN66p51bNywZMxPV1zqRSDxPQ==
 
 react-native-svg@^12.1.1:
   version "12.1.1"
