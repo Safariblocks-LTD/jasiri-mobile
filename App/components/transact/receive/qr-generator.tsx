@@ -30,17 +30,17 @@ export default function App() {
     Clipboard.setString(hardCodedAddress)
   }
 
-  const shareAddress = async () => {
-     const shareOptions = {
-       message: hardCodedAddress
-     }
+  // const shareAddress = async () => {
+  //    const shareOptions = {
+  //      message: hardCodedAddress
+  //    }
 
-     try {
-       const shareResponse = await Share.open(shareOptions)
-     } catch (error) {
-       console.log(error);
-     }
-  }
+  //    try {
+  //      const shareResponse = await Share.open(shareOptions)
+  //    } catch (error) {
+  //      console.log(error);
+  //    }
+  // }
   return (
     // <ScrollView>
     <View style={styles.container}>
@@ -55,13 +55,19 @@ export default function App() {
       </View>
 
       <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.button} onPress={copyAddressToClipboard}>
+          <TouchableOpacity 
+          style={styles.button} 
+          onPress={copyAddressToClipboard}
+          >
               <Image
               source={require('../../../assets/copy.png')}
               ></Image>
               <Text style={styles.buttonText}>copy</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={shareAddress}>
+          <TouchableOpacity 
+          style={styles.button} 
+          // onPress={shareAddress}
+          >
               <Image
               source={require('../../../assets/share.png')}
               ></Image>

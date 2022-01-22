@@ -6,8 +6,9 @@ import Svg, { Circle, Rect } from 'react-native-svg';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { getAccountInfo } from '../../services'
+import { AuthenticationStack } from '../../navigation';
 
-
+const loggedIn = false
 
 export const DashboardHome = () => {
     const [accountInfo, setAccountInfo] = React.useState(null)
@@ -19,7 +20,11 @@ export const DashboardHome = () => {
         }).catch(e=>console.log(e))
 
     }, [])
+
+    
     return (
+        
+
         
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
@@ -60,11 +65,13 @@ export const DashboardHome = () => {
                     <Text style={styles.tinyText}> Rewards </Text>
                     </TouchableOpacity>
 
+
                 </View>
             </View>
             
 
         </ScrollView>
+        
         
     )
 }
