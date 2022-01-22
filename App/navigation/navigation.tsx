@@ -23,7 +23,7 @@ import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
 
 
-const loggedIn = false
+const loggedIn = true
 
 const Stack = createStackNavigator()
 
