@@ -61,7 +61,7 @@ export const accountInfo= async (accountAddr: string)=>{
 }
 
 
-(async()=>console.log(await accountInfo(sender)))()
+// (async()=>console.log(await accountInfo(sender)))()
 
 
 const waitForConfirmation = async function (algodClient, txId, timeout) {
