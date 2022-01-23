@@ -10,7 +10,9 @@ import {
   SafeAreaView,
   TextInput,
   Modal,
-  Image
+  Image,
+  Alert,
+  Button
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -18,32 +20,75 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux';
 import { sendAsset } from '../../../services';
 
-const receiver = "PALKSZIPWA3Q53PLQX7UMQ4EKICITKFKKQF22IEDLRXAI2PI5M4DTYNGRE";
+
 
 
 
 export const SendToken = ({navigation}) => {
 
+  const [address, setAddress] = React.useState<string>('PALKSZIPWA3Q53PLQX7UMQ4EKICITKFKKQF22IEDLRXAI2PI5M4DTYNGRE')
+  const [amount, setAmount] = React.useState('')
+  const [success, setSuccess] = React.useState<Boolean>()
+
   
   
   const dispatch = useDispatch()
+
+ 
   const token = useSelector((state: RootState)=>state.token.token)
-  const address =  receiver
-  const amount = '1000'
+  const scanned = useSelector((state: RootState)=>state.scanned.data)
+
+  React.useEffect(()=>{
+      setAddress(scanned)
+  }, [])
 
   // console.log(token)
 
 
+  const handleChangeAmount=(text:string)=>{
+    console.log(text)
+    setAmount(text)
+  }
+
+  const handleChangeAddress=(text:string)=>{
+    console.log(text)
+    setAddress(text)
+  }
+
   const handleSend=()=>{
-   
-    (async()=>await sendAsset('description', parseInt(amount), token['asset-id'], receiver))()
     console.log('sending')
+    try{
+      
+      (async()=>{
+      const res = await sendAsset('description', parseInt(amount), token['asset-id'], address)
+      console.log(res)
+      if(res==0){
+        Alert.alert('Succesfully sent')
+      }
+      else if(res==1){
+        Alert.alert('Failed to sent, check your inputs')
+      }else{
+        Alert.alert('Failed to sent due to other errors')
+        // add more verbose response
+      }
+      
+      
+      })()
+     
+    }catch(e){
+      console.log(e)
+      
+    }
+   
+    
   }
 
   return (
     
       <ScrollView>
       <View style={styles.container}>
+
+
               
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total jasiri balance</Text>
@@ -57,7 +102,13 @@ export const SendToken = ({navigation}) => {
          <View style={styles.transactionContainer}>
          <Text style={styles.addressTitle}>Recipient Address</Text>
            <View style={styles.recipientqrContainer}>
-           <TextInput style={styles.addressInput} value={address}></TextInput>
+           <TextInput 
+           style={styles.addressInput} 
+           value={address}
+           placeholder='e.g JKJKHDJHDJHDJ.......'
+           onChangeText={handleChangeAddress}
+           />
+
            <TouchableOpacity 
             style={styles.qrInput}
             onPress={()=>navigation.navigate('Scan QR')}
@@ -70,13 +121,22 @@ export const SendToken = ({navigation}) => {
         
           <View>
         <Text style={styles.addressTitle}>Enter Amount</Text>
-        <TextInput style={styles.amountInput} value={amount} keyboardType='numeric'></TextInput>
+        <TextInput 
+          style={styles.amountInput} 
+          value={amount} 
+          keyboardType='numeric' 
+          onChangeText={text=>handleChangeAmount(text)}
+          placeholder='e.g 100'
+        />
+        
         </View>
 
           <View>
         <TouchableOpacity style={styles.continueButton} onPress={()=>handleSend()}>
          <Text style={styles.buttonText}> Continue</Text>
        </TouchableOpacity>
+      {/* <ImagePickerExample/> */}
+       {/* {success == true?<Text>Successfully sent</Text>: success == false ?<Text>Failed to send sent</Text> : <Text></Text>} */}
        </View>
        
         </View>
@@ -204,4 +264,5 @@ const styles = StyleSheet.create({
 
   },
 });
+
 

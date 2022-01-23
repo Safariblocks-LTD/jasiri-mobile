@@ -2,12 +2,23 @@ import axiosConfig from './http'
 import algosdk from 'algosdk'
 
 
-const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-const algodServer = 'http://172.20.71.80';
+const algodToken = '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri';
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+// const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+// const algodServer = 'http://172.20.71.80';
+
+
+// client
 const algodPort = 4001;
-let algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
+const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
+
+
+
+
 const mnemonic = 'tell dwarf occur chest case menu scheme hybrid car replace pen mouse punch universe biology volume trust woman orient trend economy visual detail above effort'
 let sender = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
+
+
 
 export const getAccountInfo = async()=> {
     return await axiosConfig.get({}, 'accounts/DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY', {})
@@ -40,6 +51,7 @@ export const accountInfo= async (accountAddr: string)=>{
     
         //Check your balance
         let accountInfo = await algodClient.accountInformation(accountAddr).do();
+        console.log(accountInfo)
        
         return accountInfo
     }
@@ -49,7 +61,7 @@ export const accountInfo= async (accountAddr: string)=>{
 }
 
 
-// (async()=>console.log(await accountInfo(sender)))()
+(async()=>console.log(await accountInfo(sender)))()
 
 
 const waitForConfirmation = async function (algodClient, txId, timeout) {
@@ -87,8 +99,8 @@ const waitForConfirmation = async function (algodClient, txId, timeout) {
 // createAccount()
 
 export const sendAsset=async (desc: string, amount: number, assetIndex: number, receiver: string)=>{
-        
 
+    try{
         let accountInfo = await algodClient.accountInformation(sender).do();
         console.log("Account balance: %d microAlgos", accountInfo.amount);
         let startingAmount = accountInfo.amount;
@@ -101,8 +113,8 @@ export const sendAsset=async (desc: string, amount: number, assetIndex: number, 
         const note = enc.encode(desc);
         
         let closeout = receiver; //closeRemainderTo
-        // let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, receiver, undefined, undefined, amount, note, assetIndex, params)
-        let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
+        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, receiver, undefined, undefined, amount, note, assetIndex, params)
+        // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
         const account = algosdk.mnemonicToSecretKey(mnemonic)
 
         // Sign the transaction
@@ -124,6 +136,15 @@ export const sendAsset=async (desc: string, amount: number, assetIndex: number, 
         let closeoutamt = startingAmount - confirmedTxn.txn.txn.amt - confirmedTxn.txn.txn.fee;        
         console.log("Close To Amount: %d microAlgos", closeoutamt);
         console.log("Account balance: %d microAlgos", accountInfo.amount);
+        return 0
+
+    }catch(e){
+        console.log(e)
+        return 1
+    }
+        
+
+      
 }
 
 

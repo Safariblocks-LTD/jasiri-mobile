@@ -18,6 +18,7 @@ export const Transact = ({navigation}) => {
 
     React.useEffect(()=>{    
         (async()=>{
+            console.log('loading')
             const accInfo = await accountInfo(accountAddr)
         
             const assets = accInfo.assets

@@ -4,6 +4,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { setData } from '../redux';
 import BarcodeMask from 'react-native-barcode-mask';
+import { MyImagePicker } from './image-picker';
 
 
 
@@ -52,9 +53,9 @@ const viewMinY = (height - finderHeight) / 2;
       }
   };
 
-  // if (hasPermission === false) {
-  //   return Alert.alert('No access to camera.');
-  // }
+  if (hasPermission === false) {
+    return Alert.alert('No access to camera.');
+  }
 
   return (
     
@@ -66,16 +67,20 @@ const viewMinY = (height - finderHeight) / 2;
         style={[StyleSheet.absoluteFillObject, styles.container]}
       >
 
-      <View
-          style={{
-              // flex: 1,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-          }}>
-          
-      </View>
+    
         <BarcodeMask edgeColor="#62B1F6" showAnimatedLine/>
         </BarCodeScanner>
+
+        <View
+          style={{
+              // flex: 1,
+              // backgroundColor: 'transparent',
+              // flexDirection: 'row',
+              alignSelf: 'flex-end'
+          }}>
+         {/* <MyImagePicker/>  */}
+      </View>
+        
     </View>
     
   );
