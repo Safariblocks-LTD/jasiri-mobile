@@ -23,7 +23,7 @@ import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
 
 
-const loggedIn = false
+const loggedIn = true
 
 const Stack = createStackNavigator()
 
@@ -43,11 +43,10 @@ export const Navigation =()=> {
         >
           <Tab.Group>
             <Tab.Screen name="Main" component={loggedIn?Dashboard:AuthenticationStack}/> 
-            <Tab.Screen name="Send" component={Transact} />            
-            <Tab.Screen name="Screen1" component={View}/>
+            <Tab.Screen name="Send" component={SendStack} />            
+            <Tab.Screen name="Contacts" component={View}/>
             <Tab.Screen name="Notification" component={View} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
-            <Tab.Screen name="Send or receive" component={SendStack} />
           </Tab.Group>
       </Tab.Navigator>
 
@@ -60,14 +59,15 @@ export const Navigation =()=> {
 export const SendStack=()=> {
   return (
      <Stack.Navigator
-     initialRouteName="Token"
+     initialRouteName="Transact"
       screenOptions={{
           header: ()=><View></View>
       }}
       >
         <Stack.Group >
+          <Stack.Screen name="Transact" component={Transact} />
           <Stack.Screen name="Token" component={Token} />
-          <Stack.Screen name="Scan QR" component={QrScanner} /> 
+          <Stack.Screen name="Scan QR" children={QrScanner} /> 
           <Stack.Screen name="Receive" component={Receive} /> 
           <Stack.Screen name="Send token" component={SendToken} /> 
         </Stack.Group>

@@ -10,27 +10,85 @@ import {
   SafeAreaView,
   TextInput,
   Modal,
-  Image
+  Image,
+  Alert,
+  Button
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setVisible as setGlobalVisible} from '../../../redux';
+import { RootState } from '../../../redux';
+import { sendAsset } from '../../../services';
 
 
-export const SendToken = (props: { route, navigation}) => {
+
+
+
+export const SendToken = ({navigation}) => {
+
+  const [address, setAddress] = React.useState<string>('PALKSZIPWA3Q53PLQX7UMQ4EKICITKFKKQF22IEDLRXAI2PI5M4DTYNGRE')
+  const [amount, setAmount] = React.useState('')
+  const [success, setSuccess] = React.useState<Boolean>()
 
   
   
   const dispatch = useDispatch()
-  const token = useSelector((state: RootState)=>state.token.token)
-  const address =  useSelector((state: RootState)=>state.scanned.data)
 
-  console.log(token)
+ 
+  const token = useSelector((state: RootState)=>state.token.token)
+  const scanned = useSelector((state: RootState)=>state.scanned.data)
+
+  React.useEffect(()=>{
+      setAddress(scanned)
+  }, [])
+
+  // console.log(token)
+
+
+  const handleChangeAmount=(text:string)=>{
+    console.log(text)
+    setAmount(text)
+  }
+
+  const handleChangeAddress=(text:string)=>{
+    console.log(text)
+    setAddress(text)
+  }
+
+  const handleSend=()=>{
+    console.log('sending')
+    try{
+      
+      (async()=>{
+      const res = await sendAsset('description', parseInt(amount), token['asset-id'], address)
+      console.log(res)
+      if(res==0){
+        Alert.alert('Succesfully sent')
+      }
+      else if(res==1){
+        Alert.alert('Failed to sent, check your inputs')
+      }else{
+        Alert.alert('Failed to sent due to other errors')
+        // add more verbose response
+      }
+      
+      
+      })()
+     
+    }catch(e){
+      console.log(e)
+      
+    }
+   
+    
+  }
+
   return (
     
       <ScrollView>
       <View style={styles.container}>
+
+
               
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total jasiri balance</Text>
@@ -44,10 +102,16 @@ export const SendToken = (props: { route, navigation}) => {
          <View style={styles.transactionContainer}>
          <Text style={styles.addressTitle}>Recipient Address</Text>
            <View style={styles.recipientqrContainer}>
-           <TextInput style={styles.addressInput} value={address}></TextInput>
+           <TextInput 
+           style={styles.addressInput} 
+           value={address}
+           placeholder='e.g JKJKHDJHDJHDJ.......'
+           onChangeText={handleChangeAddress}
+           />
+
            <TouchableOpacity 
             style={styles.qrInput}
-            onPress={()=>props.navigation.navigate('Scan QR')}
+            onPress={()=>navigation.navigate('Scan QR')}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>
@@ -57,13 +121,22 @@ export const SendToken = (props: { route, navigation}) => {
         
           <View>
         <Text style={styles.addressTitle}>Enter Amount</Text>
-        <TextInput style={styles.amountInput}></TextInput>
+        <TextInput 
+          style={styles.amountInput} 
+          value={amount} 
+          keyboardType='numeric' 
+          onChangeText={text=>handleChangeAmount(text)}
+          placeholder='e.g 100'
+        />
+        
         </View>
 
           <View>
-        <TouchableOpacity style={styles.continueButton}>
-         <Text> Continue</Text>
+        <TouchableOpacity style={styles.continueButton} onPress={()=>handleSend()}>
+         <Text style={styles.buttonText}> Continue</Text>
        </TouchableOpacity>
+      {/* <ImagePickerExample/> */}
+       {/* {success == true?<Text>Successfully sent</Text>: success == false ?<Text>Failed to send sent</Text> : <Text></Text>} */}
        </View>
        
         </View>
@@ -107,7 +180,8 @@ const styles = StyleSheet.create({
     height: 50,
     width: '70%',
     backgroundColor: '#fff',
-    borderRadius: 10
+    borderRadius: 10,
+    padding: 5
   },
   button: {
     alignItems: 'center',
@@ -163,7 +237,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: 'bold',
-    textTransform: 'uppercase'
+    fontSize: 20
+    // textTransform: 'uppercase'
   },
   amountInput: {
     width: '95%',
@@ -171,6 +246,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#fff',
     borderRadius: 10,
+    padding: 4
     // borderWidth: 1
   },
   recipientqrContainer: {
@@ -184,7 +260,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+
   },
 });
+
 

@@ -10,7 +10,7 @@ export const TabBar =(props: any)=>{
             <TouchableOpacity onPress={()=>navigation.navigate('Main')}>
             <FontAwesome5 name="wallet" size={30} color="#028373" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Screen1')}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Contacts')}>
             <MaterialCommunityIcons name="contacts" size={30} color="#028373"  />
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>navigation.navigate('Send')}>

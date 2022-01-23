@@ -7,19 +7,28 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { getAccountInfo } from '../../services'
 import { AuthenticationStack } from '../../navigation';
+import {createAccount} from '../../services'
 
-const loggedIn = false
+
+// const account = createAccount()
+// console.log(account)
+
 
 export const DashboardHome = () => {
     const [accountInfo, setAccountInfo] = React.useState(null)
     React.useEffect(()=>{
         const accounts=getAccountInfo()
         .then((res: any)=>{
-            console.log(res.account.assets); 
+            // console.log(res.account.assets); 
             setAccountInfo({...res})
         }).catch(e=>console.log(e))
 
+        // const account = createAccount()
+        // console.log(account)
+
     }, [])
+
+
 
     
     return (

@@ -1,27 +1,22 @@
-import { Text, View, StyleSheet, Button, SafeAreaView, Vibration, Dimensions, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, StyleSheet, Button, SafeAreaView, Vibration, Dimensions, TouchableOpacity, Alert, Modal } from 'react-native';
 import { BarCodeScanner , BarCodeScannerResult} from 'expo-barcode-scanner';
-import React, { useState } from 'react';
+import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { setData } from '../redux';
 import BarcodeMask from 'react-native-barcode-mask';
+import { MyImagePicker } from './image-picker';
 
 
 
 
 
-const finderWidth: number = 280;
-const finderHeight: number = 280;
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-const viewMinX = (width - finderWidth) / 2;
-const viewMinY = (height - finderHeight) / 2;
 
 
 
 
-export  function QrScanner({navigation}) {
+export  const QrScanner =()=>{
   const [hasPermission, setHasPermission] = React.useState<boolean|null>(null);
-  const [type, setType] = useState<any>(BarCodeScanner.Constants.Type.back);
+  const [type, setType] = React.useState<any>(BarCodeScanner.Constants.Type.back);
   const [scanned, setScanned] = React.useState<boolean>(false);
 
   React.useEffect(() => {
@@ -34,6 +29,15 @@ export  function QrScanner({navigation}) {
 
   const dispatch=useDispatch()
 
+
+  
+const finderWidth: number = 280;
+const finderHeight: number = 280;
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const viewMinX = (width - finderWidth) / 2;
+const viewMinY = (height - finderHeight) / 2;
+
   const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
 
     if (!scanned) {
@@ -44,7 +48,7 @@ export  function QrScanner({navigation}) {
               setScanned(true);
               Vibration.vibrate()
               dispatch(setData(data))
-              navigation.goBack()             
+              // navigation.goBack()             
           }
       }
   };
@@ -54,6 +58,7 @@ export  function QrScanner({navigation}) {
   }
 
   return (
+    
     <View style={styles.container}>
       <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
@@ -62,24 +67,22 @@ export  function QrScanner({navigation}) {
         style={[StyleSheet.absoluteFillObject, styles.container]}
       >
 
-      <View
-          style={{
-              // flex: 1,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-          }}>
-          <TouchableOpacity
-              onPress={() => {setType(
-                      type === BarCodeScanner.Constants.Type.back? BarCodeScanner.Constants.Type.front
-                          : BarCodeScanner.Constants.Type.back
-                  );
-              }}>
-              <Text style={{fontSize: 18, margin: 5, color: 'white',}}> Flip </Text>
-          </TouchableOpacity>
-      </View>
+    
         <BarcodeMask edgeColor="#62B1F6" showAnimatedLine/>
         </BarCodeScanner>
+
+        <View
+          style={{
+              // flex: 1,
+              // backgroundColor: 'transparent',
+              // flexDirection: 'row',
+              alignSelf: 'flex-end'
+          }}>
+         {/* <MyImagePicker/>  */}
+      </View>
+        
     </View>
+    
   );
 }
 
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      height: height
+      height: '100%'
   },    
     
 })

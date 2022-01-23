@@ -34,7 +34,8 @@
       "favicon": "./App/assets/images/favicon.png"
     },
     "plugins": [
-      "expo-camera"
+      "expo-camera",
+      "expo-image-picker"
     ]
   }
 }

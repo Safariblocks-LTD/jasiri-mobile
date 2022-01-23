@@ -1,47 +1,61 @@
 import * as React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { getAccountInfo, getAssetInfo } from '../../services'
 import { setToken, setVisible } from '../../redux'
 import { useDispatch } from 'react-redux'
 
+import { accountInfo,  getAccountInfo, getAssetInfo} from '../../services'
+import { Asset } from '../../types'
+
+const accountAddr = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
+
 
 export const Transact = ({navigation}) => {
-    const [assets, setAssets] = React.useState([])
-    const [unitName, setUnitName] = React.useState('')
+    const [assets, setAssets] = React.useState<Array<Asset>>([])
+    
    
     const dispatch = useDispatch()
 
-    React.useEffect(()=>{
-        getAccountInfo().then(res=>{
-           
-            setAssets(res.account.assets)
-            getAssetInfo().then((asset)=>{
-            
-            const assetParams = {...asset}.asset.params
-            setUnitName(assetParams['unit-name'])
-            
-        // console.log(asset)
-        })
-    })
-    }, [unitName])
-
-    const handleCLick=(asset: {amount: string})=>{
-        dispatch(setToken({unitName, amount: asset.amount}))
+    React.useEffect(()=>{    
+        (async()=>{
+            console.log('loading')
+            const accInfo = await accountInfo(accountAddr)
         
-        dispatch(setVisible({visible: true}))
-        navigation.navigate('Send or receive')
+            const assets = accInfo.assets
+
+            const au = assets.map(async(asset: Asset)=>{
+            const assetInfo = await getAssetInfo(asset['asset-id'])
+            const unitName = assetInfo.asset.params['unit-name']
+            return {...asset, unitName}            
+            })
+
+           const assetsWithName = await Promise.all(au)
+
+           setAssets(assetsWithName)
+      
+
+    })()
+        
+    // })
+    }, [])
+
+    const handleCLick=(asset: Asset)=>{
+       
+        console.log(asset)
+        
+        dispatch(setToken(asset))
+        navigation.navigate('Token')
         
     }
     return (
             <ScrollView style={styles.container} >
                 <View style={styles.content}>
                     {
-                        assets.length > 0 ? assets.map((asset: {amount: string, unit: string})=>
-                            <View style={styles.tokensContainer} key={unitName}>
+                        assets.length > 0 ? assets.map((asset: Asset)=>
+                            <View style={styles.tokensContainer} key={asset.unitName}>
                             <View style={styles.tokenContainer} >
                                 <TouchableOpacity 
-                                    onPress={() => handleCLick({amount: asset.amount})}  
+                                    onPress={() => handleCLick(asset)}  
                                     >
                                    
                                         <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
@@ -50,7 +64,7 @@ export const Transact = ({navigation}) => {
                                         </View>
                                         
                                         <Text style={styles.unitAmount}>
-                                                {asset.amount} {unitName}
+                                                {asset.amount} {asset.unitName}
                                         </Text>
                                         <Text style={styles.unitInUsd}>$ 0 USD</Text>
                                        
@@ -62,19 +76,18 @@ export const Transact = ({navigation}) => {
                         </View>
                          ):
                          <View style={styles.tokensContainer} key={''}>
-                         <View style={styles.tokenContainer} >
-                            
+                         <View style={styles.tokenContainer} >                           
                                 
-                                     <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
-                                         <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
-                                         <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>loading</Text>
-                                     </View>
-                                     
-                                     <Text style={styles.unitAmount}>
-                                             loading
-                                     </Text>
-                                     <Text style={styles.unitInUsd}>$ 0 USD</Text>
-                                    
+                            <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
+                                <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
+                                <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>loading</Text>
+                            </View>
+                            
+                            <Text style={styles.unitAmount}>
+                                    loading
+                            </Text>
+                            <Text style={styles.unitInUsd}>$ 0 USD</Text>
+                        
                                  
                      
                          </View>
@@ -121,13 +134,13 @@ tokensContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    marginBottom: 50
+    marginBottom: 50,
 },
 tokenContainer: {
     borderRadius: 5,
     width: '90%',
-    paddingBottom: 10,
-    margin: 20,
+    padding: 10,
+    margin: 10,
     backgroundColor: 'white',
 },
 unitAmount: {

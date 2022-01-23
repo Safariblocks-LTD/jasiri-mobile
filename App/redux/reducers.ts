@@ -1,22 +1,29 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { Asset } from "../types"
 
 const tokenSlice = createSlice({
   name: "token",
   initialState: {
-    token: {amount: '', unitName: ''},
-    visible: {visible: false}
+    token: {
+      amount: 0,
+      "asset-id": 0,
+      "creator": '',
+      "deleted": false,
+      "is-frozen": true,
+      "opted-in-at-round": 0,
+      unitName: ''
+    }
+    
   },
   reducers: {
-    setToken(state, action: PayloadAction<{amount: string, unitName: string} >) {
+    setToken(state, action: PayloadAction<Asset >) {
       state.token = action.payload
     },
-    setVisible(state, action: PayloadAction<{visible: boolean} >) {
-      state.visible = action.payload
-    },
+    
   }
 })
 
-export const { setToken, setVisible } = tokenSlice.actions
+export const { setToken } = tokenSlice.actions
 export const token = tokenSlice
 
 
@@ -36,4 +43,7 @@ const scannedSlice = createSlice({
 
 export const { setData } = scannedSlice.actions
 export const scanned = scannedSlice
+
+
+
 
