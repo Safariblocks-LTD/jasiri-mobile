@@ -1,11 +1,11 @@
 // import ReactDOM from 'react-dom'
 import * as React from 'react';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
-import { MaterialIcons  } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
+// import { MaterialIcons  } from '@expo/vector-icons';
+// import { FontAwesome5 } from '@expo/vector-icons';
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import { Octicons } from '@expo/vector-icons';
+// import { Fontisto } from '@expo/vector-icons';
 
 import { SettingsScreen, Transact } from '../screens';
 import { StyleSheet } from 'react-native';
@@ -14,6 +14,7 @@ import { TabBar } from './tab-bar';
 
 
 import { createStackNavigator } from "@react-navigation/stack"
+import {getFocusedRouteNameFromRoute, useNavigation, useRoute} from "@react-navigation/native"
 import { Token, Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
@@ -36,8 +37,7 @@ export const Navigation =()=> {
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
           screenOptions={{
             tabBarStyle: styles.tabBar,
-            header: ()=><View></View>
-            
+            header: ()=><View></View>,
           }}
         >
           <Tab.Group>
@@ -77,7 +77,20 @@ const SendStack=()=> {
 }
 
 
-export const AuthenticationStack=()=>{
+export const AuthenticationStack=({navigation, route})=>{
+  const {name} = useRoute();
+  const nav = useNavigation()
+  console.log(nav);
+  
+  console.log(navigation);
+
+  if ( name == 'HomeStack' ) {
+    navigation.setOptions({tabBarVisible: false}) 
+  } else {
+    navigation.setOptions({tabBarVisible: true}) 
+  }
+
+  
   return (
 
     <Stack.Navigator
@@ -86,7 +99,7 @@ export const AuthenticationStack=()=>{
          header: ()=><View></View>
      }}
      >
-        <Stack.Group screenOptions={{presentation: 'modal'}}>
+        <Stack.Group>
           <Stack.Screen name="Home" component={Home} />   
           <Stack.Screen name="Registration" component={Registration} />   
           <Stack.Screen name="Create Account" component={CreateAccount} />    

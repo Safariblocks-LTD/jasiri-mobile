@@ -13,7 +13,6 @@ export const CreateAccount = ({navigation}) => {
     }
 
     return (
-        // <Modal>
         <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.imageContainer}>
@@ -36,7 +35,6 @@ export const CreateAccount = ({navigation}) => {
                 </View>
             </View>
         </View>
-        // </Modal>
     )
 }
 
