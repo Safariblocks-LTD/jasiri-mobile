@@ -18,21 +18,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux';
 import { sendAsset } from '../../../services';
 
+const receiver = "PALKSZIPWA3Q53PLQX7UMQ4EKICITKFKKQF22IEDLRXAI2PI5M4DTYNGRE";
 
-export const SendToken = () => {
+
+
+export const SendToken = ({navigation}) => {
 
   
   
   const dispatch = useDispatch()
   const token = useSelector((state: RootState)=>state.token.token)
-  const address =  useSelector((state: RootState)=>state.scanned.data)
+  const address =  receiver
+  const amount = '1000'
 
   // console.log(token)
 
 
   const handleSend=()=>{
    
-    (async()=>await sendAsset('description', 1000))()
+    (async()=>await sendAsset('description', parseInt(amount), token['asset-id'], receiver))()
     console.log('sending')
   }
 
@@ -56,7 +60,7 @@ export const SendToken = () => {
            <TextInput style={styles.addressInput} value={address}></TextInput>
            <TouchableOpacity 
             style={styles.qrInput}
-            onPress={()=>props.navigation.navigate('Scan QR')}
+            onPress={()=>navigation.navigate('Scan QR')}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>
@@ -66,7 +70,7 @@ export const SendToken = () => {
         
           <View>
         <Text style={styles.addressTitle}>Enter Amount</Text>
-        <TextInput style={styles.amountInput}></TextInput>
+        <TextInput style={styles.amountInput} value={amount} keyboardType='numeric'></TextInput>
         </View>
 
           <View>
@@ -116,7 +120,8 @@ const styles = StyleSheet.create({
     height: 50,
     width: '70%',
     backgroundColor: '#fff',
-    borderRadius: 10
+    borderRadius: 10,
+    padding: 5
   },
   button: {
     alignItems: 'center',
@@ -181,6 +186,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#fff',
     borderRadius: 10,
+    padding: 4
     // borderWidth: 1
   },
   recipientqrContainer: {
@@ -194,7 +200,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+
   },
 });
 

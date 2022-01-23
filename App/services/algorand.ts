@@ -8,7 +8,6 @@ const algodPort = 4001;
 let algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 const mnemonic = 'tell dwarf occur chest case menu scheme hybrid car replace pen mouse punch universe biology volume trust woman orient trend economy visual detail above effort'
 let sender = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
-const receiver = "HZ57J3K46JIJXILONBBZOHX6BKPXEM2VVXNRFSUED6DKFD5ZD24PMJ3MVA";
 
 export const getAccountInfo = async()=> {
     return await axiosConfig.get({}, 'accounts/DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY', {})
@@ -50,6 +49,9 @@ export const accountInfo= async (accountAddr: string)=>{
 }
 
 
+// (async()=>console.log(await accountInfo(sender)))()
+
+
 const waitForConfirmation = async function (algodClient, txId, timeout) {
     if (algodClient == null || txId == null || timeout < 0) {
         throw new Error("Bad arguments");
@@ -84,7 +86,7 @@ const waitForConfirmation = async function (algodClient, txId, timeout) {
 
 // createAccount()
 
-export const sendAsset=async (desc: string, amount: number)=>{
+export const sendAsset=async (desc: string, amount: number, assetIndex: number, receiver: string)=>{
         
 
         let accountInfo = await algodClient.accountInformation(sender).do();
@@ -99,13 +101,8 @@ export const sendAsset=async (desc: string, amount: number)=>{
         const note = enc.encode(desc);
         
         let closeout = receiver; //closeRemainderTo
-       
+        // let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, receiver, undefined, undefined, amount, note, assetIndex, params)
         let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
-        // WARNING! all remaining funds in the sender account above will be sent to the closeRemainderTo Account 
-        // In order to keep all remaning funds in the sender account after tx, set closeout parameter to undefined.
-        // For more info see: 
-        // https://developer.algorand.org/docs/reference/transactions/#payment-transaction
-
         const account = algosdk.mnemonicToSecretKey(mnemonic)
 
         // Sign the transaction
@@ -117,11 +114,8 @@ export const sendAsset=async (desc: string, amount: number)=>{
         await algodClient.sendRawTransaction(signedTxn).do();
 
         // Wait for confirmation
-        let confirmedTxn = await waitForConfirmation(algodClient, txId, 4);
-        //Get the completed Transaction
-        console.log("Transaction " + txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
-        // let mytxinfo = JSON.stringify(confirmedTxn.txn.txn, undefined, 2);
-        // console.log("Transaction information: %o", mytxinfo);
+        let confirmedTxn = await waitForConfirmation(algodClient, txId, 4);       
+        console.log("Transaction " + txId + " confirmed in round " + confirmedTxn["confirmed-round"]);        
         var string = new TextDecoder().decode(confirmedTxn.txn.txn.note);
         console.log("Note field: ", string);
         accountInfo = await algodClient.accountInformation(sender).do();
@@ -133,4 +127,4 @@ export const sendAsset=async (desc: string, amount: number)=>{
 }
 
 
-(async()=>await sendAsset('transaction', 1000))()
+// (async()=>await sendAsset('transaction', 10, 58648674))()

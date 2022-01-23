@@ -4,7 +4,15 @@ import { Asset } from "../types"
 const tokenSlice = createSlice({
   name: "token",
   initialState: {
-    token: {}
+    token: {
+      amount: 0,
+      "asset-id": 0,
+      "creator": '',
+      "deleted": false,
+      "is-frozen": true,
+      "opted-in-at-round": 0,
+      unitName: ''
+    }
     
   },
   reducers: {

@@ -67,7 +67,7 @@ export const SendStack=()=> {
         <Stack.Group >
           <Stack.Screen name="Transact" component={Transact} />
           <Stack.Screen name="Token" component={Token} />
-          <Stack.Screen name="Scan QR" component={QrScanner} /> 
+          <Stack.Screen name="Scan QR" children={QrScanner} /> 
           <Stack.Screen name="Receive" component={Receive} /> 
           <Stack.Screen name="Send token" component={SendToken} /> 
         </Stack.Group>
