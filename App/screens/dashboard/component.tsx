@@ -14,11 +14,7 @@ import { getAccountInfo } from '../../services'
 export const Dashboard = ({navigation}: any) => {
     const [accountInfo, setAccountInfo] = React.useState(null)
     React.useEffect(()=>{
-        getAccountInfo()
-        .then((res: any)=>{
-            console.log(res.account.assets); 
-            setAccountInfo({...res})
-        }).catch(e=>console.log(e))
+    
 
     }, [])
     return (

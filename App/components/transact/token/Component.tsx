@@ -15,7 +15,7 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setVisible as setGlobalVisible} from '../../../redux';
+import { RootState} from '../../../redux';
 
 
 export const Token = (props: { route, navigation}) => {
@@ -25,7 +25,7 @@ export const Token = (props: { route, navigation}) => {
   const dispatch = useDispatch()
   const token = useSelector((state: RootState)=>state.token.token)
 
-  console.log(token)
+
 
 
 

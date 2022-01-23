@@ -15,10 +15,11 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setVisible as setGlobalVisible} from '../../../redux';
+import { RootState } from '../../../redux';
+import { sendAsset } from '../../../services';
 
 
-export const SendToken = (props: { route, navigation}) => {
+export const SendToken = () => {
 
   
   
@@ -26,7 +27,15 @@ export const SendToken = (props: { route, navigation}) => {
   const token = useSelector((state: RootState)=>state.token.token)
   const address =  useSelector((state: RootState)=>state.scanned.data)
 
-  console.log(token)
+  // console.log(token)
+
+
+  const handleSend=()=>{
+   
+    (async()=>await sendAsset('description', 1000))()
+    console.log('sending')
+  }
+
   return (
     
       <ScrollView>
@@ -61,8 +70,8 @@ export const SendToken = (props: { route, navigation}) => {
         </View>
 
           <View>
-        <TouchableOpacity style={styles.continueButton}>
-         <Text> Continue</Text>
+        <TouchableOpacity style={styles.continueButton} onPress={()=>handleSend()}>
+         <Text style={styles.buttonText}> Continue</Text>
        </TouchableOpacity>
        </View>
        
@@ -163,7 +172,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontWeight: 'bold',
-    textTransform: 'uppercase'
+    fontSize: 20
+    // textTransform: 'uppercase'
   },
   amountInput: {
     width: '95%',
