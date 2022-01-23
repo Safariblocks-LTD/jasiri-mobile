@@ -140,8 +140,6 @@ export const SendToken = ({navigation}) => {
        </View>
        
         </View>
-     
-
         </View>
       </ScrollView>
      

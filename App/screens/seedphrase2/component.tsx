@@ -37,6 +37,7 @@ export const SeedPhraseFinalPage = ({navigation}) => {
                 </View>
                 </View>
             </View>
+       
     )
 }
 

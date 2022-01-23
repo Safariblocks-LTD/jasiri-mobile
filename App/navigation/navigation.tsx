@@ -32,7 +32,7 @@ export const Navigation =()=> {
   return (
 
       <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName={"Main"}
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
           screenOptions={{
             tabBarStyle: styles.tabBar,
@@ -42,11 +42,13 @@ export const Navigation =()=> {
         >
           <Tab.Group>
             <Tab.Screen name="Main" component={Dashboard}/> 
-            <Tab.Screen name="Send" component={SendStack} />            
-            <Tab.Screen name="Contacts" component={View}/>
+            <Tab.Screen name="Send" component={Transact} />            
+            <Tab.Screen name="Screen1" component={View}/>
             <Tab.Screen name="Notification" component={View} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Group>
+            <Tab.Screen name="Send or receive" component={SendStack} />
+            <Tab.Screen name="HomeStack" component={AuthenticationStack} />
+        </Tab.Group> 
       </Tab.Navigator>
 
       
@@ -84,7 +86,7 @@ export const AuthenticationStack=()=>{
          header: ()=><View></View>
      }}
      >
-        <Stack.Group >
+        <Stack.Group screenOptions={{presentation: 'modal'}}>
           <Stack.Screen name="Home" component={Home} />   
           <Stack.Screen name="Registration" component={Registration} />   
           <Stack.Screen name="Create Account" component={CreateAccount} />    
