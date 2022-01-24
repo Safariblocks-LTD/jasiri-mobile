@@ -16,7 +16,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export const SettingsScreen = ({ navigation }: any) => {
   return (
-    <View style={{width: '100%', height: '100%', backgroundColor: '#E3E8E7'}} >
+    <View style={{width: '100%', height: '100%', backgroundColor: '#E3E8E7', marginTop: 35}} >
        <ScrollView >
           <View style={styles.container} >
             <View style={styles.head}>
@@ -26,12 +26,12 @@ export const SettingsScreen = ({ navigation }: any) => {
            <View style={{marginLeft: 8}}>
            <View style={{marginTop: 15, ...styles.content}}>
                 <Text style={styles.categorty_header}> general settings</Text>
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector9.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/Vector9.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >fiat currency</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -41,12 +41,12 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector10.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/Vector10.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >Language</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -56,12 +56,12 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector11.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/Vector11.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >notifications</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -74,12 +74,12 @@ export const SettingsScreen = ({ navigation }: any) => {
 
               <View style={styles.content_body}>
                 <Text style={styles.categorty_header}> security</Text>
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
                     <Image style={{width: 23, height: 23}} source={require('../../assets/Vector12.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >set/change password</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -89,12 +89,12 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector13.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/Vector13.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >biometric authentication</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -105,12 +105,12 @@ export const SettingsScreen = ({ navigation }: any) => {
                 </View>
 
                 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/vector14.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/vector14.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >wallet connect sessions</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -120,12 +120,12 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector15.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/Vector15.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >developer settings</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -135,12 +135,12 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{width: '10%', justifyContent: 'center', alignItems: 'flex-start', paddingBottom: 5, height: 50 }}>
-                    <Image style={{width: 26, height: 26}} source={require('../../assets/Vector16.png')} />
+                <View style={styles.section}>
+                  <View style={styles.section_image}>
+                    <Image style={styles.image} source={require('../../assets/Vector16.png')} />
                   </View>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                  <View style={styles.section_container}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >reset wallet</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -154,9 +154,9 @@ export const SettingsScreen = ({ navigation }: any) => {
               <View style={styles.content_main}>
                 <Text style={styles.categorty_header}> legal</Text>
                 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50, marginLeft: 30}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                <View style={styles.section}>
+                  <View style={styles.section_footer}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >terms of service</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -166,9 +166,9 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
-                <View style={{flexDirection: 'row', width: '100%', justifyContent: 'center', alignItems: 'center', padding: 10}}>
-                  <View style={{flexDirection: 'column', alignItems: 'center', width: '90%', height: 50, marginLeft: 30}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',  width: '100%', padding: 10}}>
+                <View style={styles.section}>
+                  <View style={styles.section_footer}>
+                    <View style={styles.section_body}>
                       <Text style={styles.category_text} >private policy</Text>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
@@ -227,6 +227,44 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%', 
     marginTop: 20
+  },
+  section: {
+    flexDirection: 'row', 
+    width: '100%', 
+    justifyContent: 'center',
+    alignItems: 'center', 
+    padding: 10
+  },
+  section_image: {
+    width: '10%', 
+    justifyContent: 'center', 
+    alignItems: 'flex-start', 
+    paddingBottom: 5, 
+    height: 50 
+  },
+  section_container: {
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    width: '90%', 
+    height: 50
+  },
+  section_body: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'space-between',  
+    width: '100%', 
+    padding: 10
+  },
+  image: {
+    width: 26, 
+    height: 26
+  },
+  section_footer: {
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    width: '90%', 
+    height: 50, 
+    marginLeft: 30
   },
   category_body: {
     flexDirection: 'row', 
