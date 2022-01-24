@@ -1,14 +1,17 @@
 
 import * as React from 'react'
 import { View, Text, StyleSheet, Image, Modal } from 'react-native'
+import {getFocusedRouteNameFromRoute} from "@react-navigation/native"
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 
 export const CreateAccount = ({navigation}) => {
-    const handleClick=()=>{
-        navigation.navigate('Seed Phrase')
-        console.log('Button click')
-    }
+
+    // const handleClick=()=>{
+    //     navigation.navigate('Seed Phrase')
+    //     console.log('Button click')
+    // }
+
     return (
         <View style={styles.container}>
             <View style={styles.content}>
@@ -16,18 +19,18 @@ export const CreateAccount = ({navigation}) => {
                   <Image 
                     source={require('../../assets/Vector.png')}
                     style={{height: 150, width: 150}}
-                     />
+                   />
                 </View>
                 <View style={styles.textBox}>
                     <Text style={styles.text}>
-                    Back up your account using a recovery passphrace 
+                     Back up your account using a recovery passphrace 
                     </Text>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={handleClick}>
-                        <Text style={styles.account}>I understand</Text>
+                        >
+                        <Text style={styles.account} onPress={() => navigation.navigate('Seed Phrase')}>I understand</Text>
                     </TouchableOpacity>
                 </View>
             </View>

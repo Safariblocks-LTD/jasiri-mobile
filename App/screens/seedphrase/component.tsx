@@ -37,10 +37,10 @@ const SeedPhrase = ({navigation}: navigation) => {
                     </View>
                 </View>
                 <View style={styles.third}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Seed Phrase Final Page")}>
                             <Text 
                             style = {styles.buttonText}
-                            onPress={() => navigation.navigate("Seed Phrase Final Page")}
+                            
                             >
                             Next
                             </Text>
