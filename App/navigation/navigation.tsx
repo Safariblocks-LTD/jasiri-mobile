@@ -1,11 +1,11 @@
 // import ReactDOM from 'react-dom'
 import * as React from 'react';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
-import { MaterialIcons  } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
+// import { MaterialIcons  } from '@expo/vector-icons';
+// import { FontAwesome5 } from '@expo/vector-icons';
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import { Octicons } from '@expo/vector-icons';
+// import { Fontisto } from '@expo/vector-icons';
 
 import { SettingsScreen, Transact } from '../screens';
 import { StyleSheet } from 'react-native';
@@ -14,6 +14,8 @@ import { TabBar } from './tab-bar';
 
 
 import { createStackNavigator } from "@react-navigation/stack"
+import { createModalNavigator } from 'react-navigation-native-modal';
+// import {getFocusedRouteNameFromRoute, useNavigation, useRoute} from "@react-navigation/native"
 import { Token, Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
@@ -26,27 +28,30 @@ import { SeedPhraseFinalPage } from '../screens';
 
 const Stack = createStackNavigator()
 
+const Modal = createModalNavigator();
+
 const Tab = createBottomTabNavigator();
 
 export const Navigation =()=> {
   return (
 
       <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName={"Main"}
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
           screenOptions={{
             tabBarStyle: styles.tabBar,
-            header: ()=><View></View>
-            
+            header: ()=><View></View>,
           }}
         >
           <Tab.Group>
             <Tab.Screen name="Main" component={Dashboard}/> 
-            <Tab.Screen name="Send" component={SendStack} />            
-            <Tab.Screen name="Contacts" component={View}/>
+            <Tab.Screen name="Send" component={Transact} />            
+            <Tab.Screen name="Screen1" component={View}/>
             <Tab.Screen name="Notification" component={View} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Group>
+            <Tab.Screen name="Send or receive" component={SendStack} />
+            <Tab.Screen name="HomeStack" component={AuthenticationStack} />
+        </Tab.Group> 
       </Tab.Navigator>
 
       
@@ -75,7 +80,9 @@ const SendStack=()=> {
 }
 
 
-export const AuthenticationStack=()=>{
+export const AuthenticationStack=({navigation, route})=>{
+
+  
   return (
 
     <Stack.Navigator
@@ -84,7 +91,7 @@ export const AuthenticationStack=()=>{
          header: ()=><View></View>
      }}
      >
-        <Stack.Group >
+        <Stack.Group>
           <Stack.Screen name="Home" component={Home} />   
           <Stack.Screen name="Registration" component={Registration} />   
           <Stack.Screen name="Create Account" component={CreateAccount} />    

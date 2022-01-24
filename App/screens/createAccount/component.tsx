@@ -14,6 +14,7 @@ export const CreateAccount = ({navigation}) => {
 
     return (
         <View style={styles.container}>
+            <Modal>
             <View style={styles.content}>
                 <View style={styles.imageContainer}>
                   <Image 
@@ -34,6 +35,7 @@ export const CreateAccount = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            </Modal>
         </View>
     )
 }

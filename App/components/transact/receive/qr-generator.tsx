@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import Clipboard from '@react-native-clipboard/clipboard'
-import Share from 'react-native-share'
+import { Text, View, StyleSheet, TouchableOpacity, Image, Share} from 'react-native';
+// import Clipboard from '@react-native-clipboard/clipboard'
+// import Clipboard from '@react-native-community/clipboard'
+import * as Clipboard from 'expo-clipboard';
+// import * as Sharing from 'expo-sharing'
 import { ScrollView } from 'react-native-gesture-handler';
 
-// See the README file
 
 import SvgQRCode from 'react-native-qrcode-svg';
 import CustomQRCodes from './custom-qr-codes';
@@ -30,17 +31,24 @@ export default function App() {
     Clipboard.setString(hardCodedAddress)
   }
 
-  // const shareAddress = async () => {
-  //    const shareOptions = {
-  //      message: hardCodedAddress
-  //    }
-
-  //    try {
-  //      const shareResponse = await Share.open(shareOptions)
-  //    } catch (error) {
-  //      console.log(error);
-  //    }
-  // }
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: hardCodedAddress
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     // <ScrollView>
     <View style={styles.container}>
@@ -66,7 +74,7 @@ export default function App() {
           </TouchableOpacity>
           <TouchableOpacity 
           style={styles.button} 
-          // onPress={shareAddress}
+          onPress={onShare}
           >
               <Image
               source={require('../../../assets/share.png')}

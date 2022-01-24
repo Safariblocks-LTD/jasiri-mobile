@@ -13,6 +13,7 @@ export const Registration = ({navigation}: navigation) => {
     return (
     
         <View style={styles.container}>
+            <Modal>
             <View style={styles.content}>
                 <View style={styles.textbox}>
                     <Text style={styles.text}>Welcome to the Jasiri wallet</Text>
@@ -43,7 +44,7 @@ export const Registration = ({navigation}: navigation) => {
                     </Text>
                 </View>
             </View>
-        
+            </Modal>
         </View>
     )
 }

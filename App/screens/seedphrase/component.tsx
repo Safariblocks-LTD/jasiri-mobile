@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Modal } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -10,6 +10,7 @@ type navigation = {
 const SeedPhrase = ({navigation}: navigation) => {
     return (
         <View style={styles.container}>
+            <Modal>
             <View style={styles.content}>
                 <View style={styles.first}>
                     <View style={styles.section1}>
@@ -47,6 +48,7 @@ const SeedPhrase = ({navigation}: navigation) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            </Modal>
         </View>
     )
 }

@@ -6,9 +6,11 @@ type navigation = {
     navigation: any
   }
 
-export const SeedPhraseFinalPage = ({navigation}) => {
+export const SeedPhraseFinalPage = ({navigation}: navigation) => {
     return (
-        <View style={styles.container} >
+    <View>
+      
+          <View style={styles.container} >
             <View style={styles.content}>
                 <View style={styles.sectionOne}>
                     <Text style={styles.text}>Tap words in correct order to confirm your seed phrase</Text>
@@ -25,11 +27,11 @@ export const SeedPhraseFinalPage = ({navigation}) => {
                 <View style={styles.sectionThree}>
                   <Text style={styles.text}>Select word #2</Text>
                 </View>
-                <View style={styles.sectionFive}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}  >
+                <View style={styles.sectionFive} >
+                    <TouchableOpacity style={styles.button}>
                             <Text 
                             style = {styles.buttonText}   
-                                                    
+                            onPress={() => navigation.navigate("Main")}                         
                             >
                             Next
                             </Text>
@@ -37,6 +39,9 @@ export const SeedPhraseFinalPage = ({navigation}) => {
                 </View>
                 </View>
             </View>
+           </View>
+     
+
     )
 }
 
@@ -44,12 +49,12 @@ export const SeedPhraseFinalPage = ({navigation}) => {
 const styles = StyleSheet.create({
  container: {
  flex: 1,
- backgroundColor: 'white'
  },
  content: {
     width: '100%',
     height: '100%',
     justifyContent: 'space-around',
+    backgroundColor: 'white',
     alignItems: 'center'
  },
  sectionOne: {
