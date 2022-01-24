@@ -7,13 +7,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export const CreateAccount = ({navigation}) => {
 
-    const handleClick=()=>{
-        navigation.navigate('Seed Phrase')
-        console.log('Button click')
-    }
+    // const handleClick=()=>{
+    //     navigation.navigate('Seed Phrase')
+    //     console.log('Button click')
+    // }
 
     return (
         <View style={styles.container}>
+            <Modal>
             <View style={styles.content}>
                 <View style={styles.imageContainer}>
                   <Image 
@@ -34,6 +35,7 @@ export const CreateAccount = ({navigation}) => {
                     </TouchableOpacity>
                 </View>
             </View>
+            </Modal>
         </View>
     )
 }

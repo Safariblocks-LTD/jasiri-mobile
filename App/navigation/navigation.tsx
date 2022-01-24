@@ -14,7 +14,8 @@ import { TabBar } from './tab-bar';
 
 
 import { createStackNavigator } from "@react-navigation/stack"
-import {getFocusedRouteNameFromRoute, useNavigation, useRoute} from "@react-navigation/native"
+import { createModalNavigator } from 'react-navigation-native-modal';
+// import {getFocusedRouteNameFromRoute, useNavigation, useRoute} from "@react-navigation/native"
 import { Token, Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
@@ -26,6 +27,8 @@ import { SeedPhraseFinalPage } from '../screens';
 
 
 const Stack = createStackNavigator()
+
+const Modal = createModalNavigator();
 
 const Tab = createBottomTabNavigator();
 
@@ -78,17 +81,6 @@ const SendStack=()=> {
 
 
 export const AuthenticationStack=({navigation, route})=>{
-  const {name} = useRoute();
-  const nav = useNavigation()
-  console.log(nav);
-  
-  console.log(navigation);
-
-  if ( name == 'HomeStack' ) {
-    navigation.setOptions({tabBarVisible: false}) 
-  } else {
-    navigation.setOptions({tabBarVisible: true}) 
-  }
 
   
   return (
