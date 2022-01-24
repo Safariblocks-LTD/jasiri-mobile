@@ -8,7 +8,7 @@ type navigation = {
 
 export const SeedPhraseFinalPage = ({navigation}) => {
     return (
-        <Modal style={styles.container} >
+        <View style={styles.container} >
             <View style={styles.content}>
                 <View style={styles.sectionOne}>
                     <Text style={styles.text}>Tap words in correct order to confirm your seed phrase</Text>
@@ -26,16 +26,17 @@ export const SeedPhraseFinalPage = ({navigation}) => {
                   <Text style={styles.text}>Select word #2</Text>
                 </View>
                 <View style={styles.sectionFive}>
-                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Main")}  >
                             <Text 
-                            style = {styles.buttonText}                            
+                            style = {styles.buttonText}   
+                                                    
                             >
                             Next
                             </Text>
                     </TouchableOpacity>
                 </View>
+                </View>
             </View>
-        </Modal>
     )
 }
 

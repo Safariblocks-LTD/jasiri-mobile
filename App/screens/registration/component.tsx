@@ -11,8 +11,6 @@ type navigation = {
 
 export const Registration = ({navigation}: navigation) => {
     return (
-
-        <Modal>
     
         <View style={styles.container}>
             <View style={styles.content}>
@@ -47,7 +45,6 @@ export const Registration = ({navigation}: navigation) => {
             </View>
         
         </View>
-        </Modal>
     )
 }
 
