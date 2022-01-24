@@ -2,10 +2,10 @@ import axiosConfig from './http'
 import algosdk from 'algosdk'
 
 
-const algodToken = '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri';
-const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
-// const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-// const algodServer = 'http://172.20.71.80';
+// const algodToken = '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri';
+// const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+const algodServer = 'http://172.27.234.202';
 
 
 // client
