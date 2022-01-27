@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, Image, Share} from 'react-native';
-// import Clipboard from '@react-native-clipboard/clipboard'
-// import Clipboard from '@react-native-community/clipboard'
+
 import * as Clipboard from 'expo-clipboard';
 // import * as Sharing from 'expo-sharing'
-import { ScrollView } from 'react-native-gesture-handler';
 
 
 import SvgQRCode from 'react-native-qrcode-svg';
-import CustomQRCodes from './custom-qr-codes';
+
 
 const hardCodedAddress = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
 

@@ -33,15 +33,19 @@ const scannedSlice = createSlice({
   name: "scanned",
   initialState: {
     data: '',
+    showScanner: true
   },
   reducers: {
     setData(state, action: PayloadAction<string >) {
       state.data = action.payload
     },
+    setShowScanner(state, action: PayloadAction<boolean >) {
+      state.showScanner = action.payload
+    },
   }
 })
 
-export const { setData } = scannedSlice.actions
+export const { setData, setShowScanner } = scannedSlice.actions
 export const scanned = scannedSlice
 
 

@@ -1,6 +1,6 @@
 require('node-libs-expo/globals');
 
-import * as Random from 'expo-random';
+// import * as Random from 'expo-random';
 
 import 'react-native-get-random-values'
 
@@ -17,6 +17,7 @@ import {store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
 import { Navigation, AuthenticationStack
  } from './App/navigation';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // import * as crypto from 'expo-crypto';
 
@@ -30,22 +31,15 @@ export default function App() {
   return (
    
     <Provider store={store}>
+      <SafeAreaProvider>
       <NavigationContainer>
        {loggedIn? <Navigation/>:<AuthenticationStack/>  } 
     </NavigationContainer>
+    </SafeAreaProvider>
     </Provider>
     
  
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 

@@ -17,7 +17,7 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../redux';
+import { RootState, setData } from '../../../redux';
 import { sendAsset } from '../../../services';
 
 
@@ -37,10 +37,6 @@ export const SendToken = ({navigation}) => {
  
   const token = useSelector((state: RootState)=>state.token.token)
   const scanned = useSelector((state: RootState)=>state.scanned.data)
-
-  React.useEffect(()=>{
-      setAddress(scanned)
-  }, [])
 
   // console.log(token)
 
@@ -83,6 +79,11 @@ export const SendToken = ({navigation}) => {
     
   }
 
+  const handleScanButton=()=> {
+    // dispatch(setData(undefined))
+    navigation.navigate('Scan QR')
+  }
+
   return (
     
       <ScrollView>
@@ -104,14 +105,14 @@ export const SendToken = ({navigation}) => {
            <View style={styles.recipientqrContainer}>
            <TextInput 
            style={styles.addressInput} 
-           value={address}
+           value={scanned}
            placeholder='e.g JKJKHDJHDJHDJ.......'
            onChangeText={handleChangeAddress}
            />
 
            <TouchableOpacity 
             style={styles.qrInput}
-            onPress={()=>navigation.navigate('Scan QR')}
+            onPress={()=>handleScanButton()}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>

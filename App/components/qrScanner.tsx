@@ -1,81 +1,73 @@
-import { Text, View, StyleSheet, Button, SafeAreaView, Vibration, Dimensions, TouchableOpacity, Alert, Modal } from 'react-native';
-import { BarCodeScanner , BarCodeScannerResult} from 'expo-barcode-scanner';
+import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity } from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { setData } from '../redux';
-import BarcodeMask from 'react-native-barcode-mask';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, setData, setShowScanner } from '../redux';
 
 
-
-
-
-
-
-
-
-export  const QrScanner =()=>{
+export  const QrScanner =({navigation})=>{
   const [hasPermission, setHasPermission] = React.useState<boolean|null>(null);
-  const [type, setType] = React.useState<any>(BarCodeScanner.Constants.Type.back);
-  const [scanned, setScanned] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-      console.log(status)
-    })();
-  }, []);
+  const [show, setShow]= React.useState<boolean>(true);
+  const [scannedData, setScannedData]= React.useState<string|null>(null);
+  
+  
+ 
 
   const dispatch=useDispatch()
 
+  const scanned = useSelector((state: RootState)=>state.scanned.data)
+  const showS = useSelector((state: RootState)=>state.scanned.showScanner)
 
-  
-const finderWidth: number = 280;
-const finderHeight: number = 280;
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-const viewMinX = (width - finderWidth) / 2;
-const viewMinY = (height - finderHeight) / 2;
+  React.useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();      
+      setHasPermission(status === 'granted');
+    })();
+    
+  }, []);
 
-  const handleBarCodeScanned = (scanningResult: BarCodeScannerResult) => {
 
-    if (!scanned) {
-          const {type, data, bounds: {origin} = {}} = scanningResult;
-          // @ts-ignore
-          const {x, y} = origin;
-          if (x >= viewMinX && y >= viewMinY && x <= (viewMinX + finderWidth / 2) && y <= (viewMinY + finderHeight / 2)) {
-              setScanned(true);
-              Vibration.vibrate()
-              dispatch(setData(data))
-              // navigation.goBack()             
-          }
-      }
+  React.useEffect(() => {
+   
+    
+    scannedData && !show && navigation.navigate('Send token') 
+    
+  }, [show]);
+ 
+
+  const handleBarCodeScanned = ({type, data}) => {
+      setShow(false)
+      // dispatch(setShowScanner(false)) 
+      setScannedData(data)   
+      Vibration.vibrate()        
+      dispatch(setData(data))  
+      console.log(scanned)  
+       
   };
 
-  // if (hasPermission === false) {
-  //   return Alert.alert('No access to camera.');
-  // }
+  if (hasPermission === false) {
+    return Alert.alert('No access to camera.');
+  }
 
   return (
     
     <View style={styles.container}>
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        type={type}
+      {!scannedData && <BarCodeScanner
+        onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
+        // type={type}
         barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-        style={[StyleSheet.absoluteFillObject, styles.container]}
+        style={[StyleSheet.absoluteFillObject]}
       >
-
-      <View
-          style={{
-              // flex: 1,
-              backgroundColor: 'transparent',
-              flexDirection: 'row',
-          }}>
+        <View style={styles.overlay}>
+          <TouchableOpacity>
+          <Text style={{fontSize: 15}}>select image</Text>
+          </TouchableOpacity>
           
-      </View>
-        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine/>
-        </BarCodeScanner>
+        </View>
+     
+        {/* <BarcodeMask edgeColor="#62B1F6"/> */}
+        </BarCodeScanner>}
+        
     </View>
     
   );
@@ -84,10 +76,21 @@ const viewMinY = (height - finderHeight) / 2;
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      // flex: 1,
+      // alignItems: 'center',
+      // justifyContent: 'center',
+      width: '100%',
       height: '100%'
   },    
+  overlay: {
+    flex: 1,
+    alignContent: 'flex-end',
+    justifyContent: 'flex-end' ,
+    alignItems: 'flex-end',
+    height: '100%',
+    width: '90%',
+    margin: 10,
+    // borderWidth: 2
+  }
     
 })

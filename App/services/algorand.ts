@@ -1,15 +1,16 @@
 import axiosConfig from './http'
 import algosdk from 'algosdk'
 
+const algodToken = {
+    'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
+}
 
-// const algodToken = '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri';
-// const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
-const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-const algodServer = 'http://172.27.234.202';
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+
 
 
 // client
-const algodPort = 4001;
+const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 
 
