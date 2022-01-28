@@ -14,9 +14,6 @@ export  const QrScanner =({navigation})=>{
 
   const dispatch=useDispatch()
 
-  const scanned = useSelector((state: RootState)=>state.scanned.data)
-  const showS = useSelector((state: RootState)=>state.scanned.showScanner)
-
   React.useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();      
@@ -26,24 +23,27 @@ export  const QrScanner =({navigation})=>{
   }, []);
 
 
-  // React.useEffect(() => {
+  React.useEffect(() => {
    
     
-  //   scannedData && !show && 
+    scannedData && !show && 
+    dispatch(setData(scannedData)) &&
+    navigation.navigate('Send token') 
+   
     
-  // }, [scannedData, show]);
+  }, [scannedData, show]);
  
 
   const handleBarCodeScanned = ({type, data}) => {
     console.log(data)
-      setShow(false)
+     
       // // dispatch(setShowScanner(false)) 
       setScannedData(data)   
       Vibration.vibrate()        
-      dispatch(setData(data))  
+      
       // console.log(scanned) 
       setShow(false) 
-      navigation.navigate('Send token') 
+     
        
   };
 
@@ -56,8 +56,9 @@ export  const QrScanner =({navigation})=>{
     <View style={styles.container}>
       {show && <Camera
         onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
-        // type={type}
-        // barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+        barCodeScannerSettings={{
+          barCodeTypes: ['qr'],
+        }}
         style={[StyleSheet.absoluteFillObject]}
       >
         <View style={styles.overlay}>
