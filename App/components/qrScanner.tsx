@@ -1,26 +1,32 @@
+<<<<<<< HEAD
 import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity, Button, Image } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+=======
+import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity, Button } from 'react-native';
+// import { BarCodeScanner } from 'expo-barcode-scanner';
+>>>>>>> 8e575d6139149e73daa51ebfe4499673aa2102b7
 import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setData, setShowScanner } from '../redux';
+import { Camera } from 'expo-camera';
 
 
 export  const QrScanner =({navigation})=>{
-  const [hasPermission, setHasPermission] = React.useState<boolean|null>(null);
+  const [hasPermission, setHasPermission] = React.useState<boolean | null>(null);
   const [show, setShow]= React.useState<boolean>(true);
   const [scannedData, setScannedData]= React.useState<string|null>(null);
 
+<<<<<<< HEAD
   
  
+=======
+>>>>>>> 8e575d6139149e73daa51ebfe4499673aa2102b7
 
   const dispatch=useDispatch()
 
-  const scanned = useSelector((state: RootState)=>state.scanned.data)
-  const showS = useSelector((state: RootState)=>state.scanned.showScanner)
-
   React.useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();      
+      const { status } = await Camera.requestCameraPermissionsAsync();      
       setHasPermission(status === 'granted');
     })();
     
@@ -30,18 +36,24 @@ export  const QrScanner =({navigation})=>{
   React.useEffect(() => {
    
     
-    scannedData && !show && navigation.navigate('Send token') 
+    scannedData && !show && 
+    dispatch(setData(scannedData)) &&
+    navigation.navigate('Send token') 
+   
     
-  }, [show]);
+  }, [scannedData, show]);
  
 
   const handleBarCodeScanned = ({type, data}) => {
-      setShow(false)
-      // dispatch(setShowScanner(false)) 
+    console.log(data)
+     
+      // // dispatch(setShowScanner(false)) 
       setScannedData(data)   
       Vibration.vibrate()        
-      dispatch(setData(data))  
-      console.log(scanned)  
+      
+      // console.log(scanned) 
+      setShow(false) 
+     
        
   };
 
@@ -76,12 +88,13 @@ export  const QrScanner =({navigation})=>{
   // }
 
   return (
-    
+
     <View style={styles.container}>
-      {!scannedData && <BarCodeScanner
+      {show && <Camera
         onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
-        // type={type}
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+        barCodeScannerSettings={{
+          barCodeTypes: ['qr'],
+        }}
         style={[StyleSheet.absoluteFillObject]}
       >
         <View style={styles.overlay}>
@@ -92,7 +105,12 @@ export  const QrScanner =({navigation})=>{
         </View>
      
         {/* <BarcodeMask edgeColor="#62B1F6"/> */}
+<<<<<<< HEAD
         </BarCodeScanner>}
+=======
+        </Camera>}
+        
+>>>>>>> 8e575d6139149e73daa51ebfe4499673aa2102b7
     </View>
   );
 }
