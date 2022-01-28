@@ -26,12 +26,12 @@ export  const QrScanner =({navigation})=>{
   }, []);
 
 
-  React.useEffect(() => {
+  // React.useEffect(() => {
    
     
-    scannedData && !show && navigation.navigate('Send token') 
+  //   scannedData && !show && 
     
-  }, [scannedData, show]);
+  // }, [scannedData, show]);
  
 
   const handleBarCodeScanned = ({type, data}) => {
@@ -41,7 +41,9 @@ export  const QrScanner =({navigation})=>{
       setScannedData(data)   
       Vibration.vibrate()        
       dispatch(setData(data))  
-      // console.log(scanned)  
+      // console.log(scanned) 
+      setShow(false) 
+      navigation.navigate('Send token') 
        
   };
 
