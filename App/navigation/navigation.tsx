@@ -1,3 +1,4 @@
+// import ReactDOM from 'react-dom'
 import * as React from 'react';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
 
@@ -17,6 +18,7 @@ import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
 
 
+const loggedIn = true
 
 const Stack = createStackNavigator()
 
@@ -35,17 +37,13 @@ export const Navigation =()=> {
           }}
         >
           <Tab.Group>
-            <Tab.Screen name="Main" component={Dashboard}/> 
+            <Tab.Screen name="Main" component={loggedIn?Dashboard:AuthenticationStack}/> 
             <Tab.Screen name="Send" component={SendStack} />            
             <Tab.Screen name="Contacts" component={View}/>
             <Tab.Screen name="Notification" component={View} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
           </Tab.Group>
       </Tab.Navigator>
-
-      
-
-   
   )
 }
 
@@ -78,15 +76,14 @@ export const AuthenticationStack=()=>{
          header: ()=><View></View>
      }}
      >
-        <Stack.Group >
+        <Stack.Group>
           <Stack.Screen name="Home" component={Home} />   
           <Stack.Screen name="Registration" component={Registration} />   
           <Stack.Screen name="Create Account" component={CreateAccount} />    
           <Stack.Screen name="Recover Account" component={RecoverAccount} />   
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
-        </Stack.Group >
-
+        </Stack.Group>
       </Stack.Navigator> 
 
   )
@@ -97,7 +94,8 @@ const styles= StyleSheet.create({
     // height: 90,
     // position: 'relative',
     // backgroundColor: '#fff',
-
   },
-  
 })
+
+
+

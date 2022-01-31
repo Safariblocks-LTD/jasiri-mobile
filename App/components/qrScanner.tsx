@@ -41,6 +41,8 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
      props.navigation.navigate('Send token')
   }
 
+
+
   return (
 
     <View style={styles.container}>
@@ -53,7 +55,7 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
       >
         <View style={styles.overlay}>
           <TouchableOpacity>
-          <Text style={{fontSize: 15}}>select image</Text>
+          <Text style={{fontSize: 15}} onPress={() => alert("heeeey")}>select image</Text>
           </TouchableOpacity>
           
         </View>
@@ -62,7 +64,6 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
         </Camera>}
         
     </View>
-    
   );
 }
 

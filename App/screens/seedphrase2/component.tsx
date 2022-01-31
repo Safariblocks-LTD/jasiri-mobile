@@ -1,22 +1,22 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, Modal } from 'react-native'
+import { View, Text, StyleSheet, Modal, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 type navigation = {
     navigation: any
   }
 
 export const SeedPhraseFinalPage = ({navigation}: navigation) => {
+
     return (
-    <View>
-      
-          <View style={styles.container} >
+          <SafeAreaView style={styles.container} >
             <View style={styles.content}>
                 <View style={styles.sectionOne}>
                     <Text style={styles.text}>Tap words in correct order to confirm your seed phrase</Text>
                 </View>
                 <View style={styles.sectionTwo}>
-                    <Text style={styles.text}>Select word #2</Text>
+                    <Text style={styles.text}>Select word #1</Text>
                 </View>
                 <View style={styles.sectionThree}>
                    <Text style={styles.text}>Select word #2</Text>
@@ -25,7 +25,7 @@ export const SeedPhraseFinalPage = ({navigation}: navigation) => {
                    <Text style={styles.text}>Select word #2</Text>
                 </View>
                 <View style={styles.sectionThree}>
-                  <Text style={styles.text}>Select word #2</Text>
+                  <Text style={styles.text}>Select word #6</Text>
                 </View>
                 <View style={styles.sectionFive} >
                     <TouchableOpacity style={styles.button}>
@@ -38,10 +38,7 @@ export const SeedPhraseFinalPage = ({navigation}: navigation) => {
                     </TouchableOpacity>
                 </View>
                 </View>
-            </View>
-           </View>
-     
-
+            </SafeAreaView>
     )
 }
 
@@ -49,6 +46,8 @@ export const SeedPhraseFinalPage = ({navigation}: navigation) => {
 const styles = StyleSheet.create({
  container: {
  flex: 1,
+ borderWidth: 2,
+//  backgroundColor: 'blue'
  },
  content: {
     width: '100%',
