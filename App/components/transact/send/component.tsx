@@ -112,7 +112,7 @@ export const SendToken = ({navigation}) => {
 
            <TouchableOpacity 
             style={styles.qrInput}
-            onPress={()=>handleScanButton()}
+            onPress={handleScanButton}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>

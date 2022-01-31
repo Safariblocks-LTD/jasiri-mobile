@@ -1,10 +1,5 @@
 import * as React from 'react';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
-import { MaterialIcons  } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
 
 import { SettingsScreen, Transact } from '../screens';
 import { StyleSheet } from 'react-native';
@@ -65,7 +60,7 @@ export const SendStack=()=> {
         <Stack.Group >
           <Stack.Screen name="Transact" component={Transact} />
           <Stack.Screen name="Token" component={Token} />
-          <Stack.Screen name="Scan QR" children={QrScanner} /> 
+          <Stack.Screen name="Scan QR" component={QrScanner} /> 
           <Stack.Screen name="Receive" component={Receive} /> 
           <Stack.Screen name="Send token" component={SendToken} /> 
         </Stack.Group>

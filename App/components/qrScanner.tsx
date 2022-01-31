@@ -1,12 +1,11 @@
-import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity, Button } from 'react-native';
-// import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setData, setShowScanner } from '../redux';
+import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setData } from '../redux';
 import { Camera } from 'expo-camera';
 
 
-export  const QrScanner =({navigation})=>{
+export  const  QrScanner =(props: {route: any, navigation: any})=>{
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(null);
   const [show, setShow]= React.useState<boolean>(true);
   const [scannedData, setScannedData]= React.useState<string|null>(null);
@@ -23,39 +22,30 @@ export  const QrScanner =({navigation})=>{
   }, []);
 
 
-  React.useEffect(() => {
-   
-    
-    scannedData && !show && 
-    dispatch(setData(scannedData)) &&
-    navigation.navigate('Send token') 
-   
-    
-  }, [scannedData, show]);
+  React.useEffect(() => { 
+      scannedData && dispatch(setData(scannedData)) &&
+      props.navigation.navigate('Send token')
+  }, [scannedData]);
  
 
-  const handleBarCodeScanned = ({type, data}) => {
-    console.log(data)
+  const handleBarCodeScanned = ({data}: any) => {
+      console.log(data) 
+      Vibration.vibrate()    
+      setShow(false)
+      setScannedData(data) 
      
-      // // dispatch(setShowScanner(false)) 
-      setScannedData(data)   
-      Vibration.vibrate()        
-      
-      // console.log(scanned) 
-      setShow(false) 
-     
-       
   };
 
   if (hasPermission === false) {
-    return Alert.alert('No access to camera.');
+     Alert.alert('No access to camera.');
+     props.navigation.navigate('Send token')
   }
 
   return (
 
     <View style={styles.container}>
       {show && <Camera
-        onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={handleBarCodeScanned}
         barCodeScannerSettings={{
           barCodeTypes: ['qr'],
         }}
