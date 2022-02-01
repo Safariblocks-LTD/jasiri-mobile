@@ -36,7 +36,7 @@ const scannedSlice = createSlice({
     showScanner: true
   },
   reducers: {
-    setData(state, action: PayloadAction<string >) {
+    setData(state, action: PayloadAction<string | null >) {
       state.data = action.payload
     },
     setShowScanner(state, action: PayloadAction<boolean >) {

@@ -23,11 +23,28 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // export {crypto}
 
+import * as Updates from 'expo-updates';
+
+
 
 const loggedIn = true
 
 
 export default function App() {
+  React.useEffect(()=>{
+    (async()=>{
+      try {
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        await Updates.fetchUpdateAsync();
+        // ... notify user of update ...
+        await Updates.reloadAsync();
+      }
+    } catch (e) {
+      // handle or log error
+    }})()
+    
+  },[])
   return (
    
     <Provider store={store}>

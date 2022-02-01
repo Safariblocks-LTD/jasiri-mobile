@@ -1,75 +1,69 @@
-import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity } from 'react-native';
-import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setData, setShowScanner } from '../redux';
+import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { setData } from '../redux';
+import { Camera } from 'expo-camera';
 
 
-export  const QrScanner =({navigation})=>{
-  const [hasPermission, setHasPermission] = React.useState<boolean|null>(null);
+export  const  QrScanner =(props: {route: any, navigation: any})=>{
+  const [hasPermission, setHasPermission] = React.useState<boolean | null>(null);
   const [show, setShow]= React.useState<boolean>(true);
   const [scannedData, setScannedData]= React.useState<string|null>(null);
-  
-  
- 
+
 
   const dispatch=useDispatch()
 
-  const scanned = useSelector((state: RootState)=>state.scanned.data)
-  const showS = useSelector((state: RootState)=>state.scanned.showScanner)
-
   React.useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();      
+      const { status } = await Camera.requestCameraPermissionsAsync();      
       setHasPermission(status === 'granted');
     })();
     
   }, []);
 
 
-  React.useEffect(() => {
-   
-    
-    scannedData && !show && navigation.navigate('Send token') 
-    
-  }, [show]);
+  React.useEffect(() => { 
+      scannedData && dispatch(setData(scannedData)) &&
+      props.navigation.navigate('Send token')
+  }, [scannedData]);
  
 
-  const handleBarCodeScanned = ({type, data}) => {
+  const handleBarCodeScanned = ({data}: any) => {
+      console.log(data) 
+      Vibration.vibrate()    
       setShow(false)
-      // dispatch(setShowScanner(false)) 
-      setScannedData(data)   
-      Vibration.vibrate()        
-      dispatch(setData(data))  
-      console.log(scanned)  
-       
+      setScannedData(data) 
+     
   };
 
   if (hasPermission === false) {
-    return Alert.alert('No access to camera.');
+     Alert.alert('No access to camera.');
+     props.navigation.navigate('Send token')
   }
 
+
+
   return (
-    
+
     <View style={styles.container}>
-      {!scannedData && <BarCodeScanner
-        onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
-        // type={type}
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+      {show && <Camera
+        onBarCodeScanned={handleBarCodeScanned}
+        barCodeScannerSettings={{
+          barCodeTypes: ['qr'],
+        }}
         style={[StyleSheet.absoluteFillObject]}
       >
         <View style={styles.overlay}>
           <TouchableOpacity>
-          <Text style={{fontSize: 15}}>select image</Text>
+          <Text style={{fontSize: 15}} onPress={() => alert("heeeey")}>select image</Text>
           </TouchableOpacity>
           
         </View>
      
         {/* <BarcodeMask edgeColor="#62B1F6"/> */}
-        </BarCodeScanner>}
+        </Camera>}
         
     </View>
-    
   );
 }
 

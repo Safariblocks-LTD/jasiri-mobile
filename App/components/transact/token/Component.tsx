@@ -39,9 +39,9 @@ export const Token = (props: { route, navigation}) => {
       <View style={styles.container}>
               
           <View style={styles.token} >
-            <Text style={styles.tokenText}> Total jasiri balance</Text>
+            <Text style={styles.tokenText}> Total {token.unitName} balance</Text>
             <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
-            <Text style={styles.tokenText}> $ {token.amount} USD</Text>
+            <Text style={styles.tokenText}> $ ### USD</Text>
           </View>
          
           <View style={styles.buttonContainer}>

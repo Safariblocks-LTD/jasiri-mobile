@@ -52,7 +52,7 @@ export const Transact = ({navigation}) => {
                 <View style={styles.content}>
                     {
                         assets.length > 0 ? assets.map((asset: Asset)=>
-                            <View style={styles.tokensContainer} key={asset.unitName}>
+                            <View style={styles.tokensContainer} key={Math.random()}>
                             <View style={styles.tokenContainer} >
                                 <TouchableOpacity 
                                     onPress={() => handleCLick(asset)}  
@@ -60,13 +60,13 @@ export const Transact = ({navigation}) => {
                                    
                                         <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
                                             <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
-                                            <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>Ja$iri</Text>
+                                            <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}> {asset.unitName} </Text>
                                         </View>
                                         
                                         <Text style={styles.unitAmount}>
                                                 {asset.amount} {asset.unitName}
                                         </Text>
-                                        <Text style={styles.unitInUsd}>$ 0 USD</Text>
+                                        <Text style={styles.unitInUsd}>$ ### USD</Text>
                                        
                                     
                                 </TouchableOpacity>
@@ -79,7 +79,7 @@ export const Transact = ({navigation}) => {
                          <View style={styles.tokenContainer} >                           
                                 
                             <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
-                                <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
+                               
                                 <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>loading</Text>
                             </View>
                             
