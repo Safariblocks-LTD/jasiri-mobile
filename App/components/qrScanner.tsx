@@ -2,12 +2,12 @@ import * as React from 'react';
 import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { setData } from '../redux';
-import { Camera } from 'expo-camera';
+import { BarCodeScanner } from 'expo-barcode-scanner';
 
 
-export  const  QrScanner =(props: {route: any, navigation: any})=>{
+export  const  QrScanner =({route, navigation})=>{
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(null);
-  const [show, setShow]= React.useState<boolean>(true);
+  const [show, setShow]= React.useState<boolean>(false);
   const [scannedData, setScannedData]= React.useState<string|null>(null);
 
 
@@ -15,16 +15,22 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
 
   React.useEffect(() => {
     (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();      
-      setHasPermission(status === 'granted');
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');   
+      
     })();
     
   }, []);
 
 
   React.useEffect(() => { 
+   hasPermission && !scannedData && setShow(true)
+}, [hasPermission]);
+
+
+  React.useEffect(() => { 
       scannedData && dispatch(setData(scannedData)) &&
-      props.navigation.navigate('Send token')
+      navigation.navigate('Send token')
   }, [scannedData]);
  
 
@@ -38,7 +44,7 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
 
   if (hasPermission === false) {
      Alert.alert('No access to camera.');
-     props.navigation.navigate('Send token')
+     
   }
 
 
@@ -46,11 +52,8 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
   return (
 
     <View style={styles.container}>
-      {show && <Camera
+      {show && <BarCodeScanner
         onBarCodeScanned={handleBarCodeScanned}
-        barCodeScannerSettings={{
-          barCodeTypes: ['qr'],
-        }}
         style={[StyleSheet.absoluteFillObject]}
       >
         <View style={styles.overlay}>
@@ -61,7 +64,7 @@ export  const  QrScanner =(props: {route: any, navigation: any})=>{
         </View>
      
         {/* <BarcodeMask edgeColor="#62B1F6"/> */}
-        </Camera>}
+        </BarCodeScanner>}
         
     </View>
   );

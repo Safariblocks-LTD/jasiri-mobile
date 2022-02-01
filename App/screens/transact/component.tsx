@@ -37,7 +37,7 @@ export const Transact = ({navigation}) => {
     })()
         
     // })
-    }, [])
+    })
 
     const handleCLick=(asset: Asset)=>{
        
