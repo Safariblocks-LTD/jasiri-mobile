@@ -27,8 +27,8 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ],
-      "package": "com.rabbitmode.jasiri_mobile"
+      ]
+     
     },
     "web": {
       "favicon": "./App/assets/images/favicon.png"

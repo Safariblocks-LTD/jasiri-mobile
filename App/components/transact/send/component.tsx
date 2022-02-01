@@ -26,7 +26,6 @@ import { sendAsset } from '../../../services';
 
 export const SendToken = ({navigation}) => {
 
-  const [address, setAddress] = React.useState<string>('PALKSZIPWA3Q53PLQX7UMQ4EKICITKFKKQF22IEDLRXAI2PI5M4DTYNGRE')
   const [amount, setAmount] = React.useState('')
   const [success, setSuccess] = React.useState<Boolean>()
 
@@ -48,7 +47,7 @@ export const SendToken = ({navigation}) => {
 
   const handleChangeAddress=(text:string)=>{
     console.log(text)
-    setAddress(text)
+    dispatch(setData(text))
   }
 
   const handleSend=()=>{
@@ -56,7 +55,7 @@ export const SendToken = ({navigation}) => {
     try{
       
       (async()=>{
-      const res = await sendAsset('description', parseInt(amount), token['asset-id'], address)
+      const res = await sendAsset('description', parseInt(amount), token['asset-id'], scanned)
       console.log(res)
       if(res==0){
         Alert.alert('Succesfully sent')
@@ -79,10 +78,7 @@ export const SendToken = ({navigation}) => {
     
   }
 
-  const handleScanButton=()=> {
-    // dispatch(setData(undefined))
-    navigation.navigate('Scan QR')
-  }
+
 
   return (
     
@@ -112,7 +108,7 @@ export const SendToken = ({navigation}) => {
 
            <TouchableOpacity 
             style={styles.qrInput}
-            onPress={handleScanButton}
+            onPress={()=>navigation.navigate('Scan QR')}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>
@@ -158,7 +154,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     backgroundColor: '#E3E8E7',
     width: '100%',
-    height: 850,
+    // height: 850,
     justifyContent: 'flex-start',
    
     // marginTop: 0
