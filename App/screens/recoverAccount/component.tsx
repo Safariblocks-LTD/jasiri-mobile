@@ -5,7 +5,7 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 const RecoverAccount = () => {
     return (
         <View style={styles.container} >
-            <Modal>
+          
             <View style={styles.content}>
                 <View style={styles.mainContent}>
                     <View style={styles.title}>
@@ -32,7 +32,7 @@ const RecoverAccount = () => {
                     </TouchableOpacity>
                 </View>
             </View>
-            </Modal>
+         
         </View>
     )
 }

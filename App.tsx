@@ -15,7 +15,7 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { Provider } from 'react-redux'
 import {store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
-import { Navigation, AuthenticationStack
+import { DashBoardNavigation, AuthenticationNavigation
  } from './App/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -27,7 +27,7 @@ import * as Updates from 'expo-updates';
 
 
 
-const loggedIn = true
+const loggedIn = false
 
 
 export default function App() {
@@ -50,7 +50,7 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
       <NavigationContainer>
-       {loggedIn? <Navigation/>:<AuthenticationStack/>  } 
+       {loggedIn? <DashBoardNavigation/>:<AuthenticationNavigation/>  } 
     </NavigationContainer>
     </SafeAreaProvider>
     </Provider>

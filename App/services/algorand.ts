@@ -33,13 +33,16 @@ export const getAssetInfo = async(assetId: number)=> {
 export const createAccount=()=> {
     try {  
         const myaccount = algosdk.generateAccount();
-        let account_mnemonic = algosdk.secretKeyToMnemonic(myaccount.sk);
-        console.log("Account Mnemonic = "+ account_mnemonic);
-        console.log(myaccount.sk)
-        return myaccount;
+        
+        const addr = myaccount.addr
+        const mnemonic = algosdk.secretKeyToMnemonic(myaccount.sk)
+
+        return {address: addr, mnemonic};
     }
     catch (err) {
+        
         console.log("err", err);
+        throw err
     }
 }
 

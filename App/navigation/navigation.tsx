@@ -18,17 +18,15 @@ import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
 
 
-const loggedIn = true
-
 const Stack = createStackNavigator()
 
 const Tab = createBottomTabNavigator();
 
-export const Navigation =()=> {
+export const DashBoardNavigation=()=> {
   return (
 
       <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName="Main"
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
           screenOptions={{
             tabBarStyle: styles.tabBar,
@@ -37,7 +35,7 @@ export const Navigation =()=> {
           }}
         >
           <Tab.Group>
-            <Tab.Screen name="Main" component={loggedIn?Dashboard:AuthenticationStack}/> 
+            <Tab.Screen name="Main" component={Dashboard}/> 
             <Tab.Screen name="Send" component={SendStack} />            
             <Tab.Screen name="Contacts" component={View}/>
             <Tab.Screen name="Notification" component={View} />
@@ -67,7 +65,7 @@ export const SendStack=()=> {
 }
 
 
-export const AuthenticationStack=()=>{
+export const AuthenticationNavigation=()=>{
   return (
 
     <Stack.Navigator
@@ -83,6 +81,7 @@ export const AuthenticationStack=()=>{
           <Stack.Screen name="Recover Account" component={RecoverAccount} />   
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
+          <Stack.Screen name="Dash board" component={DashBoardNavigation} /> 
         </Stack.Group>
       </Stack.Navigator> 
 

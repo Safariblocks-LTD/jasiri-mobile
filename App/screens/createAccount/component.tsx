@@ -1,20 +1,28 @@
 
 import * as React from 'react'
-import { View, Text, StyleSheet, Image, Modal } from 'react-native'
-import {getFocusedRouteNameFromRoute} from "@react-navigation/native"
+import { View, Text, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
+import { setAddress, setMnemonic } from '../../redux'
+import { createAccount } from '../../services'
 
 
 export const CreateAccount = ({navigation}) => {
+    const dispatch = useDispatch()
+    const handleClick=()=>{
+        
+        const account = createAccount()
+        dispatch(setAddress(account.address))
+        dispatch(setMnemonic(account.mnemonic))
+        console.log(account)
 
-    // const handleClick=()=>{
-    //     navigation.navigate('Seed Phrase')
-    //     console.log('Button click')
-    // }
+        console.log('Button click')
+        navigation.navigate('Seed Phrase')
+    }
 
     return (
         <View style={styles.container}>
-            <Modal>
+          
             <View style={styles.content}>
                 <View style={styles.imageContainer}>
                   <Image 
@@ -30,12 +38,13 @@ export const CreateAccount = ({navigation}) => {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.button}
+                        onPress={handleClick}
                         >
-                        <Text style={styles.account} onPress={() => navigation.navigate('Seed Phrase')}>I understand</Text>
+                        <Text style={styles.account} >I understand</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            </Modal>
+           
         </View>
     )
 }

@@ -7,19 +7,8 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView,
   Image, Modal
 } from 'react-native';
-import { 
-  Orbitron_400Regular,
-  Orbitron_500Medium,
-  Orbitron_600SemiBold,
-  Orbitron_700Bold,
-  Orbitron_800ExtraBold,
-  Orbitron_900Black 
-} from '@expo-google-fonts/orbitron'
-import {useFonts} from 'expo-font'
-import AppLoading from 'expo-app-loading';
 
 
 
@@ -28,21 +17,9 @@ import AppLoading from 'expo-app-loading';
 
 
 export const Home = ({ navigation }) => {
-  let [fontsLoaded, error] = useFonts({
-    Orbitron_400Regular,
-    Orbitron_500Medium,
-    Orbitron_600SemiBold,
-    Orbitron_700Bold,
-    Orbitron_800ExtraBold,
-    Orbitron_900Black 
-  })
-
-  if(!fontsLoaded){
-    return <AppLoading />
-  }
+  
   return (
     
-    <Modal style={{ flex: 1, width: '100%', height: '100%' }}>
       <View style={styles.container} >
           <View style={styles.eclipseContainer}>
               <View style={styles.ecslipe3}></View>
@@ -71,7 +48,6 @@ export const Home = ({ navigation }) => {
                 </TouchableOpacity>
           </View>
       </View>
-    </Modal>
     
   );
 }

@@ -37,7 +37,7 @@ const scannedSlice = createSlice({
   },
   reducers: {
     setData(state, action: PayloadAction<string | null >) {
-      state.data = action.payload
+      state.data = action.payload || ''
     },
     setShowScanner(state, action: PayloadAction<boolean >) {
       state.showScanner = action.payload
@@ -47,6 +47,27 @@ const scannedSlice = createSlice({
 
 export const { setData, setShowScanner } = scannedSlice.actions
 export const scanned = scannedSlice
+
+
+const newAccountSlice = createSlice({
+  name: "scanned",
+  initialState: {
+    address: '',
+    mnemonic: ''
+  },
+  reducers: {
+    setAddress(state, action: PayloadAction<string>) {
+      state.address = action.payload
+    },
+    setMnemonic(state, action: PayloadAction<string >) {
+      state.mnemonic = action.payload
+    },
+  }
+})
+
+export const { setAddress, setMnemonic } = newAccountSlice.actions
+export const newAccount = newAccountSlice
+
 
 
 
