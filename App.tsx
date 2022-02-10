@@ -12,26 +12,39 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Provider } from 'react-redux'
-import {store}  from './App/redux/store'
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import {RootState, store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
 import { DashBoardNavigation, AuthenticationNavigation
  } from './App/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-// import * as crypto from 'expo-crypto';
-
-// export {crypto}
 
 import * as Updates from 'expo-updates';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setAddress, setIsLoggedIn, setMnemonic } from './App/redux';
 
 
-
-const loggedIn = false
-
-
-export default function App() {
+const Navigation=()=>{
+  const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
+  const dispatch = useDispatch()
   React.useEffect(()=>{
+
+    (async () => {  
+      try {    
+          const jsonValue = await AsyncStorage.getItem('accountData')  
+          if(jsonValue!=null && JSON.parse(jsonValue).address && JSON.parse(jsonValue).mnemonic){
+            dispatch(setIsLoggedIn(true))
+            dispatch(setAddress(JSON.parse(jsonValue).address))
+            dispatch(setMnemonic(JSON.parse(jsonValue).mnemonic))
+          }  
+         
+      } 
+      catch(e) {    
+          //
+          console.log(' error reading value  ')
+      }})();
+
     (async()=>{
       try {
       const update = await Updates.checkForUpdateAsync();
@@ -45,13 +58,23 @@ export default function App() {
     }})()
     
   },[])
+
+  return(
+    <NavigationContainer>
+    {isLoggedIn && <AuthenticationNavigation/> || <DashBoardNavigation/>}  
+  </NavigationContainer>
+  )
+}
+
+
+
+export default function App() {
+
   return (
    
     <Provider store={store}>
       <SafeAreaProvider>
-      <NavigationContainer>
-       {loggedIn? <DashBoardNavigation/>:<AuthenticationNavigation/>  } 
-    </NavigationContainer>
+        <Navigation/>
     </SafeAreaProvider>
     </Provider>
     

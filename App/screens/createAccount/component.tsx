@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import { setAddress, setMnemonic } from '../../redux'
 import { createAccount } from '../../services'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export const CreateAccount = ({navigation}) => {
@@ -13,10 +14,18 @@ export const CreateAccount = ({navigation}) => {
         
         const account = createAccount()
         dispatch(setAddress(account.address))
-        dispatch(setMnemonic(account.mnemonic))
-        console.log(account)
+        dispatch(setMnemonic(account.mnemonic));
+        // console.log(account)
 
-        console.log('Button click')
+      (async()=>{
+            try {    
+                await AsyncStorage.setItem('accountData', JSON.stringify({address: account.address, mnemonic: account.mnemonic}))  
+            }catch (e) {    
+                // saving error  }
+                console.log('saving error')
+        }})()
+        
+        // console.log('Button click')
         navigation.navigate('Seed Phrase')
     }
 

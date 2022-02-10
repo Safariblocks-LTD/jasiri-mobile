@@ -35,34 +35,22 @@ export const DashBoardNavigation=()=> {
           }}
         >
           <Tab.Group>
-            <Tab.Screen name="Main" component={Dashboard}/> 
-            <Tab.Screen name="Send" component={SendStack} />            
+            <Tab.Screen name="Main" component={Dashboard}/>            
             <Tab.Screen name="Contacts" component={View}/>
             <Tab.Screen name="Notification" component={View} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="Transact" component={Transact} />
+            <Tab.Screen name="Send" component={Transact} />
+            <Tab.Screen name="Token" component={Token} />
+            <Tab.Screen name="Scan QR" component={QrScanner} /> 
+            <Tab.Screen name="Receive" component={Receive} /> 
+            <Tab.Screen name="Send token" component={SendToken} /> 
           </Tab.Group>
       </Tab.Navigator>
   )
 }
 
-export const SendStack=()=> {
-  return (
-     <Stack.Navigator
-     initialRouteName="Transact"
-      screenOptions={{
-          header: ()=><View></View>
-      }}
-      >
-        <Stack.Group >
-          <Stack.Screen name="Transact" component={Transact} />
-          <Stack.Screen name="Token" component={Token} />
-          <Stack.Screen name="Scan QR" component={QrScanner} /> 
-          <Stack.Screen name="Receive" component={Receive} /> 
-          <Stack.Screen name="Send token" component={SendToken} /> 
-        </Stack.Group>
-      </Stack.Navigator> 
-  )
-}
+
 
 
 export const AuthenticationNavigation=()=>{

@@ -14,22 +14,6 @@ const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 
 
-
-
-const mnemonic = 'tell dwarf occur chest case menu scheme hybrid car replace pen mouse punch universe biology volume trust woman orient trend economy visual detail above effort'
-let sender = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
-
-
-
-export const getAccountInfo = async()=> {
-    return await axiosConfig.get({}, 'accounts/DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY', {})
-}
-
-export const getAssetInfo = async(assetId: number)=> {
-    return await axiosConfig.get({}, `assets/${assetId}`, {})
-}
-
-
 export const createAccount=()=> {
     try {  
         const myaccount = algosdk.generateAccount();
@@ -42,7 +26,7 @@ export const createAccount=()=> {
     catch (err) {
         
         console.log("err", err);
-        throw err
+        return({error: err})
     }
 }
 
@@ -51,16 +35,11 @@ export const createAccount=()=> {
 
 export const accountInfo= async (accountAddr: string)=>{
     try{
-        
-    
-        //Check your balance
         let accountInfo = await algodClient.accountInformation(accountAddr).do();
-        console.log(accountInfo)
-       
         return accountInfo
     }
     catch(e){
-        throw e
+        return({error: e})
     }
 }
 
@@ -102,7 +81,14 @@ const waitForConfirmation = async function (algodClient, txId, timeout) {
 
 // createAccount()
 
-export const sendAsset=async (desc: string, amount: number, assetIndex: number, receiver: string)=>{
+export const sendAsset=async (
+    desc: string, 
+    amount: number, 
+    assetIndex: number, 
+    receiver: string, 
+    sender:string, 
+    mnemonic: string
+    )=>{
     
     const addrr = receiver.split('//')
     
@@ -141,7 +127,7 @@ export const sendAsset=async (desc: string, amount: number, assetIndex: number, 
 
     }catch(e){
         console.log(e)
-        return 1
+        return({error: e})
     }
         
 

@@ -6,33 +6,35 @@ import * as Clipboard from 'expo-clipboard';
 
 
 import SvgQRCode from 'react-native-qrcode-svg';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux';
 
-
-const hardCodedAddress = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
 
 // Simple usage, defaults for all but the value
 function Simple() {
+  const address = useSelector((state: RootState)=>state.newAccount.address)
   return (
-    <SvgQRCode size={150} value={hardCodedAddress} />
+    <SvgQRCode size={150} value={address} />
   );
 }
 
 // 20% (default) sized logo from local file string with white logo backdrop
-function LogoFromFile() {
-  let logoFromFile = require('../../../assets/images/icon.png');
+// function LogoFromFile() {
+//   let logoFromFile = require('../assets/images/icon.png');
 
-  return <SvgQRCode value="Just some string value" logo={logoFromFile} />;
-}
+//   return <SvgQRCode value="Just some string value" logo={logoFromFile} />;
+// }
 
 export default function App() {
+  const address = useSelector((state: RootState)=>state.newAccount.address)
   const copyAddressToClipboard = () => {
-    Clipboard.setString(hardCodedAddress)
+    Clipboard.setString(address)
   }
 
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: hardCodedAddress
+        message: address
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -57,7 +59,7 @@ export default function App() {
         {/* <LogoFromFile /> */}
       </View>
       <View style={styles.address}>
-          <Text>{hardCodedAddress}</Text>
+          <Text>{address}</Text>
       </View>
 
       <View style={styles.buttonsContainer}>
@@ -66,7 +68,7 @@ export default function App() {
           onPress={copyAddressToClipboard}
           >
               <Image
-              source={require('../../../assets/copy.png')}
+              source={require('../assets/copy.png')}
               ></Image>
               <Text style={styles.buttonText}>copy</Text>
           </TouchableOpacity>
@@ -75,7 +77,7 @@ export default function App() {
           onPress={onShare}
           >
               <Image
-              source={require('../../../assets/share.png')}
+              source={require('../assets/share.png')}
               ></Image>
               <Text style={styles.buttonText}>share</Text>
           </TouchableOpacity>

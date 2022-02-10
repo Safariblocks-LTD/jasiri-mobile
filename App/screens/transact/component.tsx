@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { setToken, setVisible } from '../../redux'
-import { useDispatch } from 'react-redux'
+import { RootState, setToken } from '../../redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { accountInfo,  getAccountInfo, getAssetInfo} from '../../services'
+import { accountInfo as getAccountInfo} from '../../services'
 import { Asset } from '../../types'
 
-const accountAddr = 'DQRHSRZMBFJ6P6SFE54XOTHEDRZOFXHE6LQT3YHAIWKKRYFPAYIGOCE6AY'
+
 
 
 export const Transact = ({navigation}) => {
@@ -16,28 +16,20 @@ export const Transact = ({navigation}) => {
    
     const dispatch = useDispatch()
 
-    React.useEffect(()=>{    
-        (async()=>{
-            console.log('loading')
-            const accInfo = await accountInfo(accountAddr)
+    const address = useSelector((state: RootState)=>state.newAccount.address)
+    const [accountInfo, setAccountInfo] = React.useState(null)
+    
+    React.useEffect(()=>{
+        (async()=> {
+        const account = await getAccountInfo(address)
+        setAssets(account.assets)
+        console.log(account)
+        })();
         
-            const assets = accInfo.assets
 
-            const au = assets.map(async(asset: Asset)=>{
-            const assetInfo = await getAssetInfo(asset['asset-id'])
-            const unitName = assetInfo.asset.params['unit-name']
-            return {...asset, unitName}            
-            })
-
-           const assetsWithName = await Promise.all(au)
-
-           setAssets(assetsWithName)
-      
-
-    })()
-        
-    // })
-    })
+    }, [])
+    
+  
 
     const handleCLick=(asset: Asset)=>{
        
@@ -48,8 +40,8 @@ export const Transact = ({navigation}) => {
         
     }
     return (
-            <ScrollView style={styles.container} >
-                <View style={styles.content}>
+            <ScrollView  >
+                <View style={styles.container}>
                     {
                         assets.length > 0 ? assets.map((asset: Asset)=>
                             <View style={styles.tokensContainer} key={Math.random()}>
@@ -75,25 +67,16 @@ export const Transact = ({navigation}) => {
                             
                         </View>
                          ):
-                         <View style={styles.tokensContainer} key={''}>
-                         <View style={styles.tokenContainer} >                           
-                                
-                            <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
-                               
-                                <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}>loading</Text>
-                            </View>
-                            
-                            <Text style={styles.unitAmount}>
-                                    loading
-                            </Text>
-                            <Text style={styles.unitInUsd}>$ 0 USD</Text>
-                        
-                                 
-                     
-                         </View>
-                         
-                         
-                     </View>
+
+                         <View style={styles.tokensContainer}>
+                        <Text> No assets found</Text>
+                       <TouchableOpacity 
+                        style={styles.button}
+                        onPress={()=>navigation.navigate('Receive')}
+                        >
+                           <Text>Recieve</Text>
+                           </TouchableOpacity>
+                       </View>
                      }
                   
                     
@@ -122,19 +105,15 @@ container: {
     // marginTop: 20,
     backgroundColor: '#E3E8E7',
     height: 800,
-
-    },
-content: {
     justifyContent: 'flex-start',
     alignItems: 'center',
-    height: 800,
+    },
 
-},
 tokensContainer: {
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    marginBottom: 50,
+    marginBottom: 10,
 },
 tokenContainer: {
     borderRadius: 5,

@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 
-import {token, scanned, newAccount} from './reducers';
+import {token, scanned, newAccount, account} from './reducers';
 
 
 
@@ -12,7 +12,8 @@ export const store = configureStore({
     reducer: {
         token: token.reducer,
         scanned: scanned.reducer,
-        newAccount: newAccount.reducer
+        newAccount: newAccount.reducer,
+        account: account.reducer
     }
 })
 

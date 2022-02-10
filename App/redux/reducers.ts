@@ -68,6 +68,22 @@ const newAccountSlice = createSlice({
 export const { setAddress, setMnemonic } = newAccountSlice.actions
 export const newAccount = newAccountSlice
 
+const accountSlice = createSlice({
+  name: "account",
+  initialState: {
+    isLoggedIn: false,
+  },
+  reducers: {
+    setIsLoggedIn(state, action: PayloadAction<boolean>) {
+      state.isLoggedIn = action.payload
+    },
+    
+  }
+})
+
+export const { setIsLoggedIn } = accountSlice.actions
+export const account = accountSlice
+
 
 
 

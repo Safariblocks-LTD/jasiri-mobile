@@ -5,18 +5,27 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle, Rect } from 'react-native-svg';
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-import { getAccountInfo } from '../../services'
+import { accountInfo as getAccountInfo } from '../../services'
+import { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux';
 
 
 
 
 
 export const Dashboard = ({navigation}: any) => {
+    const address = useSelector((state: RootState)=>state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
-    React.useEffect(()=>{
     
+    React.useEffect(()=>{
+        (async()=> {
+        const account = await getAccountInfo(address)
+        console.log(account)
+        })();
+        
 
-    }, [])
+    })
+
     return (
         
         <ScrollView style={styles.scrollView}>

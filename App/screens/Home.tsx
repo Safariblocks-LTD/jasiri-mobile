@@ -17,6 +17,8 @@ import {
 
 
 export const Home = ({ navigation }) => {
+
+  
   
   return (
     
