@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Button } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { RootState, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,12 +23,18 @@ export const Transact = ({navigation}) => {
         (async()=> {
         const account = await getAccountInfo(address)
         setAssets(account.assets)
+        // console.log(address)
         console.log(account)
         })();
         
 
     }, [])
     
+
+    const handleCLickReceive=()=>{
+        console.log('button click')
+        navigation.navigate('Receive')
+    }
   
 
     const handleCLick=(asset: Asset)=>{
@@ -43,7 +49,7 @@ export const Transact = ({navigation}) => {
             <ScrollView  >
                 <View style={styles.container}>
                     {
-                        assets.length > 0 ? assets.map((asset: Asset)=>
+                        assets && assets.length > 0 && assets.map((asset: Asset)=>
                             <View style={styles.tokensContainer} key={Math.random()}>
                             <View style={styles.tokenContainer} >
                                 <TouchableOpacity 
@@ -66,18 +72,21 @@ export const Transact = ({navigation}) => {
                             
                             
                         </View>
-                         ):
+                         )
+                         ||
 
                          <View style={styles.tokensContainer}>
                         <Text> No assets found</Text>
                        <TouchableOpacity 
                         style={styles.button}
-                        onPress={()=>navigation.navigate('Receive')}
+                        onPress={()=>handleCLickReceive()}
                         >
                            <Text>Recieve</Text>
                            </TouchableOpacity>
                        </View>
-                     }
+
+                        
+                     } 
                   
                     
                         <TouchableOpacity 

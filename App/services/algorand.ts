@@ -1,16 +1,23 @@
 import axiosConfig from './http'
 import algosdk from 'algosdk'
 
-const algodToken = {
-    'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
-}
 
-const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+
+const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+const algodServer = 'http://172.23.94.108';
+
+
+// client
+const algodPort = 4001;
 
 
 
 // client
-const algodPort = '';
+// const algodToken = {
+//     'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
+// }
+// const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+// const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 
 
@@ -20,6 +27,7 @@ export const createAccount=()=> {
         
         const addr = myaccount.addr
         const mnemonic = algosdk.secretKeyToMnemonic(myaccount.sk)
+        console.log(mnemonic)
 
         return {address: addr, mnemonic};
     }
@@ -136,3 +144,46 @@ export const sendAsset=async (
 
 
 // (async()=>await sendAsset('transaction', 10, 58648674))()
+
+
+
+const kmdtoken = algodToken;
+const kmdserver = algodServer;
+const kmdport = 4002;
+
+const kmdclient = new algosdk.Kmd(kmdtoken, kmdserver, kmdport);
+
+let walletid = null;
+let wallethandle = null;
+
+// (async () => {
+//     let walletid = (await kmdclient.createWallet("MyTestWallet1", "testpassword", "", "sqlite")).wallet.id;
+//     console.log("Created wallet:", walletid);
+
+//     let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
+//     console.log("Got wallet handle:", wallethandle);
+
+//     let address1 = (await kmdclient.generateKey(wallethandle)).address;
+//     console.log("Created new account:", address1);
+// })().catch(e => {
+//     console.log(e);
+// });
+
+export const recoverAccount=async(mn: string)=>{
+        try{
+        let mdk =  (await algosdk.mnemonicToMasterDerivationKey(mn));
+        // console.log(mdk);
+        let walletid = (await kmdclient.createWallet(`${Math.random()}`, "testpassword", mdk)).wallet.id;
+        // console.log("Created wallet: ", walletid);
+
+        let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
+        // console.log("Got wallet handle: ", wallethandle);
+
+        let rec_addr = (await kmdclient.generateKey(wallethandle)).address;
+        // console.log("Recovered account: ", rec_addr);
+        return rec_addr
+        }catch(e){
+            return {error: e}
+        }
+   
+}
