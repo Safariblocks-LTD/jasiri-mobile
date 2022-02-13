@@ -61,7 +61,7 @@ const Navigation=()=>{
 
   return(
     <NavigationContainer>
-    {isLoggedIn && <AuthenticationNavigation/> || <DashBoardNavigation/>}  
+    {!isLoggedIn && <AuthenticationNavigation/> || <DashBoardNavigation/>}  
   </NavigationContainer>
   )
 }

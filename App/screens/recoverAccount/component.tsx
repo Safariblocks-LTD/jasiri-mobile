@@ -1,8 +1,45 @@
 import * as React from 'react'
 import { View, Text, StyleSheet, Modal } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
+import { useDispatch } from 'react-redux'
+import { setIsLoggedIn, setAddress } from '../../redux'
+import { recoverAccount } from '../../services'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const RecoverAccount = () => {
+// let mn = 'dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry'
+
+
+const RecoverAccount = ({navigation}) => {
+    const [mnemonic, setMnemonic] = React.useState<string>('dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry')
+    const dispatch = useDispatch()
+    const recover=()=>{
+        (async()=>{
+            const recovered = await recoverAccount(mnemonic)
+            console.log(recovered)
+
+            try {    
+                await AsyncStorage.setItem('accountData',  JSON.stringify({address: recovered, mnemonic: mnemonic})) 
+                dispatch(setIsLoggedIn(true))
+                dispatch(setAddress(recovered))
+                dispatch(setMnemonic(mnemonic)) 
+                navigation.navigate('Dash board')
+                  
+               
+            } 
+            catch(e) {    
+                //
+                console.log(' error reading value  ')
+            }
+
+        })()
+        
+    }
+    const handleInput=(text: string)=>{
+        console.log(text)
+        setMnemonic(text)
+       
+    }
+
     return (
         <View style={styles.container} >
           
@@ -19,11 +56,16 @@ const RecoverAccount = () => {
                         placeholder = "Enter or paste you passphrase"
                         placeholderTextColor = "black"
                         autoCapitalize = "none"
-                        ></TextInput>
+                        value={mnemonic}
+                        onChangeText={handleInput}
+                        />
                     </View>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity 
+                    style={styles.button}
+                    onPress={recover}
+                    >
                         <Text 
                         style = {styles.buttonText}
                         >

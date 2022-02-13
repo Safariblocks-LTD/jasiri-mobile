@@ -9,15 +9,39 @@ import {
   Text,
   SafeAreaView,
   Image,
+
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsLoggedIn, setAddress, setMnemonic, RootState } from '../../redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
 export const SettingsScreen = ({ navigation }: any) => {
+  const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
+  const dispatch = useDispatch()
+
+  const handleLogout=()=>{
+    (async () => {  
+      try {    
+        
+         await AsyncStorage.removeItem('accountData')  
+          dispatch(setIsLoggedIn(false))
+         console.log('removed')
+         navigation.navigate('Home')
+      } 
+      catch(e) {    
+          //
+          console.log(' error reading value  ')
+      }})();
+
+  }
   return (
-    <View style={{width: '100%', height: '100%', backgroundColor: '#E3E8E7', marginTop: 35}} >
+   
        <ScrollView >
+          <View style={{width: '100%', height: '100%', backgroundColor: '#E3E8E7'}} >
           <View style={styles.container} >
             <View style={styles.head}>
               <Text style={styles.headText}>Settings</Text>
@@ -178,22 +202,32 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                 </View>
 
+                <TouchableOpacity 
+                  style={styles.button}
+                  onPress={handleLogout}
+                  >
+                  <Text>Logout</Text>
+                </TouchableOpacity>
+
               </View>
+             
            </View>
-            
+                          
+            </View>
             </View>
     </ScrollView>
-    </View>
+    
     
   );
 };
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#E3E8E7',
     padding: 10,
     width: 300,
-    marginTop: 16,
+    margin: 5
+    // marginTop: 16,
   },
   container: {
     // borderWidth: 1
