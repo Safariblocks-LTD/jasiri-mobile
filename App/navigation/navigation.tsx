@@ -18,17 +18,15 @@ import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
 
 
-const loggedIn = true
-
 const Stack = createStackNavigator()
 
 const Tab = createBottomTabNavigator();
 
-export const Navigation =()=> {
+export const DashBoardNavigation=()=> {
   return (
 
       <Tab.Navigator
-          initialRouteName="Home"
+          initialRouteName="Main"
           tabBar={({state, descriptors, navigation})=><TabBar state={state} descriptors={descriptors} navigation={navigation}/>}
           screenOptions={{
             tabBarStyle: styles.tabBar,
@@ -37,37 +35,25 @@ export const Navigation =()=> {
           }}
         >
           <Tab.Group>
-            <Tab.Screen name="Main" component={loggedIn?Dashboard:AuthenticationStack}/> 
-            <Tab.Screen name="Send" component={SendStack} />            
+            <Tab.Screen name="Main" component={Dashboard}/>            
             <Tab.Screen name="Contacts" component={View}/>
             <Tab.Screen name="Notification" component={View} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="Transact" component={Transact} />
+            <Tab.Screen name="Send" component={Transact} />
+            <Tab.Screen name="Token" component={Token} />
+            <Tab.Screen name="Scan QR" component={QrScanner} /> 
+            <Tab.Screen name="Receive" component={Receive} /> 
+            <Tab.Screen name="Send token" component={SendToken} /> 
           </Tab.Group>
       </Tab.Navigator>
   )
 }
 
-export const SendStack=()=> {
-  return (
-     <Stack.Navigator
-     initialRouteName="Transact"
-      screenOptions={{
-          header: ()=><View></View>
-      }}
-      >
-        <Stack.Group >
-          <Stack.Screen name="Transact" component={Transact} />
-          <Stack.Screen name="Token" component={Token} />
-          <Stack.Screen name="Scan QR" component={QrScanner} /> 
-          <Stack.Screen name="Receive" component={Receive} /> 
-          <Stack.Screen name="Send token" component={SendToken} /> 
-        </Stack.Group>
-      </Stack.Navigator> 
-  )
-}
 
 
-export const AuthenticationStack=()=>{
+
+export const AuthenticationNavigation=()=>{
   return (
 
     <Stack.Navigator
@@ -83,6 +69,7 @@ export const AuthenticationStack=()=>{
           <Stack.Screen name="Recover Account" component={RecoverAccount} />   
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
+          <Stack.Screen name="Dash board" component={DashBoardNavigation} /> 
         </Stack.Group>
       </Stack.Navigator> 
 

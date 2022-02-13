@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import QrGenerator from './qr-generator'
+import QrGenerator from '../../qr-generator'
 
 
 export const Receive = () => {
