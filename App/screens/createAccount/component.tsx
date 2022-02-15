@@ -13,9 +13,9 @@ export const CreateAccount = ({navigation}) => {
     const handleClick=()=>{
         
         const account = createAccount()
-        dispatch(setAddress(account.address))
+        dispatch(setAddress(account.address));
         dispatch(setMnemonic(account.mnemonic));
-        // console.log(account)
+        // console.log(account.mnemonic);
 
       (async()=>{
             try {    
