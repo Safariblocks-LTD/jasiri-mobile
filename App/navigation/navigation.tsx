@@ -16,6 +16,7 @@ import { Dashboard } from '../screens';
 import RecoverAccount from "../screens/recoverAccount/component"
 import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
+import { Error } from '../screens/error';
 
 
 const Stack = createStackNavigator()
@@ -70,6 +71,7 @@ export const AuthenticationNavigation=()=>{
           <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
           <Stack.Screen name="Dash board" component={DashBoardNavigation} /> 
+          <Stack.Screen name="Error" component={Error} /> 
         </Stack.Group>
       </Stack.Navigator> 
 

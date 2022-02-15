@@ -5,30 +5,55 @@ import { useDispatch } from 'react-redux'
 import { setIsLoggedIn, setAddress } from '../../redux'
 import { recoverAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Loading } from '../../components'
+import { setErrorMessage } from '../error/reducer'
 
 // let mn = 'dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry'
 
 
 const RecoverAccount = ({navigation}) => {
-    const [mnemonic, setMnemonic] = React.useState<string>('dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry')
+    const [mnemonic, setMnemonic] = React.useState<string>('forward hat elbow gasp rude oppose apology estate kid rebel book faith perfect glove renew siege planet thing clarify goat security network bounce able you')
     const dispatch = useDispatch()
-    const recover=()=>{
-        (async()=>{
-            const recovered = await recoverAccount(mnemonic)
-            console.log(recovered)
+    
 
-            try {    
-                await AsyncStorage.setItem('accountData',  JSON.stringify({address: recovered, mnemonic: mnemonic})) 
-                dispatch(setIsLoggedIn(true))
-                dispatch(setAddress(recovered))
-                dispatch(setMnemonic(mnemonic)) 
-                navigation.navigate('Dash board')
+    const [loading, setLoading] = React.useState<boolean>()
+    const [error, setError] = React.useState<string>()
+    
+    
+    const recover=()=>{
+        console.log('clicked recover');
+        (async()=>{
+            console.log('async operation');
+            
+            try{
+                setLoading(true)
+                console.log('try');
+                const recovered = await recoverAccount(mnemonic)
+                
+
+                if(recovered.error){
+                    // console.log(recovered.error)
+                    dispatch(setErrorMessage(recovered.error))
+                    navigation.navigate('Error')
                   
-               
+                }else{
+                    // console.log(recovered)
+                    // await AsyncStorage.setItem('accountData',  JSON.stringify({address: recovered, mnemonic: mnemonic})) 
+                    dispatch(setIsLoggedIn(true))
+                    dispatch(setAddress(recovered))
+                    dispatch(setMnemonic(mnemonic)) 
+                    // navigation.navigate('Dash board')
+                }
+                setLoading(false)
             } 
             catch(e) {    
                 //
+                setLoading(false)
+                navigation.navigate('Error')
+                dispatch(setErrorMessage('error reading value'))
                 console.log(' error reading value  ')
+                console.log(e)
+                // return {error: e}
             }
 
         })()
@@ -61,6 +86,8 @@ const RecoverAccount = ({navigation}) => {
                         />
                     </View>
                 </View>
+                {/* loading */}
+                {loading && <Loading/>}
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
                     style={styles.button}
@@ -86,7 +113,7 @@ container: {
 },
 
 content: {
-    width: '100%',
+    // width: '100%',
     height: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
