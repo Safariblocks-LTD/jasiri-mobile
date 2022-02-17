@@ -3,34 +3,34 @@ import algosdk from 'algosdk'
 
 
 
-const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-const algodServer = 'http://localhost';
+// const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+// const algodServer = 'http://localhost';
 
 
 // client
-const algodPort = 4001;
+// const algodPort = 4001;
 
 
 // client
-// const algodToken = {
-//     'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
-// }
-// const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
-// const algodPort = '';
+const algodToken = {
+    'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
+}
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort); 
 
-const kmdport = 4002;
+// const kmdport = 4002;
 
-const kmdtoken = algodToken;
-const kmdserver = algodServer;
+// const kmdtoken = algodToken;
+// const kmdserver = algodServer;
 
 
-const kmdclient = new algosdk.Kmd(kmdtoken, kmdserver, kmdport);
+// const kmdclient = new algosdk.Kmd(kmdtoken, kmdserver, kmdport);
 
 // console.log(kmdclient)
 
-let walletid = null;
-let wallethandle = null;
+// let walletid = null;
+// let wallethandle = null;
 
 
 
@@ -160,61 +160,16 @@ export const sendAsset=async (
 
 export const recoverAccount=async(mn: string)=>{
     try{
-        let mdk =  (await algosdk.mnemonicToMasterDerivationKey(mn));
-        
-        let walletid = (await kmdclient.createWallet(`${Math.random()}`, "testpassword", mdk)).wallet.id;
-        
-        console.log("Created wallet: ", walletid);
-
-        let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
-        // console.log("Got wallet handle: ", wallethandle);
-
-        let rec_addr = (await kmdclient.generateKey(wallethandle)).address;
-        // console.log("Recovered account: ", rec_addr);
-        return rec_addr
+        let account =  (await algosdk.mnemonicToSecretKey(mn));
+        const address = account.addr
+        const mnemonic = await algosdk.secretKeyToMnemonic(account.sk)
+        return {address, mnemonic}
+   
     }catch(e){
         console.log(e)
-        return {error: 'error recovering account'}
+        throw(e)
     }
    
 }
 
-// const mn = 'sweet fitness march already ability knock great must bar cousin equip dial ability thing coil dune usage strike entire gentle humble inhale devote abandon vit';
 
-// (async()=>{
-//     try{
-//         let mdk =  (await algosdk.mnemonicToMasterDerivationKey(mn));
-
-//         console.log(mdk)
-        
-//         let walletid = (await kmdclient.createWallet(`${Math.random()}`, "testpassword", mdk)).wallet.id;
-       
-//         console.log("Created wallet: ", walletid);
-
-//         let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
-//         // console.log("Got wallet handle: ", wallethandle);
-
-//         let rec_addr = (await kmdclient.generateKey(wallethandle)).address;
-//         // console.log("Recovered account: ", rec_addr);
-//         return rec_addr
-//     }catch(e){
-//         console.log(e)
-//         return {error: JSON.stringify(e)}
-//     }
-// })();
-
-(async()=>{
-    try{
-        let walletid = (await kmdclient.createWallet("MyTestWallet111111", "testpassword", "", "sqlite")).wallet.id;
-        console.log("Created wallet:", walletid);
-    
-        let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
-        console.log("Got wallet handle:", wallethandle);
-    
-        let address1 = (await kmdclient.generateKey(wallethandle)).address;
-        console.log("Created new account:", address1);
-    }catch(e){
-        console.log(e)
-    }
-   
-})()

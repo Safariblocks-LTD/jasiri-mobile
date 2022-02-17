@@ -29,6 +29,10 @@ export const Transact = ({navigation}) => {
         
 
     }, [])
+
+    const handleCLickAddJasiri=()=>{
+        console.log('add jasiri')
+    }
     
 
     const handleCLickReceive=()=>{
@@ -91,9 +95,10 @@ export const Transact = ({navigation}) => {
                     
                         <TouchableOpacity 
                           style={styles.button}
+                          onPress={()=>handleCLickAddJasiri()}
                         >
                             <Text style={styles.account}>
-                                Tap to add token
+                                Tap to add JASIRI
                             </Text>
                         </TouchableOpacity>
                 </View>
