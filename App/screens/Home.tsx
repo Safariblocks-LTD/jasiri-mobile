@@ -9,6 +9,8 @@ import {
   Text,
   Image, Modal
 } from 'react-native';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux';
 
 
 
@@ -18,12 +20,17 @@ import {
 
 export const Home = ({ navigation }) => {
 
+  const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
+  React.useEffect(()=>{
+    isLoggedIn&&navigation.navigate("Dash board")
+  })
+
   
   
   return (
-    
-      <View style={styles.container} >
-          <View style={styles.eclipseContainer}>
+    <>
+    {!isLoggedIn && <View style={styles.container} >
+         <View style={styles.eclipseContainer}>
               <View style={styles.ecslipe3}></View>
               <View style={styles.eclipse2}></View>
           </View>
@@ -49,7 +56,8 @@ export const Home = ({ navigation }) => {
                       <Text style={styles.account}>add Account</Text>
                 </TouchableOpacity>
           </View>
-      </View>
+      </View> || <Text>Checking credentials...</Text>}
+      </>
     
   );
 }

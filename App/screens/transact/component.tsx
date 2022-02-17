@@ -4,16 +4,21 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { RootState, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { accountInfo as getAccountInfo} from '../../services'
+import { accountInfo as getAccountInfo, optIn} from '../../services'
 import { Asset } from '../../types'
+import { setErrorMessage } from '../error/reducer'
+import { Loading } from '../../components'
 
 
 
 
 export const Transact = ({navigation}) => {
-    const [assets, setAssets] = React.useState<Array<Asset>>([])
+    const [assets, setAssets] = React.useState<Array<Asset>>()
+    const [loading, setLoading] = React.useState<boolean>()
+
+    const [added, setAdded] = React.useState<boolean>()
     
-   
+    const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
     const dispatch = useDispatch()
 
     const address = useSelector((state: RootState)=>state.newAccount.address)
@@ -24,14 +29,30 @@ export const Transact = ({navigation}) => {
         const account = await getAccountInfo(address)
         setAssets(account.assets)
         // console.log(address)
-        console.log(account)
+        // console.log(account)
         })();
         
+        console.log(assets)
 
-    }, [])
+    }, [added, address])
 
     const handleCLickAddJasiri=()=>{
         console.log('add jasiri')
+        const assetId = 67513364;
+        setLoading(true);
+        (async()=>{
+            const res = await optIn(mnemonic,assetId)
+            if(res.error){
+                navigation.navigate('Error')
+                console.log(res.error)
+                dispatch(setErrorMessage('error reading value'))
+            }
+            setAdded(true)
+            console.log(res)
+            setLoading(false);
+        })()
+
+        
     }
     
 
@@ -49,11 +70,12 @@ export const Transact = ({navigation}) => {
         navigation.navigate('Token')
         
     }
+    
     return (
             <ScrollView  >
                 <View style={styles.container}>
                     {
-                        assets && assets.length > 0 && assets.map((asset: Asset)=>
+                        assets && assets?.length> 0 &&  assets.map((asset: Asset)=>
                             <View style={styles.tokensContainer} key={Math.random()}>
                             <View style={styles.tokenContainer} >
                                 <TouchableOpacity 
@@ -87,20 +109,21 @@ export const Transact = ({navigation}) => {
                         >
                            <Text>Recieve</Text>
                            </TouchableOpacity>
+                           {loading && <Loading/>}
                        </View>
 
                         
                      } 
                   
                     
-                        <TouchableOpacity 
+                        {!assets || assets?.length===0 && <TouchableOpacity 
                           style={styles.button}
                           onPress={()=>handleCLickAddJasiri()}
                         >
                             <Text style={styles.account}>
                                 Tap to add JASIRI
                             </Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity>}
                 </View>
            
             </ScrollView>

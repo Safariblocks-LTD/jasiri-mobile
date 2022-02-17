@@ -153,8 +153,7 @@ export const sendAsset=async (
         return 0
 
     }catch(e){
-        console.log(e)
-        return {error: JSON.stringify(e)}
+        return e
     }
 }
 
@@ -171,5 +170,58 @@ export const recoverAccount=async(mn: string)=>{
     }
    
 }
+
+export async function optIn(mnemonic: string, assetId: number) {
+    try{
+        console.log("");
+        console.log("==> OPTS IN");
+    
+        const sk = algosdk.mnemonicToSecretKey(mnemonic).sk
+        const addr = algosdk.mnemonicToSecretKey(mnemonic).addr
+        
+        const params = await algodClient.getTransactionParams().do();
+        // comment out the next two lines to use suggested fee
+        // params.fee = 1000;
+        // params.flatFee = true;
+    
+        const sender = addr;
+        const recipient = addr;
+        // We set revocationTarget to undefined as 
+        // This is not a clawback operation
+        const revocationTarget = undefined;
+        // CloseReaminerTo is set to undefined as
+        // we are not closing out an asset
+        const closeRemainderTo = undefined;
+        // We are sending 0 assets to opt in
+        const amount = 0;
+        const note = undefined; // arbitrary data to be stored in the transaction; here, none is stored
+        // signing and sending "txn" allows sender to begin accepting asset specified by creator and index
+        const opttxn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+            from: sender, 
+            to: recipient, 
+            closeRemainderTo, 
+            revocationTarget,
+            amount, 
+            note, 
+            assetIndex: assetId, 
+            suggestedParams: params});
+        // Must be signed by the account wishing to opt in to the asset    
+        const rawSignedTxn = opttxn.signTxn(sk);
+        const tx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
+        // wait for transaction to be confirmed
+        const confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
+        //Get the completed Transaction
+        console.log("Transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
+        //You should now see the new asset listed in the account information
+        console.log("Bob's Account Opts In = " + addr);
+       
+        return 0;
+    
+    }catch(e){
+        return {error: e}
+    }
+    
+}
+
 
 

@@ -18,7 +18,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setData } from '../../../redux';
+import { setErrorMessage } from '../../../screens/error/reducer';
 import { sendAsset } from '../../../services';
+import { Loading } from '../../loading';
 
 
 
@@ -28,6 +30,7 @@ export const SendToken = ({navigation}) => {
 
   const [amount, setAmount] = React.useState('')
   const [success, setSuccess] = React.useState<Boolean>()
+  const [loading, setLoading] = React.useState<boolean>()
 
   
   
@@ -36,8 +39,10 @@ export const SendToken = ({navigation}) => {
  
   const token = useSelector((state: RootState)=>state.token.token)
   const scanned = useSelector((state: RootState)=>state.scanned.data)
+  const address = useSelector((state: RootState)=>state.newAccount.address)
+  const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
 
-  // console.log(token)
+  // console.log(mnemonic)
 
 
   const handleChangeAmount=(text:string)=>{
@@ -52,26 +57,28 @@ export const SendToken = ({navigation}) => {
 
   const handleSend=()=>{
     console.log('sending')
+    setLoading(true)
     try{
       
       (async()=>{
-      const res = await sendAsset('description', parseInt(amount), token['asset-id'], scanned)
-      console.log(res)
-      if(res==0){
-        Alert.alert('Succesfully sent')
-      }
-      else if(res==1){
-        Alert.alert('Failed to sent, check your inputs')
+      const res = await sendAsset('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
+      // console.log(res)
+      if(res === 0){
+        setLoading(false)
+        navigation.navigate('Success')
       }else{
-        Alert.alert('Failed to sent due to other errors')
-        // add more verbose response
+      
+        setLoading(false)
+        navigation.navigate('Error')
+        dispatch(setErrorMessage(`${res.message}`))
       }
       
       
       })()
      
     }catch(e){
-      console.log(e)
+      // console.log(JSON.stringify(e))
+      
       
     }
    
@@ -125,8 +132,9 @@ export const SendToken = ({navigation}) => {
           onChangeText={text=>handleChangeAmount(text)}
           placeholder='e.g 100'
         />
-        
+         {loading && <Loading/>}
         </View>
+       
 
           <View>
         <TouchableOpacity style={styles.continueButton} onPress={()=>handleSend()}>
