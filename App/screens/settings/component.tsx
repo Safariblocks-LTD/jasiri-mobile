@@ -15,13 +15,27 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
 import { setIsLoggedIn, setAddress, setMnemonic, RootState } from '../../redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { walletConnect } from '../../services/wallet-connect';
+import { useWalletConnect } from '@walletconnect/react-native-dapp';
 
 
 
 
-export const SettingsScreen = ({ navigation }: any) => {
+export const SettingsScreen = (props) => {
   const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
   const dispatch = useDispatch()
+
+  const {
+    createSession,
+    killSession,
+    session,
+    signTransaction,
+  } = useWalletConnect();
+
+  const handleWConnect=()=>{
+    console.log(createSession())
+    
+  }
 
   const handleLogout=()=>{
     (async () => {  
@@ -30,7 +44,7 @@ export const SettingsScreen = ({ navigation }: any) => {
          await AsyncStorage.removeItem('accountData')  
           dispatch(setIsLoggedIn(false))
          console.log('removed')
-         navigation.navigate('Home')
+        //  navigation.navigate('Home')
       } 
       catch(e) {    
           //
@@ -135,7 +149,9 @@ export const SettingsScreen = ({ navigation }: any) => {
                   </View>
                   <View style={styles.section_container}>
                     <View style={styles.section_body}>
-                      <Text style={styles.category_text} >wallet connect sessions</Text>
+                      <TouchableOpacity onPress={handleWConnect}>
+                        <Text style={styles.category_text} >wallet connect sessions</Text>
+                      </TouchableOpacity>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
                     <View style={{width: '100%', padding: 10}}>

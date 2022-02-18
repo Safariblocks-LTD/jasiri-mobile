@@ -34,9 +34,9 @@ const RecoverAccount = ({navigation}) => {
                 console.log(recovered.address)
                 console.log(recovered.mnemonic)
                 await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
-                // dispatch(setIsLoggedIn(true))
-                // dispatch(setAddress(recovered))
-                // mnemonic && dispatch(setMnemonic(mnemonic)) 
+                dispatch(setIsLoggedIn(true))
+                dispatch(setAddress(recovered.address))
+                // mnemonic && dispatch(setMnemonic(recovered.mnemonic)) 
                 navigation.navigate('Dash board')                
                 setLoading(false)
             } 

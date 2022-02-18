@@ -2,20 +2,19 @@ require('node-libs-expo/globals');
 
 // import * as Random from 'expo-random';
 
-import 'react-native-get-random-values'
+require('react-native-get-random-values')
+// require("react-native-crypto")
 
 import 'fastestsmallesttextencoderdecoder'
- 
+// import * as Crypto from 'expo-crypto';
 
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { Provider, useDispatch, useSelector } from 'react-redux'
-import {RootState, store}  from './App/redux/store'
+import { Provider, useDispatch } from 'react-redux'
+import {store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
-import { DashBoardNavigation, AuthenticationNavigation
+import { AuthenticationNavigation
  } from './App/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
@@ -23,10 +22,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Updates from 'expo-updates';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setAddress, setIsLoggedIn, setMnemonic } from './App/redux';
-
+import './shim.js'
+import WalletConnectProvider from '@walletconnect/react-native-dapp';
 
 const Navigation=()=>{
-  const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
+  
   const dispatch = useDispatch()
   React.useEffect(()=>{
 
@@ -74,9 +74,25 @@ export default function App() {
   return (
    
     <Provider store={store}>
-      <SafeAreaProvider>
-        <Navigation/>
-    </SafeAreaProvider>
+       <SafeAreaProvider>
+       <WalletConnectProvider
+        bridge="https://bridge.walletconnect.org"
+        clientMeta={{
+          description: 'Connect with WalletConnect',
+          url: 'https://walletconnect.org',
+          icons: ['https://walletconnect.org/walletconnect-logo.png'],
+          name: 'WalletConnect',
+        }}
+        redirectUrl={'yourappscheme://'}
+        storageOptions= {{
+          asyncStorage: AsyncStorage,
+        }}
+        >
+       
+          <Navigation/>
+          </WalletConnectProvider>
+      </SafeAreaProvider>
+    
     </Provider>
     
  

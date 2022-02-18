@@ -7,13 +7,8 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView,
   TextInput,
-  Modal,
-  Image,
-  Alert,
-  Button
-} from 'react-native';
+  Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';

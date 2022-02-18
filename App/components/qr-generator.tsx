@@ -5,7 +5,7 @@ import * as Clipboard from 'expo-clipboard';
 // import * as Sharing from 'expo-sharing'
 
 
-import SvgQRCode from 'react-native-qrcode-svg';
+// import SvgQRCode from 'react-native-qrcode-svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux';
 
@@ -14,7 +14,9 @@ import { RootState } from '../redux';
 function Simple() {
   const address = useSelector((state: RootState)=>state.newAccount.address)
   return (
-    <SvgQRCode size={150} value={address} />
+    // <SvgQRCode size={150} value={address} /><
+
+    <></>
   );
 }
 
