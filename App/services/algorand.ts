@@ -66,7 +66,7 @@ export const accountInfo= async (accountAddr: string)=>{
         return accountInfo
     }
     catch(e){
-        return {error: JSON.stringify(e)}
+        return {error: e}
     }
 }
 

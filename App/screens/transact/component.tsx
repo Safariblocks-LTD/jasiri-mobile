@@ -27,14 +27,18 @@ export const Transact = ({navigation}) => {
     React.useEffect(()=>{
         (async()=> {
         const account = await getAccountInfo(address)
+        console.log(account)
+        if(account.error){
+            dispatch(setErrorMessage(`${account.error}`))
+            navigation.navigate('Error')
+        }
         setAssets(account.assets)
-        // console.log(address)
-        // console.log(account)
+        
         })();
         
-        console.log(assets)
+        
 
-    }, [added, address])
+    }, [])
 
     const handleCLickAddJasiri=()=>{
         console.log('add jasiri')
