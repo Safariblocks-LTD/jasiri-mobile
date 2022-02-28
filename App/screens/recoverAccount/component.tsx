@@ -31,19 +31,13 @@ const RecoverAccount = ({navigation}) => {
                 const recovered = await recoverAccount(mnemonic)
                 
 
-                if(recovered.error){
-                    // console.log(recovered.error)
-                    dispatch(setErrorMessage(recovered.error))
-                    navigation.navigate('Error')
-                  
-                }else{
-                    // console.log(recovered)
-                    // await AsyncStorage.setItem('accountData',  JSON.stringify({address: recovered, mnemonic: mnemonic})) 
-                    dispatch(setIsLoggedIn(true))
-                    dispatch(setAddress(recovered))
-                    dispatch(setMnemonic(mnemonic)) 
-                    // navigation.navigate('Dash board')
-                }
+                console.log(recovered.address)
+                console.log(recovered.mnemonic)
+                await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
+                // dispatch(setIsLoggedIn(true))
+                // dispatch(setAddress(recovered))
+                // mnemonic && dispatch(setMnemonic(mnemonic)) 
+                navigation.navigate('Dash board')                
                 setLoading(false)
             } 
             catch(e) {    

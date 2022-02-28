@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { createBottomTabNavigator  } from '@react-navigation/bottom-tabs'
 
-import { SettingsScreen, Transact } from '../screens';
+import { SettingsScreen, Success, Transact } from '../screens';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { TabBar } from './tab-bar';
@@ -72,6 +72,7 @@ export const AuthenticationNavigation=()=>{
           <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
           <Stack.Screen name="Dash board" component={DashBoardNavigation} /> 
           <Stack.Screen name="Error" component={Error} /> 
+          <Stack.Screen name="Success" component={Success} /> 
         </Stack.Group>
       </Stack.Navigator> 
 

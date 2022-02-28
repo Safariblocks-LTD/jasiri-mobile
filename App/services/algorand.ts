@@ -3,34 +3,34 @@ import algosdk from 'algosdk'
 
 
 
-const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
-const algodServer = 'http://localhost';
+// const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+// const algodServer = 'http://localhost';
 
 
 // client
-const algodPort = 4001;
+// const algodPort = 4001;
 
 
 // client
-// const algodToken = {
-//     'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
-// }
-// const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
-// const algodPort = '';
+const algodToken = {
+    'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
+}
+const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort); 
 
-const kmdport = 4002;
+// const kmdport = 4002;
 
-const kmdtoken = algodToken;
-const kmdserver = algodServer;
+// const kmdtoken = algodToken;
+// const kmdserver = algodServer;
 
 
-const kmdclient = new algosdk.Kmd(kmdtoken, kmdserver, kmdport);
+// const kmdclient = new algosdk.Kmd(kmdtoken, kmdserver, kmdport);
 
 // console.log(kmdclient)
 
-let walletid = null;
-let wallethandle = null;
+// let walletid = null;
+// let wallethandle = null;
 
 
 
@@ -153,68 +153,75 @@ export const sendAsset=async (
         return 0
 
     }catch(e){
-        console.log(e)
-        return {error: JSON.stringify(e)}
+        return e
     }
 }
 
 export const recoverAccount=async(mn: string)=>{
     try{
-        let mdk =  (await algosdk.mnemonicToMasterDerivationKey(mn));
-        
-        let walletid = (await kmdclient.createWallet(`${Math.random()}`, "testpassword", mdk)).wallet.id;
-        
-        console.log("Created wallet: ", walletid);
-
-        let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
-        // console.log("Got wallet handle: ", wallethandle);
-
-        let rec_addr = (await kmdclient.generateKey(wallethandle)).address;
-        // console.log("Recovered account: ", rec_addr);
-        return rec_addr
+        let account =  (await algosdk.mnemonicToSecretKey(mn));
+        const address = account.addr
+        const mnemonic = await algosdk.secretKeyToMnemonic(account.sk)
+        return {address, mnemonic}
+   
     }catch(e){
         console.log(e)
-        return {error: 'error recovering account'}
+        throw(e)
     }
    
 }
 
-// const mn = 'sweet fitness march already ability knock great must bar cousin equip dial ability thing coil dune usage strike entire gentle humble inhale devote abandon vit';
-
-// (async()=>{
-//     try{
-//         let mdk =  (await algosdk.mnemonicToMasterDerivationKey(mn));
-
-//         console.log(mdk)
-        
-//         let walletid = (await kmdclient.createWallet(`${Math.random()}`, "testpassword", mdk)).wallet.id;
-       
-//         console.log("Created wallet: ", walletid);
-
-//         let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
-//         // console.log("Got wallet handle: ", wallethandle);
-
-//         let rec_addr = (await kmdclient.generateKey(wallethandle)).address;
-//         // console.log("Recovered account: ", rec_addr);
-//         return rec_addr
-//     }catch(e){
-//         console.log(e)
-//         return {error: JSON.stringify(e)}
-//     }
-// })();
-
-(async()=>{
+export async function optIn(mnemonic: string, assetId: number) {
     try{
-        let walletid = (await kmdclient.createWallet("MyTestWallet111111", "testpassword", "", "sqlite")).wallet.id;
-        console.log("Created wallet:", walletid);
+        console.log("");
+        console.log("==> OPTS IN");
     
-        let wallethandle = (await kmdclient.initWalletHandle(walletid, "testpassword")).wallet_handle_token;
-        console.log("Got wallet handle:", wallethandle);
+        const sk = algosdk.mnemonicToSecretKey(mnemonic).sk
+        const addr = algosdk.mnemonicToSecretKey(mnemonic).addr
+        
+        const params = await algodClient.getTransactionParams().do();
+        // comment out the next two lines to use suggested fee
+        // params.fee = 1000;
+        // params.flatFee = true;
     
-        let address1 = (await kmdclient.generateKey(wallethandle)).address;
-        console.log("Created new account:", address1);
+        const sender = addr;
+        const recipient = addr;
+        // We set revocationTarget to undefined as 
+        // This is not a clawback operation
+        const revocationTarget = undefined;
+        // CloseReaminerTo is set to undefined as
+        // we are not closing out an asset
+        const closeRemainderTo = undefined;
+        // We are sending 0 assets to opt in
+        const amount = 0;
+        const note = undefined; // arbitrary data to be stored in the transaction; here, none is stored
+        // signing and sending "txn" allows sender to begin accepting asset specified by creator and index
+        const opttxn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
+            from: sender, 
+            to: recipient, 
+            closeRemainderTo, 
+            revocationTarget,
+            amount, 
+            note, 
+            assetIndex: assetId, 
+            suggestedParams: params});
+        // Must be signed by the account wishing to opt in to the asset    
+        const rawSignedTxn = opttxn.signTxn(sk);
+        const tx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
+        // wait for transaction to be confirmed
+        const confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
+        //Get the completed Transaction
+        console.log("Transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
+        //You should now see the new asset listed in the account information
+        console.log("Bob's Account Opts In = " + addr);
+       
+        return 0;
+    
     }catch(e){
-        console.log(e)
+        return {error: e}
     }
-   
-})()
+    
+}
+
+
+
