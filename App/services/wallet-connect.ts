@@ -1,41 +1,83 @@
-import WalletConnect from "@walletconnect/client";
-import QRCodeModal from "algorand-walletconnect-qrcode-modal";
-import algosdk from "algosdk";
-import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
+import WalletConnectClient from "@walletconnect/client";
+import { CLIENT_EVENTS } from "@walletconnect/client";
+import { SessionTypes } from "@walletconnect/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Create a connector
-const connector = new WalletConnect({
-  bridge: "https://bridge.walletconnect.org", // Required
-  qrcodeModal: QRCodeModal,
-});
-
-// Check if connection is already established
-if (!connector.connected) {
-  // create new session
-  connector.createSession();
+export const WC=async(uri: string)=>{
+  try{
+    const client = await WalletConnectClient.init({
+      controller: true,
+      projectId: "61e46b1aab63d857ad4f1f1213233253",
+      relayUrl: "wss://relay.walletconnect.com",
+      metadata: {
+        name: "Test Wallet",
+        description: "Test Wallet",
+        url: "#",
+        icons: ["https://walletconnect.com/walletconnect-logo.png"],
+      },
+      storageOptions: {
+        asyncStorage: AsyncStorage,
+      },
+      
+    });
+  
+    console.log(client)
+  
+    client.on(
+      CLIENT_EVENTS.session.proposal,
+      async (proposal: SessionTypes.Proposal) => {
+        // user should be prompted to approve the proposed session permissions displaying also dapp metadata
+        const { proposer, permissions } = proposal;
+        console.log(proposer)
+        const { metadata } = proposer;
+        let approved: boolean;
+        handleSessionUserApproval(approved, proposal); // described in the step 4
+      }
+    );
+    
+    client.on(
+      CLIENT_EVENTS.session.created,
+      async (session: SessionTypes.Created) => {
+        console.log('created')
+      }
+    );
+  
+  
+    const  handleSessionUserApproval=async(
+      approved: boolean,
+      proposal: SessionTypes.Proposal
+    )=> {
+      if (approved) {
+        // if user approved then include response with accounts matching the chains and wallet metadata
+        const response: SessionTypes.Response = {
+          state: {
+            accounts: ["eip155:1:0x1d85568eEAbad713fBB5293B45ea066e552A90De"],
+          },
+        };
+        await client.approve({ proposal, response });
+      } else {
+        // if user didn't approve then reject with no response
+        await client.reject({ proposal });
+      }
+    }
+   
+      client.pair({uri})
+  
+  }catch(e){
+    console.log(e)
+  }
+  
 }
 
-// Subscribe to connection events
-connector.on("connect", (error, payload) => {
-  if (error) {
-    throw error;
-  }
 
-  // Get provided accounts
-  const { accounts } = payload.params[0];
-});
 
-connector.on("session_update", (error, payload) => {
-  if (error) {
-    throw error;
-  }
 
-  // Get updated accounts 
-  const { accounts } = payload.params[0];
-});
 
-connector.on("disconnect", (error, payload) => {
-  if (error) {
-    throw error;
-  }
-});
+
+ 
+
+
+
+
+
+

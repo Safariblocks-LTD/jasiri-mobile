@@ -1,36 +1,48 @@
 import * as React from 'react';
 import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { setData } from '../redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, setData, setWalletConnectURI } from '../redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { NormalButton } from './common';
+import { useNavigation } from '@react-navigation/native';
 
 
-export  const  QrScanner =({route, navigation})=>{
+export  const  QrScanner =()=>{
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(null);
   const [show, setShow]= React.useState<boolean>(false);
   const [scannedData, setScannedData]= React.useState<string|null>(null);
 
+  const navigator = useNavigation()
+
+  
+
+
+  // const walletConnect = useSelector((state: RootState)=>state.walletConnectScanner.walletConnect)
 
   const dispatch=useDispatch()
 
   React.useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');   
+      setHasPermission(status === 'granted') ;   
       
     })();
     
   }, []);
 
 
-  React.useEffect(() => { 
-   hasPermission && !scannedData && setShow(true)
-}, [hasPermission]);
+//   React.useEffect(() => { 
+//     && setShow(true)
+// }, [hasPermission]);
 
 
   React.useEffect(() => { 
-      scannedData && dispatch(setData(scannedData)) &&
-      navigation.navigate('Send token')
+      scannedData && dispatch(setData(scannedData));
+
+      setScannedData(null);
+      const history = navigator.getState().routeNames;
+      (scannedData && navigator.navigate(history[history.length - 1])) 
+      // (scannedData && navigation.navigate('Send token'))
   }, [scannedData]);
  
 
@@ -47,24 +59,31 @@ export  const  QrScanner =({route, navigation})=>{
      
   }
 
+  const handleCancel=()=>{    
+    const history = navigator.getState().routeNames
+    console.log(history)
+    // navigator.navigate(history[history.length - 1])
+  //  navigator.goBack()
+
+  }
+
 
 
   return (
 
     <View style={styles.container}>
-      {show && <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={[StyleSheet.absoluteFillObject]}
-      >
-        <View style={styles.overlay}>
-          <TouchableOpacity>
-          <Text style={{fontSize: 15}} onPress={() => alert("heeeey")}>select image</Text>
-          </TouchableOpacity>
-          
-        </View>
+      <View style={styles.scanner}>
+        {hasPermission && !scannedData && <BarCodeScanner
+          onBarCodeScanned={handleBarCodeScanned}
+          style={[StyleSheet.absoluteFillObject]}
+        />}
+      </View>
+      
+        
      
-        {/* <BarcodeMask edgeColor="#62B1F6"/> */}
-        </BarCodeScanner>}
+      <NormalButton title='Cancell' clickHandler={handleCancel} style={styles.button}/>
+
+    
         
     </View>
   );
@@ -73,21 +92,25 @@ export  const  QrScanner =({route, navigation})=>{
 
 const styles = StyleSheet.create({
   container: {
-      // flex: 1,
-      // alignItems: 'center',
-      // justifyContent: 'center',
-      width: '100%',
-      height: '100%'
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      // borderWidth: 1
+     
+    
   },    
-  overlay: {
-    flex: 1,
-    alignContent: 'flex-end',
-    justifyContent: 'flex-end' ,
-    alignItems: 'flex-end',
-    height: '100%',
-    width: '90%',
-    margin: 10,
-    // borderWidth: 2
-  }
+ 
+  scanner: {
+    height:250,
+    width: 250,
+    borderRadius: 20,
+    borderWidth: 1
+  },
+  button: {
+    height:40,
+    width: '40%',
+    borderRadius: 20,
+    marginTop: '40%',
+},
     
 })

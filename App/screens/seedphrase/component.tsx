@@ -4,6 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
+import { NormalButton } from '../../components/common';
 
 
 
@@ -47,12 +48,13 @@ const SeedPhrase = ({navigation}) => {
                     })}
                 </View>
             </View>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={handleClick}
-                >
-                <Text  >Next</Text>
-            </TouchableOpacity>
+            <NormalButton
+                     title='Next'
+                     style={styles.button}
+                     clickHandler={handleClick}
+                     />
+                      
+               
         </View>
         </ScrollView>
     )

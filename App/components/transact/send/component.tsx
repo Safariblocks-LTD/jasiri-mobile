@@ -7,18 +7,13 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView,
   TextInput,
-  Modal,
-  Image,
-  Alert,
-  Button
-} from 'react-native';
+  Image} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setData } from '../../../redux';
-import { setErrorMessage } from '../../../screens/error/reducer';
+import { RootState, setData, setErrorMessage } from '../../../redux';
+
 import { sendAsset } from '../../../services';
 import { Loading } from '../../loading';
 

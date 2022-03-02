@@ -8,7 +8,7 @@ import { RootState } from '../../redux'
 
 export const Success = () => {
     
-    // const error = useSelector((state: RootState)=>state.error.message)
+    const message = useSelector((state: RootState)=>state.success.message)
     // console.log(error)
 
     return (
@@ -17,7 +17,7 @@ export const Success = () => {
           <Image style={styles.image} source={require('../../assets/success.png')} />
           
           </View>
-          <Text>Transaction processed successfully</Text>
+          <Text>{message}</Text>
          
         </View>
     )

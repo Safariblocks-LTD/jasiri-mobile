@@ -2,6 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet, Modal, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { NormalButton } from '../../components/common'
 
 type navigation = {
     navigation: any
@@ -9,8 +10,12 @@ type navigation = {
 
 export const SeedPhraseFinalPage = ({navigation}: navigation) => {
 
+   const handleClick=()=>{
+      navigation.navigate('Main')
+   }
+
     return (
-          <SafeAreaView style={styles.container} >
+          <View style={styles.container} >
             <View style={styles.content}>
                 <View style={styles.sectionOne}>
                     <Text style={styles.text}>Tap words in correct order to confirm your seed phrase</Text>
@@ -28,17 +33,15 @@ export const SeedPhraseFinalPage = ({navigation}: navigation) => {
                   <Text style={styles.text}>Select word #6</Text>
                 </View>
                 <View style={styles.sectionFive} >
-                    <TouchableOpacity style={styles.button}>
-                            <Text 
-                            style = {styles.buttonText}   
-                            onPress={() => navigation.navigate("Main")}                         
-                            >
-                            Next
-                            </Text>
-                    </TouchableOpacity>
+                <NormalButton
+                     title='Next'
+                     style={styles.button}
+                     clickHandler={handleClick}
+                     />
+                      
                 </View>
                 </View>
-            </SafeAreaView>
+            </View>
     )
 }
 

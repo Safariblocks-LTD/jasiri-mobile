@@ -2,21 +2,16 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Asset } from "../types"
 
 const tokenSlice = createSlice({
-  name: "token",
+  name: "ttokenSliceoken",
   initialState: {
     token: {
       amount: 0,
-      "asset-id": 0,
-      "creator": '',
-      "deleted": false,
-      "is-frozen": true,
-      "opted-in-at-round": 0,
       unitName: ''
     }
     
   },
   reducers: {
-    setToken(state, action: PayloadAction<Asset >) {
+    setToken(state, action: PayloadAction<any>) {
       state.token = action.payload
     },
     
@@ -83,6 +78,74 @@ const accountSlice = createSlice({
 
 export const { setIsLoggedIn } = accountSlice.actions
 export const account = accountSlice
+
+
+const walletConnectScannerSlice = createSlice({
+  name: "walletConnectScanner",
+  initialState: {
+    walletConnect: false,
+  },
+  reducers: {
+    setWalletConnect(state, action: PayloadAction<boolean>) {
+      state.walletConnect = action.payload
+    },
+    
+  }
+})
+
+export const { setWalletConnect } = walletConnectScannerSlice.actions
+export const walletConnectScanner = walletConnectScannerSlice
+
+
+const walletConnectURISlice = createSlice({
+  name: "walletConnectURI",
+  initialState: {
+    URI: '',
+  },
+  reducers: {
+    setWalletConnectURI(state, action: PayloadAction<string>) {
+      state.URI = action.payload
+    },
+    
+  }
+})
+
+export const { setWalletConnectURI } = walletConnectURISlice.actions
+export const walletConnectURI = walletConnectURISlice
+
+
+const errorMessageSlice = createSlice({
+  name: "errorMessageSlice",
+  initialState: {
+    message: '',
+  },
+  reducers: {
+    setErrorMessage(state, action: PayloadAction<string>) {
+      state.message = action.payload
+    },
+    
+  }
+})
+
+export const { setErrorMessage } = errorMessageSlice.actions
+export const error = errorMessageSlice
+
+
+const successMessageSlice = createSlice({
+  name: "errorMessageSlice",
+  initialState: {
+    message: '',
+  },
+  reducers: {
+    setSuccessMessage(state, action: PayloadAction<string>) {
+      state.message = action.payload
+    },
+    
+  }
+})
+
+export const { setSuccessMessage } = successMessageSlice.actions
+export const success = successMessageSlice
 
 
 

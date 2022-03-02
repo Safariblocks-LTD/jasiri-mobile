@@ -1,14 +1,14 @@
-const {getDefaultConfig} = require('expo/metro-config');
+// const {getDefaultConfig} = require('expo/metro-config');
 
-module.exports = (async () => {
-    const config = await getDefaultConfig(__dirname);
+// module.exports = (async () => {
+//     const config = await getDefaultConfig(__dirname);
 
-    const {resolver} = config
+//     const {resolver} = config
 
 
 
-    resolver.extraNodeModules = require('node-libs-expo')
+//     resolver.extraNodeModules = require('node-libs-expo')
     
 
-    return config
-  })();
+//     return config
+//   })();

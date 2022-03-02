@@ -6,7 +6,8 @@ import { setIsLoggedIn, setAddress } from '../../redux'
 import { recoverAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Loading } from '../../components'
-import { setErrorMessage } from '../error/reducer'
+import { setErrorMessage } from '../../redux'
+import { NormalButton } from '../../components/common'
 
 // let mn = 'dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry'
 
@@ -34,9 +35,9 @@ const RecoverAccount = ({navigation}) => {
                 console.log(recovered.address)
                 console.log(recovered.mnemonic)
                 await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
-                // dispatch(setIsLoggedIn(true))
-                // dispatch(setAddress(recovered))
-                // mnemonic && dispatch(setMnemonic(mnemonic)) 
+                dispatch(setIsLoggedIn(true))
+                dispatch(setAddress(recovered.address))
+                // mnemonic && dispatch(setMnemonic(recovered.mnemonic)) 
                 navigation.navigate('Dash board')                
                 setLoading(false)
             } 
@@ -83,16 +84,7 @@ const RecoverAccount = ({navigation}) => {
                 {/* loading */}
                 {loading && <Loading/>}
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity 
-                    style={styles.button}
-                    onPress={recover}
-                    >
-                        <Text 
-                        style = {styles.buttonText}
-                        >
-                         Recover Account
-                        </Text>
-                    </TouchableOpacity>
+                    <NormalButton style={styles.button} title={'Recover Account'} clickHandler={recover}/>
                 </View>
             </View>
          

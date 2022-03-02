@@ -6,10 +6,11 @@ import { SettingsScreen, Success, Transact } from '../screens';
 import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { TabBar } from './tab-bar';
+import { Text } from 'react-native';
 
 
 import { createStackNavigator } from "@react-navigation/stack"
-import { Token, Receive, SendToken } from '../components';
+import { Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
 import { Dashboard } from '../screens';
@@ -17,9 +18,12 @@ import RecoverAccount from "../screens/recoverAccount/component"
 import SeedPhrase from "../screens/seedphrase/component"
 import { SeedPhraseFinalPage } from '../screens';
 import { Error } from '../screens/error';
+import { WalletConnectComponent } from '../screens/WalletConnect';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Token } from '../screens';
 
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 
 const Tab = createBottomTabNavigator();
 
@@ -42,14 +46,58 @@ export const DashBoardNavigation=()=> {
             <Tab.Screen name="Settings" component={SettingsScreen} />
             <Tab.Screen name="Transact" component={Transact} />
             <Tab.Screen name="Send" component={Transact} />
-            <Tab.Screen name="Token" component={Token} />
-            <Tab.Screen name="Scan QR" component={QrScanner} /> 
-            <Tab.Screen name="Receive" component={Receive} /> 
-            <Tab.Screen name="Send token" component={SendToken} /> 
+            <Tab.Screen name="Token" component={Token} 
+            
+            />
+            <Tab.Screen name="Scan QR" component={QrScanner}/> 
+            <Tab.Screen name="Receive" component={Receive} 
+            
+            /> 
+            <Tab.Screen name="Send token" component={SendToken}
+           
+            /> 
+            <Tab.Screen 
+              name="Wallet connect" 
+              component={WalletConnectComponent} 
+              options={{
+                title: 'Create Account',
+                
+                header: ()=> <Header title={'Wallet connect'}/>,
+              }}
+              /> 
           </Tab.Group>
       </Tab.Navigator>
   )
 }
+
+
+const Header =(props:{title:string})=>{
+  const {title}=props
+  return(
+    <View style={headerStyle.header} >
+      <Text style={headerStyle.text}>{title}</Text>
+    </View>
+  )
+}
+
+const headerStyle = StyleSheet.create({
+  text: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    alignSelf: 'center'
+  },
+  header: {
+    paddingTop: 50,
+    // flex: 1,
+    padding: 10,
+    width: '100%',
+    // borderWidth: 1,
+   
+    
+    backgroundColor: 'transparent'
+    
+  },
+})
 
 
 
