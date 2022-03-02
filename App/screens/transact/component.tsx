@@ -4,15 +4,44 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { RootState, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { accountInfo as getAccountInfo, optIn} from '../../services'
+import { accountInfo as getAccountInfo, assetInfo, optIn} from '../../services'
 import { Asset } from '../../types'
-import { setErrorMessage } from '../error/reducer'
+import { setErrorMessage } from '../../redux'
 import { Loading } from '../../components'
+import { useNavigation } from '@react-navigation/native'
+import { AssetButton, NormalButton } from '../../components/common'
+
+
+const AssetInfo=({asset})=>{
+    return (
+        <>
+        <View style={assetInfoStyles.assetinfo}>
+       
+        <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
+            <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
+            <Text style={styles.unitname}> {asset.unitName} </Text>
+        </View>
+        
+        <Text style={styles.unitAmount}>
+                {asset.amount} {asset.unitName}
+        </Text>
+        <Text style={styles.unitInUsd}>$ ### USD</Text>
+        </View>
+        </>
+    )
+}
+
+const assetInfoStyles = StyleSheet.create({
+    assetinfo: {
+        justifyContent: 'flex-start',
+        width: '100%'
+    }
+})
 
 
 
 
-export const Transact = ({navigation}) => {
+export const Transact = () => {
     const [assets, setAssets] = React.useState<Array<Asset>>()
     const [loading, setLoading] = React.useState<boolean>()
 
@@ -23,16 +52,23 @@ export const Transact = ({navigation}) => {
 
     const address = useSelector((state: RootState)=>state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
+
+    const navigation = useNavigation()
     
     React.useEffect(()=>{
         (async()=> {
         const account = await getAccountInfo(address)
-        console.log(account)
+        console.log(account.assets[0])
         if(account.error){
             dispatch(setErrorMessage(`${account.error}`))
             navigation.navigate('Error')
         }
-        setAssets(account.assets)
+
+        const assets: Partial<Asset[]> = account.assets
+        
+        setAssets(assets)
+        dispatch(setToken({amount: assets[0].amount, unitName:'JASIRI'}))
+        // await assetInfo(account.assets[0].id)
         
         })();
         
@@ -82,22 +118,7 @@ export const Transact = ({navigation}) => {
                         assets && assets?.length> 0 &&  assets.map((asset: Asset)=>
                             <View style={styles.tokensContainer} key={Math.random()}>
                             <View style={styles.tokenContainer} >
-                                <TouchableOpacity 
-                                    onPress={() => handleCLick(asset)}  
-                                    >
-                                   
-                                        <View style={{flexDirection: 'row', justifyContent: 'flex-start', }}>
-                                            <Image style={{margin: 5}} source={require('../../assets/Vector(6).png')} />
-                                            <Text style={{ fontWeight: 'bold', fontSize: 17, textTransform: 'uppercase', margin: 5}}> {asset.unitName} </Text>
-                                        </View>
-                                        
-                                        <Text style={styles.unitAmount}>
-                                                {asset.amount} {asset.unitName}
-                                        </Text>
-                                        <Text style={styles.unitInUsd}>$ ### USD</Text>
-                                       
-                                    
-                                </TouchableOpacity>
+                              <AssetButton element={<AssetInfo asset={{...asset, unitName:'JASIRI'}}/>} style={styles.assetButton} clickHandler={handleCLick}/>
                             </View>
                             
                             
@@ -105,16 +126,16 @@ export const Transact = ({navigation}) => {
                          )
                          ||
 
-                         <View style={styles.tokensContainer}>
+                         <>
                         <Text> No assets found</Text>
-                       <TouchableOpacity 
+                       <NormalButton 
+                       title='Recieve'
                         style={styles.button}
-                        onPress={()=>handleCLickReceive()}
-                        >
-                           <Text>Recieve</Text>
-                           </TouchableOpacity>
+                        clickHandler={handleCLickReceive}
+                        />
+                           
                            {loading && <Loading/>}
-                       </View>
+                           </>
 
                         
                      } 
@@ -144,11 +165,18 @@ container: {
     flex: 1,
     paddingTop: 40,
     // marginTop: 20,
-    backgroundColor: '#E3E8E7',
+    // backgroundColor: '#E3E8E7',
     height: 800,
     justifyContent: 'flex-start',
     alignItems: 'center',
     },
+
+unitname: { 
+    fontWeight: 'bold', 
+    fontSize: 17, 
+    textTransform: 'uppercase', 
+    margin: 5
+},
 
 tokensContainer: {
     justifyContent: 'space-between',
@@ -156,12 +184,18 @@ tokensContainer: {
     width: '100%',
     marginBottom: 10,
 },
+
+assetButton: {
+    alignContent: 'flex-start'
+},
+
 tokenContainer: {
     borderRadius: 5,
     width: '90%',
     padding: 10,
     margin: 10,
     backgroundColor: 'white',
+    // borderWidth: 5
 },
 unitAmount: {
     marginLeft: 40,

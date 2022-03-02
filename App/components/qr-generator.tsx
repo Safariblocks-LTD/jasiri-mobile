@@ -5,7 +5,7 @@ import * as Clipboard from 'expo-clipboard';
 // import * as Sharing from 'expo-sharing'
 
 
-// import SvgQRCode from 'react-native-qrcode-svg';
+import SvgQRCode from 'react-native-qrcode-svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux';
 
@@ -14,18 +14,14 @@ import { RootState } from '../redux';
 function Simple() {
   const address = useSelector((state: RootState)=>state.newAccount.address)
   return (
-    // <SvgQRCode size={150} value={address} /><
+    <>
+    <SvgQRCode size={150} value={address} />
 
-    <></>
+    </>
   );
 }
 
-// 20% (default) sized logo from local file string with white logo backdrop
-// function LogoFromFile() {
-//   let logoFromFile = require('../assets/images/icon.png');
 
-//   return <SvgQRCode value="Just some string value" logo={logoFromFile} />;
-// }
 
 export default function App() {
   const address = useSelector((state: RootState)=>state.newAccount.address)
@@ -86,7 +82,7 @@ export default function App() {
 
     </View>
 
-      {/* <CustomQRCodes /> */}
+     
      
     </View>
    

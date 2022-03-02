@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux'
 import { setAddress, setMnemonic } from '../../redux'
 import { createAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NormalButton } from '../../components/common'
+
 
 
 export const CreateAccount = ({navigation}) => {
@@ -45,12 +47,13 @@ export const CreateAccount = ({navigation}) => {
                     </Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity
+                    <NormalButton
+                        title='I understand'
                         style={styles.button}
-                        onPress={handleClick}
-                        >
-                        <Text style={styles.account} >I understand</Text>
-                    </TouchableOpacity>
+                        clickHandler={handleClick}
+                        />
+                      
+                    
                 </View>
             </View>
            

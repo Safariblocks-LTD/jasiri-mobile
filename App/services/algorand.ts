@@ -18,6 +18,7 @@ const algodToken = {
 const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
 const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort); 
+const indexerClient = new algosdk.Indexer(algodToken, algodServer, algodPort);
 
 // const kmdport = 4002;
 
@@ -31,6 +32,18 @@ const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort);
 
 // let walletid = null;
 // let wallethandle = null;
+
+export const assetInfo=async(assetId:number)=>{
+    (async () => {
+        let assetIndex = 2044572;
+        let assetInfo = await indexerClient.searchForAssets()
+            .index(assetIndex).do();
+        console.log("Information for Asset: " + JSON.stringify(assetInfo, undefined, 2));
+    })().catch(e => {
+        console.log(e);
+        console.trace();
+    });
+}
 
 
 

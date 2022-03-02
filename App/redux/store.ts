@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 
-import {token, scanned, newAccount, account} from './reducers';
-import { error } from '../screens/error/reducer';
+import {token, scanned, newAccount, account
+,walletConnectScanner,
+walletConnectURI, error, success
+} from './reducers';
+
 
 
 
@@ -15,7 +18,10 @@ export const store = configureStore({
         scanned: scanned.reducer,
         newAccount: newAccount.reducer,
         account: account.reducer,
-        error: error.reducer
+        error: error.reducer,
+        walletConnectScanner: walletConnectScanner.reducer,
+        walletConnectURI: walletConnectURI.reducer,
+        success: success.reducer
     }
 })
 

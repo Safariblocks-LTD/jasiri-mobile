@@ -1,10 +1,3 @@
-require('node-libs-expo/globals');
-
-// import * as Random from 'expo-random';
-
-require('react-native-get-random-values')
-// require("react-native-crypto")
-
 import 'fastestsmallesttextencoderdecoder'
 // import * as Crypto from 'expo-crypto';
 
@@ -22,14 +15,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import * as Updates from 'expo-updates';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setAddress, setIsLoggedIn, setMnemonic } from './App/redux';
-import './shim.js'
-import WalletConnectProvider from '@walletconnect/react-native-dapp';
+
+// import WalletConnectProvider from '@walletconnect/react-native-dapp';
+// import { withWalletConnect } from '@walletconnect/react-native-dapp';
+// import { Linking } from 'react-native';
+
+const uri = 'wc:0ac0146f-13a3-4739-9e85-7eeebf2ac70d@1?bridge=https%3A%2F%2F3.bridge.walletconnect.org&key=5090de44777a909754f2c8ed878a6868cea54e98bfd7d1288351f7628c1575d5'
+
 
 const Navigation=()=>{
   
   const dispatch = useDispatch()
   React.useEffect(()=>{
-
     (async () => {  
       try {    
           const jsonValue = await AsyncStorage.getItem('accountData')  
@@ -71,26 +68,17 @@ const Navigation=()=>{
 
 export default function App() {
 
+
+
   return (
    
     <Provider store={store}>
        <SafeAreaProvider>
-       <WalletConnectProvider
-        bridge="https://bridge.walletconnect.org"
-        clientMeta={{
-          description: 'Connect with WalletConnect',
-          url: 'https://walletconnect.org',
-          icons: ['https://walletconnect.org/walletconnect-logo.png'],
-          name: 'WalletConnect',
-        }}
-        redirectUrl={'yourappscheme://'}
-        storageOptions= {{
-          asyncStorage: AsyncStorage,
-        }}
-        >
        
-          <Navigation/>
-          </WalletConnectProvider>
+       <Navigation/>
+         
+      
+         
       </SafeAreaProvider>
     
     </Provider>
@@ -98,5 +86,13 @@ export default function App() {
  
   );
 }
+
+// export default withWalletConnect(App, {
+//   redirectUrl: 'myapp://',
+//   bridge :"https://bridge.walletconnect.org",
+//   storageOptions: {
+//     asyncStorage: AsyncStorage,
+//   },
+// })
 
 

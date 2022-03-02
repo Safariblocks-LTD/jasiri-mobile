@@ -9,46 +9,47 @@ import {
   Text,
   SafeAreaView,
   Image,
+  Linking,
+  Alert
 
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsLoggedIn, setAddress, setMnemonic, RootState } from '../../redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { walletConnect } from '../../services/wallet-connect';
-import { useWalletConnect } from '@walletconnect/react-native-dapp';
+import { setIsLoggedIn, setAddress, setMnemonic, RootState, setWalletConnect, setSuccessMessage, setErrorMessage } from '../../redux';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {WC} from '../../services/wallet-connect'
+import WalletConnectClient from '@walletconnect/client';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
-export const SettingsScreen = (props) => {
-  const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
-  const dispatch = useDispatch()
 
-  const {
-    createSession,
-    killSession,
-    session,
-    signTransaction,
-  } = useWalletConnect();
+export const SettingsScreen = () => {
+    const isLoggedIn = useSelector((state: RootState)=>state.account.isLoggedIn)
+    const walletConnectURI = useSelector((state: RootState)=>state.walletConnectURI.URI)
+    const dispatch = useDispatch()
 
-  const handleWConnect=()=>{
-    console.log(createSession())
-    
-  }
+    const navigator = useNavigation()
 
+    const handleWConnect =  () => {
+      navigator.navigate('Wallet connect')
+    };
+
+
+  
   const handleLogout=()=>{
     (async () => {  
       try {    
         
          await AsyncStorage.removeItem('accountData')  
           dispatch(setIsLoggedIn(false))
-         console.log('removed')
-        //  navigation.navigate('Home')
+          console.log('removed')
+          navigator.navigate('Home')
       } 
       catch(e) {    
-          //
-          console.log(' error reading value  ')
+          dispatch(setErrorMessage(e.message))
+          navigator.navigate('Error')
       }})();
 
   }
@@ -181,7 +182,9 @@ export const SettingsScreen = (props) => {
                   </View>
                   <View style={styles.section_container}>
                     <View style={styles.section_body}>
+                      <TouchableOpacity  onPress={handleLogout}>
                       <Text style={styles.category_text} >reset wallet</Text>
+                      </TouchableOpacity>
                       <Image source={require('../../assets/Vector17.png')} />
                     </View>
                     <View style={{width: '100%', padding: 10}}>
@@ -218,12 +221,7 @@ export const SettingsScreen = (props) => {
                   </View>
                 </View>
 
-                <TouchableOpacity 
-                  style={styles.button}
-                  onPress={handleLogout}
-                  >
-                  <Text>Logout</Text>
-                </TouchableOpacity>
+               
 
               </View>
              

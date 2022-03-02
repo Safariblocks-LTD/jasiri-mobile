@@ -15,7 +15,7 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState} from '../../../redux';
+import { RootState} from '../redux';
 
 
 export const Token = (props: { route, navigation}) => {
@@ -24,14 +24,6 @@ export const Token = (props: { route, navigation}) => {
   
   const dispatch = useDispatch()
   const token = useSelector((state: RootState)=>state.token.token)
-
-
-
-
-
-  
-
-
   
   return (
     
@@ -41,7 +33,7 @@ export const Token = (props: { route, navigation}) => {
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total {token.unitName} balance</Text>
             <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
-            <Text style={styles.tokenText}> $ ### USD</Text>
+            <Text style={styles.tokenText}> $ 0.00 USD</Text>
           </View>
          
           <View style={styles.buttonContainer}>
