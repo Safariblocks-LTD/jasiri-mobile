@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         display: 'flex',
         //   flexDirection: 'row',
         //   justifyContent: 'space-around',
-        alignItems: 'center'
+        // alignItems: 'center'
     },
     section1: {
         marginTop: 17,
@@ -32,14 +32,14 @@ export const styles = StyleSheet.create({
     section2: {
         //   justifyContent: 'flex-start',
         width: '80%',
-        padding: 10,
+        paddingLeft: 50,
         //   borderWidth: 1
 
     },
     section1Text1: {
         fontWeight: 'bold',
         color: 'black',
-        marginLeft: 5
+        // marginLeft: 5
     },
 
     section2Text2: {
