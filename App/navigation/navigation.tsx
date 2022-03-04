@@ -120,7 +120,6 @@ export const AuthenticationNavigation=()=>{
         }}/>   
         <Stack.Screen name="Registration" component={Registration}
               options={{
-          // headerTintColor: '#fff',
            headerTitle: props =>  null,
             headerRight: () => (
             <Button
@@ -136,19 +135,21 @@ export const AuthenticationNavigation=()=>{
           ),
         }}/>   
         <Stack.Screen name="Create Account" component={CreateAccount}
-         options={{
-          header: ()=><View></View>
-      
-        }}/>    
+           options={{
+          headerTitle: props =>  null,
+        }}
+       />    
         <Stack.Screen name="Recover Account" component={RecoverAccount}
          options={{
           header: ()=><View></View>
       
         }}/>   
         <Stack.Screen name="Seed Phrase" component={SeedPhrase}
-         options={{
-          header: ()=><View></View>
-      
+          options={{
+            headerTitle: props => null,
+            headerStyle: {
+  height: 60, // Specify the height of your custom header
+}
         }}/> 
         <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage}
          options={{
