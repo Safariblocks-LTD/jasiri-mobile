@@ -23,6 +23,7 @@ import { WalletConnectComponent } from '../screens/WalletConnect';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Token } from '../screens';
 
+import Splash from '../screens/splash/component';
 
 const Stack = createNativeStackNavigator()
 
@@ -107,12 +108,18 @@ export const AuthenticationNavigation=()=>{
   return (
 
     <Stack.Navigator
-    initialRouteName="Home"
+      initialRouteName="Splash"
+      
     //  screenOptions={{
     //      header: ()=><View></View>
     //  }}
      >
-        <Stack.Group>
+      <Stack.Group>
+                <Stack.Screen name="Splash" component={Splash}
+          options={{
+          header: ()=><View></View>
+      
+        }}/>
         <Stack.Screen name="Home" component={Home}
           options={{
           header: ()=><View></View>
@@ -123,7 +130,7 @@ export const AuthenticationNavigation=()=>{
            headerTitle: props =>  null,
             headerRight: () => (
             <Button
-              // onPress={() => navigation.navigate("HomeScreen")}
+              // onPress={() => navigation.navigate("Splash")}
                 title="Skip"
                  containerStyle={{
                   marginHorizontal: 20,
