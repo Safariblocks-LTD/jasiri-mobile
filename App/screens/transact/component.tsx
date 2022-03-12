@@ -134,21 +134,19 @@ export const Transact = () => {
                         clickHandler={handleCLickReceive}
                         />
                            
-                           {loading && <Loading/>}
+                           {/* {loading && <Loading/>} */}
                            </>
 
                         
                      } 
                   
                     
-                        {!assets || assets?.length===0 && <TouchableOpacity 
+                        {!assets || assets?.length===0 && <NormalButton 
                           style={styles.button}
-                          onPress={()=>handleCLickAddJasiri()}
-                        >
-                            <Text style={styles.account}>
-                                Tap to add JASIRI
-                            </Text>
-                        </TouchableOpacity>}
+                    clickHandler={() => handleCLickAddJasiri()}
+                    title='Tap to add JASIRI'
+                        />
+                    }
                 </View>
            
             </ScrollView>

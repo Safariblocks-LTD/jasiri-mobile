@@ -67,8 +67,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
-    "react-native-crypto": "^2.2.0",
     "react-native-animated-loader": "^0.0.9",
+    "react-native-crypto": "^2.2.0",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-i18n": "^2.0.15",
@@ -111,7 +111,7 @@
     "babel-plugin-react-native-platform-specific-extensions": "^1.1.1",
     "react-devtools": "^4.23.0",
     "react-native-css-transformer": "^1.2.4",
-    "rn-nodeify": "github:tradle/rn-nodeify",
+    "rn-nodeify": "^10.3.0",
     "typescript": "~4.3.5"
   },
   "jest": {
