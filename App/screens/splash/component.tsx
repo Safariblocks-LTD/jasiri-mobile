@@ -31,7 +31,7 @@ const Splash = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/jasiri.gif')}
+        source={require('../../assets/jasiri_1.gif')}
         style={{width: '80%', resizeMode: 'contain', margin: 30}}
       />
       <ActivityIndicator
