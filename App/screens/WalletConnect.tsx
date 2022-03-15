@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Alert } from 'react-native'
+import { View, Text, ScrollView, Alert, Image } from 'react-native'
 import { StyleSheet } from 'react-native'
 
 // import { accountInfo as getAccountInfo } from '../../services'
@@ -11,35 +11,38 @@ import WalletConnectClient from '@walletconnect/client';
 import { RootState, setErrorMessage, setroutes, setSuccessMessage } from '../redux';
 import routes from '../navigation/routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import { StyleText, MyAppText, textStyles } from '../components/common/appTexts';
+import { ListItem, Icon, Avatar } from 'react-native-elements'
+import { Link, Box, Flex, HStack, Spacer, Badge, VStack } from "native-base";
 
 
 export const WalletConnectComponent = () => {
+
    
     const uri = useSelector((state: RootState)=>state.scanned.URI)
     const address = useSelector((state: RootState)=>state.newAccount.address)
+
     const dispatch = useDispatch()
     const navigator = useNavigation()
     const [connections, setConnections] = React.useState<string>()
     const [connecting, setConnecting] = React.useState<boolean>()
-    
-    React.useEffect(()=>{
-           uri && (async()=>{
-               const client = new WalletConnectClient({
+
+    React.useEffect(() => {
+        uri && (async () => {
+            const client = new WalletConnectClient({
                 uri: uri,
-               
+
                 clientMeta: {
-                description: "WalletConnect Developer App",
-                url: "https://walletconnect.org",
-                icons: ["https://walletconnect.org/walletconnect-logo.png"],
-                name: "WalletConnect",
+                    description: "WalletConnect Developer App",
+                    url: "https://walletconnect.org",
+                    icons: ["https://walletconnect.org/walletconnect-logo.png"],
+                    name: "WalletConnect",
                 },
                 storageOptions: {
-                  asyncStorage: AsyncStorage,
+                    asyncStorage: AsyncStorage,
                 },
-                
-                });
+
+            });
 
             client.on("session_request", (error, payload) => {
                 setConnecting(true);
@@ -48,12 +51,12 @@ export const WalletConnectComponent = () => {
                     setConnecting(false);
                     navigator.navigate(routes.ERROR)
                     return
-                }else{
+                } else {
                     console.log('success session_request')
                     console.log(payload)
-    
+
                     client.approveSession({
-                    accounts: [address], chainId: 1,
+                        accounts: [address], chainId: 1,
                     })
                     // stop connecting indicator
                     setConnecting(false);
@@ -62,11 +65,11 @@ export const WalletConnectComponent = () => {
                     // navigation.navigate('Success')
                 }
 
-              
-                
+
+
             })
 
-            
+
 
             client.on("call_request", (error, payload) => {
                 if (error) {
@@ -80,7 +83,7 @@ export const WalletConnectComponent = () => {
 
             });
 
-            
+
             client.on("disconnect", (error, payload) => {
                 if (error) {
                     dispatch(setErrorMessage(error.message))
@@ -98,14 +101,29 @@ export const WalletConnectComponent = () => {
             !client.session.connected && client.createSession()
 
             console.log(client.session)
-            
+
         })();
     }, [uri])
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         console.log(connections)
         console.log(connecting)
     })
+
+    const list = [
+        {
+            title: 'Jasiri wallet',
+            icon: 'av-timer',
+            date: "23 Jan 2022"
+        },
+        {
+            title: 'Other wallet',
+            icon: 'flight-takeoff',
+            date: "23 Jan 2022"
+        },
+
+    ]
+
         
     
    const handleClick=()=>{
@@ -114,59 +132,92 @@ export const WalletConnectComponent = () => {
        navigator.navigate(routes.SCAN_QR)
    }
 
+
     return (
-        
+
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
-            
-            
 
-            <View style={styles.info}> 
-                <Text>
-                Wallet connect allows you to connect the JASIRI Wallet to JASIRI Web App for asset tokenization. please scan the QR code on the web app to continue
-                </Text>
-            </View>
 
-               
-               
-            <NormalButton title='Scan QR code' clickHandler={handleClick} style={styles.button}/>
-            <View style={styles.container2}>
-            <Text> Connected Dapps</Text> 
-            {connections && (
-                <View>
-                    <Text> Jasiri wallet </Text>
-                    <Text>Connected with {connections} </Text> 
-                    <Text> {new Date().toDateString()} </Text>
+
+                <View style={styles.info}>
+                    <StyleText style={{ fontWeight: "bold" }}>
+                        <MyAppText>
+                            Wallet connect allows you to connect the JASIRI Wallet to JASIRI Web App for asset tokenization. please scan the QR code on the web app to continue
+                        </MyAppText>
+                    </StyleText>
+
                 </View>
-                    
-            )}
-            {connecting && <Text> loading</Text> }
-            
+
+
+
+                <NormalButton title='Scan QR code' clickHandler={handleClick} style={styles.button} />
+                <View style={styles.container2}>
+                    <StyleText style={{ fontWeight: "bold" }}>
+                        <MyAppText> Connected Dapps</MyAppText>
+                    </StyleText>
+
+
+                    {connections && (
+
+                        <Box minW="96" borderWidth="1" borderColor="#F2EDED" bg="#F2EDED" p="5" rounded="8">
+                            <HStack alignItems="center">
+                                <HStack alignItems="flex-start" space={2}>
+                                    <Avatar rounded source={require('../assets/Vector(6).png')} />
+
+                                    <StyleText style={{ fontWeight: "bold" }}>
+                                        <MyAppText>Jasiri wallet</MyAppText>
+                                    </StyleText>
+                                </HStack>
+
+                                <Spacer />
+                                <Icon
+                                    name='more-horiz'
+                                    type='material'
+                                    color='#45AC99'
+                                />
+
+                            </HStack>
+                            <VStack space={2} alignItems="flex-start" ml="10">
+                                <Text fontWeight="medium" fontSize="xl" style={styles.listLink}>Connected with {connections}
+                                </Text>
+                                <Text mt="2" fontSize="sm" color="coolGray.700">
+                                    {new Date().toDateString()}
+                                </Text>
+                            </VStack>
+                        </Box>
+                    )}
+                    {connecting && <Text> loading</Text>}
+
+                </View>
+
+
+
             </View>
-           
-               
-            </View>
-            
+
 
         </ScrollView>
-        
+
     )
 }
 
 const styles = StyleSheet.create({
     scrollView: {
-       flex: 1,
-       padding: 10
+        flex: 1,
+        padding: 10,
+        backgroundColor: '#F2EDED',
     },
 
     button: {
-        height:40,
+        height: 40,
         width: '40%',
-        borderRadius: 20,
-        margin: '10%'
+        borderRadius: 10,
+        margin: '10%',
+        paddingRight: 10,
+        paddingLeft: 10,
     },
 
-    
+
     container: {
         // flex: 1,
         alignItems: 'center',
@@ -194,10 +245,11 @@ const styles = StyleSheet.create({
 
     info: {
         backgroundColor: '#fff',
-        minHeight: '20%',
+        // minHeight: '20%',
         margin: 10,
         width: '85%',
-        borderRadius: 20
+        borderRadius: 20,
+        padding: 20
     },
 
     quickActions: {
@@ -217,10 +269,16 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 10
     },
-    tinyText:{
+    tinyText: {
         color: 'black',
         fontSize: 12,
         fontWeight: 'bold'
+    },
+    listItem: {
+        backgroundColor: '#F2EDED',
+    },
+    listLink: {
+        color: '#45AC99',
     }
 })
 
