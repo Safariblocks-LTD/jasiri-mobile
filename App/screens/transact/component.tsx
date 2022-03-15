@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View, Text, Image, StyleSheet, Button, BackHandler, RefreshControl } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { RootState, setToken } from '../../redux'
+import { RootState, setroutes, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { accountInfo as getAccountInfo, assetInfo, optIn } from '../../services'
@@ -117,6 +117,7 @@ export const Transact = () => {
 
     const handleCLickReceive = () => {
         console.log('button click')
+        dispatch(setroutes(routes.TRANSACT))
         navigation.navigate(routes.RECIEVE_TOKEN)
     }
 
