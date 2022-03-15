@@ -53,19 +53,15 @@ export const Dashboard = ({ navigation }: any) => {
 
 
             <View style={styles.balance}> 
-                <Text style={styles.balanceText}>TOTAL BALANCE</Text> 
-                <Text style={styles.balanceText}>Algo: {accountInfo?accountInfo.amount: 'loading'}</Text> 
+                <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
+                <MyAppText style={styles.balanceText}>Algo: {accountInfo?accountInfo.amount: 'loading'}</MyAppText> 
                 {accountInfo?accountInfo.assets.map(asset=>
-                <Text key={Math.random()} style={styles.balanceText}>JSR : {asset.amount}</Text>): <></>} 
-                <Text style={styles.balanceText}>USD</Text> 
+                <MyAppText key={Math.random()} style={styles.balanceText}>JSR : {asset.amount}</MyAppText>): <></>} 
+                <MyAppText style={styles.balanceText}>USD</MyAppText> 
             </View>
 
 
-                    <View style={styles.balance}>
-                        <MyAppText>TOTAL BALANCE</MyAppText>
-                        <MyAppText>{accountInfo ? accountInfo.account.assets[0].amount : '$0.00'}</MyAppText>
-                        <MyAppText>USD</MyAppText>
-                    </View>
+                  
                 </StyleText>
                 <View style={styles.info}>
 
