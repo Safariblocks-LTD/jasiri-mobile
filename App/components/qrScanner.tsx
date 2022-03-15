@@ -1,23 +1,26 @@
 import * as React from 'react';
-import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Vibration, Alert, Text, TouchableOpacity, Dimensions, BackHandler } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setData, setWalletConnectURI } from '../redux';
+import { RootState, setData, setURI, setWalletConnectURI } from '../redux';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { NormalButton } from './common';
 import { useNavigation } from '@react-navigation/native';
+
+
+import BarcodeMask from 'react-native-barcode-mask';
+import { useFocusEffect } from '@react-navigation/native';
+import routes from '../navigation/routes';
 
 
 export const QrScanner = () => {
   const [hasPermission, setHasPermission] = React.useState<boolean | null>(null);
   const [show, setShow] = React.useState<boolean>(false);
   const [scannedData, setScannedData] = React.useState<string | null>(null);
+  const back = useSelector((state: RootState)=>state.routes.back)
+  const isLoggedIn = useSelector((state: RootState) => state.account.isLoggedIn)
+  const navigation = useNavigation()
 
-  const navigator = useNavigation()
-
-
-
-
-  // const walletConnect = useSelector((state: RootState)=>state.walletConnectScanner.walletConnect)
+ 
 
   const dispatch = useDispatch()
 
@@ -30,22 +33,41 @@ export const QrScanner = () => {
 
   }, []);
 
+  
 
-  //   React.useEffect(() => { 
-  //     && setShow(true)
-  // }, [hasPermission]);
+  
+
+
+    
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+    
+        console.log(back)
+         navigation.navigate(back)
+         return true
+       };
+    
+     
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [back])
+  );
+ 
 
 
   React.useEffect(() => {
-    scannedData && dispatch(setData(scannedData));
-
-      // setScannedData(null);
-      const history = navigator.getState().routeNames;
-      (scannedData && navigator.navigate(history[history.length - 1])) 
-      // (scannedData && navigation.navigate('Send token'))
+      scannedData && back === routes.WC && dispatch(setURI(scannedData));
+      scannedData && back ===routes.SEND_TOKEN && dispatch(setData(scannedData));
+      console.log(back)
+        // setScannedData(null);
+     scannedData && navigation.navigate(back)
+     
       return setScannedData(null)
 
-  }, [scannedData]);
+  }, [scannedData, back]);
 
 
   const handleBarCodeScanned = ({ data }: any) => {
@@ -53,6 +75,8 @@ export const QrScanner = () => {
     Vibration.vibrate()
     setShow(false)
     setScannedData(data)
+   
+
 
   };
 
@@ -62,11 +86,8 @@ export const QrScanner = () => {
   }
 
   const handleCancel = () => {
-    const history = navigator.getState().routeNames
-    console.log(history)
-    // navigator.navigate(history[history.length - 1])
-
-     navigator.goBack()
+    navigation.navigate(back)
+    
 
 
   }
@@ -76,20 +97,25 @@ export const QrScanner = () => {
   return (
 
     <View style={styles.container}>
-      <View style={styles.scanner}>
-        {hasPermission && !scannedData && <BarCodeScanner
+      {/* <View style={styles.scanner}> */}
+        {
+        
+        hasPermission && !scannedData && <BarCodeScanner
           onBarCodeScanned={handleBarCodeScanned}
-          style={[StyleSheet.absoluteFillObject, styles.container]}
-        />}
-      </View>
-
-      {/* <BarCodeScanner
-   
-        style={[StyleSheet.absoluteFill, styles.container]}>
-    
-      </BarCodeScanner> */}
-
-      <NormalButton title='Cancel' clickHandler={handleCancel} style={styles.button} />
+          // barCodeSize= {{he}}
+          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+          style={[StyleSheet.absoluteFillObject]}
+        > 
+        
+        <BarcodeMask edgeColor="#62B1F6" showAnimatedLine/>
+        <View style={styles.mask}>
+          <NormalButton title='Cancel' clickHandler={handleCancel} style={styles.button} />
+        </View>
+        </BarCodeScanner>
+          
+        }
+     
+      
 
 
 
@@ -97,27 +123,36 @@ export const QrScanner = () => {
   );
 }
 
-const { width } = Dimensions.get('window')
-const qrSize = width * 0.7
+const { width, height } = Dimensions.get('window')
+// const qrSize = width * 0.7
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    // flexDirection: 'column',
+    // justifyContent: 'center',
     // borderWidth: 1
   },
 
-  scanner: {
-    flex: 0.7,
-    overflow: 'hidden',
-    width: 300,
-    height: 200,
-  },
+  mask: { flex: 1, backgroundColor: 'transparent',flexDirection: 'column', 
+  justifyContent: 'flex-end',
+  // : 'column',
+  // alignItems: 'flex-end',
+  
+  // borderWidth: 1,
+  // borderColor: 'red'
+
+},
+
+ 
   button: {
     height: 40,
     width: '40%',
     borderRadius: 20,
     marginTop: '40%',
+    alignSelf: 'center',
+    margin: 40
+    
+    // jus
   },
 
 })

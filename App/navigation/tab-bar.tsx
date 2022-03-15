@@ -1,6 +1,7 @@
 import { FontAwesome5, Fontisto, MaterialCommunityIcons, MaterialIcons, Octicons } from '@expo/vector-icons'
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import routes from './routes'
 
 
 export const TabBar =(props: any)=>{
@@ -13,7 +14,7 @@ export const TabBar =(props: any)=>{
             <TouchableOpacity onPress={()=>navigation.navigate('Contacts')}>
             <MaterialCommunityIcons name="contacts" size={30} color="#028373"  />
             </TouchableOpacity>
-            <TouchableOpacity onPress={()=>navigation.navigate('Send')}>
+            <TouchableOpacity onPress={()=>navigation.navigate(routes.TRANSACT)}>
             <MaterialIcons name="swap-vert-circle" size={55} color="#028373" />
             </TouchableOpacity>
             <TouchableOpacity onPress={()=>navigation.navigate('Notification')}>

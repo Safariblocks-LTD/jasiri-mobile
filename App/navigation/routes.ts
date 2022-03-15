@@ -3,5 +3,10 @@ export default  {
     RECIEVE_TOKEN: 'Receive',
     SEND_RECIEVE_SCREEN: 'Token',
     ERROR: 'Error',
-    SCAN_QR: 'Scan QR'
+    SCAN_QR: 'Scan QR',
+    SUCCESS: 'Success',
+    WC: 'Wallet connect',
+    TOKEN: 'Token',
+    TRANSACT: 'Transact',
+    DASHBOARD: 'Dash board'
 }
