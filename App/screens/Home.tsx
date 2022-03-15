@@ -7,12 +7,13 @@ import {
   StyleSheet,
   View,
   Text,
-  Image, Modal
+  Image, Modal, BackHandler
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux';
 import { styles } from './styles';
 import Loader from '../components/loading';
+import { useFocusEffect } from '@react-navigation/native';
 
 
 
@@ -24,6 +25,24 @@ export const Home = ({ navigation }) => {
   React.useEffect(() => {
     isLoggedIn && navigation.navigate("Dash board")
   })
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+    
+        
+         BackHandler.exitApp()
+         return true
+       };
+    
+     
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
 
 
 
@@ -56,10 +75,7 @@ export const Home = ({ navigation }) => {
             <Text style={styles.account}>add Account</Text>
           </TouchableOpacity>
         </View>
-      </View> ||
-        <Text>Checking credentials...</Text>
-      // <Loader/>
-      }
+      </View> }
     </>
 
   );

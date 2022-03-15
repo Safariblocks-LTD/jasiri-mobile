@@ -1,11 +1,32 @@
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, BackHandler } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import routes from '../../../navigation/routes';
+
 
 import QrGenerator from '../../qr-generator'
 
 
 export const Receive = () => {
+    const navigation=useNavigation()
+    useFocusEffect(
+        React.useCallback(() => {
+          const onBackPress = () => {
+        
+            
+             navigation.navigate(routes.TOKEN)
+             return true
+           };
+        
+         
+          BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    
+          return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, [])
+      );
+    
     return (
         
         <ScrollView style={styles.receiveContainer}>

@@ -1,7 +1,7 @@
 // React Native Bottom Navigation
 // https://aboutreact.com/react-native-bottom-navigation/
 
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import {
   TouchableOpacity,
@@ -11,7 +11,8 @@ import {
   SafeAreaView,
   TextInput,
   Modal,
-  Image
+  Image,
+  BackHandler
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -45,6 +46,24 @@ export const Token = () => {
     
    
   },[address, token])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+    
+       
+         navigation.navigate(routes.TRANSACT)
+         return true
+       };
+    
+     
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
+
   
   return (
     

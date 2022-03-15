@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NormalButton } from '../components/common';
 import { useNavigation } from '@react-navigation/native';
 import WalletConnectClient from '@walletconnect/client';
-import { RootState, setErrorMessage, setSuccessMessage } from '../redux';
+import { RootState, setErrorMessage, setroutes, setSuccessMessage } from '../redux';
 import routes from '../navigation/routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const WalletConnectComponent = () => {
    
-    const uri = useSelector((state: RootState)=>state.scanned.data)
+    const uri = useSelector((state: RootState)=>state.scanned.URI)
     const address = useSelector((state: RootState)=>state.newAccount.address)
     const dispatch = useDispatch()
     const navigator = useNavigation()
@@ -109,6 +109,8 @@ export const WalletConnectComponent = () => {
         
     
    const handleClick=()=>{
+        dispatch(setroutes(routes.WC))
+        console.log(routes.WC)
        navigator.navigate(routes.SCAN_QR)
    }
 

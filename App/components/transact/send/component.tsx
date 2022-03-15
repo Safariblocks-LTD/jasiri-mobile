@@ -6,22 +6,29 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Text,
+  
   TextInput,
-  Image} from 'react-native';
+  Image,
+  BackHandler} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setData, setErrorMessage } from '../../../redux';
+import routes from '../../../navigation/routes';
+import { RootState, setData, setErrorMessage, setroutes } from '../../../redux';
 
 import { sendAsset } from '../../../services';
-import { Loading } from '../../loading';
+import { MyAppText } from '../../common/appTexts';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import Loading from '../../loading';
 
 
 
 
 
-export const SendToken = ({navigation}) => {
+
+export const SendToken = () => {
+
+  const navigation=useNavigation()
 
   const [amount, setAmount] = React.useState('')
   const [success, setSuccess] = React.useState<Boolean>()
@@ -37,8 +44,7 @@ export const SendToken = ({navigation}) => {
   const address = useSelector((state: RootState)=>state.newAccount.address)
   const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
 
-  // console.log(mnemonic)
-
+ 
 
   const handleChangeAmount=(text:string)=>{
     console.log(text)
@@ -60,11 +66,11 @@ export const SendToken = ({navigation}) => {
       // console.log(res)
       if(res === 0){
         setLoading(false)
-        navigation.navigate('Success')
+        navigation.navigate(routes.SUCCESS)
       }else{
       
         setLoading(false)
-        navigation.navigate('Error')
+        navigation.navigate(routes.ERROR)
         dispatch(setErrorMessage(`${res.message}`))
       }
       
@@ -80,6 +86,31 @@ export const SendToken = ({navigation}) => {
     
   }
 
+  
+  const scanQR=()=>{
+    dispatch(setroutes(routes.SEND_TOKEN))
+    console.log(routes.SEND_TOKEN)
+
+    navigation.navigate(routes.SCAN_QR)
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+    
+        
+         navigation.navigate(routes.TOKEN)
+         return true
+       };
+    
+     
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
+
 
 
   return (
@@ -90,16 +121,16 @@ export const SendToken = ({navigation}) => {
 
               
           <View style={styles.token} >
-            <Text style={styles.tokenText}> Total jasiri balance</Text>
-            <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
-            <Text style={styles.tokenText}> $ {token.amount} USD</Text>
+            <MyAppText style={styles.tokenText}> Total jasiri balance</MyAppText>
+            <MyAppText style={styles.tokenText}> {token.amount} {token.unitName}</MyAppText>
+            <MyAppText style={styles.tokenText}> $ {token.amount} USD</MyAppText>
           </View>
          
           
           
           
          <View style={styles.transactionContainer}>
-         <Text style={styles.addressTitle}>Recipient Address</Text>
+         <MyAppText style={styles.addressTitle}>Recipient Address</MyAppText>
            <View style={styles.recipientqrContainer}>
            <TextInput 
            style={styles.addressInput} 
@@ -110,7 +141,7 @@ export const SendToken = ({navigation}) => {
 
            <TouchableOpacity 
             style={styles.qrInput}
-            onPress={()=>navigation.navigate('Scan QR')}
+            onPress={scanQR}
            >
              <Image source={require('../../../assets/qr.png')}></Image>
            </TouchableOpacity>
@@ -119,7 +150,7 @@ export const SendToken = ({navigation}) => {
         
         
           <View>
-        <Text style={styles.addressTitle}>Enter Amount</Text>
+        <MyAppText style={styles.addressTitle}>Enter Amount</MyAppText>
         <TextInput 
           style={styles.amountInput} 
           value={amount} 
@@ -133,10 +164,10 @@ export const SendToken = ({navigation}) => {
 
           <View>
         <TouchableOpacity style={styles.continueButton} onPress={()=>handleSend()}>
-         <Text style={styles.buttonText}> Continue</Text>
+         <MyAppText style={styles.buttonText}> Continue</MyAppText>
        </TouchableOpacity>
       {/* <ImagePickerExample/> */}
-       {/* {success == true?<Text>Successfully sent</Text>: success == false ?<Text>Failed to send sent</Text> : <Text></Text>} */}
+       {/* {success == true?<MyAppText>Successfully sent</MyAppText>: success == false ?<MyAppText>Failed to send sent</MyAppText> : <MyAppText></MyAppText>} */}
        </View>
        
         </View>

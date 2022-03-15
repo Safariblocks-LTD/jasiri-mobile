@@ -41,23 +41,32 @@ export const DashBoardNavigation = () => {
 
       }}
     >
-      <Tab.Group>
-        <Tab.Screen name="Main" component={Dashboard} />
+      
+        <Tab.Screen 
+          name="Main" 
+          component={Dashboard} 
+         options={{
+          title: 'Main',
+
+          header: () => <Header title={'Dashboard'} />,
+         }
+
+         }
+        
+        />
         <Tab.Screen name="Contacts" component={View} />
         <Tab.Screen name="Notification" component={View} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
-        <Tab.Screen name="Transact" component={Transact} />
-        <Tab.Screen name="Send" component={Transact} />
-        <Tab.Screen name="Token" component={Token}
-
+        {/* <Tab.Screen name="Transact" component={Transact} /> */}
+        <Tab.Screen name="Transact" component={Transact} 
+        options={{
+          
+        }}
         />
+        <Tab.Screen name="Token" component={Token}/>
         <Tab.Screen name="Scan QR" component={QrScanner} />
-        <Tab.Screen name="Receive" component={Receive}
-
-        />
-        <Tab.Screen name="Send token" component={SendToken}
-
-        />
+        <Tab.Screen name="Receive" component={Receive}/>
+        <Tab.Screen name="Send token" component={SendToken} />
         <Tab.Screen
           name="Wallet connect"
           component={WalletConnectComponent}
@@ -67,7 +76,7 @@ export const DashBoardNavigation = () => {
             header: () => <Header title={'Wallet connect'} />,
           }}
         />
-      </Tab.Group>
+      
     </Tab.Navigator>
   )
 }

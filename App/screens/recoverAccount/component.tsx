@@ -5,16 +5,20 @@ import { useDispatch } from 'react-redux'
 import { setIsLoggedIn, setAddress } from '../../redux'
 import { recoverAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Loading } from '../../components'
+
 import { setErrorMessage } from '../../redux'
 import { NormalButton } from '../../components/common'
+import routes from '../../navigation/routes'
+import { useNavigation } from '@react-navigation/native'
 
 // let mn = 'dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry'
 
 
-const RecoverAccount = ({navigation}) => {
+const RecoverAccount = () => {
     const [mnemonic, setMnemonic] = React.useState<string>('forward hat elbow gasp rude oppose apology estate kid rebel book faith perfect glove renew siege planet thing clarify goat security network bounce able you')
     const dispatch = useDispatch()
+
+    const navigation = useNavigation()
     
 
     const [loading, setLoading] = React.useState<boolean>()
@@ -36,15 +40,15 @@ const RecoverAccount = ({navigation}) => {
                 console.log(recovered.mnemonic)
                 await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
                 dispatch(setIsLoggedIn(true))
-                dispatch(setAddress(recovered.address))
+                // dispatch(setAddress(recovered.address))
                 // mnemonic && dispatch(setMnemonic(recovered.mnemonic)) 
-                navigation.navigate('Dash board')                
+                navigation.navigate(routes.DASHBOARD)                
                 setLoading(false)
             } 
             catch(e) {    
                 //
                 setLoading(false)
-                navigation.navigate('Error')
+                navigation.navigate(routes.ERROR)
                 dispatch(setErrorMessage('error reading value'))
                 console.log(' error reading value  ')
                 console.log(e)
@@ -82,7 +86,7 @@ const RecoverAccount = ({navigation}) => {
                     </View>
                 </View>
                 {/* loading */}
-                {loading && <Loading/>}
+               
                 <View style={styles.buttonContainer}>
                     <NormalButton style={styles.button} title={'Recover Account'} clickHandler={recover}/>
                 </View>
