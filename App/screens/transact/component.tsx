@@ -103,7 +103,7 @@ export const Transact = () => {
                 navigation.navigate(routes.ERROR)
 
                 console.log(res.error)
-                dispatch(setErrorMessage('error reading value'))
+                dispatch(setErrorMessage(res.error))
             }
             setAdded(true)
             console.log(res)
