@@ -1,6 +1,6 @@
 
 import * as React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
 import { setAddress, setMnemonic } from '../../redux'
@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NormalButton } from '../../components/common'
 
 
+import { styles } from './styles'
 
 export const CreateAccount = ({navigation}) => {
     const dispatch = useDispatch()
@@ -43,7 +44,7 @@ export const CreateAccount = ({navigation}) => {
                 </View>
                 <View style={styles.textBox}>
                     <Text style={styles.text}>
-                     Back up your account using a recovery passphrace 
+                     Back up your account{'\n'}using a recovery {'\n'}passphrase 
                     </Text>
                 </View>
                 <View style={styles.buttonContainer}>
@@ -61,54 +62,4 @@ export const CreateAccount = ({navigation}) => {
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-    },
 
-    content: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#FFFFFF',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    imageContainer: {
-        marginTop: 40,
-    },
-    textBox: {
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-        marginBottom: 70
-    },
-    buttonContainer: {
-        width: '80%',
-        justifyContent: 'center',
-        margin: 15,
-        marginBottom: 40
-    },
-    text: {
-        color: '#000000',
-        // fontFamily: 'Poppins',
-        fontStyle: 'normal',
-        fontWeight: '600',
-        fontSize: 30,
-    },
-    account: {
-        color: 'black',
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-        fontSize: 18,
-      },
-
-      button: {
-        alignItems: 'center',
-        backgroundColor: '#3BD5C2',
-        padding: 10,
-        width: '100%',
-        height: 42,
-        borderRadius: 15,
-      },
-})
