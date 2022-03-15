@@ -12,7 +12,8 @@ import {
   TextInput,
   Modal,
   Image,
-  BackHandler
+  BackHandler,
+  RefreshControl
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -33,6 +34,14 @@ export const Token = () => {
   const address = useSelector((state: RootState)=>state.newAccount.address)
 
   const [history, setHistory] = React.useState<object[]>()
+
+  const [refreshing, setRefreshing] = React.useState<boolean>(false)
+    
+
+    const onRefresh=()=>{
+        setRefreshing(true)
+    }
+
   
 
   React.useEffect(()=>{
@@ -42,10 +51,11 @@ export const Token = () => {
       // console.log(history)
       setHistory(history.transactions)
       console.log(history.transactions[0]['asset-transfer-transaction'])
+      setRefreshing(false)
       })()
     
    
-  },[address, token])
+  },[address, token, refreshing])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -67,7 +77,7 @@ export const Token = () => {
   
   return (
     
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
               
           <View style={styles.token} >

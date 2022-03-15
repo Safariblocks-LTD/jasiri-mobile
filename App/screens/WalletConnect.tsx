@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Alert, Image, BackHandler } from 'react-native'
+import { View, Text, ScrollView, Alert, Image, BackHandler, RefreshControl } from 'react-native'
 import { StyleSheet } from 'react-native'
 
 // import { accountInfo as getAccountInfo } from '../../services'
@@ -27,9 +27,16 @@ export const WalletConnectComponent = () => {
     const navigator = useNavigation()
     const [connections, setConnections] = React.useState<string>()
     const [connecting, setConnecting] = React.useState<boolean>()
+    const [refreshing, setRefreshing] = React.useState<boolean>(false)
+
+    const onRefresh=()=>{
+        setRefreshing(true)
+    }
 
     React.useEffect(() => {
+        setRefreshing(false)
         uri && (async () => {
+            
             const client = new WalletConnectClient({
                 uri: uri,
 
@@ -102,9 +109,10 @@ export const WalletConnectComponent = () => {
             !client.session.connected && client.createSession()
 
             console.log(client.session)
+           
 
         })();
-    }, [uri])
+    }, [uri, refreshing])
 
     React.useEffect(() => {
         console.log(connections)
@@ -153,7 +161,7 @@ export const WalletConnectComponent = () => {
 
     return (
 
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
             <View style={styles.container}>
 
 

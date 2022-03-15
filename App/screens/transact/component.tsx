@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet, Button, BackHandler } from 'react-native'
+import { View, Text, Image, StyleSheet, Button, BackHandler, RefreshControl } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { RootState, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
@@ -58,6 +58,14 @@ export const Transact = () => {
     const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
 
+    const [refreshing, setRefreshing] = React.useState<boolean>(false)
+    
+
+    const onRefresh=()=>{
+        setRefreshing(true)
+    }
+
+
     const navigation = useNavigation()
 
     React.useEffect(()=>{
@@ -74,13 +82,14 @@ export const Transact = () => {
         setAssets(assets)
         dispatch(setToken({amount: assets[0].amount, unitName:'JASIRI'}))
         // await assetInfo(account.assets[0].id)
+        setRefreshing(false)
         
 
         })();
 
 
 
-    }, [])
+    }, [refreshing])
 
     const handleCLickAddJasiri = () => {
         console.log('add jasiri')
@@ -118,7 +127,7 @@ export const Transact = () => {
     }
 
     return (
-        <ScrollView  >
+        <ScrollView  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
             <View style={styles.container}>
                 {
                     assets && assets?.length > 0 && assets.map((asset: Asset) =>

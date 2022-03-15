@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Image, BackHandler } from 'react-native'
+import { View, Text, ScrollView, Image, BackHandler, RefreshControl } from 'react-native'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle, Rect } from 'react-native-svg';
@@ -19,9 +19,14 @@ import routes from '../../navigation/routes';
 
 
 export const Dashboard = () => {
+    const [refreshing, setRefreshing] = React.useState<boolean>(false)
     const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
     const navigation=useNavigation()
+
+    const onRefresh=()=>{
+        setRefreshing(true)
+    }
 
     useFocusEffect(
         React.useCallback(() => {
@@ -57,16 +62,17 @@ export const Dashboard = () => {
         (async () => {
             const account = await getAccountInfo(address)
 
-        setAccountInfo(account)
+            setAccountInfo(account)
+            setRefreshing(false)
 
         })();
 
 
-    }, [address])
+    }, [address, refreshing])
 
     return (
 
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
             <View style={styles.container}>
 
                 <StyleText style={{ fontWeight: "bold" }}>
