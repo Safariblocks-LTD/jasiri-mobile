@@ -9,6 +9,7 @@ import { Container } from 'native-base';
 import { styles } from './styles';
 import { Center, Stack, VStack, Divider, Heading, HStack } from "native-base";
 import { Icon } from 'react-native-elements';
+import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
 
 
 const SeedPhrase = ({ navigation }) => {
@@ -18,7 +19,18 @@ const SeedPhrase = ({ navigation }) => {
   const handleClick = () => {
     navigation.navigate('Dash board')
   }
+    const styled = {
+        heading: (scale) => {
+            const fontSize = textStyles.fontSize * scale;
 
+            return {
+                lineHeight: fontSize * 1.4,
+                marginBottom: 12,
+                fontWeight: "500",
+                fontSize
+            };
+        }
+    }
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -31,14 +43,14 @@ const SeedPhrase = ({ navigation }) => {
                 size={40}
                 color="#55B2A6"
               />
-              <Center><Text style={styles.section1Text1}>Write down your passphrase</Text></Center>
+              <Center><MyAppText style={styles.section1Text1}>Write down your passphrase</MyAppText></Center>
             </HStack>
           </VStack>
           <View style={styles.section2}>
             <Center mb="3"ml="4">
-              <Text style={styles.section2Text2}>
+              <MyAppText style={styles.section2Text2}>
                 make sure you write it down and store it securely. If you lose it, you will lose access to your wallet. No one will help you recover it
-              </Text>
+              </MyAppText>
             </Center>
           </View>
         </Container>

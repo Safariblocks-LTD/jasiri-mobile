@@ -12,7 +12,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux';
 import { styles } from './styles';
-
+import Loader from '../components/loading';
 
 
 
@@ -56,7 +56,10 @@ export const Home = ({ navigation }) => {
             <Text style={styles.account}>add Account</Text>
           </TouchableOpacity>
         </View>
-      </View> || <Text>Checking credentials...</Text>}
+      </View> ||
+        <Text>Checking credentials...</Text>
+      // <Loader/>
+      }
     </>
 
   );

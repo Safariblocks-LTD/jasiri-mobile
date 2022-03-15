@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#fff',
-        padding: 10
+        padding: 10,
+        height:'100%'
     },
 
     first: {
