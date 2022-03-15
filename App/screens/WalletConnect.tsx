@@ -1,9 +1,6 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Image, Alert } from 'react-native'
+import { View, Text, ScrollView, Alert } from 'react-native'
 import { StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Svg, { Circle, Rect } from 'react-native-svg';
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 // import { accountInfo as getAccountInfo } from '../../services'
 // import { RootState } from '../../redux/store';
@@ -13,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import WalletConnectClient from '@walletconnect/client';
 import { RootState, setErrorMessage, setSuccessMessage } from '../redux';
 import routes from '../navigation/routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -27,19 +25,19 @@ export const WalletConnectComponent = () => {
     const [connecting, setConnecting] = React.useState<boolean>()
     
     React.useEffect(()=>{
-           uri && (()=>{
+           uri && (async()=>{
                const client = new WalletConnectClient({
                 uri: uri,
-            
+               
                 clientMeta: {
                 description: "WalletConnect Developer App",
                 url: "https://walletconnect.org",
                 icons: ["https://walletconnect.org/walletconnect-logo.png"],
                 name: "WalletConnect",
                 },
-                // storageOptions: {
-                //   asyncStorage: AsyncStorage,
-                // },
+                storageOptions: {
+                  asyncStorage: AsyncStorage,
+                },
                 
                 });
 
@@ -76,6 +74,7 @@ export const WalletConnectComponent = () => {
                     navigator.navigate(routes.ERROR)
                 }
                 console.log(payload)
+                client.approveRequest({})
                 console.log('success call_request')
                 Alert.alert(JSON.stringify(payload))
 
@@ -98,7 +97,7 @@ export const WalletConnectComponent = () => {
 
             !client.session.connected && client.createSession()
 
-            // console.log(client.session, client.approve({}))
+            console.log(client.session)
             
         })();
     }, [uri])

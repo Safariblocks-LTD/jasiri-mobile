@@ -1,5 +1,5 @@
 import WalletConnectClient from "@walletconnect/client";
-import { CLIENT_EVENTS } from "@walletconnect/client";
+import CLIENT_EVENTS  from "@walletconnect/client";
 import { SessionTypes } from "@walletconnect/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 

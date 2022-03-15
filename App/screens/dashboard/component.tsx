@@ -35,11 +35,11 @@ export const Dashboard = ({navigation}: any) => {
             <Text style={styles.title}>Dashboard</Text>
 
             <View style={styles.balance}> 
-                <Text>TOTAL BALANCE</Text> 
-                <Text>Algo: {accountInfo?accountInfo.amount: 'loading'}</Text> 
+                <Text style={styles.balanceText}>TOTAL BALANCE</Text> 
+                <Text style={styles.balanceText}>Algo: {accountInfo?accountInfo.amount: 'loading'}</Text> 
                 {accountInfo?accountInfo.assets.map(asset=>
-                <Text key={Math.random()}>JSR : {asset.amount}</Text>): <></>} 
-                <Text>USD</Text> 
+                <Text key={Math.random()} style={styles.balanceText}>JSR : {asset.amount}</Text>): <></>} 
+                <Text style={styles.balanceText}>USD</Text> 
             </View>
 
             <View style={styles.info}> 
@@ -79,6 +79,4 @@ export const Dashboard = ({navigation}: any) => {
         
     )
 }
-
-
 
