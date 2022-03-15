@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Alert, Image } from 'react-native'
+import { View, Text, ScrollView, Alert, Image, BackHandler } from 'react-native'
 import { StyleSheet } from 'react-native'
 
 // import { accountInfo as getAccountInfo } from '../../services'
@@ -14,11 +14,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleText, MyAppText, textStyles } from '../components/common/appTexts';
 import { ListItem, Icon, Avatar } from 'react-native-elements'
 import { Link, Box, Flex, HStack, Spacer, Badge, VStack } from "native-base";
+import { useFocusEffect } from '@react-navigation/native';
 
 
 export const WalletConnectComponent = () => {
 
-   
+    const navigation=useNavigation()
     const uri = useSelector((state: RootState)=>state.scanned.URI)
     const address = useSelector((state: RootState)=>state.newAccount.address)
 
@@ -131,6 +132,23 @@ export const WalletConnectComponent = () => {
         console.log(routes.WC)
        navigator.navigate(routes.SCAN_QR)
    }
+
+   useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+    
+        
+         navigation.navigate(routes.SETTINGS)
+         return true
+       };
+    
+     
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
 
 
     return (

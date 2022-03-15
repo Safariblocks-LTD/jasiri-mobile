@@ -8,5 +8,6 @@ export default  {
     WC: 'Wallet connect',
     TOKEN: 'Token',
     TRANSACT: 'Transact',
-    DASHBOARD: 'Dash board'
+    DASHBOARD: 'Dash board',
+    SETTINGS: 'Settings'
 }
