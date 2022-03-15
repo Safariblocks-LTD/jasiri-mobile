@@ -1,9 +1,6 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Image, Alert } from 'react-native'
+import { View, Text, ScrollView, Alert } from 'react-native'
 import { StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Svg, { Circle, Rect } from 'react-native-svg';
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 // import { accountInfo as getAccountInfo } from '../../services'
 // import { RootState } from '../../redux/store';
@@ -12,6 +9,8 @@ import { NormalButton } from '../components/common';
 import { useNavigation } from '@react-navigation/native';
 import WalletConnectClient from '@walletconnect/client';
 import { RootState, setErrorMessage, setSuccessMessage } from '../redux';
+import routes from '../navigation/routes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
@@ -26,28 +25,28 @@ export const WalletConnectComponent = () => {
     const [connecting, setConnecting] = React.useState<boolean>()
     
     React.useEffect(()=>{
-           uri && (()=>{
+           uri && (async()=>{
                const client = new WalletConnectClient({
                 uri: uri,
-            
+               
                 clientMeta: {
                 description: "WalletConnect Developer App",
                 url: "https://walletconnect.org",
                 icons: ["https://walletconnect.org/walletconnect-logo.png"],
                 name: "WalletConnect",
                 },
-                // storageOptions: {
-                //   asyncStorage: AsyncStorage,
-                // },
+                storageOptions: {
+                  asyncStorage: AsyncStorage,
+                },
                 
-            });
+                });
 
             client.on("session_request", (error, payload) => {
                 setConnecting(true);
                 if (error) {
                     dispatch(setErrorMessage(error.message))
                     setConnecting(false);
-                    navigator.navigate('Error')
+                    navigator.navigate(routes.ERROR)
                     return
                 }else{
                     console.log('success session_request')
@@ -72,9 +71,10 @@ export const WalletConnectComponent = () => {
             client.on("call_request", (error, payload) => {
                 if (error) {
                     dispatch(setErrorMessage(error.message))
-                    navigator.navigate('Error')
+                    navigator.navigate(routes.ERROR)
                 }
                 console.log(payload)
+                client.approveRequest({})
                 console.log('success call_request')
                 Alert.alert(JSON.stringify(payload))
 
@@ -84,7 +84,7 @@ export const WalletConnectComponent = () => {
             client.on("disconnect", (error, payload) => {
                 if (error) {
                     dispatch(setErrorMessage(error.message))
-                    navigator.navigate('Error')
+                    navigator.navigate(routes.ERROR)
                 }
 
                 console.log(payload)
@@ -97,7 +97,7 @@ export const WalletConnectComponent = () => {
 
             !client.session.connected && client.createSession()
 
-            // console.log(client.session, client.approve({}))
+            console.log(client.session)
             
         })();
     }, [uri])
@@ -109,7 +109,7 @@ export const WalletConnectComponent = () => {
         
     
    const handleClick=()=>{
-       navigator.navigate('Scan QR')
+       navigator.navigate(routes.SCAN_QR)
    }
 
     return (

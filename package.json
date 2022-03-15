@@ -32,7 +32,7 @@
     "@reduxjs/toolkit": "^1.7.1",
     "@tradle/react-native-http": "^2.0.1",
     "@types/react-redux": "^7.1.20",
-    "@walletconnect/client": "^1.7.1",
+    "@walletconnect/client": "^1.7.5",
     "algosdk": "^1.13.1",
     "assert": "^1.5.0",
     "asyncstorage-down": "^4.2.0",

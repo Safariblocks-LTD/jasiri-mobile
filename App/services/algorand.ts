@@ -16,9 +16,12 @@ const algodToken = {
     'X-API-Key': '7ghDyOxiGX2spbgEoIHJ04hsn8ZClPuy6SY6d0ri'
 }
 const algodServer = 'https://testnet-algorand.api.purestake.io/ps2';
+const algoIServer = 'https://testnet-algorand.api.purestake.io/idx2'
 const algodPort = '';
 const algodClient = new algosdk.Algodv2(algodToken, algodServer, algodPort); 
-const indexerClient = new algosdk.Indexer(algodToken, algodServer, algodPort);
+const indexerClient = new algosdk.Indexer(algodToken, algoIServer, algodPort);
+
+
 
 // const kmdport = 4002;
 
@@ -33,12 +36,27 @@ const indexerClient = new algosdk.Indexer(algodToken, algodServer, algodPort);
 // let walletid = null;
 // let wallethandle = null;
 
-export const assetInfo=async(assetId:number)=>{
+export  async function transactionHistory(acct: string){
+    // indexer/javascript/AccountInfoBlock.js
+  try{       
+        let round = 5;
+        let accountInfo = await indexerClient.searchForTransactions()
+           .address(acct).do()
+        // console.log("Information for Account at block: " + JSON.stringify(accountInfo, undefined, 2));
+        return accountInfo
+    }catch(e) {
+        console.log(e);
+        console.trace();
+    }
+   
+}
+
+export const assetInfo=async()=>{
     (async () => {
         let assetIndex = 2044572;
         let assetInfo = await indexerClient.searchForAssets()
             .index(assetIndex).do();
-        console.log("Information for Asset: " + JSON.stringify(assetInfo, undefined, 2));
+        return JSON.stringify(assetInfo, undefined, 2)
     })().catch(e => {
         console.log(e);
         console.trace();
@@ -59,7 +77,7 @@ export const createAccount= ()=> {
         
         const addr = myaccount.addr
         const mnemonic = algosdk.secretKeyToMnemonic(myaccount.sk)
-        console.log(mnemonic)
+      
 
         return {address: addr, mnemonic};
     }
@@ -146,7 +164,6 @@ export const sendAsset=async (
         const enc = new TextEncoder();
         const note = enc.encode(desc);
         
-        let closeout = stripped; //closeRemainderTo
         let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, stripped, undefined, undefined, amount, note, assetIndex, params)
         // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
         const account = algosdk.mnemonicToSecretKey(mnemonic)
@@ -160,9 +177,7 @@ export const sendAsset=async (
 
         // Wait for confirmation
         let confirmedTxn = await waitForConfirmation(algodClient, txId, 4);       
-        var string = new TextDecoder().decode(confirmedTxn.txn.txn.note);
         accountInfo = await algodClient.accountInformation(sender).do();
-        let closeoutamt = startingAmount - confirmedTxn.txn.txn.amt - confirmedTxn.txn.txn.fee;        
         return 0
 
     }catch(e){
@@ -226,8 +241,7 @@ export async function optIn(mnemonic: string, assetId: number) {
         //Get the completed Transaction
         console.log("Transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
         //You should now see the new asset listed in the account information
-        console.log("Bob's Account Opts In = " + addr);
-       
+      
         return 0;
     
     }catch(e){

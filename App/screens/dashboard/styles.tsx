@@ -19,6 +19,9 @@ export const styles = StyleSheet.create({
         margin: 30,
         fontWeight: 'bold'
     },
+    balanceText: {
+        fontWeight: 'bold'
+    },
     balance: {
         backgroundColor: '#F8FDFD',
         minHeight: '10%',

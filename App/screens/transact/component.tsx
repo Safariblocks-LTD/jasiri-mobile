@@ -10,8 +10,12 @@ import { setErrorMessage } from '../../redux'
 import { Loading } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { AssetButton, NormalButton } from '../../components/common'
+
 import { Badge, VStack, Center } from 'native-base';
 import { styles } from "./styles";
+
+import routes from '../../navigation/routes'
+
 
 const AssetInfo = ({ asset }) => {
     return (
@@ -43,7 +47,7 @@ const assetInfoStyles = StyleSheet.create({
 
 
 export const Transact = () => {
-    const [assets, setAssets] = React.useState<Array<Asset>>()
+    const [assets, setAssets] = React.useState<Array<Asset>>([])
     const [loading, setLoading] = React.useState<boolean>()
 
     const [added, setAdded] = React.useState<boolean>()
@@ -56,20 +60,21 @@ export const Transact = () => {
 
     const navigation = useNavigation()
 
-    React.useEffect(() => {
-        (async () => {
-            const account = await getAccountInfo(address)
-            console.log(account.assets[0])
-            if (account.error) {
-                dispatch(setErrorMessage(`${account.error}`))
-                navigation.navigate('Error')
-            }
+    React.useEffect(()=>{
+        (async()=> {
+        const account = await getAccountInfo(address)
+        console.log(account.assets[0])
+        if(account.error){
+            dispatch(setErrorMessage(`${account.error}`))
+            navigation.navigate(routes.ERROR)
+        }
 
-            const assets: Partial<Asset[]> = account.assets
-
-            setAssets(assets)
-            dispatch(setToken({ amount: assets[0].amount, unitName: 'JASIRI' }))
-            // await assetInfo(account.assets[0].id)
+        const assets: Partial<Asset[]> = account.assets
+        
+        setAssets(assets)
+        dispatch(setToken({amount: assets[0].amount, unitName:'JASIRI'}))
+        // await assetInfo(account.assets[0].id)
+        
 
         })();
 
@@ -81,10 +86,13 @@ export const Transact = () => {
         console.log('add jasiri')
         const assetId = 67513364;
         setLoading(true);
-        (async () => {
-            const res = await optIn(mnemonic, assetId)
-            if (res.error) {
-                navigation.navigate('Error')
+
+
+        (async()=>{
+            const res = await optIn(mnemonic,assetId)
+            if(res.error){
+                navigation.navigate(routes.ERROR)
+
                 console.log(res.error)
                 dispatch(setErrorMessage('error reading value'))
             }
@@ -99,16 +107,12 @@ export const Transact = () => {
 
     const handleCLickReceive = () => {
         console.log('button click')
-        navigation.navigate('Receive')
+        navigation.navigate(routes.RECIEVE_TOKEN)
     }
 
 
-    const handleCLick = (asset: Asset) => {
-
-        console.log(asset)
-
-        dispatch(setToken(asset))
-        navigation.navigate('Token')
+    const handleCLick=(asset: Asset)=>{
+        navigation.navigate(routes.SEND_RECIEVE_SCREEN)
 
     }
 

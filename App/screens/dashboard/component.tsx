@@ -19,6 +19,7 @@ export const Dashboard = ({ navigation }: any) => {
     const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
 
+
     const styled = {
         heading: (scale) => {
             const fontSize = textStyles.fontSize * scale;
@@ -34,18 +35,31 @@ export const Dashboard = ({ navigation }: any) => {
     React.useEffect(() => {
         (async () => {
             const account = await getAccountInfo(address)
-            console.log(account)
+
+        setAccountInfo(account)
+
         })();
 
 
-    })
+    }, [address])
 
     return (
 
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
+
                 <StyleText style={{ fontWeight: "bold" }}>
                     <MyAppText style={{ alignSelf: 'center' }}>Dashboard</MyAppText>
+
+
+            <View style={styles.balance}> 
+                <Text style={styles.balanceText}>TOTAL BALANCE</Text> 
+                <Text style={styles.balanceText}>Algo: {accountInfo?accountInfo.amount: 'loading'}</Text> 
+                {accountInfo?accountInfo.assets.map(asset=>
+                <Text key={Math.random()} style={styles.balanceText}>JSR : {asset.amount}</Text>): <></>} 
+                <Text style={styles.balanceText}>USD</Text> 
+            </View>
+
 
                     <View style={styles.balance}>
                         <MyAppText>TOTAL BALANCE</MyAppText>
@@ -92,6 +106,4 @@ export const Dashboard = ({ navigation }: any) => {
 
     )
 }
-
-
 
