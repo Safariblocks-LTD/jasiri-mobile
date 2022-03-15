@@ -39,6 +39,7 @@ export const styles = StyleSheet.create({
     quickActions: {
         // backgroundColor: '#fff',
         // minHeight: '20%',
+        paddingTop:30,
         margin: 10,
         width: '85%',
         // borderRadius: 20,

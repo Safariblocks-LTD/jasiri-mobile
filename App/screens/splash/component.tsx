@@ -21,16 +21,16 @@ const Splash = ({navigation}) => {
       //Check if user_id is set or not
       //If not then send for Authentication
       //else send to Home Screen
-      // AsyncStorage.getItem('user_id').then((value) =>
-      //   navigation.navigate('Home'),
-      // );
-      navigation.navigate('Home')
-    }, 5000);
+      AsyncStorage.getItem('user_id').then((value) =>
+        navigation.navigate('Home'),
+      );
+      // navigation.navigate('Home')
+    }, 3000);
   }, []);
 
   return (
     <View style={styles.container}>
-      {/* <Image
+      <Image
         source={require('../../assets/jasiri.gif')}
         style={{width: '80%', resizeMode: 'contain', margin: 30}}
       />
@@ -39,8 +39,8 @@ const Splash = ({navigation}) => {
         color="#FFFFFF"
         size="large"
         style={styles.activityIndicator}
-      /> */}
-      <Loader loading={true}/>
+      />
+      {/* <Loader loading={true}/> */}
     </View>
   );
 };

@@ -9,71 +9,87 @@ import { accountInfo as getAccountInfo } from '../../services'
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
 import { styles } from './styles';
+import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
+import appStyles from '../../components/common/appStyles'
 
 
 
 
-
-export const Dashboard = ({navigation}: any) => {
-    const address = useSelector((state: RootState)=>state.newAccount.address)
+export const Dashboard = ({ navigation }: any) => {
+    const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
-    
-    React.useEffect(()=>{
-        (async()=> {
-        const account = await getAccountInfo(address)
-        console.log(account)
+
+    const styled = {
+        heading: (scale) => {
+            const fontSize = textStyles.fontSize * scale;
+
+            return {
+                lineHeight: fontSize * 1.4,
+                marginBottom: 12,
+                fontWeight: "500",
+                fontSize
+            };
+        }
+    }
+    React.useEffect(() => {
+        (async () => {
+            const account = await getAccountInfo(address)
+            console.log(account)
         })();
-        
+
 
     })
 
     return (
-        
+
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
-            <Text style={styles.title}>Dashboard</Text>
+                <StyleText style={{ fontWeight: "bold" }}>
+                    <MyAppText style={{ alignSelf: 'center' }}>Dashboard</MyAppText>
 
-            <View style={styles.balance}> 
-                <Text>TOTAL BALANCE</Text> 
-                <Text>{accountInfo?accountInfo.account.assets[0].amount: 'loading'}</Text> 
-                <Text>USD</Text> 
-            </View>
-
-            <View style={styles.info}> 
+                    <View style={styles.balance}>
+                        <MyAppText>TOTAL BALANCE</MyAppText>
+                        <MyAppText>{accountInfo ? accountInfo.account.assets[0].amount : '$0.00'}</MyAppText>
+                        <MyAppText>USD</MyAppText>
+                    </View>
+                </StyleText>
+                <View style={styles.info}>
 
                 </View>
+                <StyleText style={{ fontWeight: "bold" }}>
+                    <MyAppText style={{ alignSelf: 'flex-start' }}>Quick actions</MyAppText>
+                </StyleText>
 
-                <Text style={{alignSelf: 'flex-start',...styles.title}}>Quick actions</Text>
 
-                <View style={styles.quickActions}> 
+                <View style={styles.quickActions}>
                     <TouchableOpacity style={styles.quickActionsItem}>
-                    <Image
-                        // style={styles.tinyLogo}
-                        source={require('../../assets/hand.png')}
-                    />
-                    <Text style={styles.tinyText}> Tokenization </Text>
+                        <Image
+                            // style={styles.tinyLogo}
+                            source={require('../../assets/hand.png')}
+                        />
+                        <MyAppText style={styles.tinyText}> Tokenization </MyAppText>
                     </TouchableOpacity>
-                    <TouchableOpacity  style={styles.quickActionsItem}>
-                    <Image
-                        // style={styles.tinyLogo}
-                        source={require('../../assets/dollar.png')}
-                    />
-                    <Text style={styles.tinyText}> Cash commit </Text>
+                    <TouchableOpacity style={styles.quickActionsItem}>
+                        <Image
+                            // style={styles.tinyLogo}
+                            source={require('../../assets/dollar.png')}
+                        />
+                        <MyAppText style={styles.tinyText}> Cash commit </MyAppText>
                     </TouchableOpacity>
-                    <TouchableOpacity  style={styles.quickActionsItem}>
-                    <Image
-                        // style={styles.tinyLogo}
-                        source={require('../../assets/pie.png')}
-                    />
-                    <Text style={styles.tinyText}> Rewards </Text>
+                    <TouchableOpacity style={styles.quickActionsItem}>
+                        <Image
+                            // style={styles.tinyLogo}
+                            source={require('../../assets/pie.png')}
+                        />
+                        <MyAppText style={styles.tinyText}> Rewards </MyAppText>
                     </TouchableOpacity>
 
                 </View>
             </View>
-            
+
 
         </ScrollView>
-        
+
     )
 }
 
