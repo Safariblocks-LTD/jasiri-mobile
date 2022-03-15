@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { accountInfo as getAccountInfo, assetInfo, optIn } from '../../services'
 import { Asset } from '../../types'
 import { setErrorMessage } from '../../redux'
-import { Loading } from '../../components'
+
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { AssetButton, NormalButton } from '../../components/common'
 
@@ -147,7 +147,7 @@ export const Transact = () => {
 
 
 
-                        {loading && <Loading />}
+                        
                     </>
 
 

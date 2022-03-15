@@ -76,7 +76,7 @@ export const Dashboard = () => {
             <View style={styles.balance}> 
                 <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
                 <MyAppText style={styles.balanceText}>Algo: {accountInfo?accountInfo.amount: 'loading'}</MyAppText> 
-                {accountInfo?accountInfo.assets.map(asset=>
+                {(accountInfo && accountInfo.assets) ?accountInfo.assets.map(asset=>
                 <MyAppText key={Math.random()} style={styles.balanceText}>JSR : {asset.amount}</MyAppText>): <></>} 
                 <MyAppText style={styles.balanceText}>USD</MyAppText> 
             </View>
