@@ -8,6 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { accountInfo as getAccountInfo } from '../../services'
 import { RootState } from '../../redux/store';
 import { useSelector } from 'react-redux';
+import { styles } from './styles';
 
 
 
@@ -78,66 +79,4 @@ export const Dashboard = ({navigation}: any) => {
         
     )
 }
-
-const styles = StyleSheet.create({
-    scrollView: {
-       flex: 1,
-       padding: 10
-    },
-    
-    container: {
-        // flex: 1,
-        alignItems: 'center',
-        height: 800,
-        // borderWidth: 1
-    },
-    title: {
-        textAlign: 'center',
-        fontSize: 20,
-        margin: 30,
-        fontWeight: 'bold'
-    },
-    balanceText: {
-        fontWeight: 'bold'
-    },
-    balance: {
-        backgroundColor: '#fff',
-        minHeight: '10%',
-        margin: 5,
-        width: '85%',
-        borderRadius: 20,
-        padding: 20
-    },
-
-    info: {
-        backgroundColor: '#fff',
-        minHeight: '20%',
-        margin: 10,
-        width: '85%',
-        borderRadius: 20
-    },
-
-    quickActions: {
-        // backgroundColor: '#fff',
-        // minHeight: '20%',
-        margin: 10,
-        width: '85%',
-        borderRadius: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    },
-    quickActionsItem: {
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 80,
-        height: 60,
-        borderRadius: 10
-    },
-    tinyText:{
-        color: 'black',
-        fontSize: 12,
-        fontWeight: 'bold'
-    }
-})
 

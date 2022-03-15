@@ -7,6 +7,7 @@ import { StyleSheet } from 'react-native';
 import { View } from 'react-native';
 import { TabBar } from './tab-bar';
 import { Text } from 'react-native';
+import { Button, Icon } from 'react-native-elements';
 
 
 import { createStackNavigator } from "@react-navigation/stack"
@@ -22,6 +23,7 @@ import { WalletConnectComponent } from '../screens/WalletConnect';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Token } from '../screens';
 
+import Splash from '../screens/splash/component';
 
 const Stack = createNativeStackNavigator()
 
@@ -106,21 +108,76 @@ export const AuthenticationNavigation=()=>{
   return (
 
     <Stack.Navigator
-    initialRouteName="Home"
-     screenOptions={{
-         header: ()=><View></View>
-     }}
+      initialRouteName="Splash"
+      
+    //  screenOptions={{
+    //      header: ()=><View></View>
+    //  }}
      >
-        <Stack.Group>
-          <Stack.Screen name="Home" component={Home} />   
-          <Stack.Screen name="Registration" component={Registration} />   
-          <Stack.Screen name="Create Account" component={CreateAccount} />    
-          <Stack.Screen name="Recover Account" component={RecoverAccount} />   
-          <Stack.Screen name="Seed Phrase" component={SeedPhrase} /> 
-          <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage} /> 
-          <Stack.Screen name="Dash board" component={DashBoardNavigation} /> 
-          <Stack.Screen name="Error" component={Error} /> 
-          <Stack.Screen name="Success" component={Success} /> 
+      <Stack.Group>
+                <Stack.Screen name="Splash" component={Splash}
+          options={{
+          header: ()=><View></View>
+      
+        }}/>
+        <Stack.Screen name="Home" component={Home}
+          options={{
+          header: ()=><View></View>
+      
+        }}/>   
+        <Stack.Screen name="Registration" component={Registration}
+              options={{
+           headerTitle: props =>  null,
+            headerRight: () => (
+            <Button
+              // onPress={() => navigation.navigate("Splash")}
+                title="Skip"
+                 containerStyle={{
+                  marginHorizontal: 20,
+                  marginVertical: 10,
+                }}
+                type="clear"
+                titleStyle={{ color: '#42BDB6' }}
+            />
+          ),
+        }}/>   
+        <Stack.Screen name="Create Account" component={CreateAccount}
+           options={{
+          headerTitle: props =>  null,
+        }}
+       />    
+        <Stack.Screen name="Recover Account" component={RecoverAccount}
+         options={{
+          header: ()=><View></View>
+      
+        }}/>   
+        <Stack.Screen name="Seed Phrase" component={SeedPhrase}
+          options={{
+            headerTitle: props => null,
+            headerStyle: {
+  height: 60, // Specify the height of your custom header
+}
+        }}/> 
+        <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage}
+         options={{
+          header: ()=><View></View>
+      
+        }}/> 
+        <Stack.Screen name="Dash board" component={DashBoardNavigation}
+         options={{
+          header: ()=><View></View>
+      
+        }}/> 
+        <Stack.Screen name="Error" component={Error}
+         options={{
+          header: ()=><View></View>
+      
+        }}/> 
+        <Stack.Screen name="Success" component={Success}
+         options={{
+          header: ()=><View></View>
+      
+        }}/> 
         </Stack.Group>
       </Stack.Navigator> 
 
@@ -133,6 +190,7 @@ const styles= StyleSheet.create({
     // position: 'relative',
     // backgroundColor: '#fff',
   },
+
 })
 
 
