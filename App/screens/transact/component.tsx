@@ -10,6 +10,7 @@ import { setErrorMessage } from '../../redux'
 import { Loading } from '../../components'
 import { useNavigation } from '@react-navigation/native'
 import { AssetButton, NormalButton } from '../../components/common'
+import routes from '../../navigation/routes'
 
 
 const AssetInfo=({asset})=>{
@@ -42,7 +43,7 @@ const assetInfoStyles = StyleSheet.create({
 
 
 export const Transact = () => {
-    const [assets, setAssets] = React.useState<Array<Asset>>()
+    const [assets, setAssets] = React.useState<Array<Asset>>([])
     const [loading, setLoading] = React.useState<boolean>()
 
     const [added, setAdded] = React.useState<boolean>()
@@ -61,7 +62,7 @@ export const Transact = () => {
         console.log(account.assets[0])
         if(account.error){
             dispatch(setErrorMessage(`${account.error}`))
-            navigation.navigate('Error')
+            navigation.navigate(routes.ERROR)
         }
 
         const assets: Partial<Asset[]> = account.assets
@@ -83,7 +84,7 @@ export const Transact = () => {
         (async()=>{
             const res = await optIn(mnemonic,assetId)
             if(res.error){
-                navigation.navigate('Error')
+                navigation.navigate(routes.ERROR)
                 console.log(res.error)
                 dispatch(setErrorMessage('error reading value'))
             }
@@ -98,16 +99,12 @@ export const Transact = () => {
 
     const handleCLickReceive=()=>{
         console.log('button click')
-        navigation.navigate('Receive')
+        navigation.navigate(routes.RECIEVE_TOKEN)
     }
   
 
     const handleCLick=(asset: Asset)=>{
-       
-        console.log(asset)
-        
-        dispatch(setToken(asset))
-        navigation.navigate('Token')
+        navigation.navigate(routes.SEND_RECIEVE_SCREEN)
         
     }
     

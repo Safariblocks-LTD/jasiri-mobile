@@ -39,7 +39,7 @@ export  const  QrScanner =()=>{
   React.useEffect(() => { 
       scannedData && dispatch(setData(scannedData));
 
-      setScannedData(null);
+      // setScannedData(null);
       const history = navigator.getState().routeNames;
       (scannedData && navigator.navigate(history[history.length - 1])) 
       // (scannedData && navigation.navigate('Send token'))
@@ -63,7 +63,7 @@ export  const  QrScanner =()=>{
     const history = navigator.getState().routeNames
     console.log(history)
     // navigator.navigate(history[history.length - 1])
-  //  navigator.goBack()
+   navigator.goBack()
 
   }
 

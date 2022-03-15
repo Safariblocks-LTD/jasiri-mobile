@@ -21,10 +21,11 @@ export const Dashboard = ({navigation}: any) => {
         (async()=> {
         const account = await getAccountInfo(address)
         console.log(account)
+        setAccountInfo(account)
         })();
         
 
-    })
+    }, [address])
 
     return (
         
@@ -34,7 +35,9 @@ export const Dashboard = ({navigation}: any) => {
 
             <View style={styles.balance}> 
                 <Text>TOTAL BALANCE</Text> 
-                <Text>{accountInfo?accountInfo.account.assets[0].amount: 'loading'}</Text> 
+                <Text>Algo: {accountInfo?accountInfo.amount: 'loading'}</Text> 
+                {accountInfo?accountInfo.assets.map(asset=>
+                <Text key={Math.random()}>JSR : {asset.amount}</Text>): <></>} 
                 <Text>USD</Text> 
             </View>
 

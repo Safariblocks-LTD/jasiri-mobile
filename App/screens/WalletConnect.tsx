@@ -12,6 +12,7 @@ import { NormalButton } from '../components/common';
 import { useNavigation } from '@react-navigation/native';
 import WalletConnectClient from '@walletconnect/client';
 import { RootState, setErrorMessage, setSuccessMessage } from '../redux';
+import routes from '../navigation/routes';
 
 
 
@@ -40,14 +41,14 @@ export const WalletConnectComponent = () => {
                 //   asyncStorage: AsyncStorage,
                 // },
                 
-            });
+                });
 
             client.on("session_request", (error, payload) => {
                 setConnecting(true);
                 if (error) {
                     dispatch(setErrorMessage(error.message))
                     setConnecting(false);
-                    navigator.navigate('Error')
+                    navigator.navigate(routes.ERROR)
                     return
                 }else{
                     console.log('success session_request')
@@ -72,7 +73,7 @@ export const WalletConnectComponent = () => {
             client.on("call_request", (error, payload) => {
                 if (error) {
                     dispatch(setErrorMessage(error.message))
-                    navigator.navigate('Error')
+                    navigator.navigate(routes.ERROR)
                 }
                 console.log(payload)
                 console.log('success call_request')
@@ -84,7 +85,7 @@ export const WalletConnectComponent = () => {
             client.on("disconnect", (error, payload) => {
                 if (error) {
                     dispatch(setErrorMessage(error.message))
-                    navigator.navigate('Error')
+                    navigator.navigate(routes.ERROR)
                 }
 
                 console.log(payload)
@@ -109,7 +110,7 @@ export const WalletConnectComponent = () => {
         
     
    const handleClick=()=>{
-       navigator.navigate('Scan QR')
+       navigator.navigate(routes.SCAN_QR)
    }
 
     return (

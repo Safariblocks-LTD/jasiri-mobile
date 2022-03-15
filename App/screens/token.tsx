@@ -1,6 +1,7 @@
 // React Native Bottom Navigation
 // https://aboutreact.com/react-native-bottom-navigation/
 
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import {
   TouchableOpacity,
@@ -16,14 +17,34 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '../redux';
+import routes  from '../navigation/routes';
+import { transactionHistory } from '../services';
 
 
-export const Token = (props: { route, navigation}) => {
+export const Token = () => {
  
-  
+  const navigation = useNavigation()
+
+  // console.log(navigation.)
   
   const dispatch = useDispatch()
   const token = useSelector((state: RootState)=>state.token.token)
+  const address = useSelector((state: RootState)=>state.newAccount.address)
+
+  const [history, setHistory] = React.useState<object[]>()
+  
+
+  React.useEffect(()=>{
+   
+      (async ()=>{
+      const history =  await transactionHistory(address)
+      // console.log(history)
+      setHistory(history.transactions)
+      console.log(history.transactions[0]['asset-transfer-transaction'])
+      })()
+    
+   
+  },[address, token])
   
   return (
     
@@ -39,20 +60,30 @@ export const Token = (props: { route, navigation}) => {
           <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={()=>props.navigation.navigate('Send token')}
+            onPress={()=>navigation.navigate(routes.SEND_TOKEN)}
           >
             <Text style={styles.buttonText}>Send</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.button}
-            onPress={()=>props.navigation.navigate('Receive')}
+            onPress={()=>navigation.navigate(routes.RECIEVE_TOKEN)}
             >
             <Text style={styles.buttonText}>Receive</Text>
           </TouchableOpacity>
           </View>
           <View style={styles.transactions}>
           <Text style={styles.transactionHeader}>TRANSACTION HISTORY</Text>
+          {history && history.map((item, index)=>{
+          let i = item['asset-transfer-transaction']
+          return (<ScrollView key={Math.random()}>
+          <Text style={styles.historyText}>{index + 1}{':'} {`${item.id.slice(0, 15)} ...`} </Text>
+          <Text style={styles.historySubText}>Amount: {i && i.amount} </Text>
+          <Text style={styles.historySubText}>Receiver: {i && i.receiver.slice(0, 15)}{'...'} </Text>
+          <Text style={styles.historySubText}>Asset: {i && i['asset-id']} </Text>
+          </ScrollView>)
+          })}
+
           </View>
           
 
@@ -70,6 +101,7 @@ const styles = StyleSheet.create({
   transactionHeader: {
     alignSelf: 'flex-start',
     fontWeight: 'bold',
+    margin: 5
     // borderWidth: 3
   },
   container: {
@@ -80,6 +112,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
    
     // marginTop: 0
+  },
+  historyText: {
+    margin: 2,
+  },
+  historySubText: {
+    fontSize: 11,
+    fontWeight: 'bold'
   },
   transactionContainer: {
     width: '85%',
