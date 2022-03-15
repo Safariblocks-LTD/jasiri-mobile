@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  
+  Text,
   TextInput,
   Image,
   BackHandler,
@@ -15,7 +15,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../../navigation/routes';
-import { RootState, setData, setErrorMessage, setroutes } from '../../../redux';
+import { RootState, setData, setErrorMessage, setroutes, setSuccessMessage } from '../../../redux';
 
 import { sendAsset } from '../../../services';
 import { MyAppText } from '../../common/appTexts';
@@ -73,6 +73,8 @@ export const SendToken = () => {
       // console.log(res)
       if(res === 0){
         setLoading(false)
+        dispatch(setroutes(routes.SEND_RECIEVE_SCREEN))
+        dispatch(setSuccessMessage('sent'))
         navigation.navigate(routes.SUCCESS)
       }else{
       
@@ -167,7 +169,7 @@ export const SendToken = () => {
           onChangeText={text=>handleChangeAmount(text)}
           placeholder='e.g 100'
         />
-         {loading && <Loading/>}
+         {loading && <Text>Loading...</Text>}
         </View>
        
 

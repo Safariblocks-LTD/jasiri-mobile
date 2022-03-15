@@ -1,5 +1,6 @@
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import * as React from 'react'
-import { View, StyleSheet, Image, Text } from 'react-native'
+import { View, StyleSheet, Image, Text, BackHandler } from 'react-native'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux'
 
@@ -10,6 +11,29 @@ export const Success = () => {
     
     const message = useSelector((state: RootState)=>state.success.message)
     // console.log(error)
+
+    const back = useSelector((state: RootState)=>state.routes.back)
+    // console.log(error)
+
+    const navigation= useNavigation()
+
+    useFocusEffect(
+      React.useCallback(() => {
+        const onBackPress = () => {
+      
+          
+           navigation.navigate(back)
+           return true
+         };
+      
+       
+        BackHandler.addEventListener('hardwareBackPress', onBackPress);
+  
+        return () =>
+          BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+      }, [])
+    );
+
 
     return (
         <View style={styles.container} >

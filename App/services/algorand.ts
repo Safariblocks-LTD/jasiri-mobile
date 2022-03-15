@@ -53,7 +53,7 @@ export  async function transactionHistory(acct: string){
 
 export const assetInfo=async()=>{
     (async () => {
-        let assetIndex = 2044572;
+        let assetIndex = 67513364;
         let assetInfo = await indexerClient.searchForAssets()
             .index(assetIndex).do();
         return JSON.stringify(assetInfo, undefined, 2)
@@ -157,6 +157,8 @@ export const sendAsset=async (
         
         let startingAmount = accountInfo.amount;
 
+        console.log(assetIndex)
+
 
         let params = await algodClient.getTransactionParams().do();
         // comment out the next two lines to use suggested fee
@@ -164,9 +166,12 @@ export const sendAsset=async (
         const enc = new TextEncoder();
         const note = enc.encode(desc);
         
-        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, stripped, undefined, undefined, amount, note, assetIndex, params)
-        // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, receiver, amount, undefined, note, params);
-        const account = algosdk.mnemonicToSecretKey(mnemonic)
+        
+        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, stripped, undefined, undefined, amount, note, 67513364, params)
+        // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, stripped, amount, undefined, note, params);
+        const account = algosdk.mnemonicToSecretKey(mnemonic.trim())
+
+        console.log(addrr)
 
         // Sign the transaction
         let signedTxn = txn.signTxn(account.sk);
