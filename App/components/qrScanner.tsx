@@ -43,6 +43,7 @@ export  const  QrScanner =()=>{
       const history = navigator.getState().routeNames;
       (scannedData && navigator.navigate(history[history.length - 1])) 
       // (scannedData && navigation.navigate('Send token'))
+      return setScannedData(null)
   }, [scannedData]);
  
 
