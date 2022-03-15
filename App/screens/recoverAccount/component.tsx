@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet, Modal } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
-import { setIsLoggedIn, setAddress } from '../../redux'
+import { setIsLoggedIn, setAddress, setroutes } from '../../redux'
 import { recoverAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,9 +20,6 @@ const RecoverAccount = () => {
 
     const navigation = useNavigation()
     
-
-    const [loading, setLoading] = React.useState<boolean>()
-    const [error, setError] = React.useState<string>()
     
     
     const recover=()=>{
@@ -31,25 +28,29 @@ const RecoverAccount = () => {
             console.log('async operation');
             
             try{
-                setLoading(true)
+             
                 console.log('try');
                 const recovered = await recoverAccount(mnemonic)
                 
-
-                console.log(recovered.address)
-                console.log(recovered.mnemonic)
+                console.log(recovered)
+                const raddress = recovered.address
+                const rmnemonic = recovered.mnemonic
+               
                 await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
-                dispatch(setIsLoggedIn(true))
-                // dispatch(setAddress(recovered.address))
-                // mnemonic && dispatch(setMnemonic(recovered.mnemonic)) 
-                navigation.navigate(routes.DASHBOARD)                
-                setLoading(false)
+                raddress  && dispatch(setAddress(raddress))
+                // rmnemonic && dispatch(setMnemonic(rmnemonic)) 
+                raddress && rmnemonic && dispatch(setIsLoggedIn(true))
+                
+                // recovered && navigation.navigate(routes.DASHBOARD)                
+                // setLoading(false)
             } 
             catch(e) {    
                 //
-                setLoading(false)
+              
+                dispatch(setErrorMessage(e.message))
+                dispatch(setroutes(routes.RECOVER_ACCOUNT))
                 navigation.navigate(routes.ERROR)
-                dispatch(setErrorMessage('error reading value'))
+               
                 console.log(' error reading value  ')
                 console.log(e)
                 // return {error: e}

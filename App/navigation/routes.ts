@@ -9,5 +9,7 @@ export default  {
     TOKEN: 'Token',
     TRANSACT: 'Transact',
     DASHBOARD: 'Dash board',
-    SETTINGS: 'Settings'
+    SETTINGS: 'Settings',
+    HOME: 'Home',
+    RECOVER_ACCOUNT: 'Recover Account'
 }

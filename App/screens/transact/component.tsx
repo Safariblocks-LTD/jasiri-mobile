@@ -89,7 +89,7 @@ export const Transact = () => {
 
 
 
-    }, [refreshing])
+    }, [refreshing, address])
 
     const handleCLickAddJasiri = () => {
         console.log('add jasiri')

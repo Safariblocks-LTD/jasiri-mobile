@@ -49,7 +49,7 @@ export const scanned = scannedSlice
 
 
 const newAccountSlice = createSlice({
-  name: "scanned",
+  name: "newAccountSlice",
   initialState: {
     address: '',
     mnemonic: ''
@@ -68,7 +68,7 @@ export const { setAddress, setMnemonic } = newAccountSlice.actions
 export const newAccount = newAccountSlice
 
 const accountSlice = createSlice({
-  name: "account",
+  name: "accountSlice",
   initialState: {
     isLoggedIn: false,
   },

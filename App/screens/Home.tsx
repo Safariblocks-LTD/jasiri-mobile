@@ -14,6 +14,7 @@ import { RootState } from '../redux';
 import { styles } from './styles';
 import Loader from '../components/loading';
 import { useFocusEffect } from '@react-navigation/native';
+import routes from '../navigation/routes';
 
 
 
@@ -23,7 +24,7 @@ export const Home = ({ navigation }) => {
 
   const isLoggedIn = useSelector((state: RootState) => state.account.isLoggedIn)
   React.useEffect(() => {
-    isLoggedIn && navigation.navigate("Dash board")
+    isLoggedIn && navigation.navigate(routes.DASHBOARD)
   })
 
 

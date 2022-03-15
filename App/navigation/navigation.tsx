@@ -56,7 +56,15 @@ export const DashBoardNavigation = () => {
         />
         <Tab.Screen name="Contacts" component={View} />
         <Tab.Screen name="Notification" component={View} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen 
+          name="Settings" 
+          component={SettingsScreen} 
+          options={{
+            title: 'Settings',
+
+            header: () => <Header title={'Settings'} />,
+          }}
+        />
         {/* <Tab.Screen name="Transact" component={Transact} /> */}
         <Tab.Screen name="Transact" component={Transact} 
         options={{
@@ -95,12 +103,13 @@ const headerStyle = StyleSheet.create({
   text: {
     fontSize: 25,
     fontWeight: 'bold',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    
   },
   header: {
-    paddingTop: 50,
+    // paddingTop: 50,
     // flex: 1,
-    padding: 10,
+    padding: 20,
     width: '100%',
     // borderWidth: 1,
 

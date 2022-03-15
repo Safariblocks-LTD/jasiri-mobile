@@ -9,7 +9,8 @@ import {
   
   TextInput,
   Image,
-  BackHandler} from 'react-native';
+  BackHandler,
+  RefreshControl} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,7 +45,13 @@ export const SendToken = () => {
   const address = useSelector((state: RootState)=>state.newAccount.address)
   const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
 
- 
+  const [refreshing, setRefreshing] = React.useState<boolean>(false)
+    
+
+  const onRefresh=()=>{
+      setRefreshing(true)
+  }
+
 
   const handleChangeAmount=(text:string)=>{
     console.log(text)
@@ -70,8 +77,10 @@ export const SendToken = () => {
       }else{
       
         setLoading(false)
-        navigation.navigate(routes.ERROR)
         dispatch(setErrorMessage(`${res.message}`))
+        dispatch(setroutes(routes.SEND_TOKEN))
+        navigation.navigate(routes.ERROR)
+       
       }
       
       
@@ -115,7 +124,7 @@ export const SendToken = () => {
 
   return (
     
-      <ScrollView>
+      <ScrollView  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
 
 

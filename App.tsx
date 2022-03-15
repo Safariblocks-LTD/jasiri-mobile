@@ -4,15 +4,18 @@ import 'fastestsmallesttextencoderdecoder'
 import 'react-native-gesture-handler';
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { NativeBaseProvider } from 'native-base';
-import { Provider, useDispatch } from 'react-redux'
-import {store}  from './App/redux/store'
+import { NativeBaseProvider, Box } from 'native-base';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import {RootState, store}  from './App/redux/store'
 // import HomeStack from './App/screens/index'
 import { AuthenticationNavigation
  } from './App/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
+import * as Updates from 'expo-updates';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setAddress, setIsLoggedIn, setMnemonic } from './App/redux';
 

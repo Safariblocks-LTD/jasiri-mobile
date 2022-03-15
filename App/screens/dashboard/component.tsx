@@ -22,6 +22,7 @@ export const Dashboard = () => {
     const [refreshing, setRefreshing] = React.useState<boolean>(false)
     const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
+    
     const navigation=useNavigation()
 
     const onRefresh=()=>{

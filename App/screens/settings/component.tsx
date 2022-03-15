@@ -23,6 +23,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Center, Stack, VStack, Divider, Heading, HStack } from "native-base";
 import { styles } from "./styles";
 import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
+import routes from '../../navigation/routes';
 
 
 
@@ -34,7 +35,7 @@ export const SettingsScreen = () => {
   const navigator = useNavigation()
 
   const handleWConnect = () => {
-    navigator.navigate('Wallet connect')
+    navigator.navigate(routes.WC)
   };
 
 
@@ -46,11 +47,11 @@ export const SettingsScreen = () => {
         await AsyncStorage.removeItem('accountData')
         dispatch(setIsLoggedIn(false))
         console.log('removed')
-        navigator.navigate('Home')
+        navigator.navigate(routes.HOME)
       }
       catch (e) {
         dispatch(setErrorMessage(e.message))
-        navigator.navigate('Error')
+        navigator.navigate(routes.ERROR)
       }
     })();
 
@@ -72,12 +73,7 @@ export const SettingsScreen = () => {
     <ScrollView >
       <View style={{ width: '100%', height: '100%', backgroundColor: '#E3E8E7' }} >
         <View style={styles.container} >
-          <View style={styles.head}>
-            <StyleText style={{ fontWeight: "bold" }}>
-              <MyAppText style={styled.heading(1.5)}>Settings</MyAppText>
-             </StyleText>
-           
-          </View>
+         
 
           <View style={{ marginLeft: 8 }}>
             <View style={{ marginTop: 15, ...styles.content }}>
