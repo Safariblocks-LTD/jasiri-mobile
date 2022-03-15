@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet, Button } from 'react-native'
+import { View, Text, Image, StyleSheet, Button, BackHandler } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { RootState, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import { accountInfo as getAccountInfo, assetInfo, optIn } from '../../services'
 import { Asset } from '../../types'
 import { setErrorMessage } from '../../redux'
 import { Loading } from '../../components'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { AssetButton, NormalButton } from '../../components/common'
 
 import { Badge, VStack, Center } from 'native-base';
@@ -104,6 +104,7 @@ export const Transact = () => {
 
     }
 
+   
 
     const handleCLickReceive = () => {
         console.log('button click')

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NormalButton } from '../components/common';
 import { useNavigation } from '@react-navigation/native';
 import WalletConnectClient from '@walletconnect/client';
-import { RootState, setErrorMessage, setSuccessMessage } from '../redux';
+import { RootState, setErrorMessage, setroutes, setSuccessMessage } from '../redux';
 import routes from '../navigation/routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StyleText, MyAppText, textStyles } from '../components/common/appTexts';
@@ -18,8 +18,10 @@ import { Link, Box, Flex, HStack, Spacer, Badge, VStack } from "native-base";
 
 export const WalletConnectComponent = () => {
 
-    const uri = useSelector((state: RootState) => state.scanned.data)
-    const address = useSelector((state: RootState) => state.newAccount.address)
+   
+    const uri = useSelector((state: RootState)=>state.scanned.URI)
+    const address = useSelector((state: RootState)=>state.newAccount.address)
+
     const dispatch = useDispatch()
     const navigator = useNavigation()
     const [connections, setConnections] = React.useState<string>()
@@ -108,10 +110,6 @@ export const WalletConnectComponent = () => {
         console.log(connecting)
     })
 
-
-    const handleClick = () => {
-        navigator.navigate(routes.SCAN_QR)
-    }
     const list = [
         {
             title: 'Jasiri wallet',
@@ -125,6 +123,15 @@ export const WalletConnectComponent = () => {
         },
 
     ]
+
+        
+    
+   const handleClick=()=>{
+        dispatch(setroutes(routes.WC))
+        console.log(routes.WC)
+       navigator.navigate(routes.SCAN_QR)
+   }
+
 
     return (
 

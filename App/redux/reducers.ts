@@ -28,7 +28,8 @@ const scannedSlice = createSlice({
   name: "scanned",
   initialState: {
     data: '',
-    showScanner: true
+    showScanner: true,
+    URI: ''
   },
   reducers: {
     setData(state, action: PayloadAction<string | null >) {
@@ -37,10 +38,13 @@ const scannedSlice = createSlice({
     setShowScanner(state, action: PayloadAction<boolean >) {
       state.showScanner = action.payload
     },
+    setURI(state, action: PayloadAction<string >) {
+      state.URI = action.payload
+    },
   }
 })
 
-export const { setData, setShowScanner } = scannedSlice.actions
+export const { setData, setShowScanner, setURI } = scannedSlice.actions
 export const scanned = scannedSlice
 
 
@@ -146,6 +150,24 @@ const successMessageSlice = createSlice({
 
 export const { setSuccessMessage } = successMessageSlice.actions
 export const success = successMessageSlice
+
+const routesSlice = createSlice({
+  name: "routesSlice",
+  initialState: {
+    back: '',
+  },
+  reducers: {
+    setroutes(state, action: PayloadAction<string>) {
+      state.back = action.payload
+    },
+    
+  }
+})
+
+export const { setroutes } = routesSlice.actions
+export const routes = routesSlice
+
+
 
 
 

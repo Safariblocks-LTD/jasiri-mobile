@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image, BackHandler } from 'react-native'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Svg, { Circle, Rect } from 'react-native-svg';
@@ -11,14 +11,35 @@ import { useSelector } from 'react-redux';
 import { styles } from './styles';
 import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
 import appStyles from '../../components/common/appStyles'
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import routes from '../../navigation/routes';
 
 
 
 
-export const Dashboard = ({ navigation }: any) => {
+
+export const Dashboard = () => {
     const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
+    const navigation=useNavigation()
 
+    useFocusEffect(
+        React.useCallback(() => {
+          const onBackPress = () => {
+        
+            
+             BackHandler.exitApp()
+             return true
+           };
+        
+         
+          BackHandler.addEventListener('hardwareBackPress', onBackPress);
+    
+          return () =>
+            BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+        }, [])
+      );
+    
 
     const styled = {
         heading: (scale) => {
@@ -49,7 +70,7 @@ export const Dashboard = ({ navigation }: any) => {
             <View style={styles.container}>
 
                 <StyleText style={{ fontWeight: "bold" }}>
-                    <MyAppText style={{ alignSelf: 'center' }}>Dashboard</MyAppText>
+                    
 
 
             <View style={styles.balance}> 
