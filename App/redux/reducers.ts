@@ -168,6 +168,23 @@ export const { setroutes } = routesSlice.actions
 export const routes = routesSlice
 
 
+const accountInfoSlice = createSlice({
+  name: "routesSlice",
+  initialState: {
+    info: {},
+  },
+  reducers: {
+    setAccountInfo(state, action: PayloadAction<object>) {
+      state.info = action.payload
+    },
+    
+  }
+})
+
+export const { setAccountInfo } = accountInfoSlice.actions
+export const accountInfo = accountInfoSlice
+
+
 
 
 

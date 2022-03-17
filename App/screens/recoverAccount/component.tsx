@@ -32,14 +32,16 @@ const RecoverAccount = () => {
                 console.log('try');
                 const recovered = await recoverAccount(mnemonic)
                 
-                console.log(recovered)
+                
                 const raddress = recovered.address
                 const rmnemonic = recovered.mnemonic
+
+                console.log(recovered.mnemonic)
                
                 await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
-                raddress  && dispatch(setAddress(raddress))
-                // rmnemonic && dispatch(setMnemonic(rmnemonic)) 
-                raddress && rmnemonic && dispatch(setIsLoggedIn(true))
+                // raddress  && dispatch(setAddress(raddress))
+                // dispatch(setMnemonic((mnemonic)))
+                // raddress && rmnemonic && dispatch(setIsLoggedIn(true))
                 
                 // recovered && navigation.navigate(routes.DASHBOARD)                
                 // setLoading(false)

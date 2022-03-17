@@ -15,12 +15,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../../navigation/routes';
-import { RootState, setData, setErrorMessage, setroutes, setSuccessMessage, setToken } from '../../../redux';
+import { RootState, setAccountInfo, setData, setErrorMessage, setroutes, setSuccessMessage, setToken } from '../../../redux';
 
 import { sendJSR } from '../../../services';
 import { MyAppText } from '../../common/appTexts';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Loading from '../../loading';
+import Loader from '../../loading';
 
 
 
@@ -71,7 +72,8 @@ export const SendToken = () => {
       (async()=>{
       const res = await sendJSR('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
       console.log(res)
-      dispatch(setToken({amount: res.assets[0].amount, unitName:'JASIRI'}))
+      dispatch(setToken({amount: res.assets && res.assets[0].amount, unitName:'JASIRI'}))
+      dispatch(setAccountInfo(res))
 
       // setAccountInfo(account)
       
@@ -133,7 +135,7 @@ export const SendToken = () => {
     
       <ScrollView  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
-
+      <Loader loading={loading}/>
 
               
           <View style={styles.token} >
@@ -174,7 +176,7 @@ export const SendToken = () => {
           onChangeText={text=>handleChangeAmount(text)}
           placeholder='e.g 100'
         />
-         {loading && <Text>Loading...</Text>}
+        
         </View>
        
 

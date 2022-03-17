@@ -1,7 +1,7 @@
 import axiosConfig from './http'
 import algosdk from 'algosdk'
 
-
+const clawBackAddress = 'NMSMT3FUFNT5H4HEWZLVGHBFOETWUJPMUOQLGRGN6VM63QTHI6D4JJHYOU'
 
 // const algodToken = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
 // const algodServer = 'http://localhost';
@@ -166,10 +166,22 @@ export const sendJSR=async (
         const enc = new TextEncoder();
         const note = enc.encode(desc);
         
+
+        // algosdk.makeAssetTxn(sender=clawBackAddress, amt=0.1JSR(fee), receiver=feecollect_address),
         
-        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, 
-            stripped, undefined, undefined, amount, note, 67513364, params)
-        // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, stripped, amount, undefined, note, params);
+        // and group it with the ```algosdk.makeAssetTxn(sender=accountA, receiver=accountB, amt=providedBySender)
+        
+        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(
+            sender, 
+            stripped,
+            undefined,  
+            clawBackAddress, 
+           
+            amount, 
+            note, 
+            67513364, 
+            params
+            )
         
         
         
@@ -217,44 +229,34 @@ export async function optIn(mnemonic: string, assetId: number) {
         const addr = algosdk.mnemonicToSecretKey(mnemonic).addr
         
         const params = await algodClient.getTransactionParams().do();
-        // comment out the next two lines to use suggested fee
-        // params.fee = 1000;
-        // params.flatFee = true;
+        
     
         const sender = addr;
         const recipient = addr;
-        // We set revocationTarget to undefined as 
-        // This is not a clawback operation
-        const revocationTarget = undefined;
-        // CloseReaminerTo is set to undefined as
-        // we are not closing out an asset
-        const closeRemainderTo = undefined;
-        // We are sending 0 assets to opt in
+        
+        
         const amount = 0;
         const note = undefined; // arbitrary data to be stored in the transaction; here, none is stored
         // signing and sending "txn" allows sender to begin accepting asset specified by creator and index
-        const opttxn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
-            from: sender, 
-            to: recipient, 
-            closeRemainderTo, 
-            revocationTarget,
+        const opttxn = algosdk.makeAssetTransferTxnWithSuggestedParams(
+            sender, 
+            recipient,
+            undefined,  
+            clawBackAddress,            
             amount, 
             note, 
-            assetIndex: assetId, 
-            suggestedParams: params});
-        // Must be signed by the account wishing to opt in to the asset    
+            67513364, //hardcoded asset id
+            params
+           );
+        
         const rawSignedTxn = opttxn.signTxn(sk);
         const tx = (await algodClient.sendRawTransaction(rawSignedTxn).do());
-        // wait for transaction to be confirmed
         const confirmedTxn = await algosdk.waitForConfirmation(algodClient, tx.txId, 4);
-        //Get the completed Transaction
-        console.log("Transaction " + tx.txId + " confirmed in round " + confirmedTxn["confirmed-round"]);
-        //You should now see the new asset listed in the account information
       
-        return 0;
+        return confirmedTxn;
     
     }catch(e){
-        return {error: e}
+        return {error: JSON.stringify(e.message)}
     }
     
 }

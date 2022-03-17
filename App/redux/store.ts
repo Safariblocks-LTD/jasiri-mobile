@@ -4,7 +4,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import {token, scanned, newAccount, account
 ,walletConnectScanner,
 walletConnectURI, error, success,
-routes
+routes, accountInfo
 } from './reducers';
 
 
@@ -23,7 +23,8 @@ export const store = configureStore({
         walletConnectScanner: walletConnectScanner.reducer,
         walletConnectURI: walletConnectURI.reducer,
         success: success.reducer,
-        routes: routes.reducer
+        routes: routes.reducer,
+        accountInfo: accountInfo.reducer
     }
 })
 

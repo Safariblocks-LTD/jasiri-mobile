@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '../redux';
 import routes  from '../navigation/routes';
 import { transactionHistory } from '../services';
+import Loader from '../components/loading';
 
 
 export const Token = () => {
@@ -36,10 +37,12 @@ export const Token = () => {
   const [history, setHistory] = React.useState<object[]>()
 
   const [refreshing, setRefreshing] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(false)
     
 
     const onRefresh=()=>{
         setRefreshing(true)
+        setLoading(true)
     }
 
   
@@ -52,6 +55,7 @@ export const Token = () => {
       setHistory(history.transactions)
       console.log(history.transactions[0]['asset-transfer-transaction'])
       setRefreshing(false)
+      setLoading(false)
       })()
     
    
@@ -79,7 +83,7 @@ export const Token = () => {
     
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
-              
+              <Loader loading={loading}/>
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total {token.unitName} balance</Text>
             <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
@@ -105,12 +109,12 @@ export const Token = () => {
           <Text style={styles.transactionHeader}>TRANSACTION HISTORY</Text>
           {history && history.map((item, index)=>{
           let i = item['asset-transfer-transaction']
-          return (<ScrollView key={Math.random()}>
+          return (<View key={Math.random()}>
           <Text style={styles.historyText}>{index + 1}{':'} {`${item.id.slice(0, 15)} ...`} </Text>
           <Text style={styles.historySubText}>Amount: {i && i.amount} </Text>
           <Text style={styles.historySubText}>Receiver: {i && i.receiver.slice(0, 15)}{'...'} </Text>
           <Text style={styles.historySubText}>Asset: {i && i['asset-id']} </Text>
-          </ScrollView>)
+          </View>)
           })}
 
           </View>
