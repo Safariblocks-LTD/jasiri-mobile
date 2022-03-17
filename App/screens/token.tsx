@@ -86,7 +86,7 @@ export const Token = () => {
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total JASIRI balance</Text>
             <Text style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</Text>
-            <Text style={styles.tokenText}> $ 0.00 USD</Text>
+            <Text style={styles.tokenText}> $ #### USD</Text>
           </View>
          
           <View style={styles.buttonContainer}>
