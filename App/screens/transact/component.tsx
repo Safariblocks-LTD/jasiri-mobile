@@ -13,6 +13,7 @@ import { AssetButton, NormalButton } from '../../components/common'
 
 import { Badge, VStack, Center } from 'native-base';
 import { styles } from "./styles";
+import Loader from '../../components/loading'
 
 import routes from '../../navigation/routes'
 
@@ -63,6 +64,7 @@ export const Transact = () => {
 
     const onRefresh=()=>{
         setRefreshing(true)
+        setLoading(true)
     }
 
 
@@ -82,7 +84,8 @@ export const Transact = () => {
         setAssets(assets)
         dispatch(setToken({amount: assets[0].amount, unitName:'JASIRI'}))
         // await assetInfo(account.assets[0].id)
-        setRefreshing(false)
+            setRefreshing(false)
+            setLoading(false)
         
 
         })();
@@ -128,7 +131,8 @@ export const Transact = () => {
     }
 
     return (
-        <ScrollView  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+            <Loader loading={loading}/>
             <View style={styles.container}>
                 {
                     assets && assets?.length > 0 && assets.map((asset: Asset) =>
