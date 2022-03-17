@@ -40,8 +40,7 @@ export const SendToken = () => {
   
   const dispatch = useDispatch()
 
- 
-  const token = useSelector((state: RootState)=>state.token.token)
+  const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
   const scanned = useSelector((state: RootState)=>state.scanned.data)
   const address = useSelector((state: RootState)=>state.newAccount.address)
   const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
@@ -72,7 +71,7 @@ export const SendToken = () => {
       (async()=>{
       const res = await sendJSR('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
       console.log(res)
-      dispatch(setToken({amount: res.assets && res.assets[0].amount, unitName:'JASIRI'}))
+     
       dispatch(setAccountInfo(res))
 
       // setAccountInfo(account)
@@ -140,8 +139,8 @@ export const SendToken = () => {
               
           <View style={styles.token} >
             <MyAppText style={styles.tokenText}> Total jasiri balance</MyAppText>
-            <MyAppText style={styles.tokenText}> {token.amount} {token.unitName}</MyAppText>
-            <MyAppText style={styles.tokenText}> $ {token.amount} USD</MyAppText>
+            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</MyAppText>
+            <MyAppText style={styles.tokenText}> $ #### USD</MyAppText>
           </View>
          
           

@@ -10,6 +10,7 @@ import { setErrorMessage } from '../../redux'
 import { NormalButton } from '../../components/common'
 import routes from '../../navigation/routes'
 import { useNavigation } from '@react-navigation/native'
+import Loader from '../../components/loading'
 
 // let mn = 'dwarf jar wild economy unit subway pottery panic genuine science cabin spell drift toast settle skin business outside note rebel clay wool empower absent merry'
 
@@ -17,6 +18,7 @@ import { useNavigation } from '@react-navigation/native'
 const RecoverAccount = () => {
     const [mnemonic, setMnemonic] = React.useState<string>('forward hat elbow gasp rude oppose apology estate kid rebel book faith perfect glove renew siege planet thing clarify goat security network bounce able you')
     const dispatch = useDispatch()
+    const [loading, setLoading] = React.useState<boolean>()
 
     const navigation = useNavigation()
     
@@ -28,23 +30,23 @@ const RecoverAccount = () => {
             console.log('async operation');
             
             try{
-             
+                setLoading(true)
                 console.log('try');
                 const recovered = await recoverAccount(mnemonic)
                 
                 
                 const raddress = recovered.address
-                const rmnemonic = recovered.mnemonic
+                const rmnemonic = recovered.mnemonic.toString()
 
-                console.log(recovered.mnemonic)
-               
-                await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
+                console.log(rmnemonic)              
+                
                 // raddress  && dispatch(setAddress(raddress))
-                // dispatch(setMnemonic((mnemonic)))
-                // raddress && rmnemonic && dispatch(setIsLoggedIn(true))
+                // rmnemonic && dispatch(setMnemonic(rmnemonic))
+                await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
+                raddress && rmnemonic && dispatch(setIsLoggedIn(true))
                 
                 // recovered && navigation.navigate(routes.DASHBOARD)                
-                // setLoading(false)
+                setLoading(false)
             } 
             catch(e) {    
                 //
@@ -69,7 +71,7 @@ const RecoverAccount = () => {
 
     return (
         <View style={styles.container} >
-          
+          <Loader loading={loading}/>
             <View style={styles.content}>
                 <View style={styles.mainContent}>
                     <View style={styles.title}>

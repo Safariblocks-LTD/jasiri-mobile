@@ -15,6 +15,7 @@ import { StyleText, MyAppText, textStyles } from '../components/common/appTexts'
 import { ListItem, Icon, Avatar } from 'react-native-elements'
 import { Link, Box, Flex, HStack, Spacer, Badge, VStack } from "native-base";
 import { useFocusEffect } from '@react-navigation/native';
+import Loader from '../components/loading';
 
 
 export const WalletConnectComponent = () => {
@@ -26,7 +27,7 @@ export const WalletConnectComponent = () => {
     const dispatch = useDispatch()
     const navigator = useNavigation()
     const [connections, setConnections] = React.useState<string>()
-    const [connecting, setConnecting] = React.useState<boolean>()
+    const [connecting, setConnecting] = React.useState<boolean>(false)
     const [refreshing, setRefreshing] = React.useState<boolean>(false)
 
     const onRefresh=()=>{
@@ -67,9 +68,10 @@ export const WalletConnectComponent = () => {
                         accounts: [address], chainId: 1,
                     })
                     // stop connecting indicator
-                    setConnecting(false);
+                  
                     setConnections(payload.id)
-                    dispatch(setSuccessMessage('successfully connected'))
+                   
+                    setConnecting(false);
                     // navigation.navigate('Success')
                 }
 
@@ -80,6 +82,7 @@ export const WalletConnectComponent = () => {
 
 
             client.on("call_request", (error, payload) => {
+                setConnecting(true)
                 if (error) {
                     dispatch(setErrorMessage(error.message))
                     navigator.navigate(routes.ERROR)
@@ -87,7 +90,9 @@ export const WalletConnectComponent = () => {
                 console.log(payload)
                 client.approveRequest({})
                 console.log('success call_request')
+                setConnecting(false)
                 Alert.alert(JSON.stringify(payload))
+
 
             });
 
@@ -163,7 +168,7 @@ export const WalletConnectComponent = () => {
 
         <ScrollView style={styles.scrollView}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
             <View style={styles.container}>
-
+            <Loader loading={connecting}/>
 
 
                 <View style={styles.info}>

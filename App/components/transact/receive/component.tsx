@@ -2,20 +2,26 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import * as React from 'react'
 import { View, Text, StyleSheet, BackHandler } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useSelector } from 'react-redux';
 import routes from '../../../navigation/routes';
+import { RootState } from '../../../redux';
 
 
 import QrGenerator from '../../qr-generator'
 
 
 export const Receive = () => {
+    const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
+    
     const navigation=useNavigation()
     useFocusEffect(
         React.useCallback(() => {
           const onBackPress = () => {
         
             
-             navigation.navigate(routes.TOKEN)
+             accountInfo.assets.length ? navigation.navigate(routes.TOKEN) : navigation.navigate(routes.TRANSACT)
+
+             
              return true
            };
         

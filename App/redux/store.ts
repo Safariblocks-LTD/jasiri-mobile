@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
+import thunk from 'redux-thunk'
 
 
 import {token, scanned, newAccount, account
@@ -6,12 +7,6 @@ import {token, scanned, newAccount, account
 walletConnectURI, error, success,
 routes, accountInfo
 } from './reducers';
-
-
-
-
-
-
 
 export const store = configureStore({
     reducer: {
@@ -25,7 +20,11 @@ export const store = configureStore({
         success: success.reducer,
         routes: routes.reducer,
         accountInfo: accountInfo.reducer
-    }
+    },
+    middleware:(getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(thunk)
+      
+    
 })
 
 

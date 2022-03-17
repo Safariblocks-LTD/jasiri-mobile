@@ -31,7 +31,7 @@ export const Token = () => {
   // console.log(navigation.)
   
   const dispatch = useDispatch()
-  const token = useSelector((state: RootState)=>state.token.token)
+  const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
   const address = useSelector((state: RootState)=>state.newAccount.address)
 
   const [history, setHistory] = React.useState<object[]>()
@@ -53,13 +53,12 @@ export const Token = () => {
       const history =  await transactionHistory(address)
       // console.log(history)
       setHistory(history.transactions)
-      console.log(history.transactions[0]['asset-transfer-transaction'])
       setRefreshing(false)
       setLoading(false)
       })()
     
    
-  },[address, token, refreshing])
+  },[address, accountInfo, refreshing])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -85,8 +84,8 @@ export const Token = () => {
       <View style={styles.container}>
               <Loader loading={loading}/>
           <View style={styles.token} >
-            <Text style={styles.tokenText}> Total {token.unitName} balance</Text>
-            <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
+            <Text style={styles.tokenText}> Total JASIRI balance</Text>
+            <Text style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</Text>
             <Text style={styles.tokenText}> $ 0.00 USD</Text>
           </View>
          
@@ -123,7 +122,7 @@ export const Token = () => {
           
           
           
-        </View>
+        </View> 
       </ScrollView>
      
      

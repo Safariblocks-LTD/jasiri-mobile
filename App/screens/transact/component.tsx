@@ -76,7 +76,7 @@ export const Transact = () => {
         const assets: Partial<Asset[]> = accountInfo.assets
         // dispatch(setAccountInfo(account))
         setAssets(assets || [])
-        dispatch(setToken({amount: assets.length > 0 && assets[0].amount, unitName:'JASIRI'}))
+       
         // // await assetInfo(account.assets[0].id)
             setRefreshing(false)
             setLoading(false)
@@ -97,11 +97,13 @@ export const Transact = () => {
         (async()=>{
             const res = await optIn(mnemonic,assetId)
             if(res.error){
-                navigation.navigate(routes.ERROR)
-
                 console.log(res)
                 dispatch(setErrorMessage(res.error))
                 dispatch(setroutes(routes.TRANSACT))
+                navigation.navigate(routes.ERROR)
+
+               
+                
             }
             setAdded(true)
             console.log(res)
