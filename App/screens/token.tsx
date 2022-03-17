@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState} from '../redux';
 import routes  from '../navigation/routes';
 import { transactionHistory } from '../services';
+import Loader from '../components/loading';
 
 
 export const Token = () => {
@@ -30,16 +31,18 @@ export const Token = () => {
   // console.log(navigation.)
   
   const dispatch = useDispatch()
-  const token = useSelector((state: RootState)=>state.token.token)
+  const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
   const address = useSelector((state: RootState)=>state.newAccount.address)
 
   const [history, setHistory] = React.useState<object[]>()
 
   const [refreshing, setRefreshing] = React.useState<boolean>(false)
+  const [loading, setLoading] = React.useState<boolean>(false)
     
 
     const onRefresh=()=>{
         setRefreshing(true)
+        setLoading(true)
     }
 
   
@@ -50,12 +53,12 @@ export const Token = () => {
       const history =  await transactionHistory(address)
       // console.log(history)
       setHistory(history.transactions)
-      console.log(history.transactions[0]['asset-transfer-transaction'])
       setRefreshing(false)
+      setLoading(false)
       })()
     
    
-  },[address, token, refreshing])
+  },[address, accountInfo, refreshing])
 
   useFocusEffect(
     React.useCallback(() => {
@@ -79,11 +82,11 @@ export const Token = () => {
     
       <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
-              
+              <Loader loading={loading}/>
           <View style={styles.token} >
-            <Text style={styles.tokenText}> Total {token.unitName} balance</Text>
-            <Text style={styles.tokenText}> {token.amount} {token.unitName}</Text>
-            <Text style={styles.tokenText}> $ 0.00 USD</Text>
+            <Text style={styles.tokenText}> Total JASIRI balance</Text>
+            <Text style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</Text>
+            <Text style={styles.tokenText}> $ #### USD</Text>
           </View>
          
           <View style={styles.buttonContainer}>
@@ -105,13 +108,13 @@ export const Token = () => {
           <Text style={styles.transactionHeader}>TRANSACTION HISTORY</Text>
           {history && history.map((item, index)=>{
           let i = item['asset-transfer-transaction']
-          return (<ScrollView key={Math.random()}>
+          return (<View key={Math.random()}>
           <Text style={styles.historyText}>{index + 1}{':'} {`${item.id.slice(0, 15)} ...`} </Text>
           <Text style={styles.historySubText}>Amount: {i && i.amount} </Text>
           <Text style={styles.historySubText}>Receiver: {i && i.receiver.slice(0, 15)}{'...'} </Text>
           <Text style={styles.historySubText}>Asset: {i && i['asset-id']} </Text>
-          </ScrollView>)
-          })}
+          </View>)
+          }) || <Loader loading={true}/>}
 
           </View>
           
@@ -119,7 +122,7 @@ export const Token = () => {
           
           
           
-        </View>
+        </View> 
       </ScrollView>
      
      

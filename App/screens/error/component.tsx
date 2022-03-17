@@ -11,7 +11,7 @@ export const Error = () => {
     
     const error = useSelector((state: RootState)=>state.error.message)
     const back = useSelector((state: RootState)=>state.routes.back)
-    // console.log(error)
+    console.log(back)
 
     const navigation= useNavigation()
 

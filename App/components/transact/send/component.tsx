@@ -15,12 +15,13 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../../navigation/routes';
-import { RootState, setData, setErrorMessage, setroutes, setSuccessMessage } from '../../../redux';
+import { RootState, setAccountInfo, setData, setErrorMessage, setroutes, setSuccessMessage, setToken } from '../../../redux';
 
-import { sendAsset } from '../../../services';
+import { sendJSR } from '../../../services';
 import { MyAppText } from '../../common/appTexts';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Loading from '../../loading';
+import Loader from '../../loading';
 
 
 
@@ -39,8 +40,7 @@ export const SendToken = () => {
   
   const dispatch = useDispatch()
 
- 
-  const token = useSelector((state: RootState)=>state.token.token)
+  const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
   const scanned = useSelector((state: RootState)=>state.scanned.data)
   const address = useSelector((state: RootState)=>state.newAccount.address)
   const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
@@ -69,9 +69,15 @@ export const SendToken = () => {
     try{
       
       (async()=>{
-      const res = await sendAsset('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
-      // console.log(res)
-      if(res === 0){
+      const res = await sendJSR('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
+      console.log(res)
+     
+      dispatch(setAccountInfo(res))
+
+      // setAccountInfo(account)
+      
+      
+      if(res.address){
         setLoading(false)
         dispatch(setroutes(routes.SEND_RECIEVE_SCREEN))
         dispatch(setSuccessMessage('sent'))
@@ -128,13 +134,13 @@ export const SendToken = () => {
     
       <ScrollView  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <View style={styles.container}>
-
+      <Loader loading={loading}/>
 
               
           <View style={styles.token} >
             <MyAppText style={styles.tokenText}> Total jasiri balance</MyAppText>
-            <MyAppText style={styles.tokenText}> {token.amount} {token.unitName}</MyAppText>
-            <MyAppText style={styles.tokenText}> $ {token.amount} USD</MyAppText>
+            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</MyAppText>
+            <MyAppText style={styles.tokenText}> $ #### USD</MyAppText>
           </View>
          
           
@@ -169,7 +175,7 @@ export const SendToken = () => {
           onChangeText={text=>handleChangeAmount(text)}
           placeholder='e.g 100'
         />
-         {loading && <Text>Loading...</Text>}
+        
         </View>
        
 

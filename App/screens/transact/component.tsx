@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet, Button, BackHandler, RefreshControl } from 'react-native'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { RootState, setroutes, setToken } from '../../redux'
+import { View, Text, Image, StyleSheet, RefreshControl } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import { RootState, setAccountInfo, setroutes, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { accountInfo as getAccountInfo, assetInfo, optIn } from '../../services'
+import { accountInfo as getAccountInfo, optIn } from '../../services'
 import { Asset } from '../../types'
 import { setErrorMessage } from '../../redux'
 
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { AssetButton, NormalButton } from '../../components/common'
 
 import { Badge, VStack, Center } from 'native-base';
@@ -57,8 +57,9 @@ export const Transact = () => {
     const dispatch = useDispatch()
 
     const address = useSelector((state: RootState) => state.newAccount.address)
-    const [accountInfo, setAccountInfo] = React.useState(null)
+    
 
+    const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
     const [refreshing, setRefreshing] = React.useState<boolean>(false)
     
 
@@ -71,28 +72,21 @@ export const Transact = () => {
     const navigation = useNavigation()
 
     React.useEffect(()=>{
-        (async()=> {
-        const account = await getAccountInfo(address)
-        console.log(account.assets[0])
-        if(account.error){
-            dispatch(setErrorMessage(`${account.error}`))
-            navigation.navigate(routes.ERROR)
-        }
-
-        const assets: Partial<Asset[]> = account.assets
-        
-        setAssets(assets)
-        dispatch(setToken({amount: assets[0].amount, unitName:'JASIRI'}))
-        // await assetInfo(account.assets[0].id)
+       
+        const assets: Partial<Asset[]> = accountInfo.assets
+        // dispatch(setAccountInfo(account))
+        setAssets(assets || [])
+       
+        // // await assetInfo(account.assets[0].id)
             setRefreshing(false)
             setLoading(false)
         
 
-        })();
+        // })();
 
 
 
-    }, [refreshing, address])
+    }, [refreshing, address, assets])
 
     const handleCLickAddJasiri = () => {
         console.log('add jasiri')
@@ -103,10 +97,13 @@ export const Transact = () => {
         (async()=>{
             const res = await optIn(mnemonic,assetId)
             if(res.error){
+                console.log(res)
+                dispatch(setErrorMessage(res.error))
+                dispatch(setroutes(routes.TRANSACT))
                 navigation.navigate(routes.ERROR)
 
-                console.log(res.error)
-                dispatch(setErrorMessage(res.error))
+               
+                
             }
             setAdded(true)
             console.log(res)

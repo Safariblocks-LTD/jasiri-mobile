@@ -7,13 +7,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 
 import { accountInfo as getAccountInfo } from '../../services'
 import { RootState } from '../../redux/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './styles';
 import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
 import appStyles from '../../components/common/appStyles'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import Loader from '../../components/loading';
+import { setAccountInfo } from '../../redux';
 
 
 
@@ -21,9 +22,10 @@ import Loader from '../../components/loading';
 export const Dashboard = () => {
     const [refreshing, setRefreshing] = React.useState<boolean>(false)
     const address = useSelector((state: RootState) => state.newAccount.address)
-    const [accountInfo, setAccountInfo] = React.useState(null)
+   const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
     const [loading, setLoading] = React.useState<boolean>()
     const navigation=useNavigation()
+    const dispatch = useDispatch()
 
     const onRefresh=()=>{
         setRefreshing(true)
@@ -64,7 +66,7 @@ export const Dashboard = () => {
         (async () => {
             const account = await getAccountInfo(address)
 
-            setAccountInfo(account)
+            dispatch(setAccountInfo(account))
             setRefreshing(false)
             setLoading(false);
         })();
