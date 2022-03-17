@@ -13,7 +13,7 @@ import { StyleText, MyAppText, textStyles } from '../../components/common/appTex
 import appStyles from '../../components/common/appStyles'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
-
+import Loader from '../../components/loading';
 
 
 
@@ -22,11 +22,12 @@ export const Dashboard = () => {
     const [refreshing, setRefreshing] = React.useState<boolean>(false)
     const address = useSelector((state: RootState) => state.newAccount.address)
     const [accountInfo, setAccountInfo] = React.useState(null)
-    
+    const [loading, setLoading] = React.useState<boolean>()
     const navigation=useNavigation()
 
     const onRefresh=()=>{
         setRefreshing(true)
+        setLoading(true);
     }
 
     useFocusEffect(
@@ -65,7 +66,7 @@ export const Dashboard = () => {
 
             setAccountInfo(account)
             setRefreshing(false)
-
+            setLoading(false);
         })();
 
 
@@ -73,7 +74,8 @@ export const Dashboard = () => {
 
     return (
 
-        <ScrollView style={styles.scrollView}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+        <ScrollView style={styles.scrollView} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+             <Loader loading={loading}/>
             <View style={styles.container}>
 
                 <StyleText style={{ fontWeight: "bold" }}>

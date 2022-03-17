@@ -7,36 +7,14 @@ const Loader = (props) => {
   const {loading, ...attributes} = props;
 
   return (
-    // <Modal
-    //   transparent={true}
-    //   animationType={'none'}
-    //   visible={loading}
-    //   onRequestClose={() => {
-    //     console.log('close modal');
-    //   }}>
-    //   <View style={styles.modalBackground}>
-    //     <View style={styles.activityIndicatorWrapper}>
-    //         <LottieView
-    //    source={require('../assets/jasiri_loader.json')}
-    //     autoPlay
-    //     loop
-    //     style={styles.lottie}
-    // />
-    //     </View>
-    //   </View>
-    // </Modal>
-
       <AnimatedLoader
       visible={loading}
       overlayColor="rgba(255,255,255,0.75)"
-      source={require("../assets/jasiri_loader.json")}
+      source={require("../assets/js_loader.json")}
       animationStyle={styles.lottie}
       speed={1}
-    >
-      {/* <Text>
-        Loading
-      </Text> */}
-    </AnimatedLoader>
+    />
+
   );
 };
 
