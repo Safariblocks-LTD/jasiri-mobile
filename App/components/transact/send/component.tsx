@@ -15,9 +15,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../../navigation/routes';
-import { RootState, setData, setErrorMessage, setroutes, setSuccessMessage } from '../../../redux';
+import { RootState, setData, setErrorMessage, setroutes, setSuccessMessage, setToken } from '../../../redux';
 
-import { sendAsset } from '../../../services';
+import { sendJSR } from '../../../services';
 import { MyAppText } from '../../common/appTexts';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Loading from '../../loading';
@@ -69,9 +69,14 @@ export const SendToken = () => {
     try{
       
       (async()=>{
-      const res = await sendAsset('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
-      // console.log(res)
-      if(res === 0){
+      const res = await sendJSR('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
+      console.log(res)
+      dispatch(setToken({amount: res.assets[0].amount, unitName:'JASIRI'}))
+
+      // setAccountInfo(account)
+      
+      
+      if(res.address){
         setLoading(false)
         dispatch(setroutes(routes.SEND_RECIEVE_SCREEN))
         dispatch(setSuccessMessage('sent'))

@@ -139,7 +139,7 @@ const waitForConfirmation = async function (algodClient, txId, timeout) {
 
 // createAccount()
 
-export const sendAsset=async (
+export const sendJSR=async (
     desc: string, 
     amount: number, 
     assetIndex: number, 
@@ -167,8 +167,12 @@ export const sendAsset=async (
         const note = enc.encode(desc);
         
         
-        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, stripped, undefined, undefined, amount, note, 67513364, params)
+        let txn = algosdk.makeAssetTransferTxnWithSuggestedParams(sender, 
+            stripped, undefined, undefined, amount, note, 67513364, params)
         // let txn = algosdk.makePaymentTxnWithSuggestedParams(sender, stripped, amount, undefined, note, params);
+        
+        
+        
         const account = algosdk.mnemonicToSecretKey(mnemonic.trim())
 
         console.log(addrr)
@@ -183,7 +187,7 @@ export const sendAsset=async (
         // Wait for confirmation
         let confirmedTxn = await waitForConfirmation(algodClient, txId, 4);       
         accountInfo = await algodClient.accountInformation(sender).do();
-        return 0
+        return accountInfo
 
     }catch(e){
         return e
@@ -192,9 +196,9 @@ export const sendAsset=async (
 
 export const recoverAccount=async(mn: string)=>{
     try{
-        let account =  (await algosdk.mnemonicToSecretKey(mn));
+        let account =  algosdk.mnemonicToSecretKey(mn);
         const address = account.addr
-        const mnemonic = await algosdk.secretKeyToMnemonic(account.sk)
+        const mnemonic = algosdk.secretKeyToMnemonic(account.sk)
         return {address, mnemonic}
    
     }catch(e){

@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet, Button, BackHandler, RefreshControl } from 'react-native'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text, Image, StyleSheet, RefreshControl } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { RootState, setroutes, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { accountInfo as getAccountInfo, assetInfo, optIn } from '../../services'
+import { accountInfo as getAccountInfo, optIn } from '../../services'
 import { Asset } from '../../types'
 import { setErrorMessage } from '../../redux'
 
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { AssetButton, NormalButton } from '../../components/common'
 
 import { Badge, VStack, Center } from 'native-base';
@@ -80,7 +80,7 @@ export const Transact = () => {
         }
 
         const assets: Partial<Asset[]> = account.assets
-        
+        setAccountInfo(account)
         setAssets(assets)
         dispatch(setToken({amount: assets[0].amount, unitName:'JASIRI'}))
         // await assetInfo(account.assets[0].id)
