@@ -114,7 +114,7 @@ export const Token = () => {
           <Text style={styles.historySubText}>Receiver: {i && i.receiver.slice(0, 15)}{'...'} </Text>
           <Text style={styles.historySubText}>Asset: {i && i['asset-id']} </Text>
           </View>)
-          })}
+          }) || <Loader loading={true}/>}
 
           </View>
           
