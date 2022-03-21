@@ -38,10 +38,14 @@ const { Value, Text: AnimatedText } = Animated;
 
 export const Login = ({ navigation }: navigation) => {
   const [loading, setLoading] = React.useState<boolean>()
-  const [hasPin, setHasPin] = React.useState<boolean>()
+  const [hasPin, setHasPin] = React.useState<boolean>(true)
 
   const [value, setValue] = React.useState('');
+ 
 
+  const buttonPress = () => {
+    setHasPin(false)
+  }
   const Reset = () => {
     return (
       <ScrollView style={styles.container}>
@@ -66,7 +70,7 @@ export const Login = ({ navigation }: navigation) => {
               containerStyle={styles.cellContainer}
               cellSpacing={40}
               cellStyle={styles.cell}
-              // ref={pinInput}
+              // ref={confirmPinInput}
               // value={code}
               // onTextChange={code => setState({ code })}
               // onFulfill={this._checkCode}
@@ -74,7 +78,7 @@ export const Login = ({ navigation }: navigation) => {
             />
           </VStack>
 
-          <NormalButton title='Create Pin' style={styles.button} />
+          <NormalButton title='Create Pin'clickHandler={buttonPress} style={styles.button} />
 
         </VStack>
 
@@ -96,7 +100,7 @@ export const Login = ({ navigation }: navigation) => {
   }
   return (
 
-    hasPin ?
+   hasPin && hasPin ?
       <ScrollView style={styles.container}>
         <Loader loading={loading} />
         <VStack space={10} style={styles.root}>
@@ -115,7 +119,9 @@ export const Login = ({ navigation }: navigation) => {
           </VStack>
           <NormalButton title='Login' style={styles.button} />
           <Center style={styles.down}>
-            <MyAppText style={styles.footer}>Forgot Pin?</MyAppText>
+            <TouchableOpacity onPress={buttonPress}>
+              <MyAppText style={styles.footer}>Forgot Pin?</MyAppText>
+            </TouchableOpacity>  
           </Center>
 
 
