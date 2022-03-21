@@ -14,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
+import { Login } from '../screens';
 import { Dashboard } from '../screens';
 import RecoverAccount from "../screens/recoverAccount/component"
 import SeedPhrase from "../screens/seedphrase/component"
@@ -54,7 +55,7 @@ export const DashBoardNavigation = () => {
          }
         
         />
-        <Tab.Screen name="Contacts" component={View} />
+        <Tab.Screen name="Contacts" component={Login} />
         <Tab.Screen name="Notification" component={View} />
         <Tab.Screen 
           name="Settings" 
