@@ -38,53 +38,12 @@ const { Value, Text: AnimatedText } = Animated;
 
 export const Login = ({ navigation }: navigation) => {
   const [loading, setLoading] = React.useState<boolean>()
-  const [hasPin, setHasPin] = React.useState<boolean>(true)
+  const [code, setCode] = React.useState('')
 
   const [value, setValue] = React.useState('');
  
 
-  const buttonPress = () => {
-    setHasPin(false)
-  }
-  const Reset = () => {
-    return (
-      <ScrollView style={styles.container}>
-        <Loader loading={loading} />
-        <VStack space={10} style={styles.root}>
-          <VStack>
-            <MyAppText style={styles.title}>Create Pin</MyAppText>
-            <SmoothPinCodeInput
-              containerStyle={styles.cellContainer}
-              cellSpacing={40}
-              cellStyle={styles.cell}
-              // ref={pinInput}
-              // value={code}
-              // onTextChange={code => setState({ code })}
-              // onFulfill={this._checkCode}
-              onBackspace={() => console.log('No more back.')}
-            />
-          </VStack>
-          <VStack>
-            <MyAppText style={styles.title}>Confirm Pin</MyAppText>
-            <SmoothPinCodeInput
-              containerStyle={styles.cellContainer}
-              cellSpacing={40}
-              cellStyle={styles.cell}
-              // ref={confirmPinInput}
-              // value={code}
-              // onTextChange={code => setState({ code })}
-              // onFulfill={this._checkCode}
-              onBackspace={() => console.log('No more back.')}
-            />
-          </VStack>
 
-          <NormalButton title='Create Pin'clickHandler={buttonPress} style={styles.button} />
-
-        </VStack>
-
-      </ScrollView>
-    )
-  }
 
   const styled = {
     heading: (scale) => {
@@ -99,8 +58,6 @@ export const Login = ({ navigation }: navigation) => {
     }
   }
   return (
-
-   hasPin && hasPin ?
       <ScrollView style={styles.container}>
         <Loader loading={loading} />
         <VStack space={10} style={styles.root}>
@@ -111,24 +68,20 @@ export const Login = ({ navigation }: navigation) => {
               cellSpacing={40}
               cellStyle={styles.cell}
               // ref={pinInput}
-              // value={code}
-              // onTextChange={code => setState({ code })}
-              // onFulfill={this._checkCode}
+              value={code}
+              onTextChange={code => setCode(code)}
+              onFulfill={() => console.log('Do something')}
               onBackspace={() => console.log('No more back.')}
             />
           </VStack>
           <NormalButton title='Login' style={styles.button} />
           <Center style={styles.down}>
-            <TouchableOpacity onPress={buttonPress}>
+          <TouchableOpacity onPress={() => navigation.navigate("Create Pin")}>
               <MyAppText style={styles.footer}>Forgot Pin?</MyAppText>
             </TouchableOpacity>  
           </Center>
-
-
         </VStack>
-
       </ScrollView>
-      : <Reset />
   )
 }
 
