@@ -14,7 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import { Receive, SendToken } from '../components';
 import { QrScanner } from "../components/qrScanner"
 import { Home, Registration, CreateAccount } from "../screens"
-import { Login } from '../screens';
+import { Login, CreatePin } from '../screens';
 import { Dashboard } from '../screens';
 import RecoverAccount from "../screens/recoverAccount/component"
 import SeedPhrase from "../screens/seedphrase/component"
@@ -176,6 +176,16 @@ export const AuthenticationNavigation = () => {
           }}
         />
         <Stack.Screen name="Recover Account" component={RecoverAccount}
+          options={{
+            header: () => <View></View>
+
+          }} />
+        <Stack.Screen name="Create Pin" component={CreatePin}
+          options={{
+            header: () => <View></View>
+
+          }} />
+              <Stack.Screen name="Login" component={Login}
           options={{
             header: () => <View></View>
 
