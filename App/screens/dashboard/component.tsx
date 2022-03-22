@@ -64,9 +64,8 @@ export const Dashboard = () => {
     }
     React.useEffect(() => {
         (async () => {
-            const account = await getAccountInfo(address)
-
-            dispatch(setAccountInfo(account))
+            const account = await getAccountInfo({address: address, name: 'getAccountInfo'})
+            dispatch(setAccountInfo(JSON.parse(account)))
             setRefreshing(false)
             setLoading(false);
         })();

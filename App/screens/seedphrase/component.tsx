@@ -10,14 +10,17 @@ import { styles } from './styles';
 import { Center, Stack, VStack, Divider, Heading, HStack } from "native-base";
 import { Icon } from 'react-native-elements';
 import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
+import routes from '../../navigation/routes';
+import { useNavigation } from '@react-navigation/native';
 
 
-const SeedPhrase = ({ navigation }) => {
+const SeedPhrase = () => {
   const address = useSelector((state: RootState) => state.newAccount.address)
   const mnemonic = useSelector((state: RootState) => state.newAccount.mnemonic).split(' ')
 
+  const navigation = useNavigation()
   const handleClick = () => {
-    navigation.navigate('Dash board')
+    navigation.navigate(routes.DASHBOARD)
   }
     const styled = {
         heading: (scale) => {

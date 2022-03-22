@@ -12,5 +12,6 @@ export default  {
     SETTINGS: 'Settings',
     HOME: 'Home',
     RECOVER_ACCOUNT: 'Recover Account',
-    CREATE_PASSWORD: 'Create password'
+    CREATE_PASSWORD: 'Create password',
+    SEED_PHRASE: 'Seed Phrase'
 }

@@ -1,52 +1,74 @@
 
 import * as React from 'react';
 import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
   ScrollView,
-  Image,
-  Keyboard,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Card,
-  Animated,
-  SafeAreaView
+  
 } from "react-native";
-import { Icon } from 'react-native-elements';
-import { Center, Stack, VStack, Divider, Heading, HStack } from "native-base";
-import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
+import { VStack } from "native-base";
+import { MyAppText, textStyles } from '../../components/common/appTexts';
 import Loader from '../../components/loading'
 import { NormalButton } from '../../components/common';
 import {
   styles
 } from './styles';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
+import { setAddress, setMnemonic } from '../../redux';
+import { createAccount, setPassword } from '../../services';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import routes from '../../navigation/routes';
 
 
+export const CreatePin = () => {
 
-
-type navigation = {
-  navigation: any
-}
-const { Value, Text: AnimatedText } = Animated;
-
-
-
-
-
-export const CreatePin = ({ navigation }: navigation) => {
+  const navigation = useNavigation()
+   
   const [loading, setLoading] = React.useState<boolean>()
   const [code, setCode] = React.useState('')
-  const [confirmCode, setConfirmCode] = React.useState('')
-
-  const [value, setValue] = React.useState('');
- 
+  const [confirmCode, setConfirmCode] = React.useState('') 
+  const dispatch = useDispatch()
 
   const buttonPress = () => {
     
   }
+
+ 
+
+  React.useEffect(()=>{
+    if(code.length === 4 && confirmCode.length === 4 && code === confirmCode){
+      
+      console.log('matched');
+
+      (async()=>{
+            const account = await createAccount({name: 'createAccount'})
+            
+            const accountObject = JSON.parse(account)
+
+            
+            
+            dispatch(setAddress(accountObject.address));
+            dispatch(setMnemonic(accountObject.mnemonic));
+
+
+            const accountInfo = JSON.stringify({...accountObject, password: code})
+            const encrypted = await setPassword({accountInfo, name: 'setPassword'})
+
+            console.log(encrypted)
+            
+            try {  
+               
+
+                await AsyncStorage.setItem('accountData', JSON.stringify(accountObject))  
+            }catch (e) {    
+                // saving error  }
+                console.log('saving error')
+            }
+
+            //  navigation.navigate(routes.SEED_PHRASE)
+        })()
+    }
+  }, [code, confirmCode])
 
   const styled = {
     heading: (scale) => {
@@ -86,7 +108,7 @@ export const CreatePin = ({ navigation }: navigation) => {
             // ref={confirmPinInput}
             value={confirmCode}
             onTextChange={confirmCode => setConfirmCode(confirmCode)}
-            onFulfill={() => console.log('Do something')}
+            onFulfill={()=>console.log('Do something')}
             onBackspace={() => console.log('No more back.')}
           />
         </VStack>

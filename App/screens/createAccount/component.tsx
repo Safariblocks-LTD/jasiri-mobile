@@ -11,26 +11,14 @@ import { NormalButton } from '../../components/common'
 
 import { styles } from './styles'
 import routes from '../../navigation/routes'
+import { useNavigation } from '@react-navigation/native'
 
-export const CreateAccount = ({navigation}) => {
-    const dispatch = useDispatch()
+export const CreateAccount = () => {
+
+    const navigation = useNavigation()
+   
     const handleClick=()=>{
-        
-    //     const account = createAccount()
-    //     dispatch(setAddress(account.address));
-    //     dispatch(setMnemonic(account.mnemonic));
-    //     // console.log(account.mnemonic);
-
-    //   (async()=>{
-    //         try {    
-    //             await AsyncStorage.setItem('accountData', JSON.stringify({address: account.address, mnemonic: account.mnemonic}))  
-    //         }catch (e) {    
-    //             // saving error  }
-    //             console.log('saving error')
-    //     }})()
-        
-    //     // console.log('Button click')
-    //     navigation.navigate('Seed Phrase')
+    
     navigation.navigate(routes.CREATE_PASSWORD)
 
     }

@@ -181,24 +181,16 @@ export const AuthenticationNavigation = () => {
             header: () => <View></View>
 
           }} />
-        <Stack.Screen name="Create Pin" component={CreatePin}
+
+        <Stack.Screen name="Login" component={Login}
           options={{
             header: () => <View></View>
 
-          }} />
-              <Stack.Screen name="Login" component={Login}
-          options={{
-            header: () => <View></View>
-
-          }} />
+        }} />
         <Stack.Screen name="Seed Phrase" component={SeedPhrase}
           options={{
             headerTitle: props => null,
             headerStyle: {
-           
-              
-              
-              
             }
           }} />
         <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage}
@@ -221,7 +213,7 @@ export const AuthenticationNavigation = () => {
             header: () => <View></View>
 
           }} />
-          <Stack.Screen name="Create password" component={Login}
+          <Stack.Screen name="Create password" component={CreatePin}
           options={{
             header: () => <View></View>
 

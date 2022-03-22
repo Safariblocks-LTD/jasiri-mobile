@@ -1,66 +1,33 @@
 import axios from "axios";
-import {token} from "./auth";
 
 
 
-const apiBaseUrl = 'https://algoindexer.testnet.algoexplorerapi.io/v2';
+// const apiBaseUrl = 'https://dev-jsr-functionapp.azurewebsites.net/api/JSR-mobile-algorand-functions?code=RMBsEjnjIH9I6lTJo14hXr/WmaQwEqrTsB4EtqLygub9oW444wMCig==';
+const apiBaseUrl = 'http://172.31.242.182:7071/api/JSR-mobile-algorand-functions'
 
-const baseConfig = () => {
-  const config = {};
- 
-  return config;
-};
+
 
 export default {
-  get: async (params: {}, endpoint: string, options: {}) => {
-    
-    let qsParts = [''];
-   
-    let paramString = qsParts.length === 0 ? "" : `?${qsParts.join("&")}`;
-    console.log(paramString)
-
-   
-   
-    let url = (endpoint || "").toLowerCase().startsWith("http")
-      ? `${endpoint}`
-      : `${apiBaseUrl}/${endpoint}`;
-
-      console.log(`${url}${paramString}`)
-
+  post: async (body: object) => {
+    let url =  `${apiBaseUrl}`;
     try {
-      let response = await axios.get(`${url}${paramString}`, baseConfig());
+      let response = await axios.post(`${url}`, body);
       return response.data;
     } catch (error) {
+      
       return errorHandler(error);
     }
   },
-  /*
-    options: {
-      requestConfig: {},
-      results: string (csv, zip) || object ({operation: string, configItem1: null, configItem2: null}) || [strings/objects/mix]
-    }
-  */
-  post: async () => {
-   
-  },
+
+
 };
 
 function errorHandler (error: any){
-  if (error.response) {
+ 
     return {
       errored: true,
       message: "Server responded with an error",
-      data: error.response.data,
+      data: error.message,
   };
-} else if (error.request) {
-    return {
-      errored: true,
-      message: 'Request failed, check your internet connection',
-  };
-  } else {
-    return { 
-      message: "Application failure.",
-      errored: true
-  };
-  }
+ 
 };
