@@ -10,28 +10,31 @@ import { NormalButton } from '../../components/common'
 
 
 import { styles } from './styles'
+import routes from '../../navigation/routes'
 
 export const CreateAccount = ({navigation}) => {
     const dispatch = useDispatch()
     const handleClick=()=>{
         
-        const account = createAccount()
-        dispatch(setAddress(account.address));
-        dispatch(setMnemonic(account.mnemonic));
-        // console.log(account.mnemonic);
+    //     const account = createAccount()
+    //     dispatch(setAddress(account.address));
+    //     dispatch(setMnemonic(account.mnemonic));
+    //     // console.log(account.mnemonic);
 
-      (async()=>{
-            try {    
-                await AsyncStorage.setItem('accountData', JSON.stringify({address: account.address, mnemonic: account.mnemonic}))  
-            }catch (e) {    
-                // saving error  }
-                console.log('saving error')
-        }})()
+    //   (async()=>{
+    //         try {    
+    //             await AsyncStorage.setItem('accountData', JSON.stringify({address: account.address, mnemonic: account.mnemonic}))  
+    //         }catch (e) {    
+    //             // saving error  }
+    //             console.log('saving error')
+    //     }})()
         
-        // console.log('Button click')
-        navigation.navigate('Seed Phrase')
-    }
+    //     // console.log('Button click')
+    //     navigation.navigate('Seed Phrase')
+    navigation.navigate(routes.CREATE_PASSWORD)
 
+    }
+   
     return (
         <View style={styles.container}>
           

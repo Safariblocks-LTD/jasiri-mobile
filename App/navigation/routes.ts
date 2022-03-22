@@ -11,5 +11,6 @@ export default  {
     DASHBOARD: 'Dash board',
     SETTINGS: 'Settings',
     HOME: 'Home',
-    RECOVER_ACCOUNT: 'Recover Account'
+    RECOVER_ACCOUNT: 'Recover Account',
+    CREATE_PASSWORD: 'Create password'
 }

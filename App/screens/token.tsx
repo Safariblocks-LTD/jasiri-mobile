@@ -8,10 +8,6 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView,
-  TextInput,
-  Modal,
-  Image,
   BackHandler,
   RefreshControl
 } from 'react-native';
