@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Alert, Image, BackHandler, RefreshControl } from 'react-native'
+import { View, Text, ScrollView, Alert, BackHandler, RefreshControl } from 'react-native'
 import { StyleSheet } from 'react-native'
 
 // import { accountInfo as getAccountInfo } from '../../services'
@@ -8,12 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NormalButton } from '../components/common';
 import { useNavigation } from '@react-navigation/native';
 import WalletConnectClient from '@walletconnect/client';
-import { RootState, setErrorMessage, setroutes, setSuccessMessage } from '../redux';
+import { RootState, setErrorMessage, setroutes } from '../redux';
 import routes from '../navigation/routes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StyleText, MyAppText, textStyles } from '../components/common/appTexts';
-import { ListItem, Icon, Avatar } from 'react-native-elements'
-import { Link, Box, Flex, HStack, Spacer, Badge, VStack } from "native-base";
+import { StyleText, MyAppText } from '../components/common/appTexts';
+import { Icon, Avatar } from 'react-native-elements'
+import { Box, HStack, Spacer, VStack } from "native-base";
 import { useFocusEffect } from '@react-navigation/native';
 import Loader from '../components/loading';
 

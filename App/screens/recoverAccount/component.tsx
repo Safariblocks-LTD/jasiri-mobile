@@ -32,20 +32,20 @@ const RecoverAccount = () => {
             try{
                 setLoading(true)
                 console.log('try');
-                const recovered = await recoverAccount(mnemonic)
-                
-                
-                const raddress = recovered.address
-                const rmnemonic = recovered.mnemonic.toString()
+                const recovered = await recoverAccount({mnemonic: mnemonic, name: 'recoverAccount'})
 
-                console.log(rmnemonic)              
+          
+                const raddress = JSON.parse(recovered).address
+                const rmnemonic = JSON.parse(recovered).mnemonic
+
+                // console.log(rmnemonic)              
                 
                 // raddress  && dispatch(setAddress(raddress))
                 // rmnemonic && dispatch(setMnemonic(rmnemonic))
-                await AsyncStorage.setItem('accountData',  JSON.stringify(recovered)) 
+                await AsyncStorage.setItem('accountData',  recovered) 
                 raddress && rmnemonic && dispatch(setIsLoggedIn(true))
                 
-                // recovered && navigation.navigate(routes.DASHBOARD)                
+                // // recovered && navigation.navigate(routes.DASHBOARD)                
                 setLoading(false)
             } 
             catch(e) {    
@@ -57,7 +57,7 @@ const RecoverAccount = () => {
                
                 console.log(' error reading value  ')
                 console.log(e)
-                // return {error: e}
+                return {error: e}
             }
 
         })()

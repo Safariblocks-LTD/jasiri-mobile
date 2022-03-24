@@ -55,8 +55,9 @@ export const DashBoardNavigation = () => {
          }
         
         />
-        <Tab.Screen name="Contacts" component={Login} />
+        <Tab.Screen name="Contacts" component={View} />
         <Tab.Screen name="Notification" component={View} />
+        
         <Tab.Screen 
           name="Settings" 
           component={SettingsScreen} 
@@ -148,9 +149,9 @@ export const AuthenticationNavigation = () => {
           options={{
             headerTitle: props => null,
             headerStyle: {
-              backgroundColor: '#fff',
-              borderBottomWidth: 0,
-              shadowColor: 'transparent',
+              // backgroundColor: '#fff',
+              
+              
             },
             headerRight: () => (
               <Button
@@ -169,9 +170,9 @@ export const AuthenticationNavigation = () => {
           options={{
             headerTitle: props => null,
             headerStyle: {
-              backgroundColor: '#fff',
-              borderBottomWidth: 0,
-              shadowColor: 'transparent',
+              // backgroundColor: '#fff',
+              
+              
             },
           }}
         />
@@ -180,24 +181,16 @@ export const AuthenticationNavigation = () => {
             header: () => <View></View>
 
           }} />
-        <Stack.Screen name="Create Pin" component={CreatePin}
+
+        <Stack.Screen name="Login" component={Login}
           options={{
             header: () => <View></View>
 
-          }} />
-              <Stack.Screen name="Login" component={Login}
-          options={{
-            header: () => <View></View>
-
-          }} />
+        }} />
         <Stack.Screen name="Seed Phrase" component={SeedPhrase}
           options={{
             headerTitle: props => null,
             headerStyle: {
-              height: 60,
-              backgroundColor: '#fff',
-              borderBottomWidth: 0,
-              shadowColor: 'transparent',
             }
           }} />
         <Stack.Screen name="Seed Phrase Final Page" component={SeedPhraseFinalPage}
@@ -216,6 +209,11 @@ export const AuthenticationNavigation = () => {
 
           }} />
         <Stack.Screen name="Success" component={Success}
+          options={{
+            header: () => <View></View>
+
+          }} />
+          <Stack.Screen name="Create password" component={CreatePin}
           options={{
             header: () => <View></View>
 

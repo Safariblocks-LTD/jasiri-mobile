@@ -8,10 +8,6 @@ import {
   StyleSheet,
   View,
   Text,
-  SafeAreaView,
-  TextInput,
-  Modal,
-  Image,
   BackHandler,
   RefreshControl
 } from 'react-native';
@@ -50,9 +46,9 @@ export const Token = () => {
   React.useEffect(()=>{
    
       (async ()=>{
-      const history =  await transactionHistory(address)
+      const history =  await transactionHistory({address: address, name: 'transactionHistory'})
       // console.log(history)
-      setHistory(history.transactions)
+      setHistory(JSON.parse(history).transactions)
       setRefreshing(false)
       setLoading(false)
       })()
