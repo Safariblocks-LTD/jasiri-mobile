@@ -2,8 +2,8 @@ import axios from "axios";
 
 
 
-// const apiBaseUrl = 'https://dev-jsr-functionapp.azurewebsites.net/api/JSR-mobile-algorand-functions?code=RMBsEjnjIH9I6lTJo14hXr/WmaQwEqrTsB4EtqLygub9oW444wMCig==';
-const apiBaseUrl = 'http://172.19.37.247:7071/api/JSR-mobile-algorand-functions'
+const apiBaseUrl = 'https://dev-jsr-functionapp.azurewebsites.net/api/JSR-mobile-algorand-functions?code=RMBsEjnjIH9I6lTJo14hXr/WmaQwEqrTsB4EtqLygub9oW444wMCig==';
+// const apiBaseUrl = 'http://172.19.37.247:7071/api/JSR-mobile-algorand-functions'
 
 
 
