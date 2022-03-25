@@ -52,7 +52,8 @@ const newAccountSlice = createSlice({
   name: "newAccountSlice",
   initialState: {
     address: '',
-    mnemonic: ''
+    mnemonic: '',
+    account: {}
   },
   reducers: {
     setAddress(state, action: PayloadAction<string>) {
@@ -61,10 +62,13 @@ const newAccountSlice = createSlice({
     setMnemonic(state, action: PayloadAction<string >) {
       state.mnemonic = action.payload
     },
+    setAccount(state, action: PayloadAction<any >) {
+      state.account = action.payload
+    },
   }
 })
 
-export const { setAddress, setMnemonic } = newAccountSlice.actions
+export const { setAddress, setMnemonic, setAccount } = newAccountSlice.actions
 export const newAccount = newAccountSlice
 
 const accountSlice = createSlice({

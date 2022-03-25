@@ -69,6 +69,18 @@ export const createAccount= async(body: object)=> {
     }
 }
 
+
+export const loginAccount= async(body: object)=> {
+    try {  
+        const res = await http.post(body)
+        return res
+    }
+    catch (e) {        
+        console.log(e);
+        throw(e)
+    }
+}
+
 // (async()=>createAccount())()
 
 

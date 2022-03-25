@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, Text, StyleSheet, Modal } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
-import { setIsLoggedIn, setAddress, setroutes } from '../../redux'
+import { setIsLoggedIn, setAddress, setroutes, setAccount } from '../../redux'
 import { recoverAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -16,11 +16,13 @@ import Loader from '../../components/loading'
 
 
 const RecoverAccount = () => {
-    const [mnemonic, setMnemonic] = React.useState<string>('forward hat elbow gasp rude oppose apology estate kid rebel book faith perfect glove renew siege planet thing clarify goat security network bounce able you')
+    const [mn, setMnemonic] = React.useState<string>('forward hat elbow gasp rude oppose apology estate kid rebel book faith perfect glove renew siege planet thing clarify goat security network bounce able you')
     const dispatch = useDispatch()
     const [loading, setLoading] = React.useState<boolean>()
 
     const navigation = useNavigation()
+
+    
     
     
     
@@ -32,20 +34,19 @@ const RecoverAccount = () => {
             try{
                 setLoading(true)
                 console.log('try');
-                const recovered = await recoverAccount({mnemonic: mnemonic, name: 'recoverAccount'})
+                const recovered = await recoverAccount({mnemonic: mn, name: 'recoverAccount'})
 
-          
-                const raddress = JSON.parse(recovered).address
-                const rmnemonic = JSON.parse(recovered).mnemonic
+                const rec = JSON.parse(recovered)
 
-                // console.log(rmnemonic)              
+                const {address, mnemonic} = rec
+               
+                console.log(address)     
+                console.log(mnemonic)               
                 
-                // raddress  && dispatch(setAddress(raddress))
-                // rmnemonic && dispatch(setMnemonic(rmnemonic))
-                await AsyncStorage.setItem('accountData',  recovered) 
-                raddress && rmnemonic && dispatch(setIsLoggedIn(true))
+                dispatch(setAccount({address: address, mnemonic:mnemonic}))
                 
-                // // recovered && navigation.navigate(routes.DASHBOARD)                
+                dispatch(setroutes(routes.RECOVER_ACCOUNT))
+                navigation.navigate(routes.CREATE_PASSWORD)                
                 setLoading(false)
             } 
             catch(e) {    
@@ -69,6 +70,8 @@ const RecoverAccount = () => {
        
     }
 
+    
+
     return (
         <View style={styles.container} >
           <Loader loading={loading}/>
@@ -85,7 +88,7 @@ const RecoverAccount = () => {
                         placeholder = "Enter or paste you passphrase"
                         placeholderTextColor = "black"
                         autoCapitalize = "none"
-                        value={mnemonic}
+                        value={mn}
                         onChangeText={handleInput}
                         />
                     </View>

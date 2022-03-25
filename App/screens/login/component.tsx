@@ -1,62 +1,105 @@
 
 import * as React from 'react';
 import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
+ 
   ScrollView,
-  Image,
-  Keyboard,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-  Card,
-  Animated,
-  SafeAreaView
-} from "react-native";
-import { Icon } from 'react-native-elements';
-import { Center, Stack, VStack, Divider, Heading, HStack } from "native-base";
-import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
+  TouchableOpacity} from "react-native";
+import { Center, VStack } from "native-base";
+import { MyAppText, textStyles } from '../../components/common/appTexts';
 import Loader from '../../components/loading'
 import { NormalButton } from '../../components/common';
 import {
   styles
 } from './styles';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
+import { useNavigation } from '@react-navigation/native';
+import routes from '../../navigation/routes';
+import { useDispatch } from 'react-redux';
+import { setIsLoggedIn, setAddress, setMnemonic, setErrorMessage, setroutes } from '../../redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createAccount, setPassword, loginAccount } from '../../services';
 
 
 
-
-type navigation = {
-  navigation: any
-}
-const { Value, Text: AnimatedText } = Animated;
-
-
-
-
-
-export const Login = ({ navigation }: navigation) => {
+export const Login = () => {
   const [loading, setLoading] = React.useState<boolean>()
   const [code, setCode] = React.useState('')
 
-  const [value, setValue] = React.useState('');
+  const [encrypted, setEncrypted] = React.useState('');
  
+  const navigation = useNavigation()
+  const dispatch = useDispatch()
+  
+  React.useEffect(()=>{
+    (async () => {  
+      try {    
+          const jsonValue = await AsyncStorage.getItem('accountData')  
+          console.log('hex:-------------', jsonValue)
+          setEncrypted(jsonValue)
+         
+      } 
+      catch(e) {    
+          //
+          console.log(' error reading value  ')
+      }})();
+  }, [])
 
 
 
-  const styled = {
-    heading: (scale) => {
-      const fontSize = textStyles.fontSize * scale;
+  const loginAcc=()=>{
+    if(code.length === 4){
+      
+      console.log('matched');
+      setLoading(true);
 
-      return {
-        lineHeight: fontSize * 1.4,
-        marginBottom: 12,
-        fontWeight: "bold",
-        fontSize,
-      };
+      (async()=>{
+          try {  
+            console.log('encrypted: -----------------',encrypted)
+            const res = await loginAccount({name: 'loginAccount', accountInfo: {encrypted: encrypted, password: code}})
+
+            const resObject = JSON.parse(res)
+
+            if(resObject.errored){
+              console.log(resObject.data)
+              console.log('saving error')
+              setLoading(false);
+              dispatch(setErrorMessage(resObject.data))
+              dispatch(setroutes(routes.LOGIN))
+              navigation.navigate(routes.ERROR)
+              return
+            }
+
+            const decrypted = JSON.parse(resObject.decrypted)
+
+            const {address, mnemonic} = decrypted
+
+              
+            dispatch(setAddress(address));
+            dispatch(setMnemonic(mnemonic));
+            
+            
+           
+            setLoading(false);
+            navigation.navigate(routes.DASHBOARD)
+          }catch (e) {    
+                console.log(e)
+                console.log('saving error')
+                setLoading(false);
+                dispatch(setroutes(routes.LOGIN))
+                dispatch(setErrorMessage(e.message))
+                navigation.navigate(routes.ERROR)
+          }
+           
+        })()
     }
   }
+
+  const handlePin=()=>{
+     loginAcc()
+
+  }
+
+
   return (
       <ScrollView style={styles.container}>
         <Loader loading={loading} />
@@ -70,13 +113,13 @@ export const Login = ({ navigation }: navigation) => {
               // ref={pinInput}
               value={code}
               onTextChange={code => setCode(code)}
-              onFulfill={() => console.log('Do something')}
+              onFulfill={() => console.log('Do something.')}
               onBackspace={() => console.log('No more back.')}
             />
           </VStack>
-          <NormalButton title='Login' style={styles.button} />
+          <NormalButton title='Login' style={styles.button} clickHandler={handlePin}/>
           <Center style={styles.down}>
-          <TouchableOpacity onPress={() => navigation.navigate("Create Pin")}>
+          <TouchableOpacity onPress={() => navigation.navigate(routes.RECOVER_ACCOUNT)}>
               <MyAppText style={styles.footer}>Forgot Pin?</MyAppText>
             </TouchableOpacity>  
           </Center>
