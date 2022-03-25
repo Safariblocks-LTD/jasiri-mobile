@@ -45,10 +45,10 @@ export const SettingsScreen = () => {
       try {
 
         await AsyncStorage.removeItem('accountData')
-        dispatch(setIsLoggedIn(false))
-        dispatch(setAccount({}))
-        dispatch(setMnemonic(''))
-        dispatch(setAddress(''))
+        // dispatch(setIsLoggedIn(false))
+        // dispatch(setAccount({}))
+        // dispatch(setMnemonic(''))
+        // dispatch(setAddress(''))
        
         console.log('removed')
         navigator.navigate(routes.HOME)
