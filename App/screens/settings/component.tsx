@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsLoggedIn, setAddress, setMnemonic, RootState, setWalletConnect, setSuccessMessage, setErrorMessage } from '../../redux';
+import { setIsLoggedIn, setAddress, setMnemonic, RootState, setWalletConnect, setSuccessMessage, setErrorMessage, setAccount } from '../../redux';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { WC } from '../../services/wallet-connect'
 import WalletConnectClient from '@walletconnect/client';
@@ -45,7 +45,11 @@ export const SettingsScreen = () => {
       try {
 
         await AsyncStorage.removeItem('accountData')
-        dispatch(setIsLoggedIn(false))
+        // dispatch(setIsLoggedIn(false))
+        // dispatch(setAccount({}))
+        // dispatch(setMnemonic(''))
+        // dispatch(setAddress(''))
+       
         console.log('removed')
         navigator.navigate(routes.HOME)
       }

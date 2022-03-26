@@ -15,12 +15,18 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const SeedPhrase = () => {
-  const address = useSelector((state: RootState) => state.newAccount.address)
-  const mnemonic = useSelector((state: RootState) => state.newAccount.mnemonic).split(' ')
+ 
+
+  const account = useSelector((state: RootState) => state.newAccount.account)
+
+  const accountObject = account.accountObject
+
+  const mnemonic = accountObject && accountObject.mnemonic && accountObject.mnemonic.split(' ')
+  const address = accountObject && accountObject.address && accountObject.address.split(' ')
 
   const navigation = useNavigation()
   const handleClick = () => {
-    navigation.navigate(routes.DASHBOARD)
+    navigation.navigate(routes.LOGIN)
   }
     const styled = {
         heading: (scale) => {

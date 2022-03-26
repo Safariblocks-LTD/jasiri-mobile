@@ -91,21 +91,25 @@ export const Transact = () => {
     const handleCLickAddJasiri = () => {
         console.log('add jasiri')
         const assetId = 67513364;
-        setLoading(true);
-
+      
 
         (async()=>{
-            const res = await optIn(mnemonic,assetId)
-            if(res.error){
+            setLoading(true);
+            const response = await optIn({name: 'optIn', mnemonic, assetId})
+
+            const res = JSON.parse(response)
+
+
+            if(res.errored){
                 console.log(res)
-                dispatch(setErrorMessage(res.error))
+                dispatch(setErrorMessage(res.data))
                 dispatch(setroutes(routes.TRANSACT))
                 navigation.navigate(routes.ERROR)
-
+                setLoading(false);
                
                 
             }
-            setAdded(true)
+            // setAdded(true)
             console.log(res)
             setLoading(false);
         })()
@@ -167,14 +171,14 @@ export const Transact = () => {
 
                 {!assets || assets?.length === 0 &&
                  <VStack space={2} alignItems="center">
-                            <Center>
-                              <NormalButton
+                <Center>
+                    <NormalButton
                     style={styles.button}
                     clickHandler={() => handleCLickAddJasiri()}
                     title='Tap to add JASIRI'
                 />
-                            </Center>
-                            </VStack>
+                </Center>
+                </VStack>
               
                 }
             </View>

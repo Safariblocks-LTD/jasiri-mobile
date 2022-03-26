@@ -12,11 +12,11 @@ import {
   styles
 } from './styles';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
-import { setAddress, setMnemonic } from '../../redux';
+import { RootState, setAccount, setAddress, setErrorMessage, setMnemonic, setroutes } from '../../redux';
 import { createAccount, setPassword } from '../../services';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import routes from '../../navigation/routes';
 
 
@@ -29,45 +29,82 @@ export const CreatePin = () => {
   const [confirmCode, setConfirmCode] = React.useState('') 
   const dispatch = useDispatch()
 
-  const buttonPress = () => {
-    
-  }
+  const back = useSelector((state: RootState)=>state.routes.back)
+  const account = useSelector((state: RootState)=>state.newAccount.account)
 
- 
-
-  React.useEffect(()=>{
+  const create=()=>{
     if(code.length === 4 && confirmCode.length === 4 && code === confirmCode){
       
       console.log('matched');
+      setLoading(true);
 
       (async()=>{
-            const account = await createAccount({name: 'createAccount'})
-            
-            const accountObject = JSON.parse(account)
+          try {  
 
+
+            let accountObject;
+
+            if(back === routes.RECOVER_ACCOUNT){
+              accountObject = account
+            }else {
+              const res = await createAccount({name: 'createAccount'})
+
+              console.log(res)
+
+              accountObject = JSON.parse(res)
+            }
+
+            // console.log(accountObject)
+
+
+            if(accountObject.errored){
+              console.log(accountObject.data)
+              console.log('saving error')
+              setLoading(false);
+              dispatch(setErrorMessage(accountObject.data))
+              dispatch(setroutes(routes.CREATE_PASSWORD))
+              navigation.navigate(routes.ERROR)
+              return
+            }
+            
+           
             
             
-            dispatch(setAddress(accountObject.address));
-            dispatch(setMnemonic(accountObject.mnemonic));
+            dispatch(setAccount({accountObject}))
 
 
             const accountInfo = JSON.stringify({...accountObject, password: code})
             const encrypted = await setPassword({accountInfo, name: 'setPassword'})
 
-            console.log(encrypted)
-            
-            try {  
-               
+            const enc = JSON.parse(encrypted)
 
-                await AsyncStorage.setItem('accountData', JSON.stringify(accountObject))  
-            }catch (e) {    
-                // saving error  }
+            const data =enc.encrypted
+            await AsyncStorage.setItem('accountData', JSON.stringify(data))  
+            setLoading(false);
+            back === routes.RECOVER_ACCOUNT ? navigation.navigate(routes.LOGIN) : navigation.navigate(routes.SEED_PHRASE)
+            dispatch(setroutes(''))
+          
+          }catch (e) {    
+                console.log(e)
                 console.log('saving error')
-            }
-
-            //  navigation.navigate(routes.SEED_PHRASE)
+                setLoading(false);
+                dispatch(setroutes(routes.CREATE_PASSWORD))
+                dispatch(setErrorMessage(e.message))
+                navigation.navigate(routes.ERROR)
+          }
+           
         })()
     }
+  }
+
+  const buttonPress = () => {
+    create()
+  }
+
+ 
+
+  React.useEffect(()=>{
+    create()
   }, [code, confirmCode])
 
   const styled = {
