@@ -43,7 +43,7 @@ export const Home = () => {
           console.log(' error reading value  ')
       }})();
 
- 
+      return ()=>setIsLoggedIn(false)
     
   },[])
 
