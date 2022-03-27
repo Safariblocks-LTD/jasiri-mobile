@@ -97,18 +97,18 @@ export const Transact = () => {
             setLoading(true);
             const response = await optIn({name: 'optIn', mnemonic, assetId})
 
-            const res = JSON.parse(response)
-
-
-            if(res.errored){
-                console.log(res)
-                dispatch(setErrorMessage(res.data))
+            if(response.errored){
+                console.log(response)
+                dispatch(setErrorMessage(response.data))
                 dispatch(setroutes(routes.TRANSACT))
                 navigation.navigate(routes.ERROR)
                 setLoading(false);
+                return 
                
                 
             }
+
+            const res = JSON.parse(response)
             // setAdded(true)
             console.log(res)
             setLoading(false);

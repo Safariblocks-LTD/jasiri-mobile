@@ -54,20 +54,22 @@ export const Login = () => {
 
       (async()=>{
           try {  
-            console.log('encrypted: -----------------',encrypted)
+            
             const res = await loginAccount({name: 'loginAccount', accountInfo: {encrypted: encrypted, password: code}})
 
-            const resObject = JSON.parse(res)
+            console.log(res)
 
-            if(resObject.errored){
-              console.log(resObject.data)
+            if(res.errored){
+              console.log(res.data)
               console.log('saving error')
               setLoading(false);
-              dispatch(setErrorMessage(resObject.data))
+              dispatch(setErrorMessage(res.data))
               dispatch(setroutes(routes.LOGIN))
               navigation.navigate(routes.ERROR)
               return
             }
+
+            const resObject = JSON.parse(res)
 
             const decrypted = JSON.parse(resObject.decrypted)
 

@@ -14,7 +14,7 @@ import appStyles from '../../components/common/appStyles'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import Loader from '../../components/loading';
-import { setAccountInfo } from '../../redux';
+import { setAccountInfo, setErrorMessage, setroutes } from '../../redux';
 
 
 
@@ -65,6 +65,14 @@ export const Dashboard = () => {
     React.useEffect(() => {
         (async () => {
             const account = await getAccountInfo({address: address, name: 'getAccountInfo'})
+            if(account.errored){
+                setLoading(false)
+                dispatch(setErrorMessage(account.data))
+                dispatch(setroutes(routes.DASHBOARD))
+                navigation.navigate(routes.ERROR)
+                return 
+
+            }
             dispatch(setAccountInfo(JSON.parse(account)))
             setRefreshing(false)
             setLoading(false);
