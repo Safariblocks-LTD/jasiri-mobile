@@ -32,7 +32,8 @@ export const Home = () => {
     (async () => {  
       try {    
           const jsonValue = await AsyncStorage.getItem('accountData')  
-          if(jsonValue!=null){
+          console.log(jsonValue)
+          if(jsonValue){
             setIsLoggedIn(true)
             
           }  
@@ -43,14 +44,15 @@ export const Home = () => {
           console.log(' error reading value  ')
       }})();
 
-      return ()=>setIsLoggedIn(false)
+      
     
   },[])
 
 
   React.useEffect(() => {
     isLoggedIn && navigation.navigate(routes.LOGIN)
-  })
+    return ()=>setIsLoggedIn(false)
+  }, [isLoggedIn])
 
 
   useFocusEffect(

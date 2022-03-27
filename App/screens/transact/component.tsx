@@ -110,7 +110,12 @@ export const Transact = () => {
 
             const res = JSON.parse(response)
             // setAdded(true)
+
+            dispatch(setAccountInfo(res))
+            setAssets(res.assets)
             console.log(res)
+            // dispatch(setroutes(routes.TRANSACT))
+            // navigation.navigate(routes.T)
             setLoading(false);
         })()
 
