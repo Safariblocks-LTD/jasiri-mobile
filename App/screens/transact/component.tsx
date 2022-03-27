@@ -29,7 +29,7 @@ const AssetInfo = ({ asset }) => {
                 </View>
 
                 <Text style={styles.unitAmount}>
-                    {asset.amount} {asset.unitName}
+                    {asset.amount/10000} {asset.unitName}
                 </Text>
                 <Text style={styles.unitInUsd}>$ ### USD</Text>
             </View>

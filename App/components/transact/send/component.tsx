@@ -152,7 +152,7 @@ export const SendToken = () => {
               
           <View style={styles.token} >
             <MyAppText style={styles.tokenText}> Total jasiri balance</MyAppText>
-            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</MyAppText>
+            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount/10000} JASIRI</MyAppText>
             <MyAppText style={styles.tokenText}> $ #### USD</MyAppText>
           </View>
          

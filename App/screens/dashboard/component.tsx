@@ -73,6 +73,7 @@ export const Dashboard = () => {
                 return 
 
             }
+            console.log(account)
             dispatch(setAccountInfo(JSON.parse(account)))
             setRefreshing(false)
             setLoading(false);
@@ -93,9 +94,9 @@ export const Dashboard = () => {
 
             <View style={styles.balance}> 
                 <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
-                <MyAppText style={styles.balanceText}>Algo: {accountInfo?accountInfo.amount: 'loading'}</MyAppText> 
+                <MyAppText style={styles.balanceText}>ALGOs: {accountInfo?accountInfo.amount/1000000: 'loading'}</MyAppText> 
                 {(accountInfo && accountInfo.assets) ?accountInfo.assets.map(asset=>
-                <MyAppText key={Math.random()} style={styles.balanceText}>JSR : {asset.amount}</MyAppText>): <></>} 
+                <MyAppText key={Math.random()} style={styles.balanceText}>JSR : {asset.amount/10000}</MyAppText>): <></>} 
                 <MyAppText style={styles.balanceText}>USD</MyAppText> 
             </View>
 
