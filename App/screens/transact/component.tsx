@@ -62,10 +62,10 @@ export const Transact = () => {
     const assets = useSelector((state: RootState)=>state.assetInfo.assets)
     
 
-    const onRefresh=()=>{
-        setRefreshing(true)
-        setLoading(true)
-    }
+    // const onRefresh=()=>{
+    //     setRefreshing(true)
+    //     setLoading(true)
+    // }
 
 
     const navigation = useNavigation()
@@ -138,7 +138,7 @@ export const Transact = () => {
     }
 
     return (
-        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        <ScrollView >
             <Loader loading={loading}/>
             <View style={styles.container}>
                 {
