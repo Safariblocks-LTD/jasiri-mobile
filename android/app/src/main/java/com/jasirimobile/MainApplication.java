@@ -7,6 +7,9 @@ import androidx.annotation.NonNull;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
+import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
+import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactInstanceManager;
