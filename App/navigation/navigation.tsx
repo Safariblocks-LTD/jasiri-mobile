@@ -116,7 +116,7 @@ const headerStyle = StyleSheet.create({
     // borderWidth: 1,
 
 
-    backgroundColor: 'transparent'
+    backgroundColor: '#F2EDED',
 
   },
 })

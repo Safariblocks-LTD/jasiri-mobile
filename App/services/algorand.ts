@@ -100,11 +100,15 @@ export const accountInfo= async (body: object)=>{
 
 // createAccount()
 
-export const sendJSR=async (
-   
-    )=>{
+export const sendJSR=async (body: object)=>{
     
-
+    try{
+        const res = await http.post(body)
+        return res
+    }
+    catch(e){
+        return {error: e}
+    }
 }
 
 

@@ -69,27 +69,40 @@ export const SendToken = () => {
     try{
       
       (async()=>{
-      const res = await sendJSR('description', parseInt(amount), token['asset-id'], scanned, address, mnemonic)
-      console.log(res)
+      const res = await sendJSR({
+        name: 'sendJSR', 
+      description: '', 
+      amount: parseInt(amount), 
+      assetId: '', 
+      receiver: scanned, 
+      sender: address, 
+      sk: mnemonic
+      })
+
+
+      if(res.errored){
+        console.log(res)
+        dispatch(setErrorMessage(res.data))
+        dispatch(setroutes(routes.SEND_RECIEVE_SCREEN))
+        navigation.navigate(routes.ERROR)
+        setLoading(false);
+        return 
+       
+        
+    }
+      
+      
+      const response = JSON.parse(res)
      
-      dispatch(setAccountInfo(res))
+      dispatch(setAccountInfo(response))
+      setLoading(false)
+      dispatch(setroutes(routes.SEND_RECIEVE_SCREEN))
+      dispatch(setSuccessMessage('sent'))
+      navigation.navigate(routes.SUCCESS)
 
       // setAccountInfo(account)
       
       
-      if(res.address){
-        setLoading(false)
-        dispatch(setroutes(routes.SEND_RECIEVE_SCREEN))
-        dispatch(setSuccessMessage('sent'))
-        navigation.navigate(routes.SUCCESS)
-      }else{
-      
-        setLoading(false)
-        dispatch(setErrorMessage(`${res.message}`))
-        dispatch(setroutes(routes.SEND_TOKEN))
-        navigation.navigate(routes.ERROR)
-       
-      }
       
       
       })()
@@ -139,7 +152,7 @@ export const SendToken = () => {
               
           <View style={styles.token} >
             <MyAppText style={styles.tokenText}> Total jasiri balance</MyAppText>
-            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</MyAppText>
+            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount/10000} JASIRI</MyAppText>
             <MyAppText style={styles.tokenText}> $ #### USD</MyAppText>
           </View>
          

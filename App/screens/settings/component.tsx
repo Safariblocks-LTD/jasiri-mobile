@@ -75,7 +75,7 @@ export const SettingsScreen = () => {
   return (
 
     <ScrollView >
-      <View style={{ width: '100%', height: '100%', backgroundColor: '#E3E8E7' }} >
+      <View style={{ width: '100%', height: '100%', backgroundColor: '#F2EDED' }} >
         <View style={styles.container} >
          
 

@@ -34,10 +34,22 @@ const RecoverAccount = () => {
             try{
                 setLoading(true)
                 console.log('try');
-                const recovered = await recoverAccount({mnemonic: mn, name: 'recoverAccount'})
+                const response = await recoverAccount({mnemonic: mn, name: 'recoverAccount'})
 
-                const rec = JSON.parse(recovered)
+                console.log(response)
 
+                
+
+                if(response.errored){
+                    setLoading(false)
+                    dispatch(setErrorMessage(response.data))
+                    dispatch(setroutes(routes.RECOVER_ACCOUNT))
+                    navigation.navigate(routes.ERROR)
+                    return 
+
+                }
+                
+                const rec = JSON.parse(response)
                 const {address, mnemonic} = rec
                
                 console.log(address)     
@@ -57,8 +69,7 @@ const RecoverAccount = () => {
                 navigation.navigate(routes.ERROR)
                
                 console.log(' error reading value  ')
-                console.log(e)
-                return {error: e}
+               
             }
 
         })()

@@ -24,7 +24,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Home = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>()
+  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false)
   const navigation = useNavigation()
 
   const dispatch = useDispatch()
@@ -32,9 +32,10 @@ export const Home = () => {
     (async () => {  
       try {    
           const jsonValue = await AsyncStorage.getItem('accountData')  
-          if(jsonValue!=null){
+          console.log(jsonValue)
+          if(jsonValue){
             setIsLoggedIn(true)
-            navigation.navigate(routes.LOGIN)
+            
           }  
          
       } 
@@ -43,14 +44,15 @@ export const Home = () => {
           console.log(' error reading value  ')
       }})();
 
-      return ()=>setIsLoggedIn(false)
+      
     
   },[])
 
 
-  // React.useEffect(() => {
-  //   isLoggedIn && navigation.navigate(routes.DASHBOARD)
-  // })
+  React.useEffect(() => {
+    isLoggedIn && navigation.navigate(routes.LOGIN)
+    return ()=>setIsLoggedIn(false)
+  }, [isLoggedIn])
 
 
   useFocusEffect(

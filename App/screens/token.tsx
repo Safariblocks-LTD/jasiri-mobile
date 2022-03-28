@@ -14,7 +14,7 @@ import {
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState} from '../redux';
+import { RootState, setErrorMessage, setroutes} from '../redux';
 import routes  from '../navigation/routes';
 import { transactionHistory } from '../services';
 import Loader from '../components/loading';
@@ -48,6 +48,14 @@ export const Token = () => {
       (async ()=>{
       const history =  await transactionHistory({address: address, name: 'transactionHistory'})
       // console.log(history)
+      if(history.errored){
+        setLoading(false)
+        // dispatch(setErrorMessage(response.data))
+        // dispatch(setroutes(routes.RECOVER_ACCOUNT))
+        // navigation.navigate(routes.ERROR)
+        return 
+
+    }
       setHistory(JSON.parse(history).transactions)
       setRefreshing(false)
       setLoading(false)
@@ -81,7 +89,7 @@ export const Token = () => {
               <Loader loading={loading}/>
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total JASIRI balance</Text>
-            <Text style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount} JASIRI</Text>
+            <Text style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount/10000} JASIRI</Text>
             <Text style={styles.tokenText}> $ #### USD</Text>
           </View>
          

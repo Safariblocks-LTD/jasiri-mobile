@@ -11,7 +11,14 @@ export default {
   post: async (body: object) => {
     let url =  `${apiBaseUrl}`;
     try {
-      let response = await axios.post(`${url}`, body);
+      const response = await axios.post(`${url}`, body);
+
+      const res = JSON.parse(response.data)
+
+      if(res.errored){
+        return errorHandler(res)
+      }
+
       return response.data;
     } catch (error) {
       
@@ -23,11 +30,12 @@ export default {
 };
 
 function errorHandler (error: any){
+  
  
     return {
       errored: true,
       message: "Server responded with an error",
-      data: error.message,
+      data: error.message || error.data,
   };
  
 };

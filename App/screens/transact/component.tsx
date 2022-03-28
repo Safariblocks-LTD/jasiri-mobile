@@ -29,7 +29,7 @@ const AssetInfo = ({ asset }) => {
                 </View>
 
                 <Text style={styles.unitAmount}>
-                    {asset.amount} {asset.unitName}
+                    {asset.amount/10000} {asset.unitName}
                 </Text>
                 <Text style={styles.unitInUsd}>$ ### USD</Text>
             </View>
@@ -97,20 +97,25 @@ export const Transact = () => {
             setLoading(true);
             const response = await optIn({name: 'optIn', mnemonic, assetId})
 
-            const res = JSON.parse(response)
-
-
-            if(res.errored){
-                console.log(res)
-                dispatch(setErrorMessage(res.data))
+            if(response.errored){
+                console.log(response)
+                dispatch(setErrorMessage(response.data))
                 dispatch(setroutes(routes.TRANSACT))
                 navigation.navigate(routes.ERROR)
                 setLoading(false);
+                return 
                
                 
             }
+
+            const res = JSON.parse(response)
             // setAdded(true)
+
+            dispatch(setAccountInfo(res))
+            setAssets(res.assets)
             console.log(res)
+            // dispatch(setroutes(routes.TRANSACT))
+            // navigation.navigate(routes.T)
             setLoading(false);
         })()
 
