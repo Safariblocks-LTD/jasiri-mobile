@@ -5,7 +5,8 @@ import thunk from 'redux-thunk'
 import {token, scanned, newAccount, account
 ,walletConnectScanner,
 walletConnectURI, error, success,
-routes, accountInfo
+routes, accountInfo,
+assetInfo, activeAsset
 } from './reducers';
 
 export const store = configureStore({
@@ -19,7 +20,9 @@ export const store = configureStore({
         walletConnectURI: walletConnectURI.reducer,
         success: success.reducer,
         routes: routes.reducer,
-        accountInfo: accountInfo.reducer
+        accountInfo: accountInfo.reducer,
+        assetInfo: assetInfo.reducer,
+        activeAsset: activeAsset.reducer
     },
     middleware:(getDefaultMiddleware) =>
         getDefaultMiddleware().concat(thunk)

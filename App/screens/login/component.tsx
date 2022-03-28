@@ -57,7 +57,7 @@ export const Login = () => {
             
             const res = await loginAccount({name: 'loginAccount', accountInfo: {encrypted: encrypted, password: code}})
 
-            console.log(res)
+          
 
             if(res.errored){
               console.log(res.data)
@@ -69,11 +69,11 @@ export const Login = () => {
               return
             }
 
-            const resObject = JSON.parse(res)
+            
 
-            const decrypted = JSON.parse(resObject.decrypted)
+            const decrypted = res.decrypted
 
-            const {address, mnemonic} = decrypted
+            const {address, mnemonic} = JSON.parse(decrypted)
 
               
             dispatch(setAddress(address));

@@ -3,19 +3,16 @@ import http from "./http";
 
 
 export const recoverAccount=async(body: any)=>{
-        try{
-           const res = await http.post(body)
-           return res
-       
-        }catch(e){
-            console.log(e)
-            throw(e)
-        }
-       
-    }
+    try{
+        const res = await http.post(body)
+        return res
     
-
-
+    }catch(e){
+        console.log(e)
+        throw(e)
+    }
+       
+}
 
 
 export  async function transactionHistory(body: object){
@@ -29,16 +26,14 @@ export  async function transactionHistory(body: object){
    
 }
 
-export const assetInfo=async()=>{
-    (async () => {
-        // let assetIndex = 67513364;
-        // let assetInfo = await indexerClient.searchForAssets()
-        //     .index(assetIndex).do();
-        // return JSON.stringify(assetInfo, undefined, 2)
-    })().catch(e => {
+export const assetInfo=async(body: object)=>{
+   try{
+        const res = await http.post(body)
+        return res
+   }catch(e){
         console.log(e);
-        console.trace();
-    });
+        throw(e)
+    };
 }
 
 
@@ -92,11 +87,6 @@ export const accountInfo= async (body: object)=>{
         return {error: e}
     }
 }
-
-
-
-
-
 
 // createAccount()
 
