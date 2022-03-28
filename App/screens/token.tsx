@@ -29,6 +29,7 @@ export const Token = () => {
   const dispatch = useDispatch()
   const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
   const address = useSelector((state: RootState)=>state.newAccount.address)
+  const asset = useSelector((state: RootState)=>state.activeAsset.asset)
 
   const [history, setHistory] = React.useState<object[]>()
 
@@ -44,19 +45,16 @@ export const Token = () => {
   
 
   React.useEffect(()=>{
-   
+      
       (async ()=>{
       const history =  await transactionHistory({address: address, name: 'transactionHistory'})
       // console.log(history)
       if(history.errored){
         setLoading(false)
-        // dispatch(setErrorMessage(response.data))
-        // dispatch(setroutes(routes.RECOVER_ACCOUNT))
-        // navigation.navigate(routes.ERROR)
         return 
 
     }
-      setHistory(JSON.parse(history).transactions)
+      setHistory(history.transactions)
       setRefreshing(false)
       setLoading(false)
       })()
@@ -88,8 +86,8 @@ export const Token = () => {
       <View style={styles.container}>
               <Loader loading={loading}/>
           <View style={styles.token} >
-            <Text style={styles.tokenText}> Total JASIRI balance</Text>
-            <Text style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount/10000} JASIRI</Text>
+            <Text style={styles.tokenText}> Total {asset.params.name} balance</Text>
+            <Text style={styles.tokenText}> {asset.amount/10000}  {asset.params.name}</Text>
             <Text style={styles.tokenText}> $ #### USD</Text>
           </View>
          

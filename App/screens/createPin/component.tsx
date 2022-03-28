@@ -49,9 +49,9 @@ export const CreatePin = () => {
             }else {
               const res = await createAccount({name: 'createAccount'})
 
-              console.log(res)
+              
 
-              accountObject = JSON.parse(res)
+              accountObject = res
             }
 
             // console.log(accountObject)
@@ -76,7 +76,7 @@ export const CreatePin = () => {
             const accountInfo = JSON.stringify({...accountObject, password: code})
             const encrypted = await setPassword({accountInfo, name: 'setPassword'})
 
-            const enc = JSON.parse(encrypted)
+            const enc = encrypted
 
             const data =enc.encrypted
             await AsyncStorage.setItem('accountData', JSON.stringify(data))  

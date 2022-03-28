@@ -49,7 +49,7 @@ const RecoverAccount = () => {
 
                 }
                 
-                const rec = JSON.parse(response)
+                const rec = response
                 const {address, mnemonic} = rec
                
                 console.log(address)     

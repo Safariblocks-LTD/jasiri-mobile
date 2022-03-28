@@ -189,6 +189,40 @@ export const { setAccountInfo } = accountInfoSlice.actions
 export const accountInfo = accountInfoSlice
 
 
+const assetsSlice = createSlice({
+  name: "assetsSlice",
+  initialState: {
+    assets: [],
+  },
+  reducers: {
+    setAssets(state, action: PayloadAction<object[]>) {
+      state.assets = action.payload
+    },
+    
+  }
+})
+
+export const { setAssets } = assetsSlice.actions
+export const assetInfo = assetsSlice
+
+const activeAssetSlice = createSlice({
+  name: "assetsSlice",
+  initialState: {
+    asset: {},
+  },
+  reducers: {
+    setActiveAsset(state, action: PayloadAction<object>) {
+      state.asset = action.payload
+    },
+    
+  }
+})
+
+export const { setActiveAsset } = activeAssetSlice.actions
+export const activeAsset = activeAssetSlice
+
+
+
 
 
 

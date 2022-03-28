@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 const apiBaseUrl = 'https://dev-jsr-functionapp.azurewebsites.net/api/JSR-mobile-algorand-functions?code=RMBsEjnjIH9I6lTJo14hXr/WmaQwEqrTsB4EtqLygub9oW444wMCig==';
-// const apiBaseUrl = 'http://172.19.37.247:7071/api/JSR-mobile-algorand-functions'
+// const apiBaseUrl = 'http://172.21.134.247:7071/api/JSR-mobile-algorand-functions'
 
 
 
@@ -13,7 +13,7 @@ export default {
     try {
       const response = await axios.post(`${url}`, body);
 
-      const res = JSON.parse(response.data)
+      const res = response.data
 
       if(res.errored){
         return errorHandler(res)

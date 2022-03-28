@@ -44,6 +44,8 @@ export const SendToken = () => {
   const scanned = useSelector((state: RootState)=>state.scanned.data)
   const address = useSelector((state: RootState)=>state.newAccount.address)
   const mnemonic = useSelector((state: RootState)=>state.newAccount.mnemonic)
+  const asset = useSelector((state: RootState)=>state.activeAsset.asset)
+
 
   const [refreshing, setRefreshing] = React.useState<boolean>(false)
     
@@ -73,7 +75,7 @@ export const SendToken = () => {
         name: 'sendJSR', 
       description: '', 
       amount: parseInt(amount), 
-      assetId: '', 
+      assetId: asset.index, 
       receiver: scanned, 
       sender: address, 
       sk: mnemonic
@@ -92,7 +94,7 @@ export const SendToken = () => {
     }
       
       
-      const response = JSON.parse(res)
+      const response = res
      
       dispatch(setAccountInfo(response))
       setLoading(false)
@@ -151,8 +153,8 @@ export const SendToken = () => {
 
               
           <View style={styles.token} >
-            <MyAppText style={styles.tokenText}> Total jasiri balance</MyAppText>
-            <MyAppText style={styles.tokenText}> {accountInfo.assets.length && accountInfo.assets[0].amount/10000} JASIRI</MyAppText>
+            <MyAppText style={styles.tokenText}> Total {asset.params.name} balance</MyAppText>
+            <MyAppText style={styles.tokenText}> {asset.amount/10000} {asset.params.name}</MyAppText>
             <MyAppText style={styles.tokenText}> $ #### USD</MyAppText>
           </View>
          

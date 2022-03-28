@@ -1,20 +1,16 @@
 import * as React from 'react'
-import { View, Text, ScrollView, Image, BackHandler, RefreshControl } from 'react-native'
-import { StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import Svg, { Circle, Rect } from 'react-native-svg';
+import { View, ScrollView, Image, BackHandler, RefreshControl } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-import { accountInfo as getAccountInfo } from '../../services'
+import { accountInfo as getAccountInfo, assetInfo } from '../../services'
 import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './styles';
 import { StyleText, MyAppText, textStyles } from '../../components/common/appTexts';
-import appStyles from '../../components/common/appStyles'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import Loader from '../../components/loading';
-import { setAccountInfo, setErrorMessage, setroutes } from '../../redux';
+import { setAccountInfo, setAssets, setErrorMessage, setroutes } from '../../redux';
 
 
 
@@ -24,6 +20,7 @@ export const Dashboard = () => {
     const address = useSelector((state: RootState) => state.newAccount.address)
    const accountInfo = useSelector((state: RootState)=>state.accountInfo.info)
     const [loading, setLoading] = React.useState<boolean>()
+    const assets = useSelector((state: RootState)=>state.assetInfo.assets)
     const navigation=useNavigation()
     const dispatch = useDispatch()
 
@@ -73,8 +70,25 @@ export const Dashboard = () => {
                 return 
 
             }
-            console.log(account)
-            dispatch(setAccountInfo(JSON.parse(account)))
+
+            dispatch(setAccountInfo(account))
+           
+            const assets = account.assets
+            const assetsdata = assets.map(async (asset)=> {
+                const res = await assetInfo({name: 'assetInfo', asset: asset['asset-id']})
+               
+                return {...res.assets[0], amount: asset.amount }
+            })
+
+            const assetsData = await Promise.all(assetsdata)
+
+           
+
+            // setAssets(assetsData)
+
+            dispatch(setAssets(assetsData))
+
+           
             setRefreshing(false)
             setLoading(false);
         })();
@@ -95,8 +109,8 @@ export const Dashboard = () => {
             <View style={styles.balance}> 
                 <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
                 <MyAppText style={styles.balanceText}>ALGOs: {accountInfo?accountInfo.amount/1000000: 'loading'}</MyAppText> 
-                {(accountInfo && accountInfo.assets) ?accountInfo.assets.map(asset=>
-                <MyAppText key={Math.random()} style={styles.balanceText}>JSR : {asset.amount/10000}</MyAppText>): <></>} 
+                {(assets && assets.length > 0)  ? assets.map(asset=>
+                <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount/10000}</MyAppText>): <></>} 
                 <MyAppText style={styles.balanceText}>USD</MyAppText> 
             </View>
 
