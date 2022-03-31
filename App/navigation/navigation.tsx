@@ -23,6 +23,7 @@ import { Error } from '../screens/error';
 import { WalletConnectComponent } from '../screens/WalletConnect';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Token } from '../screens';
+import { Agent, AgentSignUp } from '../screens';
 
 import Splash from '../screens/splash/component';
 
@@ -42,51 +43,53 @@ export const DashBoardNavigation = () => {
 
       }}
     >
-      
-        <Tab.Screen 
-          name="Main" 
-          component={Dashboard} 
-         options={{
+
+      <Tab.Screen
+        name="Main"
+        component={Dashboard}
+        options={{
           title: 'Main',
 
           header: () => <Header title={'Dashboard'} />,
-         }
+        }
 
-         }
-        
-        />
-        <Tab.Screen name="Contacts" component={View} />
-        <Tab.Screen name="Notification" component={View} />
-        
-        <Tab.Screen 
-          name="Settings" 
-          component={SettingsScreen} 
-          options={{
-            title: 'Settings',
+        }
 
-            header: () => <Header title={'Settings'} />,
-          }}
-        />
-        {/* <Tab.Screen name="Transact" component={Transact} /> */}
-        <Tab.Screen name="Transact" component={Transact} 
+      />
+      <Tab.Screen name="Contacts" component={View} />
+      <Tab.Screen name="Notification" component={View} />
+
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
         options={{
-          
-        }}
-        />
-        <Tab.Screen name="Token" component={Token}/>
-        <Tab.Screen name="Scan QR" component={QrScanner} />
-        <Tab.Screen name="Receive" component={Receive}/>
-        <Tab.Screen name="Send token" component={SendToken} />
-        <Tab.Screen
-          name="Wallet connect"
-          component={WalletConnectComponent}
-          options={{
-            title: 'Create Account',
+          title: 'Settings',
 
-            header: () => <Header title={'Wallet connect'} />,
-          }}
-        />
-      
+          header: () => <Header title={'Settings'} />,
+        }}
+      />
+      {/* <Tab.Screen name="Transact" component={Transact} /> */}
+      <Tab.Screen name="Transact" component={Transact}
+        options={{
+
+        }}
+      />
+      <Tab.Screen name="Agent" component={Agent} />
+      <Tab.Screen name="AgentSignUp" component={AgentSignUp} />
+      <Tab.Screen name="Token" component={Token} />
+      <Tab.Screen name="Scan QR" component={QrScanner} />
+      <Tab.Screen name="Receive" component={Receive} />
+      <Tab.Screen name="Send token" component={SendToken} />
+      <Tab.Screen
+        name="Wallet connect"
+        component={WalletConnectComponent}
+        options={{
+          title: 'Create Account',
+
+          header: () => <Header title={'Wallet connect'} />,
+        }}
+      />
+
     </Tab.Navigator>
   )
 }
@@ -106,7 +109,7 @@ const headerStyle = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     alignSelf: 'center',
-    
+
   },
   header: {
     // paddingTop: 50,
@@ -150,8 +153,8 @@ export const AuthenticationNavigation = () => {
             headerTitle: props => null,
             headerStyle: {
               // backgroundColor: '#fff',
-              
-              
+
+
             },
             headerRight: () => (
               <Button
@@ -171,8 +174,8 @@ export const AuthenticationNavigation = () => {
             headerTitle: props => null,
             headerStyle: {
               // backgroundColor: '#fff',
-              
-              
+
+
             },
           }}
         />
@@ -186,7 +189,7 @@ export const AuthenticationNavigation = () => {
           options={{
             header: () => <View></View>
 
-        }} />
+          }} />
         <Stack.Screen name="Seed Phrase" component={SeedPhrase}
           options={{
             headerTitle: props => null,
@@ -213,7 +216,7 @@ export const AuthenticationNavigation = () => {
             header: () => <View></View>
 
           }} />
-          <Stack.Screen name="Create password" component={CreatePin}
+        <Stack.Screen name="Create password" component={CreatePin}
           options={{
             header: () => <View></View>
 
@@ -232,6 +235,5 @@ const styles = StyleSheet.create({
   },
 
 })
-
 
 
