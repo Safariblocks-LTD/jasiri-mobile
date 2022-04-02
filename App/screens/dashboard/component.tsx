@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, ScrollView, Image, BackHandler, RefreshControl } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-import { accountInfo as getAccountInfo, assetInfo } from '../../services'
+import { accountInfo as getAccountInfo, assetInfo, exchangeRate } from '../../services'
 import { RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { styles } from './styles';
@@ -10,7 +10,7 @@ import { StyleText, MyAppText, textStyles } from '../../components/common/appTex
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import Loader from '../../components/loading';
-import { setAccountInfo, setAssets, setErrorMessage, setroutes } from '../../redux';
+import { setAccountInfo, setAssets, setErrorMessage, setExchangeRate, setroutes } from '../../redux';
 
 
 
@@ -23,6 +23,8 @@ export const Dashboard = () => {
     const assets = useSelector((state: RootState)=>state.assetInfo.assets)
     const navigation=useNavigation()
     const dispatch = useDispatch()
+
+//    const exchangeRates = useSelector((state: RootState)=>state.exchangeRate.exchangeRates)
 
     const onRefresh=()=>{
         setRefreshing(true)
@@ -72,6 +74,8 @@ export const Dashboard = () => {
             }
 
             dispatch(setAccountInfo(account))
+
+            
            
             const assets = account.assets
             const assetsdata = assets.map(async (asset)=> {
@@ -84,9 +88,45 @@ export const Dashboard = () => {
 
            
 
-            // setAssets(assetsData)
+            if(assets.length<1){
+                dispatch(setAssets([]))
 
-            dispatch(setAssets(assetsData))
+            // dispatch(setAssets(assetsData))
+
+           
+                setRefreshing(false)
+                setLoading(false);
+                return
+            }
+
+           
+
+           
+
+            const res = await exchangeRate({name: 'exchangeRates'})
+            // console.log(res)
+           
+            const JSR = assetsData.find(asset=>asset.params.name === 'JASIRI')
+            // console.log(JSR.amount)
+            const jsrusdc = res.find(pair=>pair.pair==='JSR/USDC')
+            const usdckes = res.find(pair=>pair.pair==='USD/KES')
+            console.log(usdckes)
+            const updatedAssets = assetsData.length && assetsData.map((asset)=>{
+               
+                if(asset.params.name === 'JASIRI'){
+                    return {
+                        ...asset, usdc: (jsrusdc.value) * (asset.amount/10000), kes: ((jsrusdc.value) * (asset.amount/10000)) *  usdckes.value
+                    }
+                }
+                return asset
+                
+            })
+
+          
+
+            dispatch(setAssets(updatedAssets))
+
+            // dispatch(setAssets(assetsData))
 
            
             setRefreshing(false)
@@ -95,6 +135,8 @@ export const Dashboard = () => {
 
 
     }, [address, refreshing])
+
+   
 
     return (
 
@@ -109,9 +151,23 @@ export const Dashboard = () => {
             <View style={styles.balance}> 
                 <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
                 <MyAppText style={styles.balanceText}>ALGOs: {accountInfo?accountInfo.amount/1000000: 'loading'}</MyAppText> 
-                {(assets && assets.length > 0)  ? assets.map(asset=>
-                <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount/10000}</MyAppText>): <></>} 
-                <MyAppText style={styles.balanceText}>USD</MyAppText> 
+                {assets.length > 0 && assets.map(asset=><View key={Math.random()}>
+                <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount/10000}</MyAppText>
+               
+                {asset.params.name === 'JASIRI' && 
+                    
+                    <>
+                
+                <MyAppText key={Math.random()} style={styles.balanceText}>KES : {asset.kes || 0}</MyAppText>
+                <MyAppText key={Math.random()} style={styles.balanceText}>USD : {asset.usdc || 0}</MyAppText> 
+                </>
+                }
+                </View>
+                )} 
+              
+                 
+                 
+               
             </View>
 
 

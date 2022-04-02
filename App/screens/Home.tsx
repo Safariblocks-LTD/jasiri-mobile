@@ -22,38 +22,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
+
 export const Home = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false)
-  const navigation = useNavigation()
-
-  const dispatch = useDispatch()
-  React.useEffect(()=>{
-    (async () => {  
-      try {    
-          const jsonValue = await AsyncStorage.getItem('accountData')  
-          console.log(jsonValue)
-          if(jsonValue){
-            setIsLoggedIn(true)
-            
-          }  
-         
-      } 
-      catch(e) {    
-          //
-          console.log(' error reading value  ')
-      }})();
-
-      
-    
-  },[])
-
-
-  React.useEffect(() => {
-    isLoggedIn && navigation.navigate(routes.LOGIN)
-    return ()=>setIsLoggedIn(false)
-  }, [isLoggedIn])
-
+ const navigation = useNavigation()
+  
 
   useFocusEffect(
     React.useCallback(() => {
@@ -75,8 +48,8 @@ export const Home = () => {
 
 
   return (
-    <>
-      {!isLoggedIn && <View style={styles.container} >
+    
+      <View style={styles.container} >
         <View style={styles.eclipseContainer}>
           <View style={styles.ecslipe3}></View>
           <View style={styles.eclipse2}></View>
@@ -99,12 +72,12 @@ export const Home = () => {
         <View style={styles.buttonTextBoxContainer}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Registration')}>
+            onPress={() => navigation.navigate(routes.REGISTRATION)}>
             <Text style={styles.account}>add Account</Text>
           </TouchableOpacity>
         </View>
-      </View> }
-    </>
+      </View> 
+    
 
   );
 }

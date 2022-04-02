@@ -113,4 +113,15 @@ export async function optIn(body: object) {
     
 }
 
+export async function exchangeRate(args: object) {
+    try{
+        const res = await http.post(args)
+        return res
+    }
+    catch(e){
+        return {error: e}
+    }
+    
+}
+
 

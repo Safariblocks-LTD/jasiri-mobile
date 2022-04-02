@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { RootState, setAccountInfo, setActiveAsset, setActiveAssets, setAssets, setroutes, setToken } from '../../redux'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { accountInfo as getAccountInfo, assetInfo, optIn } from '../../services'
+import { accountInfo as getAccountInfo, assetInfo, exchangeRate, optIn } from '../../services'
 import { Asset } from '../../types'
 import { setErrorMessage } from '../../redux'
 
@@ -19,6 +19,12 @@ import routes from '../../navigation/routes'
 
 
 const AssetInfo = ({ asset }) => {
+    const exchangeRates = useSelector((state: RootState)=>state.exchangeRate.exchangeRates)
+
+    React.useEffect(()=>{
+        console.log(exchangeRates)
+    },[])
+
     return (
         <>
             <View style={assetInfoStyles.assetinfo}>
@@ -60,6 +66,8 @@ export const Transact = () => {
 
     const [refreshing, setRefreshing] = React.useState<boolean>(false)
     const assets = useSelector((state: RootState)=>state.assetInfo.assets)
+
+    
     
 
     // const onRefresh=()=>{
@@ -91,13 +99,13 @@ export const Transact = () => {
                 
             }
 
-            const res = response
+           
             // setAdded(true)
 
-            dispatch(setAccountInfo(res))
+            dispatch(setAccountInfo(response))
             
-            console.log(res)
-            const assets = res.assets
+            console.log(response)
+            const assets = response.assets
             const assetsdata = assets.map(async (asset)=> {
                 const res = await assetInfo({name: 'assetInfo', asset: asset['asset-id']})
                
@@ -106,11 +114,34 @@ export const Transact = () => {
 
             const assetsData = await Promise.all(assetsdata)
 
+            const res = await exchangeRate({name: 'exchangeRates'})
+            // console.log(res)
+           
+            const JSR = assetsData.find(asset=>asset.params.name === 'JASIRI')
+            // console.log(JSR.amount)
+            const jsrusdc = res.find(pair=>pair.pair==='JSR/USDC')
+            const usdckes = res.find(pair=>pair.pair==='USD/KES')
+            console.log(usdckes)
+            const updatedAssets = assetsData.length && assetsData.map((asset)=>{
+               
+                if(asset.params.name === 'JASIRI'){
+                    return {
+                        ...asset, usdc: (jsrusdc.value) * (asset.amount/10000), kes: ((jsrusdc.value) * (asset.amount/10000)) *  usdckes.value
+                    }
+                }
+                return asset
+                
+            })
+
+           console.log(updatedAssets)
+
+            dispatch(setAssets(updatedAssets))
+
            
 
             // setAssets(assetsData)
 
-            dispatch(setAssets(assetsData))
+            // dispatch(setAssets(assetsData))
 
             // dispatch(setroutes(routes.TRANSACT))
             // navigation.navigate(routes.T)
