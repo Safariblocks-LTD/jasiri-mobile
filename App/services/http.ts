@@ -3,15 +3,16 @@ import axios from "axios";
 
 
 const apiBaseUrl = 'https://dev-jsr-functionapp.azurewebsites.net/api/JSR-mobile-algorand-functions?code=RMBsEjnjIH9I6lTJo14hXr/WmaQwEqrTsB4EtqLygub9oW444wMCig==';
-// const apiBaseUrl = 'http://172.21.134.247:7071/api/JSR-mobile-algorand-functions'
+// const apiBaseUrl = 'http://172.30.76.229:7071/api/JSR-mobile-algorand-functions'
+
 
 
 
 export default {
-  post: async (body: object) => {
+  post: async (args: object) => {
     let url =  `${apiBaseUrl}`;
     try {
-      const response = await axios.post(`${url}`, body);
+      const response = await axios.post(`${url}`, args);
 
       const res = response.data
 
@@ -22,9 +23,11 @@ export default {
       return response.data;
     } catch (error) {
       
-      return errorHandler(error);
+      return errorHandler({data: error.message});
     }
   },
+
+  
 
 
 };
@@ -35,7 +38,7 @@ function errorHandler (error: any){
     return {
       errored: true,
       message: "Server responded with an error",
-      data: error.message || error.data,
+      data:  error.data,
   };
  
 };

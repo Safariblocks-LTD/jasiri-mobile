@@ -222,6 +222,22 @@ export const { setActiveAsset } = activeAssetSlice.actions
 export const activeAsset = activeAssetSlice
 
 
+const exchangeRateSlice = createSlice({
+  name: "exchangeRateSlice",
+  initialState: {
+    exchangeRates: [],
+  },
+  reducers: {
+    setExchangeRate(state, action: PayloadAction<object[]>) {
+      state.exchangeRates = action.payload
+    },
+    
+  }
+})
+
+export const { setExchangeRate } = exchangeRateSlice.actions
+export const exchangeRate = exchangeRateSlice
+
 
 
 

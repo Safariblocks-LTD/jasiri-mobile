@@ -10,6 +10,7 @@ import {
 import { styles } from "./styles";
 import Loader from '../../components/loading';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import routes from '../../navigation/routes';
 
 const Splash = ({navigation}) => {
   //State for ActivityIndicator animation
@@ -21,10 +22,18 @@ const Splash = ({navigation}) => {
       //Check if user_id is set or not
       //If not then send for Authentication
       //else send to Home Screen
-      AsyncStorage.getItem('user_id').then((value) =>
-        navigation.navigate('Home'),
-      );
-      // navigation.navigate('Home')
+      AsyncStorage.getItem('accountData').then((value) =>{
+        console.log(value)
+        if(value){
+          navigation.navigate(routes.LOGIN)
+         
+        }
+        else{
+          navigation.navigate('Home')
+        }
+        
+      }).catch(err=>navigation.navigate(routes.HOME));
+      
     }, 3000);
   }, []);
 
