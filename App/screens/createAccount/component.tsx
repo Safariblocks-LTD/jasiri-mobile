@@ -3,7 +3,7 @@ import * as React from 'react'
 import { View, Text, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
-import { setAddress, setMnemonic } from '../../redux'
+import { setAddress, setMnemonic, setroutes } from '../../redux'
 import { createAccount } from '../../services'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NormalButton } from '../../components/common'
@@ -14,11 +14,11 @@ import routes from '../../navigation/routes'
 import { useNavigation } from '@react-navigation/native'
 
 export const CreateAccount = () => {
-
+    const dispatch=useDispatch()
     const navigation = useNavigation()
    
     const handleClick=()=>{
-    
+    dispatch(setroutes('Create account'))
     navigation.navigate(routes.CREATE_PASSWORD)
 
     }

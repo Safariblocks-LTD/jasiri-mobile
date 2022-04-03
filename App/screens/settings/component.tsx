@@ -51,6 +51,8 @@ export const SettingsScreen = () => {
         // dispatch(setAddress(''))
        
         console.log('removed')
+        dispatch(setAccount({}))
+        
         navigator.navigate(routes.HOME)
       }
       catch (e) {

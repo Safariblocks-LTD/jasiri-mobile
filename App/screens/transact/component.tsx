@@ -16,14 +16,13 @@ import { styles } from "./styles";
 import Loader from '../../components/loading'
 
 import routes from '../../navigation/routes'
+import { MyAppText } from '../../components/common/appTexts'
 
 
 const AssetInfo = ({ asset }) => {
-    const exchangeRates = useSelector((state: RootState)=>state.exchangeRate.exchangeRates)
+   
 
-    React.useEffect(()=>{
-        console.log(exchangeRates)
-    },[])
+   
 
     return (
         <>
@@ -34,10 +33,20 @@ const AssetInfo = ({ asset }) => {
                     <Text style={styles.unitname}> {asset.params.name} </Text>
                 </View>
 
+               
+
                 <Text style={styles.unitAmount}>
-                    {asset.amount/10000} {asset.params.name}
+
+                    {asset.params['unit-name']}: {asset.amount/10000} 
                 </Text>
-                <Text style={styles.unitInUsd}>$ ### USD</Text>
+                {asset.params.name === 'JASIRI' && 
+                    
+                    <>
+                
+                <Text style={styles.unitAmount}>KES : {asset.kes || 0}</Text>
+                <Text style={styles.unitAmount}>USD : {asset.usdc || 0}</Text> 
+                </>}
+                {/* <Text style={styles.unitInUsd}>$ ### USD</Text> */}
             </View>
         </>
     )

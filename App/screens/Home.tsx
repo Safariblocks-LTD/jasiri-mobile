@@ -4,18 +4,13 @@
 import * as React from 'react';
 import {
   TouchableOpacity,
-  StyleSheet,
   View,
   Text,
-  Image, Modal, BackHandler, 
+  Image, BackHandler, 
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, setAddress, setIsLoggedIn, setMnemonic } from '../redux';
 import { styles } from './styles';
-import Loader from '../components/loading';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../navigation/routes';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
