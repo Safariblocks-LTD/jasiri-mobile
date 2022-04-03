@@ -2,6 +2,7 @@
 import * as React from 'react';
 import {
  
+  BackHandler,
   ScrollView,
   TouchableOpacity} from "react-native";
 import { Center, VStack } from "native-base";
@@ -12,7 +13,7 @@ import {
   styles
 } from './styles';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import { useDispatch } from 'react-redux';
 import { setIsLoggedIn, setAddress, setMnemonic, setErrorMessage, setroutes } from '../../redux';
@@ -43,6 +44,23 @@ export const Login = () => {
           console.log(' error reading value  ')
       }})();
   }, [])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+    
+        
+        navigation.navigate(routes.HOME)
+         return true
+       };
+    
+     
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, [])
+  );
 
 
 
@@ -82,6 +100,7 @@ export const Login = () => {
             
            
             setLoading(false);
+            setCode('')
             navigation.navigate(routes.DASHBOARD)
           }catch (e) {    
                 console.log(e)

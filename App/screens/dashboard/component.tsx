@@ -73,6 +73,7 @@ export const Dashboard = () => {
 
             }
 
+
             dispatch(setAccountInfo(account))
 
             
@@ -115,7 +116,9 @@ export const Dashboard = () => {
                
                 if(asset.params.name === 'JASIRI'){
                     return {
-                        ...asset, usdc: (jsrusdc.value) * (asset.amount/10000), kes: ((jsrusdc.value) * (asset.amount/10000)) *  usdckes.value
+                        ...asset, 
+                        usdc: ((jsrusdc.value) * (asset.amount/10000)).toFixed(2), 
+                        kes: (((jsrusdc.value) * (asset.amount/10000)) *  usdckes.value).toFixed(2)
                     }
                 }
                 return asset
