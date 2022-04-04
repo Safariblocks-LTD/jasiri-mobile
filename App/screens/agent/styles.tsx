@@ -8,7 +8,17 @@ export const styles = StyleSheet.create({
         
     },
     box: {
-        opacity:0.6
+        opacity: 0.6,
+        // display: "flex",
+        // flexDirection: "row",
+        // justifyContent: "space-between",
+        // minWidth: "80%",
+    },
+    boxText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        paddingLeft: 2,
+        paddingRight: 5,
     },
     content: {
         width: "100%",
@@ -30,6 +40,13 @@ export const styles = StyleSheet.create({
     text: {
         fontFamily: "Roboto",
         fontSize: 30,
+        fontWeight: "bold",
+        fontStyle: "normal"
+    },
+
+    innerText: {
+        fontFamily: "Roboto",
+        fontSize: 18,
         fontWeight: "bold",
         fontStyle: "normal"
     },
@@ -96,7 +113,7 @@ export const styles = StyleSheet.create({
     },
     button: {
         height: 40,
-        width: '40%',
+        width: 100,
         borderRadius: 10,
         // marginTop: '25%',
         alignSelf: 'center',
@@ -125,5 +142,41 @@ export const styles = StyleSheet.create({
         marginLeft: 30
 
     },
-    
+    lowerRow: {
+        paddingTop: 10,
+        marginLeft: 30,
+        justifyContent: "space-between",
+    },
+    buttonRow: {
+        paddingTop: 10,
+        justifyContent: "space-around",
+    },
+
+    quickActions: {
+        // backgroundColor: '#fff',
+        // minHeight: '20%',
+        // paddingTop: 30,
+        // margin: 10,
+        width: '100%',
+        // borderRadius: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    quickActionsItem: {
+        backgroundColor: '#F8FDFD',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 100,
+        // height: 60,
+        borderRadius: 15,
+        paddingBottom: 10,
+        paddingTop: 10,
+        borderWidth: 1,
+        borderColor: '#000000',
+    },
+    tinyText: {
+        color: 'black',
+        fontSize: 12,
+        fontWeight: 'bold'
+    }
 });

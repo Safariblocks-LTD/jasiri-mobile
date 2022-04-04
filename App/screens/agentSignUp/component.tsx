@@ -71,7 +71,7 @@ export const AgentSignUp = () => {
                   < >
                     <HStack space={4}>
                   <Input variant="outline" bg="#D1FDE2" placeholder="0700000000" w="45%" />
-                      <NormalButton title='Send' style={styles.button} clickHandler={navigation.navigate("AgentSignUp")} />
+                  <NormalButton title='Send' style={styles.button} clickHandler={navigation.navigate("Agent")} />
                     </HStack>                
                   </> 
                 {/* </Stack> */}
