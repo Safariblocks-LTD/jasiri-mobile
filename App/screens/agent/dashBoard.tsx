@@ -183,7 +183,8 @@ export const AgentDashboard = () => {
                                 <Stack space={4}>
                                     <HStack space={12}>
                                         <View style={styles.quickActions}>
-                                            <TouchableOpacity style={styles.quickActionsItem}>
+                                            <TouchableOpacity onPress={() => navigation.navigate("ManageAccount")}
+                                                style={styles.quickActionsItem}>
                                                 <Image
                                                     // style={styles.tinyLogo}
                                                     source={require('../../assets/manage.png')}

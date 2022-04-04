@@ -23,7 +23,7 @@ import { Error } from '../screens/error';
 import { WalletConnectComponent } from '../screens/WalletConnect';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Token } from '../screens';
-import { Agent, AgentSignUp, AgentDashboard } from '../screens';
+import { Agent, AgentSignUp, AgentDashboard, ManageAccount, Timer } from '../screens';
 
 import Splash from '../screens/splash/component';
 
@@ -76,6 +76,9 @@ export const DashBoardNavigation = () => {
       />
       <Tab.Screen name="AgentSignUp" component={AgentSignUp} />
       <Tab.Screen name="Agent" component={Agent} />
+      <Tab.Screen name="ManageAccount" component={ManageAccount} /> 
+      <Tab.Screen name="Timer" component={Timer} /> 
+
       {/* <Tab.Screen name="AgentDashboard" component={AgentDashboard} /> */}
       <Tab.Screen name="Token" component={Token} />
       <Tab.Screen name="Scan QR" component={QrScanner} />

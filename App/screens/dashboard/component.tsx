@@ -24,9 +24,9 @@ export const Dashboard = () => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
 
-//    const exchangeRates = useSelector((state: RootState)=>state.exchangeRate.exchangeRates)
+    //    const exchangeRates = useSelector((state: RootState)=>state.exchangeRate.exchangeRates)
 
-    const onRefresh=()=>{
+    const onRefresh = () => {
         setRefreshing(true)
         setLoading(true);
     }
@@ -76,8 +76,8 @@ export const Dashboard = () => {
 
             dispatch(setAccountInfo(account))
 
-            
-           
+
+
             const assets = account.assets
             const assetsdata = assets.map(async (asset) => {
                 const res = await assetInfo({ name: 'assetInfo', asset: asset['asset-id'] })
@@ -89,43 +89,36 @@ export const Dashboard = () => {
 
 
 
-            if(assets.length<1){
+            if (assets.length < 1) {
                 dispatch(setAssets([]))
 
-            // dispatch(setAssets(assetsData))
-
-           
+                // dispatch(setAssets(assetsData))
                 setRefreshing(false)
                 setLoading(false);
                 return
             }
 
-           
-
-           
-
-            const res = await exchangeRate({name: 'exchangeRates'})
-            // console.log(res)
-           
-            const JSR = assetsData.find(asset=>asset.params.name === 'JASIRI')
+            const res = await exchangeRate({ name: 'exchangeRates' })
+            // console.log(res)           
+            const JSR = assetsData.find(asset => asset.params.name === 'JASIRI')
             // console.log(JSR.amount)
-            const jsrusdc = res.find(pair=>pair.pair==='JSR/USDC')
-            const usdckes = res.find(pair=>pair.pair==='USD/KES')
+            const jsrusdc = res.find(pair => pair.pair === 'JSR/USDC')
+            const usdckes = res.find(pair => pair.pair === 'USD/KES')
             console.log(usdckes)
-            const updatedAssets = assetsData.length && assetsData.map((asset)=>{
-               
-                if(asset.params.name === 'JASIRI'){
+            const updatedAssets = assetsData.length && assetsData.map((asset) => {
+
+                if (asset.params.name === 'JASIRI') {
                     return {
-                        ...asset, 
-                        usdc: ((jsrusdc.value) * (asset.amount/10000)).toFixed(2), 
-                        kes: (((jsrusdc.value) * (asset.amount/10000)) *  usdckes.value).toFixed(2)
+                        ...asset,
+                        usdc: ((jsrusdc.value) * (asset.amount / 10000)).toFixed(2),
+                        kes: (((jsrusdc.value) * (asset.amount / 10000)) * usdckes.value).toFixed(2)
                     }
                 }
                 return asset
-                
+
             })
 
-          
+
 
             dispatch(setAssets(updatedAssets))
 
@@ -139,7 +132,7 @@ export const Dashboard = () => {
 
     }, [address, refreshing])
 
-   
+
 
     return (
 
@@ -150,27 +143,27 @@ export const Dashboard = () => {
                 <StyleText style={{ fontWeight: "bold" }}>
 
 
-            <View style={styles.balance}> 
-                <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
-                <MyAppText style={styles.balanceText}>ALGOs: {accountInfo?accountInfo.amount/1000000: 'loading'}</MyAppText> 
-                {assets.length > 0 && assets.map(asset=><View key={Math.random()}>
-                <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount/10000}</MyAppText>
-               
-                {asset.params.name === 'JASIRI' && 
-                    
-                    <>
-                
-                <MyAppText key={Math.random()} style={styles.balanceText}>KES : {asset.kes || 0}</MyAppText>
-                <MyAppText key={Math.random()} style={styles.balanceText}>USD : {asset.usdc || 0}</MyAppText> 
-                </>
-                }
-                </View>
-                )} 
-              
-                 
-                 
-               
-            </View>
+                    <View style={styles.balance}>
+                        <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
+                        <MyAppText style={styles.balanceText}>ALGOs: {accountInfo ? accountInfo.amount / 1000000 : 'loading'}</MyAppText>
+                        {assets.length > 0 && assets.map(asset => <View key={Math.random()}>
+                            <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount / 10000}</MyAppText>
+
+                            {asset.params.name === 'JASIRI' &&
+
+                                <>
+
+                                    <MyAppText key={Math.random()} style={styles.balanceText}>KES : {asset.kes || 0}</MyAppText>
+                                    <MyAppText key={Math.random()} style={styles.balanceText}>USD : {asset.usdc || 0}</MyAppText>
+                                </>
+                            }
+                        </View>
+                        )}
+
+
+
+
+                    </View>
 
 
                 </StyleText>
@@ -192,7 +185,7 @@ export const Dashboard = () => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("Agent")}
-                     style={styles.quickActionsItem}>
+                        style={styles.quickActionsItem}>
                         <Image
                             // style={styles.tinyLogo}
                             source={require('../../assets/agent.png')}

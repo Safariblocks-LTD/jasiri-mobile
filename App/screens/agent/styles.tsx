@@ -117,6 +117,13 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         // marginTop: '25%',
         alignSelf: 'center',
+    },
+    button2: {
+        height: 40,
+        width: "50%",
+        borderRadius: 10,
+        marginTop: '25%',
+        alignSelf: 'center',
         // margin: 40
 
         // jus
@@ -178,5 +185,15 @@ export const styles = StyleSheet.create({
         color: 'black',
         fontSize: 12,
         fontWeight: 'bold'
-    }
+    },
+    settingActions: {
+        // backgroundColor: '#fff',
+        // minHeight: '20%',
+        paddingTop: 15,
+        // margin: 10,
+        minWidth: '100%',
+        // borderRadius: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
 });
