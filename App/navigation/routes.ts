@@ -14,5 +14,6 @@ export default  {
     RECOVER_ACCOUNT: 'Recover Account',
     CREATE_PASSWORD: 'Create password',
     SEED_PHRASE: 'Seed Phrase',
-    LOGIN: 'Login'
+    LOGIN: 'Login',
+    REGISTRATION: 'Registration'
 }

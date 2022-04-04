@@ -6,7 +6,7 @@ import {token, scanned, newAccount, account
 ,walletConnectScanner,
 walletConnectURI, error, success,
 routes, accountInfo,
-assetInfo, activeAsset
+assetInfo, activeAsset, exchangeRate
 } from './reducers';
 
 export const store = configureStore({
@@ -22,7 +22,8 @@ export const store = configureStore({
         routes: routes.reducer,
         accountInfo: accountInfo.reducer,
         assetInfo: assetInfo.reducer,
-        activeAsset: activeAsset.reducer
+        activeAsset: activeAsset.reducer,
+        exchangeRate: exchangeRate.reducer
     },
     middleware:(getDefaultMiddleware) =>
         getDefaultMiddleware().concat(thunk)

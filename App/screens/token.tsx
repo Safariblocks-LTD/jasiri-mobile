@@ -87,8 +87,17 @@ export const Token = () => {
               <Loader loading={loading}/>
           <View style={styles.token} >
             <Text style={styles.tokenText}> Total {asset.params.name} balance</Text>
-            <Text style={styles.tokenText}> {asset.amount/10000}  {asset.params.name}</Text>
-            <Text style={styles.tokenText}> $ #### USD</Text>
+            <Text style={styles.tokenText}>
+
+            {asset.params['unit-name']}: {asset.amount/10000} 
+            </Text>
+            {asset.params.name === 'JASIRI' && 
+
+            <>
+
+            <Text style={styles.tokenText}>KES : {asset.kes || 0}</Text>
+            <Text style={styles.tokenText}>USD : {asset.usdc || 0}</Text> 
+            </>}
           </View>
          
           <View style={styles.buttonContainer}>

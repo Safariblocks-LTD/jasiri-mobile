@@ -3212,16 +3212,16 @@ anymatch@^3.0.3:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-appcenter-analytics@4.4.3:
+appcenter-analytics@^4.4.3:
   version "4.4.3"
-  resolved "https://registry.npmjs.org/appcenter-analytics/-/appcenter-analytics-4.4.3.tgz"
+  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-4.4.3.tgz#a49d8e50fed6df6de8b06a8a9a9e54adf35df54c"
   integrity sha512-fcVuxl/swf5LMmt95AlDdP2gMyvHTUGZODrl1FFpWYo8Np5mWBvTEQr0mEIOilDToCa4NljQHID+3PeBK+Asqg==
   dependencies:
     appcenter "4.4.3"
 
-appcenter-crashes@4.4.3:
+appcenter-crashes@^4.4.3:
   version "4.4.3"
-  resolved "https://registry.npmjs.org/appcenter-crashes/-/appcenter-crashes-4.4.3.tgz"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-4.4.3.tgz#f5f7e0dfbae4a19ae5560575fe1a5b77a3d9b5a6"
   integrity sha512-vroN9XvsEzkVXsidO9F0h+lALR5+YIVrt2TqbeTTAUHEQBemJMp3V1wudw/3xPKRm7D+UaOrEf1t0xoQZi52SA==
   dependencies:
     appcenter "4.4.3"
@@ -3239,9 +3239,9 @@ appcenter-link-scripts@4.4.3:
     which "1.2.11"
     xcode "2.0.0"
 
-appcenter@4.4.3:
+appcenter@4.4.3, appcenter@^4.4.3:
   version "4.4.3"
-  resolved "https://registry.npmjs.org/appcenter/-/appcenter-4.4.3.tgz"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-4.4.3.tgz#834c77faf4cc6e8b69d712a7edb081e0312f370a"
   integrity sha512-4AnVZnjh0oJvnW466Tk8DK7Fn0ZkMYC4G5aJn7j3yKc2kWAfnNHAOF8V9BAGpIOAZCTyEQy8Wx3iCqrR0rSBEg==
   dependencies:
     appcenter-link-scripts "4.4.3"

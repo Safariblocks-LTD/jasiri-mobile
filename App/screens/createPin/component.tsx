@@ -41,7 +41,7 @@ export const CreatePin = () => {
       (async()=>{
           try {  
 
-
+            
             let accountObject;
 
             if(back === routes.RECOVER_ACCOUNT){
@@ -101,9 +101,10 @@ export const CreatePin = () => {
     create()
   }
 
- 
+  console.log(back)
 
   React.useEffect(()=>{
+    
     create()
   }, [code, confirmCode])
 
