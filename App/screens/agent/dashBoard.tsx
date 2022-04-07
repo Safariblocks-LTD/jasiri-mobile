@@ -200,7 +200,8 @@ export const AgentDashboard = () => {
                                                 />
                                                 <MyAppText style={styles.tinyText}> Liquidity Pool </MyAppText>
                                             </TouchableOpacity>
-                                            <TouchableOpacity style={styles.quickActionsItem}>
+                                            <TouchableOpacity onPress={() => navigation.navigate("ManageCashFlow")}
+                                                style={styles.quickActionsItem}>
                                                 <Image
                                                     // style={styles.tinyLogo}
                                                     source={require('../../assets/cashflow.png')}

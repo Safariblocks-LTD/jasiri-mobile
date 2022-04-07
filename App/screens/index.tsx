@@ -16,3 +16,10 @@ export * from './login'
 export * from './createPin'
 export * from './agent'
 export * from './agentSignUp'
+export * from './manageAccount'
+export * from './manageLocation'
+export * from './manageCashFlow'
+export * from './agentDirectory'
+
+
+

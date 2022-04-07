@@ -14,7 +14,7 @@ import Loader from '../../components/loading'
 import { NormalButton } from '../../components/common';
 import {
     styles
-} from './styles';
+} from '../agent/styles';
 import { useNavigation } from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import { useDispatch } from 'react-redux';
@@ -59,7 +59,7 @@ export const ManageAccount = () => {
                             </HStack>
                         </TouchableOpacity>
                         <Divider my="2" bg="#807D7D" w="75%" />
-                        <TouchableOpacity onPress={() => console.log("I'm Pressed")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("ManageLocation")}>
                             <HStack space={10} style={styles.settingActions}>
                                 <HStack space={4}>
                                     <Image
@@ -78,7 +78,7 @@ export const ManageAccount = () => {
                         </TouchableOpacity>
 
                         <Divider my="2" bg="#807D7D" w="75%" />
-                        <TouchableOpacity onPress={() => console.log("I'm Pressed")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("AgentDirectory")}>
                             <HStack space={10} style={styles.settingActions}>
                                 <HStack space={4}>
                                     <Image
