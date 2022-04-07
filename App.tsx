@@ -6,10 +6,11 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider } from 'native-base';
 import { Provider } from 'react-redux'
-import {store}  from './App/redux/store'
+import { store } from './App/redux/store'
 // import HomeStack from './App/screens/index'
-import { AuthenticationNavigation
- } from './App/navigation';
+import {
+  AuthenticationNavigation
+} from './App/navigation';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
@@ -58,15 +59,15 @@ Crashes.setListener({
 
 
 
-const Navigation=()=>{
-  
- 
+const Navigation = () => {
 
-  return(
+
+
+  return (
     <NavigationContainer>
-    <AuthenticationNavigation/> 
-    
-  </NavigationContainer>
+      <AuthenticationNavigation />
+
+    </NavigationContainer>
   )
 }
 
@@ -77,19 +78,19 @@ export default function App() {
 
 
   return (
-     <NativeBaseProvider>
-    <Provider store={store}>
-       <SafeAreaProvider>
-       
-       <Navigation/>
-         
-      
-         
-      </SafeAreaProvider>
-    
-    </Provider>
+    <NativeBaseProvider>
+      <Provider store={store}>
+        <SafeAreaProvider>
+
+          <Navigation />
+
+
+
+        </SafeAreaProvider>
+
+      </Provider>
     </NativeBaseProvider>
- 
+
   );
 }
 
