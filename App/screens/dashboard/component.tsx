@@ -132,7 +132,7 @@ export const Dashboard = () => {
 
     }, [address, refreshing])
 
-
+console.log(assets)
 
     return (
 
@@ -145,16 +145,17 @@ export const Dashboard = () => {
 
                     <View style={styles.balance}>
                         <MyAppText style={styles.balanceText}>TOTAL BALANCE</MyAppText>
-                        <MyAppText style={styles.balanceText}>ALGOs: {accountInfo ? accountInfo.amount / 1000000 : 'loading'}</MyAppText>
+                        {/* <MyAppText style={styles.balanceText}>ALGOs: {accountInfo ? accountInfo.amount / 1000000 : 'loading'}</MyAppText> */}
                         {assets.length > 0 && assets.map(asset => <View key={Math.random()}>
-                            <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount / 10000}</MyAppText>
+                            
+                            
 
                             {asset.params.name === 'JASIRI' &&
 
                                 <>
-
+                                <MyAppText key={Math.random()} style={styles.balanceText}>{asset.params.name} : {asset.amount / 10000}</MyAppText>
                                     <MyAppText key={Math.random()} style={styles.balanceText}>KES : {asset.kes || 0}</MyAppText>
-                                    <MyAppText key={Math.random()} style={styles.balanceText}>USD : {asset.usdc || 0}</MyAppText>
+                                    {/* <MyAppText key={Math.random()} style={styles.balanceText}>USD : {asset.usdc || 0}</MyAppText> */}
                                 </>
                             }
                         </View>

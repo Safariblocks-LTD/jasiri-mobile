@@ -7,18 +7,19 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  Text,
+  
   BackHandler,
   RefreshControl
 } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { Box, HStack, Spacer, Text, VStack } from "native-base";
+import { StyleText, MyAppText } from '../components/common/appTexts';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setErrorMessage, setroutes} from '../redux';
 import routes  from '../navigation/routes';
 import { transactionHistory } from '../services';
 import Loader from '../components/loading';
-
+import { Icon, Avatar } from 'react-native-elements'
 
 export const Token = () => {
  
@@ -117,14 +118,36 @@ export const Token = () => {
           </View>
           <View style={styles.transactions}>
           <Text style={styles.transactionHeader}>TRANSACTION HISTORY</Text>
-          {history && history.map((item, index)=>{
-          let i = item['asset-transfer-transaction']
-          return (<View key={Math.random()}>
-          <Text style={styles.historyText}>{index + 1}{':'} {`${item.id.slice(0, 15)} ...`} </Text>
-          <Text style={styles.historySubText}>Amount: {i && i.amount} </Text>
-          <Text style={styles.historySubText}>Receiver: {i && i.receiver.slice(0, 15)}{'...'} </Text>
-          <Text style={styles.historySubText}>Asset: {i && i['asset-id']} </Text>
-          </View>)
+          {history && history.map((item, index) => {
+            //let i = item['asset-transfer-transaction']
+            //
+            let i = item['asset-transfer-transaction']
+            return (
+              <Box style={styles.transactionBox} key={Math.random()} minW="30" mt="2"borderWidth="1" borderColor="#F2EDED" bg="#F2EDED" p="5" rounded="8">
+
+              <VStack space={2} alignItems="flex-start" ml="3">
+                <Text fontWeight="medium" fontSize="sm" style={styles.listLink}>{index + 1}{':'} {`${item.id.slice(0, 15)} ...`}
+                </Text>
+                <Text fontWeight="medium" fontSize="sm" style={styles.listLink}>Amount: {i && i.amount}
+                </Text>
+                <Text fontWeight="medium" fontSize="sm" style={styles.listLink}>Receiver: {i && i.receiver.slice(0, 15)}{'...'}
+                </Text>
+                  <Text fontWeight="medium" fontSize="sm" style={styles.listLink}>Asset: {i && i['asset-id']} 
+                </Text>
+                <Text  fontSize="sm" color="coolGray.700">
+                  {new Date().toDateString()}
+                </Text>
+              </VStack>
+              </Box>
+           
+)
+          // let i = item['asset-transfer-transaction']
+          // return (<View key={Math.random()}>
+          // <Text style={styles.historyText}>{index + 1}{':'} {`${item.id.slice(0, 15)} ...`} </Text>
+          // <Text style={styles.historySubText}>Amount: {i && i.amount} </Text>
+          // <Text style={styles.historySubText}>Receiver: {i && i.receiver.slice(0, 15)}{'...'} </Text>
+          // <Text style={styles.historySubText}>Asset: {i && i['asset-id']} </Text>
+          // </View>)
           }) || <Loader loading={true}/>}
 
           </View>
@@ -151,7 +174,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     backgroundColor: '#E3E8E7',
     width: '100%',
-    height: 850,
+    minHeight: 850,
     justifyContent: 'flex-start',
    
     // marginTop: 0
@@ -220,8 +243,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     borderRadius: 10,
-    // borderWidth: 5
+    borderWidth: 1,
+    borderColor: '#000000',
     
+  },
+  transactionBox: {
+    borderWidth: 1,
+    borderColor: '#000000',
+
   },
   tokenText: {
     fontSize: 15,

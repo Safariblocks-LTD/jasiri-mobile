@@ -283,7 +283,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#fff',
     borderRadius: 10,
-    // borderWidth: 5
+    borderWidth: 1,
+    borderColor: '#000000',
     
   },
   tokenText: {

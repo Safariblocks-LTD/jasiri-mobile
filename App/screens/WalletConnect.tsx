@@ -280,7 +280,9 @@ const styles = StyleSheet.create({
         margin: 10,
         width: '85%',
         borderRadius: 20,
-        padding: 20
+        padding: 20,
+        borderWidth: 1,
+        borderColor: '#000000',
     },
 
     quickActions: {

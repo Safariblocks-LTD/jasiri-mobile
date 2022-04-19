@@ -36,7 +36,8 @@ export const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         backgroundColor: 'white',
-        // borderWidth: 5
+        borderWidth: 1,
+        borderColor: '#000000',
     },
     unitAmount: {
         marginLeft: 40,
