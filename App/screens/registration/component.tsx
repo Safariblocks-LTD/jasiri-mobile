@@ -33,34 +33,41 @@ export const Registration = ({ navigation }: navigation) => {
                     </StyleText>
 
                 </View>
-                <VStack space="5" mt="4" px="8">
-                    <HStack space={2} justifyContent="space-around">
-                        <Icon
-                            name='person-add-alt-1'
-                            type='material'
-                            size={40}
-                        />
-                        <Center style={styles.icon1}>
-                            <MyAppText style={styles.iconText} onPress={() => navigation.navigate("Create Account")}>Create Account</MyAppText>
-                        </Center >
+                <VStack space="5" mt="4" px="8" maxW={450}>
+                    <HStack space={2}  justifyContent="space-around">
+                        <HStack space={2} maxW={250} >
+                            <Icon
+                                name='person-add-alt-1'
+                                type='material'
+                                size={40}
+                            />
+                            <Center style={styles.icon1}>
+                                <MyAppText style={styles.iconText} onPress={() => navigation.navigate("Create Account")}>Create Account</MyAppText>
+                            </Center >
+                        </HStack>
+
                         <Icon
                             name='chevron-right'
                             type='material'
                             size={40}
                         />
                     </HStack>
-                    <HStack>
-                        <Divider my="8" bg="#000000" thickness="2" mx="5" width={350} />
+                    <HStack ml="10" >
+                        <Divider my="8" bg="#000000" thickness="2" mx="5" width={300} />
                     </HStack>
+         
                     <HStack space={2} justifyContent="space-around">
-                        <Icon
-                            name='repeat'
-                            type='material'
-                            size={40}
-                        />
-                        <Center style={styles.icon1}>
-                            <MyAppText style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recover with passphrase</MyAppText>
-                        </Center >
+                        <HStack space={2} maxW={250} >
+                            <Icon
+                                name='repeat'
+                                type='material'
+                                size={40}
+                            />
+                            <Center style={styles.icon1}>
+                                <MyAppText style={styles.iconText2} onPress={() => navigation.navigate("Recover Account")}>Recover with passphrase</MyAppText>
+                            </Center >
+                        </HStack>
+               
                         <Icon
                             name='chevron-right'
                             type='material'

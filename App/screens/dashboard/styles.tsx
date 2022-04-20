@@ -28,7 +28,9 @@ export const styles = StyleSheet.create({
         margin: 5,
         width: '85%',
         borderRadius: 20,
-        padding: 20
+        padding: 20,
+        borderWidth: 1,
+        borderColor: '#000000',
     },
 
     info: {
@@ -36,7 +38,9 @@ export const styles = StyleSheet.create({
         minHeight: '20%',
         margin: 10,
         width: '85%',
-        borderRadius: 20
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#000000',
     },
 
     quickActions: {
@@ -53,11 +57,13 @@ export const styles = StyleSheet.create({
         backgroundColor: '#F8FDFD',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 80,
-        height: 60,
-        borderRadius: 20,
+        width: 100,
+        // height: 60,
+        borderRadius: 15,
         paddingBottom: 10,
         paddingTop: 10,
+        borderWidth: 1,
+        borderColor: '#000000',
     },
     tinyText:{
         color: 'black',

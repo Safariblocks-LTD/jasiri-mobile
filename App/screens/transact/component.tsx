@@ -44,7 +44,7 @@ const AssetInfo = ({ asset }) => {
                     <>
                 
                 <Text style={styles.unitAmount}>KES : {asset.kes || 0}</Text>
-                <Text style={styles.unitAmount}>USD : {asset.usdc || 0}</Text> 
+                {/* <Text style={styles.unitAmount}>USD : {asset.usdc || 0}</Text>  */}
                 </>}
                 {/* <Text style={styles.unitInUsd}>$ ### USD</Text> */}
             </View>
@@ -176,7 +176,7 @@ export const Transact = () => {
         navigation.navigate(routes.SEND_RECIEVE_SCREEN)
 
     }
-
+console.log(assets)
     return (
         <ScrollView >
             <Loader loading={loading}/>
@@ -194,8 +194,8 @@ export const Transact = () => {
                     ||
 
                     <>
-                        {/* <Text> No assets found</Text> */}
-                        <VStack space={2} alignItems="center">
+                        
+                        {/* <VStack space={2} alignItems="center">
                             <Badge colorScheme="success" variant={"outline"}>No assets found</Badge>
 
                             <Center>  <NormalButton
@@ -204,7 +204,7 @@ export const Transact = () => {
                                 clickHandler={handleCLickReceive}
                             />
                             </Center>
-                        </VStack>
+                        </VStack> */}
 
 
 
