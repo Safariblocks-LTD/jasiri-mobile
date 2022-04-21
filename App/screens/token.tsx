@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     backgroundColor: '#E3E8E7',
     width: '100%',
-    minHeight: 850,
+    // minHeight: 850,
     justifyContent: 'flex-start',
    
     // marginTop: 0
@@ -237,7 +237,6 @@ const styles = StyleSheet.create({
   },
   token: {
    width: '85%',
-    height: '15%',
     marginTop: 50,
     padding: 20,
     justifyContent: 'space-between',
